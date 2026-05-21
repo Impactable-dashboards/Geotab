@@ -171,42 +171,64 @@
     .nav { padding: 0 16px; }
   }
 
-  /* ACCOUNT ACTIVATIONS */
-  .activations-meta { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin-bottom:24px; }
+  
+
+
+  /* ACCOUNT ACTIVATIONS — v2 (MRR/Fleet/Pipeline) */
+  .activations-meta { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin-bottom:32px; }
   .activations-meta strong { color:var(--text); font-weight:600; }
-  .stage-stats { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
-  .stage-stat { background:var(--surface); border:1px solid var(--border); border-left-width:3px; border-radius:8px; padding:10px 14px; display:flex; flex-direction:column; gap:2px; min-width:120px; }
-  .stage-stat-val { font-size:22px; font-weight:800; line-height:1; }
-  .stage-stat-lbl { font-size:11px; color:var(--muted); font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
-  .anomaly-box { background:rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.35); border-radius:10px; padding:18px 20px; margin-bottom:28px; }
-  .anomaly-title { font-size:12px; font-weight:700; color:#fbbf24; letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
-  .anomaly-title::before { content:"⚠"; font-size:14px; }
+  .subsection-header { margin: 8px 0 20px 0; }
+  .subsection-tag { display:inline-block; font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--accent); font-weight:600; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; }
+  .subsection-tag.pipeline { color:#10b981; }
+  .subsection-title { font-size:18px; font-weight:700; color:#fff; margin-bottom:6px; }
+  .subsection-sub { font-size:13px; color:var(--muted); max-width:780px; line-height:1.6; }
+  .pipeline-header .subsection-title { color:#6ee7b7; }
+  .tam-grid, .pipe-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; margin-bottom:28px; }
+  .tam-card, .pipe-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px 22px; }
+  .tam-card.highlight { border-color:var(--accent); background:linear-gradient(135deg, rgba(30,110,245,.08) 0%, rgba(30,110,245,.02) 100%); }
+  .pipe-card.highlight { border-color:#10b981; background:linear-gradient(135deg, rgba(16,185,129,.08) 0%, rgba(16,185,129,.02) 100%); }
+  .tam-lbl, .pipe-lbl { font-size:11px; font-weight:700; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-bottom:10px; }
+  .tam-val, .pipe-val { font-size:34px; font-weight:800; color:#fff; line-height:1; margin-bottom:8px; font-family:'Plus Jakarta Sans', sans-serif; }
+  .pipe-card.highlight .pipe-val { color:#6ee7b7; }
+  .tam-sub, .pipe-sub { font-size:12px; color:var(--muted); }
+  .pipeline-cards { display:flex; flex-direction:column; gap:14px; margin-bottom:0; }
+  .anomaly-box { background:rgba(245,158,11,.07); border:1px solid rgba(245,158,11,.3); border-radius:10px; padding:16px 20px; margin-bottom:32px; }
+  .anomaly-title { font-size:11px; font-weight:700; color:#fbbf24; letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .anomaly-title::before { content:"⚠"; font-size:13px; }
   .anomaly-list { font-size:13px; color:#fde68a; line-height:1.7; }
   .anomaly-list ul { margin-left:18px; }
   .anomaly-list strong { color:#fff; }
-  .owner-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; border-bottom:1px solid var(--border); padding-bottom:0; }
-  .owner-tab { background:transparent; border:none; padding:14px 20px; cursor:pointer; color:var(--muted); display:flex; flex-direction:column; align-items:flex-start; gap:4px; border-bottom:2px solid transparent; transition:all .15s; }
+  .anomaly-list em { color:#fbbf24; font-style:italic; }
+  .owner-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; border-bottom:1px solid var(--border); }
+  .owner-tab { background:transparent; border:none; padding:12px 18px; cursor:pointer; color:var(--muted); display:flex; flex-direction:column; align-items:flex-start; gap:3px; border-bottom:2px solid transparent; transition:all .15s; font-family:'Plus Jakarta Sans', sans-serif; }
   .owner-tab:hover { color:var(--text); }
   .owner-tab.active { color:var(--text); border-bottom-color:var(--accent); }
-  .tab-name { font-size:15px; font-weight:700; }
-  .tab-meta { font-size:11px; color:var(--muted); font-weight:500; }
-  .owner-panel { display:none; flex-direction:column; gap:18px; }
+  .tab-name { font-size:14px; font-weight:700; }
+  .tab-meta { font-size:10px; color:var(--muted); font-weight:500; }
+  .owner-panel { display:none; flex-direction:column; gap:14px; }
   .owner-panel.active { display:flex; }
-  .acct-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 20px; }
-  .acct-head { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+  .acct-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 20px; }
+  .acct-card.pipeline { border-left:3px solid #10b981; background:linear-gradient(90deg, rgba(16,185,129,.04) 0%, transparent 30%); }
+  .acct-head { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; padding-bottom:12px; border-bottom:1px solid var(--border); margin-bottom:12px; }
   .acct-head-left { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-  .acct-head-right { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .type-pill { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:4px 10px; border-radius:5px; }
+  .acct-head-right { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .type-pill { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:4px 9px; border-radius:5px; }
   .type-pill.nn { background:rgba(30,110,245,.18); color:#93c5fd; border:1px solid rgba(30,110,245,.4); }
   .type-pill.exp { background:rgba(139,92,246,.18); color:#c4b5fd; border:1px solid rgba(139,92,246,.4); }
   .type-pill.som { background:rgba(239,68,68,.18); color:#fca5a5; border:1px solid rgba(239,68,68,.4); }
-  .acct-name { font-size:16px; font-weight:700; color:#fff; }
-  .stage-chip { font-size:11px; font-weight:700; padding:4px 10px; border-radius:5px; letter-spacing:.04em; text-transform:uppercase; }
-  .eng-chip { font-size:11px; font-weight:600; padding:4px 10px; border-radius:5px; font-family:'JetBrains Mono', monospace; }
+  .acct-name { font-size:15px; font-weight:700; color:#fff; }
+  .stage-chip { font-size:10.5px; font-weight:700; padding:4px 9px; border-radius:5px; letter-spacing:.04em; text-transform:uppercase; }
+  .eng-chip { font-size:11px; font-weight:600; padding:4px 9px; border-radius:5px; font-family:'JetBrains Mono', monospace; background:rgba(0,0,0,.25); border:1px solid; }
+  .eng-chip.muted { color:#64748b; border:1px dashed #334155; background:#1e293b; }
+  .acct-metrics { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-bottom:12px; padding:10px 14px; background:rgba(0,0,0,.2); border-radius:8px; }
+  .acct-metrics .metric { display:flex; flex-direction:column; gap:2px; }
+  .metric-lbl { font-size:9.5px; font-weight:700; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; }
+  .metric-val { font-size:14px; font-weight:700; color:#fff; font-family:'JetBrains Mono', monospace; }
+  .missing { color:#64748b; font-style:italic; font-family:'Plus Jakarta Sans', sans-serif; font-weight:500; }
   .act-matrix { width:100%; border-collapse:collapse; font-size:12px; }
-  .act-matrix thead th { text-align:left; padding:6px 10px; font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+  .act-matrix thead th { text-align:left; padding:5px 10px; font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
   .act-matrix thead th:not(.ch-name) { text-align:center; width:23%; }
-  .act-matrix tbody td { padding:7px 10px; border-top:1px solid var(--border); vertical-align:middle; }
+  .act-matrix tbody td { padding:6px 10px; border-top:1px solid var(--border); vertical-align:middle; }
   .act-matrix td.ch-name { color:#cbd5e1; font-weight:500; font-size:12px; }
   .act-cell { text-align:center; font-size:11px; color:#cbd5e1; }
   .act-cell.empty { color:#475569; }
@@ -244,7 +266,7 @@
     <div class="meta-item"><span class="meta-label">Segment</span><span class="meta-value">Field Service Enterprise (US)</span></div>
     <div class="meta-item"><span class="meta-label">Campaigns</span><span class="meta-value">5 Active Personas</span></div>
     <div class="meta-item"><span class="meta-label">Accounts Reached</span><span class="meta-value">27 ABM Accounts</span></div>
-    <div class="meta-item"><span class="meta-label">Report Date</span><span class="meta-value">May 20, 2026 (refreshed)</span></div>
+    <div class="meta-item"><span class="meta-label">Report Date</span><span class="meta-value">May 21, 2026 (refreshed)</span></div>
     <div class="meta-item"><span class="meta-label">6sense Data</span><span class="meta-value">Mar 23 — Apr 12 (3 Weeks)</span></div>
   </div>
 </header>
@@ -320,31 +342,327 @@
     <span class="section-num">02</span>
     <span class="section-title">Account Activations — Q2 Execution</span>
   </div>
-
   <div class="activations-meta">
     <span><strong>Source:</strong> 2026 ABX Field Service Enterprise 10K Fleet · Account Activations tab</span>
-    <span><strong>Refreshed:</strong> May 20, 2026</span>
-    <span><strong>Total Named Accounts:</strong> 46</span>
-    <span><strong>Net New:</strong> 27 · <strong>Expansion:</strong> 18</span>
-  </div>
-
-  <div class="stage-stats">
-    <div class="stage-stat" style="border-color:#6ee7b7;"><span class="stage-stat-val" style="color:#6ee7b7;">1</span><span class="stage-stat-lbl">50% Pilot</span></div><div class="stage-stat" style="border-color:#bef264;"><span class="stage-stat-val" style="color:#bef264;">3</span><span class="stage-stat-lbl">30% Quote</span></div><div class="stage-stat" style="border-color:#fcd34d;"><span class="stage-stat-val" style="color:#fcd34d;">2</span><span class="stage-stat-lbl">20% Collaboration</span></div><div class="stage-stat" style="border-color:#fde68a;"><span class="stage-stat-val" style="color:#fde68a;">3</span><span class="stage-stat-lbl">10% Engaged</span></div><div class="stage-stat" style="border-color:#94a3b8;"><span class="stage-stat-val" style="color:#94a3b8;">21</span><span class="stage-stat-lbl">Prospect</span></div><div class="stage-stat" style="border-color:#fca5a5;"><span class="stage-stat-val" style="color:#fca5a5;">15</span><span class="stage-stat-lbl">0% / Unset</span></div>
+    <span><strong>Refreshed:</strong> May 21, 2026</span>
+    <span><strong>New:</strong> MRR + Fleet data per account</span>
   </div>
   
-  <div class="anomaly-box">
-    <div class="anomaly-title">Flagged before SVP review</div>
-    <div class="anomaly-list">
-      <ul>
-        <li><strong>Unassigned / unlabeled row:</strong> ????????? — needs owner + account name confirmed before SVP review.</li><li><strong>14 EXP accounts at 0% / Cam Exp 0%:</strong> Comcast, Windstream/Uniti, Emcor, Vestis Corporation, Everon, Amgen, Sperber Landscape Companies, Fidelity Building Services Group, TELUS, Schneider Electric, BCE, Rogers, Microsoft, Ingersoll Rand. Air Cover is live but no BDE-driven 1:1 motion yet. Frame as <em>active programmatic, awaiting BDE input</em> rather than <em>fully active 1:1</em>.</li><li><strong>No LinkedIn Company Hub match (5):</strong> ?????????, Windstream/Uniti, Chemed, Anticimex Group, Everon, Sperber Landscape Companies, BCE. Means the engagement column will read "No LI Match" — either accounts are too small to register, or hub naming needs reconciliation.</li>
-      </ul>
+  <div class="subsection-header">
+    <span class="subsection-tag">Subsection A</span>
+    <h3 class="subsection-title">Total Addressable — Named Accounts</h3>
+    <p class="subsection-sub">Aggregate revenue + fleet opportunity across all 46 named accounts in the program. MRR/Fleet sourced from the ABX sheet; 5 accounts have unknown data and are excluded from totals (flagged below).</p>
+  </div>
+  <div class="tam-grid">
+    <div class="tam-card highlight">
+      <div class="tam-lbl">Total MRR (Available)</div>
+      <div class="tam-val">$3.59M</div>
+      <div class="tam-sub">$3,591,582 across 41 accounts w/ known data</div>
+    </div>
+    <div class="tam-card highlight">
+      <div class="tam-lbl">Implied ARR</div>
+      <div class="tam-val">$43.1M</div>
+      <div class="tam-sub">MRR × 12, named accounts only</div>
+    </div>
+    <div class="tam-card">
+      <div class="tam-lbl">Total Fleet (Vehicles)</div>
+      <div class="tam-val">258,110</div>
+      <div class="tam-sub">41 accounts w/ known fleet size</div>
+    </div>
+    <div class="tam-card">
+      <div class="tam-lbl">Named Accounts</div>
+      <div class="tam-val">46</div>
+      <div class="tam-sub">28 Net New · 18 Expansion</div>
     </div>
   </div>
-  <div class="owner-tabs">
-    <button class="owner-tab active" data-owner="Zach"><span class="tab-name">Zach</span><span class="tab-meta">24 accounts · 13 NN / 11 EXP</span></button><button class="owner-tab" data-owner="Onur"><span class="tab-name">Onur</span><span class="tab-meta">20 accounts · 13 NN / 7 EXP</span></button><button class="owner-tab" data-owner="Ryan"><span class="tab-name">Ryan</span><span class="tab-meta">1 accounts · 1 NN / 0 EXP</span></button><button class="owner-tab" data-owner="Unassigned"><span class="tab-name">Unassigned</span><span class="tab-meta">1 accounts · 0 NN / 0 EXP</span></button>
+  <div class="pipeline-cards">
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Schindler Elevator</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(16,185,129,.18);color:#6ee7b7;">50% Pilot</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 204 imp / 171 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$45,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$540,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell launched"><span class="dot"></span>invited to RBCCO</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Johnson & Johnson</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 64,486 imp / 168 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$184,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$2,208,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">10,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell consider">consider</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell consider">consider (dinner- Jersey)</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Brightview</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 2,524 imp / 26 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$156,582</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$1,878,984</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">17,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell progress"><span class="dot"></span>In Progress</td><td class="act-cell launching"><span class="dot"></span>Launching</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell progress"><span class="dot"></span>In Progress</td><td class="act-cell launching"><span class="dot"></span>Launching</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell failed"><span class="dot"></span>Sent - not accepted</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Allied Universal</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 30,724 imp / 48 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$76,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$912,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,800</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Gifting Activated</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Rollins</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 668 imp / 708 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$40,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$480,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">18,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>2nd Wave -Invite toTravellers</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Exec Sponsorship</td><td class="act-cell empty">—</td><td class="act-cell other">Clive email</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Apex</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 405 imp / 0 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$8,500</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$102,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">12,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Gifting Activated</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Microsoft</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 7,240 imp / 1,932 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$7,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$84,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,510</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Compass Group</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(245,158,11,.18);color:#fcd34d;">20% Collab</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 1,200 imp / 354 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$70,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$840,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">7,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">McDonalds</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(245,158,11,.18);color:#fcd34d;">20% Collab</span>
+            <span class="eng-chip" style="color:#f97316;border-color:#f97316;">● Low · 2,250 imp / 68 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$22,500</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$270,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">1,500</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">TruGreen</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 726 imp / 18 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$680,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$8,160,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">9,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>In Queue</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>In Queue</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Windstream/Uniti</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
+            <span class="eng-chip muted">No LI Match</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$84,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$1,008,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">7,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">The Wrench Group</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 64 imp / 0 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$60,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$720,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">4,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>1:1 Launched</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>1:1 Launched</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Gifting Activated</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Rentokil</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 42 imp / 20 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$40,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$480,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">10,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">POC</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>secure</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>build</td><td class="act-cell other">Launch</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>build</td><td class="act-cell other">Launch</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell consider">consider</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell consider">consider</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell consider">consider</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card pipeline">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Anticimex Group</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
+            <span class="eng-chip muted">No LI Match</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$36,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$432,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div></div>
+  
+  <div class="subsection-header" style="margin-top:48px;">
+    <span class="subsection-tag">Subsection C</span>
+    <h3 class="subsection-title">Full Account View — Grouped by BDE Owner</h3>
+    <p class="subsection-sub">Complete list of all 46 named accounts. Click owner tab to filter. Includes prospect-stage and 0% accounts that are not in the active pipeline above.</p>
   </div>
-  <div class="owner-panels">
-    <div class="owner-panel active" data-owner="Zach">
+  <div class="owner-tabs"><button class="owner-tab active" data-owner="Zach"><span class="tab-name">Zach</span><span class="tab-meta">24 · 13 NN / 11 EXP</span></button><button class="owner-tab" data-owner="Onur"><span class="tab-name">Onur</span><span class="tab-meta">21 · 14 NN / 7 EXP</span></button><button class="owner-tab" data-owner="Ryan"><span class="tab-name">Ryan</span><span class="tab-meta">1 · 1 NN / 0 EXP</span></button></div>
+  <div class="owner-panels"><div class="owner-panel active" data-owner="Zach">
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
@@ -353,161 +671,16 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(16,185,129,.18);color:#6ee7b7;">50% Pilot</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 204 imp / 171 eng</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 204 imp / 171 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell launched"><span class="dot"></span>invited to RBCCO</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Rollins</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 668 imp / 708 eng</span>
-          </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$45,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$540,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell planned">✓ Planned</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell planned">✓ Planned</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell planned">✓ Planned</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell launched"><span class="dot"></span>2nd Wave -Invite toTravellers</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Exec Sponsorship</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell other">Neil email</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Brightview</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 2,524 imp / 26 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell progress"><span class="dot"></span>In Progress</td>
-              <td class="act-cell launching"><span class="dot"></span>Launching</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell progress"><span class="dot"></span>In Progress</td>
-              <td class="act-cell launching"><span class="dot"></span>Launching</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell planned">✓ Planned</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell failed"><span class="dot"></span>Sent - not accepted</td>
-              <td class="act-cell planned">✓ Planned</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell launched"><span class="dot"></span>invited to RBCCO</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -518,59 +691,56 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 64,486 imp / 168 eng</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 64,486 imp / 168 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell planned">✓ Planned</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell consider">consider</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell consider">consider (dinner- Jersey)</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$184,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$2,208,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">10,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell consider">consider</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell consider">consider (dinner- Jersey)</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Brightview</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 2,524 imp / 26 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$156,582</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$1,878,984</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">17,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell progress"><span class="dot"></span>In Progress</td><td class="act-cell launching"><span class="dot"></span>Launching</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell progress"><span class="dot"></span>In Progress</td><td class="act-cell launching"><span class="dot"></span>Launching</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell failed"><span class="dot"></span>Sent - not accepted</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Rollins</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 668 imp / 708 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$40,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$480,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">18,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>2nd Wave -Invite toTravellers</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Exec Sponsorship</td><td class="act-cell empty">—</td><td class="act-cell other">Clive email</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -581,29 +751,16 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(245,158,11,.18);color:#fcd34d;">20% Collab</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 1,200 imp / 354 eng</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 1,200 imp / 354 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$70,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$840,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">7,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -614,29 +771,36 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(245,158,11,.18);color:#fcd34d;">20% Collab</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#f97316;border:1px solid #f97316;">● Low · 2,250 imp / 68 eng</span>
+            <span class="eng-chip" style="color:#f97316;border-color:#f97316;">● Low · 2,250 imp / 68 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$22,500</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$270,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">1,500</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Rentokil</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 42 imp / 20 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$40,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$480,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">10,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">POC</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>secure</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>build</td><td class="act-cell other">Launch</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>build</td><td class="act-cell other">Launch</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell consider">consider</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell consider">consider</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell consider">consider</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -647,452 +811,16 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
-            <span class="eng-chip" style="background:#1e293b;color:#64748b;border:1px dashed #334155;">No LI Match</span>
+            <span class="eng-chip muted">No LI Match</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Brightspeed</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#f97316;border:1px solid #f97316;">● Low · 369 imp / 15 eng</span>
-          </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$36,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$432,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Charter Communications/Cox</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 33,764 imp / 62 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Chemed</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:#1e293b;color:#64748b;border:1px dashed #334155;">No LI Match</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Country Insurance</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 134 imp / 3 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Danaher Corporation</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 387 imp / 0 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Eli Lilly</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 3,052 imp / 58 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email/ Call 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Labcorp</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 6,793 imp / 0 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email/ Call 1:1</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched 3- month series</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">State Farm</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 946 imp / 6 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Travelers Insurance</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 36 imp / 12 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Amgen</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#f59e0b;border:1px solid #f59e0b;">● Medium · 362 imp / 42 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">BCE</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:#1e293b;color:#64748b;border:1px dashed #334155;">No LI Match</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -1103,65 +831,176 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 2,871 imp / 804 eng</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 2,871 imp / 804 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>In Progress</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>In Progress</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell planned">✓ Planned</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell other">branded swag + meal w/ Pilot install</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Personalized Content 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>start ideating/ build plan</td>
-              <td class="act-cell other">thinking video content - splashy /brand</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$200,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$2,400,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">20,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell planned">✓ Planned</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell other">branded swag + meal w/ Pilot install</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Personalized Content 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>start ideating/ build plan</td><td class="act-cell other">thinking video content - splashy /brand</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Charter Communications/Cox</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 33,764 imp / 62 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$150,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$1,800,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">10,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Labcorp</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 6,793 imp / 0 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$105,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$1,260,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">7,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email/ Call 1:1</td><td class="act-cell launched"><span class="dot"></span>Launched 3- month series</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Eli Lilly</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 3,052 imp / 58 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$90,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$1,080,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">6,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email/ Call 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Brightspeed</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#f97316;border-color:#f97316;">● Low · 369 imp / 15 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$90,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$1,080,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">6,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">State Farm</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 946 imp / 6 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$75,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$900,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">5,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Travelers Insurance</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 36 imp / 12 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$45,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$540,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Chemed</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip muted">No LI Match</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$37,500</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$450,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">2,500</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Danaher Corporation</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 387 imp / 0 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$37,500</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$450,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">2,500</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -1172,95 +1011,16 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:#1e293b;color:#64748b;border:1px dashed #334155;">No LI Match</span>
+            <span class="eng-chip muted">No LI Match</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Ingersoll Rand</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 1,489 imp / 0 eng</span>
-          </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$36,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$432,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Schneider Electric</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#84cc16;border:1px solid #84cc16;">● High · 1,568 imp / 224 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -1271,130 +1031,175 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 342 imp / 228 eng</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 342 imp / 228 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell launched"><span class="dot"></span>invited to RBCCO</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$36,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$432,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell launched"><span class="dot"></span>invited to RBCCO</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Amgen</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
+            <span class="eng-chip" style="color:#f59e0b;border-color:#f59e0b;">● Medium · 362 imp / 42 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$30,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$360,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">2,500</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
             <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Rentokil</span>
+            <span class="acct-name">Country Insurance</span>
           </div>
           <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 42 imp / 20 eng</span>
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 134 imp / 3 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">POC</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>secure</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>build</td>
-              <td class="act-cell other">Launch</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>build</td>
-              <td class="act-cell other">Launch</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell consider">consider</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell planned">✓ Planned</td>
-              <td class="act-cell consider">consider</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell planned">✓ Planned</td>
-              <td class="act-cell consider">consider</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$15,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$180,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">1,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Schneider Electric</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
+            <span class="eng-chip" style="color:#84cc16;border-color:#84cc16;">● High · 1,568 imp / 224 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">BCE</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
+            <span class="eng-chip muted">No LI Match</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Ingersoll Rand</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 1,489 imp / 0 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Zach</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div></div><div class="owner-panel" data-owner="Onur">
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
             <span class="type-pill nn">Net New</span>
-            <span class="acct-name">The Wrench Group</span>
+            <span class="acct-name">Allied Universal</span>
           </div>
           <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 64 imp / 0 eng</span>
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 30,724 imp / 48 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell launched"><span class="dot"></span>1:1 Launched</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$76,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$912,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,800</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Gifting Activated</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Apex</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 405 imp / 0 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$8,500</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$102,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">12,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Gifting Activated</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Microsoft</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(132,204,22,.18);color:#bef264;">30% Quote</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 7,240 imp / 1,932 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$7,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$84,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,510</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -1405,122 +1210,56 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 726 imp / 18 eng</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 726 imp / 18 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>Brief In Progress</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>Brief In Progress</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>In Queue</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell progress"><span class="dot"></span>In Queue</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$680,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$8,160,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">9,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>In Queue</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>In Queue</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Windstream/Uniti</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
+            <span class="eng-chip muted">No LI Match</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$84,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$1,008,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">7,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell progress"><span class="dot"></span>Brief In Progress</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
             <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Allied Universal</span>
+            <span class="acct-name">The Wrench Group</span>
           </div>
           <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 30,724 imp / 48 eng</span>
+            <span class="stage-chip" style="background:rgba(245,158,11,.13);color:#fde68a;">10% Engaged</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 64 imp / 0 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell launched"><span class="dot"></span>Gifting Activated</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$60,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$720,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">4,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>1:1 Launched</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>1:1 Launched</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Gifting Activated</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -1531,290 +1270,36 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 2,152 imp / 50 eng</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 2,152 imp / 50 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$202,500</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$2,430,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">13,500</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
             <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Comfort Systems USA</span>
+            <span class="acct-name">Emcor</span>
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 183 imp / 0 eng</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 256 imp / 422 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email/ Call 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Coolsys</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 263 imp / 0 eng</span>
-          </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$180,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$2,160,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">11,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Farmers Insurance</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 972 imp / 3 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Mary Kay</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 160 imp / 0 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Progressive Insurance</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 1,236 imp / 3 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Rogers Communications</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 3,162 imp / 2,616 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Service Masters</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#f59e0b;border:1px solid #f59e0b;">● Medium · 12 imp / 12 eng</span>
-          </div>
-        </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Gifting Activated</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -1825,257 +1310,116 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#f59e0b;border:1px solid #f59e0b;">● Medium · 2,534 imp / 171 eng</span>
+            <span class="eng-chip" style="color:#f59e0b;border-color:#f59e0b;">● Medium · 2,534 imp / 171 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$150,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$1,800,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">10,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
             <span class="type-pill nn">Net New</span>
-            <span class="acct-name">Walt Disney Imagineering</span>
+            <span class="acct-name">Mary Kay</span>
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 682 imp / 0 eng</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 160 imp / 0 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email/ Call 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell launched"><span class="dot"></span>Onur Outreach</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$79,500</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$954,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">5,300</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Emcor</span>
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Farmers Insurance</span>
           </div>
           <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 256 imp / 422 eng</span>
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 972 imp / 3 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$75,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$900,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">5,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Fidelity Building Services Group</span>
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Comfort Systems USA</span>
           </div>
           <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 432 imp / 0 eng</span>
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 183 imp / 0 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$60,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$720,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">4,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email/ Call 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Microsoft</span>
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Progressive Insurance</span>
           </div>
           <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 7,240 imp / 1,932 eng</span>
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 1,236 imp / 3 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$60,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$720,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">4,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Rogers</span>
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Service Masters</span>
           </div>
           <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#10b981;border:1px solid #10b981;">● Very High · 3,162 imp / 2,616 eng</span>
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#f59e0b;border-color:#f59e0b;">● Medium · 12 imp / 12 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell launched"><span class="dot"></span>invited to RBCCO</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Sperber Landscape Companies</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:#1e293b;color:#64748b;border:1px dashed #334155;">No LI Match</span>
-          </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$60,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$720,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">4,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
@@ -2086,92 +1430,136 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#f59e0b;border:1px solid #f59e0b;">● Medium · 132 imp / 14 eng</span>
+            <span class="eng-chip" style="color:#f59e0b;border-color:#f59e0b;">● Medium · 132 imp / 14 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$48,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$576,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">4,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div>
 
       <div class="acct-card">
         <div class="acct-head">
           <div class="acct-head-left">
             <span class="type-pill exp">Expansion</span>
-            <span class="acct-name">Windstream/Uniti</span>
+            <span class="acct-name">Sperber Landscape Companies</span>
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
-            <span class="eng-chip" style="background:#1e293b;color:#64748b;border:1px dashed #334155;">No LI Match</span>
+            <span class="eng-chip muted">No LI Match</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$48,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$576,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">4,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Walt Disney Imagineering</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 682 imp / 0 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$46,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$552,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">4,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover</td><td class="act-cell launched"><span class="dot"></span>Launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Linkedin 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Display 1:1</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Email/ Call 1:1</td><td class="act-cell empty">—</td><td class="act-cell launched"><span class="dot"></span>Onur Outreach</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Gifting</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr><tr><td class="ch-name">Events</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Coolsys</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 263 imp / 0 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$45,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$540,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Fidelity Building Services Group</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 432 imp / 0 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$36,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$432,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill nn">Net New</span>
+            <span class="acct-name">Rogers Communications</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 3,162 imp / 2,616 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div>
+
+      <div class="acct-card">
+        <div class="acct-head">
+          <div class="acct-head-left">
+            <span class="type-pill exp">Expansion</span>
+            <span class="acct-name">Rogers</span>
+          </div>
+          <div class="acct-head-right">
+            <span class="stage-chip" style="background:rgba(239,68,68,.18);color:#fca5a5;">Cam Exp 0%</span>
+            <span class="eng-chip" style="color:#10b981;border-color:#10b981;">● Very High · 3,162 imp / 2,616 eng</span>
+          </div>
+        </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val"><span class="missing">?</span></span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Onur</span></div>
+        </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell launched"><span class="dot"></span>invited to RBCCO</td><td class="act-cell empty">—</td></tr></tbody></table>
       </div></div><div class="owner-panel" data-owner="Ryan">
       <div class="acct-card">
         <div class="acct-head">
@@ -2181,94 +1569,19 @@
           </div>
           <div class="acct-head-right">
             <span class="stage-chip" style="background:rgba(100,116,139,.18);color:#94a3b8;">Prospect</span>
-            <span class="eng-chip" style="background:rgba(0,0,0,.25);color:#64748b;border:1px solid #64748b;">● Very Low · 13 imp / 0 eng</span>
+            <span class="eng-chip" style="color:#64748b;border-color:#64748b;">● Very Low · 13 imp / 0 eng</span>
           </div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover (Programmatic)</td>
-              <td class="act-cell launched"><span class="dot"></span>air cover launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div></div><div class="owner-panel" data-owner="Unassigned">
-      <div class="acct-card">
-        <div class="acct-head">
-          <div class="acct-head-left">
-            <span class="type-pill som">Unknown</span>
-            <span class="acct-name">?????????</span>
-          </div>
-          <div class="acct-head-right">
-            <span class="stage-chip" style="background:rgba(100,116,139,.15);color:#94a3b8;">Unset</span>
-            <span class="eng-chip" style="background:#1e293b;color:#64748b;border:1px dashed #334155;">No LI Match</span>
-          </div>
+        <div class="acct-metrics">
+          <div class="metric"><span class="metric-lbl">MRR</span><span class="metric-val">$45,000</span></div>
+          <div class="metric"><span class="metric-lbl">ARR</span><span class="metric-val">$540,000</span></div>
+          <div class="metric"><span class="metric-lbl">Fleet</span><span class="metric-val">3,000</span></div>
+          <div class="metric"><span class="metric-lbl">Owner</span><span class="metric-val">Ryan</span></div>
         </div>
-        
-        <table class="act-matrix">
-          <thead>
-            <tr>
-              <th class="ch-name">Channel</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            <tr>
-              <td class="ch-name">Digital Air Cover</td>
-              <td class="act-cell launched"><span class="dot"></span>Launched</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Linkedin 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Display 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Email 1:1</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Gifting</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell launched"><span class="dot"></span>Gifting Activated</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-            <tr>
-              <td class="ch-name">Events</td>
-              <td class="act-cell empty">—</td>
-              <td class="act-cell launched"><span class="dot"></span>Invite toTravellers</td>
-              <td class="act-cell empty">—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div></div>
-  </div>
+        <table class="act-matrix"><thead><tr><th class="ch-name">Channel</th><th>April</th><th>May</th><th>June</th></tr></thead><tbody><tr><td class="ch-name">Digital Air Cover (Programmatic)</td><td class="act-cell launched"><span class="dot"></span>air cover launched</td><td class="act-cell empty">—</td><td class="act-cell empty">—</td></tr></tbody></table>
+      </div></div></div>
 </section>
+
 
 <!-- SECTION 02: HEATMAP -->
 <section id="heatmap">
