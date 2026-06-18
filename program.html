@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab · Program Performance · Impactable</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#0A0A0C;--concrete:#15151A;--court:#22222A;
+  --bone:#F4F1EA;--chalk:#C8C4B8;
+  --blue:#1B9BD1;--canopy:#D4FF3D;--moss:#7BAA3E;
+  --hazard:#FF5A1F;--terracotta:#C4521F;--clay:#FFB627;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--asphalt);color:var(--bone);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,.025) 1px,transparent 0);background-size:4px 4px;pointer-events:none;z-index:0;}
+
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;z-index:2;}
+.gate-box{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:52px 56px;max-width:400px;width:100%;text-align:center;}
+.gate-logo{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);margin-bottom:4px;}
+.gate-logo span{color:var(--blue);}
+.gate-client{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk);margin-bottom:40px;opacity:.6;}
+.gate-hint{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:14px;}
+.gate-input{width:100%;background:var(--asphalt);border:1px solid var(--court);border-radius:2px;padding:15px 18px;font-size:16px;color:var(--bone);outline:none;margin-bottom:12px;letter-spacing:.12em;text-align:center;}
+.gate-input:focus{border-color:var(--blue);}
+.gate-btn{width:100%;background:var(--blue);border:none;border-radius:2px;padding:15px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;}
+.gate-btn:hover{opacity:.85;}
+.gate-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--terracotta);margin-top:12px;display:none;}
+
+#room{display:none;position:relative;z-index:2;}
+.hdr{border-bottom:1px solid var(--court);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,12,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+.hdr-left{display:flex;align-items:center;gap:18px;}
+.hdr-logo{font-family:'Archivo Black',sans-serif;font-size:17px;color:var(--bone);}
+.hdr-logo span{color:var(--blue);}
+.hdr-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.45;margin-top:3px;}
+.hdr-back{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.55;text-decoration:none;border:1px solid var(--court);border-radius:2px;padding:7px 13px;}
+.hdr-back:hover{opacity:1;border-color:var(--blue);}
+.hdr-right{text-align:right;}
+.hdr-client{font-size:14px;font-weight:600;}
+.hdr-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.4;margin-top:3px;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+.intro{padding:48px 0 26px;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);}
+h1{font-family:'Archivo Black',sans-serif;font-size:46px;letter-spacing:-.03em;text-transform:uppercase;line-height:.98;}
+.sub{font-size:16px;color:var(--chalk);max-width:780px;margin-top:18px;line-height:1.6;}
+
+.seclabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.55;padding:38px 0 16px;display:flex;align-items:center;gap:10px;}
+.seclabel::after{content:'';flex:1;height:1px;background:var(--court);}
+
+/* funnel */
+.funnel{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:30px 32px;}
+.funnel-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px;}
+.funnel-head .ttl{font-family:'Archivo Black',sans-serif;font-size:18px;color:var(--bone);}
+.funnel-head .meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--moss);}
+.fstage{margin-bottom:16px;}
+.fstage:last-child{margin-bottom:0;}
+.fstage .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.fstage .nm{font-size:14px;font-weight:600;color:var(--bone);}
+.fstage .nm small{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.6;font-weight:400;margin-left:8px;}
+.fstage .pct{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;}
+.bar{height:14px;background:var(--asphalt);border-radius:2px;overflow:hidden;}
+.bar span{display:block;height:100%;border-radius:2px;}
+.tof span{background:var(--blue);} .tof .pct{color:var(--blue);}
+.mof span{background:var(--canopy);} .mof .pct{color:var(--canopy);}
+.bof span{background:var(--clay);} .bof .pct{color:var(--clay);}
+
+.card{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:26px 30px;}
+.card.mof-thesis{border-left:3px solid var(--canopy);border-radius:0 5px 5px 0;}
+.card .ct{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--canopy);margin-bottom:12px;}
+.card h3{font-family:'Archivo Black',sans-serif;font-size:21px;color:var(--bone);margin-bottom:12px;letter-spacing:-.01em;}
+.card p{font-size:14px;color:var(--chalk);line-height:1.65;}
+.card p b{color:var(--bone);font-weight:600;}
+.twocol{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;align-items:start;}
+
+/* region */
+.region{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:28px 32px;}
+.rrow{display:flex;align-items:center;gap:16px;margin-bottom:15px;}
+.rrow:last-child{margin-bottom:0;}
+.rname{width:130px;font-size:14px;font-weight:600;color:var(--bone);flex-shrink:0;}
+.rbar{flex:1;height:26px;background:var(--asphalt);border-radius:2px;overflow:hidden;position:relative;}
+.rbar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-soft,#5BB8E0));border-radius:2px;}
+.rpct{width:120px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--chalk);flex-shrink:0;}
+.rpct b{color:var(--bone);}
+
+/* pull slots */
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.slot{background:rgba(27,155,209,.05);border:1px dashed rgba(27,155,209,.35);border-radius:5px;padding:24px;}
+.slot .sl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.slot h4{font-size:15px;font-weight:600;color:var(--bone);margin-bottom:8px;}
+.slot p{font-size:12.5px;color:var(--chalk);line-height:1.55;opacity:.85;}
+.slot .src{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--blue);margin-top:12px;opacity:.8;}
+
+.flags{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:24px 28px;margin-top:14px;}
+.flags .fl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:14px;}
+.flag-item{display:flex;gap:11px;font-size:13px;color:var(--chalk);line-height:1.55;margin-bottom:11px;}
+.flag-item:last-child{margin-bottom:0;}
+.flag-item::before{content:'▸';color:var(--clay);flex-shrink:0;}
+.flag-item b{color:var(--bone);font-weight:600;}
+
+.foot{border-top:1px solid var(--court);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;margin-top:48px;}
+.foot-logo{font-family:'Archivo Black',sans-serif;font-size:14px;}.foot-logo span{color:var(--blue);}
+.foot-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.35;margin-top:3px;}
+.foot-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(27,155,209,.25);padding:6px 13px;border-radius:2px;}
+
+@media(max-width:880px){
+  .hdr,.foot{padding:14px 20px;}.wrap{padding:0 20px;}
+  h1{font-size:32px;}.twocol,.slots{grid-template-columns:1fr;}
+  .rname{width:90px;}.rpct{width:90px;}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">impact<span>able</span></div>
+    <div class="gate-client">Geotab · Program Performance</div>
+    <div class="gate-hint">Access Password</div>
+    <input type="password" id="pw" class="gate-input" placeholder="········" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="gate-btn" onclick="checkPw()">Enter →</button>
+    <div class="gate-err" id="err">Incorrect password</div>
+  </div>
+</div>
+
+<div id="room">
+  <div class="hdr">
+    <div class="hdr-left">
+      <a href="/" class="hdr-back">← Room</a>
+      <div><div class="hdr-logo">impact<span>able</span></div><div class="hdr-tag">Intelligence layer · Program performance</div></div>
+    </div>
+    <div class="hdr-right"><div class="hdr-client">Geotab · Field Service ABM</div><div class="hdr-meta">Trailing 90 days · all regions verified · EMEA in EUR</div></div>
+  </div>
+
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">Intelligence layer · the funnel and the investment</div>
+      <h1>Program performance</h1>
+      <p class="sub">Where the program sits by funnel stage and by region, and where the investment goes. Built on verified engagement and now the verified Windsor spend: the funnel by stage, the investment by region, and where 1:1 dollars tie cleanly to a single account. The window is the trailing 90 days, with the YTD headline noted separately and EMEA kept in euros.</p>
+    </div>
+
+    <div class="seclabel">The funnel by stage · verified spend</div>
+    <div class="twocol">
+      <div class="funnel">
+        <div class="funnel-head"><div class="ttl">North America · trailing 90 days</div><div class="meta">● verified · $142,122</div></div>
+        <div class="fstage tof">
+          <div class="row"><div class="nm">Top of funnel <small>awareness, reach · $71,007</small></div><div class="pct">50%</div></div>
+          <div class="bar"><span style="width:50%"></span></div>
+        </div>
+        <div class="fstage mof">
+          <div class="row"><div class="nm">Mid funnel <small>consideration, nurture · $54,154</small></div><div class="pct">38%</div></div>
+          <div class="bar"><span style="width:38%"></span></div>
+        </div>
+        <div class="fstage bof">
+          <div class="row"><div class="nm">Bottom of funnel <small>conversion · $16,961</small></div><div class="pct">12%</div></div>
+          <div class="bar"><span style="width:12%"></span></div>
+        </div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.5;margin-top:18px;line-height:1.6;">Classified by the "BOF |" naming prefix the dashboard uses. Reproduces the dashboard 53 / 34 / 13 within date-window noise. BOF reads 12% here versus 1% on the YTD objective view: the gap is the Q2 6Sense retargeting, real and recent. See the note below.</p>
+      </div>
+      <div class="funnel">
+        <div class="funnel-head"><div class="ttl">Program-wide</div><div class="meta">● verified · Windsor</div></div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.6;margin-bottom:14px;letter-spacing:.04em;">YTD · Jan 1 to May 30 · $377,570</p>
+        <div class="fstage tof"><div class="row"><div class="nm">TOF <small>$255,409</small></div><div class="pct">68%</div></div><div class="bar"><span style="width:68%"></span></div></div>
+        <div class="fstage mof"><div class="row"><div class="nm">MOF <small>$100,610</small></div><div class="pct">27%</div></div><div class="bar"><span style="width:27%"></span></div></div>
+        <div class="fstage bof"><div class="row"><div class="nm">BOF <small>$21,550</small></div><div class="pct">6%</div></div><div class="bar"><span style="width:6%"></span></div></div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--moss);opacity:.95;margin-top:14px;line-height:1.6;">Trailing 90 days runs 64 / 27 / 10 ($298,060), more bottom-funnel than the YTD average. The rebalance the EBR proposes is already underway.</p>
+      </div>
+    </div>
+    <div class="card mof-thesis" style="margin-top:14px;">
+      <div class="ct">● The efficiency read</div>
+      <h3>Mid-funnel does the most on the least, and BOF is climbing</h3>
+      <p>The middle of the funnel carries roughly a third of the spend yet drives the program's most efficient qualified action, and over the recent 90 days the bottom of the funnel has climbed to 10% program-wide. That is the rebalance case proving itself: <b>weight is already shifting from awareness toward the layers that convert</b>. The exact cost-per-action comparison stays held until conversion definitions are normalized across channels, so we lead with the direction, not a fragile number.</p>
+    </div>
+
+    <div class="seclabel">Spend and reach by region · trailing 90 days</div>
+    <div class="region">
+      <div class="rrow"><div class="rname">North America</div><div class="rbar"><span style="width:44%"></span></div><div class="rpct" style="width:230px;font-size:10.5px;line-height:1.4;"><b>$142,122</b> · 274K reach · 17.5×</div></div>
+      <div class="rrow"><div class="rname">EMEA</div><div class="rbar"><span style="width:100%"></span></div><div class="rpct" style="width:230px;font-size:10.5px;line-height:1.4;"><b>€106,399</b> · 624K reach · 7.0×</div></div>
+      <div class="rrow"><div class="rname">APAC</div><div class="rbar"><span style="width:35%"></span></div><div class="rpct" style="width:230px;font-size:10.5px;line-height:1.4;"><b>$20,149</b> · 218K reach · 8.8×</div></div>
+      <div class="rrow"><div class="rname">LATAM</div><div class="rbar"><span style="width:18%"></span></div><div class="rpct" style="width:230px;font-size:10.5px;line-height:1.4;"><b>$20,878</b> · 114K reach · 12.1×</div></div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.5;margin-top:20px;line-height:1.6;">Bars show unique reach, the one unit comparable across regions. Spend stays in local currency and is never summed across them. Flag: NA runs a 17.5x average frequency (4.8M impressions on 274K people), worth confirming it is not a thin account set getting saturated. EMEA reaches 2.3x the unique audience of NA on about 25% less spend. APAC and LATAM are small and top-heavy. The client's own page is excluded.</p>
+    </div>
+
+    <div class="seclabel">1:1 named-account spend · where it ties cleanly</div>
+    <div class="card">
+      <div class="ct" style="color:var(--blue);">● Verified · Windsor · personalized 1:1 campaigns only</div>
+      <h3 style="margin-bottom:12px;">The 1:1 motion lives in EMEA</h3>
+      <p style="margin-bottom:18px;">True 1:1 spend (personalized single-account campaigns, with persona and 1:few excluded) totals <b>€11,048 across 17 named EMEA accounts</b>, and that equals EMEA's entire bottom-funnel layer. EMEA BOF is the 1:1 RFP motion. North America's 1:1 is still nascent at <b>$424 across four test campaigns</b>. LATAM and APAC have none.</p>
+      <div class="region">
+        <div class="rrow"><div class="rname">Philips</div><div class="rbar"><span style="width:100%"></span></div><div class="rpct" style="width:80px;">€3,164</div></div>
+        <div class="rrow"><div class="rname">Bolt</div><div class="rbar"><span style="width:67%"></span></div><div class="rpct" style="width:80px;">€2,108</div></div>
+        <div class="rrow"><div class="rname">Autoguidovie</div><div class="rbar"><span style="width:42%"></span></div><div class="rpct" style="width:80px;">€1,336</div></div>
+        <div class="rrow"><div class="rname">NorthGate</div><div class="rbar"><span style="width:31%"></span></div><div class="rpct" style="width:80px;">€969</div></div>
+        <div class="rrow"><div class="rname">Vinci</div><div class="rbar"><span style="width:25%"></span></div><div class="rpct" style="width:80px;">€784</div></div>
+        <div class="rrow"><div class="rname">Ayvens</div><div class="rbar"><span style="width:24%"></span></div><div class="rpct" style="width:80px;">€745</div></div>
+        <div class="rrow"><div class="rname">Veolia</div><div class="rbar"><span style="width:21%"></span></div><div class="rpct" style="width:80px;">€654</div></div>
+        <div class="rrow"><div class="rname">Verisure</div><div class="rbar"><span style="width:18%"></span></div><div class="rpct" style="width:80px;">€585</div></div>
+      </div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.55;margin-top:14px;line-height:1.6;">Top 8 of 17. Enel, Bureau Veritas, and 8 smaller UK and ES RFPs make up the remainder. NA 1:1 test campaigns: BrightView, Allied Universal, TruGreen, J&J.</p>
+    </div>
+
+    <div class="seclabel">Still open</div>
+    <div class="slots">
+      <div class="slot" style="border-color:rgba(255,90,31,.4);background:rgba(255,90,31,.05);">
+        <div class="sl" style="color:var(--hazard);">✕ Blocked · web-visit volume</div>
+        <h4>GA4 web visits</h4>
+        <p>The off-LinkedIn web-visit anchor the Rogers case points to cannot be sourced here. There is no Geotab GA4 property connected to Windsor, only other Impactable properties. It needs direct GA4 access.</p>
+        <div class="src" style="color:var(--hazard);">✕ Not available via Windsor</div>
+      </div>
+      <div class="slot">
+        <div class="sl">◇ Next · branded vs non-branded</div>
+        <h4>Search keyword split</h4>
+        <p>The branded versus non-branded keyword report to split the search-driven funnel, pending the search platform export.</p>
+        <div class="src">→ Google + Microsoft Ads</div>
+      </div>
+      <div class="slot">
+        <div class="sl">◇ Next · segment mapping</div>
+        <h4>Spend by segment</h4>
+        <p>Campaign-to-segment mapping so the by-segment dollar view becomes segment-precise, not just portfolio-honest.</p>
+        <div class="src">→ Campaign mapping pass</div>
+      </div>
+    </div>
+
+    <div class="flags">
+      <div class="fl">▸ Kept honest</div>
+      <div class="flag-item"><span><b>NA bottom-funnel is a classifier definition, stated once.</b> NA BOF reads 12% on the trailing 90 days (the "BOF |" naming-prefix classifier the dashboard and the team build to) and 1% on the YTD objective-based view. This report uses the naming-prefix classifier throughout, footnoted. The 12% is real and recent: the Q2 6Sense retargeting campaigns.</span></div>
+      <div class="flag-item"><span><b>Those NA "BOF" campaigns run a Website Visit objective, not conversion.</b> Right audience, a narrow 60-day retarget, but the ask is only a click. That is exactly the gap the DemandSense-to-Salesforce and WebID asks close. It strengthens the asks, it does not undercut them.</span></div>
+      <div class="flag-item"><span><b>NA frequency is 17.5x over 90 days.</b> Defensible for a retargeting-heavy account, worth confirming it is not a thin account set getting saturated. EMEA reaches 2.3x the unique audience on about 25% less spend.</span></div>
+      <div class="flag-item"><span><b>EMEA stays in euros and is never summed across currencies.</b> The blended program figure uses a 1.08 USD conversion for a single comparable total only. Spend per account is clean only for the 1:1 accounts shown.</span></div>
+      <div class="flag-item"><span><b>The GA4 web-visit anchor is blocked.</b> No Geotab GA4 property is connected to Windsor, so the off-LinkedIn web signal cannot be sized from this source. Cross-channel CPA also stays out until conversion definitions are normalized.</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="foot-logo">impact<span>able</span></div><div class="foot-txt">Geotab · Program performance · Confidential</div></div>
+    <div class="foot-badge">LinkedIn Marketing Partner</div>
+  </div>
+</div>
+
+<script>
+var HASH='cbba7f209d8529e80a21be0d6feec3d3cefee93261d88be5dbd2bb62307b075f';
+function sha256(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
+function showRoom(){document.getElementById('gate').style.display='none';document.getElementById('room').style.display='block';}
+function checkPw(){sha256(document.getElementById('pw').value).then(function(h){if(h===HASH){try{sessionStorage.setItem('implab','1');}catch(e){}showRoom();}else{var e=document.getElementById('err');e.style.display='block';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
+try{if(sessionStorage.getItem('implab')==='1')showRoom();else document.getElementById('pw').focus();}catch(e){document.getElementById('pw').focus();}
+</script>
+</body>
+</html>

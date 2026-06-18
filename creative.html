@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab · Message &amp; Creative · Impactable</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#0A0A0C;--concrete:#15151A;--court:#22222A;
+  --bone:#F4F1EA;--chalk:#C8C4B8;
+  --blue:#1B9BD1;--blue-soft:#5BB8E0;--canopy:#D4FF3D;--moss:#7BAA3E;
+  --hazard:#FF5A1F;--terracotta:#C4521F;--clay:#FFB627;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--asphalt);color:var(--bone);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,.025) 1px,transparent 0);background-size:4px 4px;pointer-events:none;z-index:0;}
+
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;z-index:2;}
+.gate-box{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:52px 56px;max-width:400px;width:100%;text-align:center;}
+.gate-logo{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);margin-bottom:4px;}
+.gate-logo span{color:var(--blue);}
+.gate-client{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk);margin-bottom:40px;opacity:.6;}
+.gate-hint{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:14px;}
+.gate-input{width:100%;background:var(--asphalt);border:1px solid var(--court);border-radius:2px;padding:15px 18px;font-size:16px;color:var(--bone);outline:none;margin-bottom:12px;letter-spacing:.12em;text-align:center;}
+.gate-input:focus{border-color:var(--blue);}
+.gate-btn{width:100%;background:var(--blue);border:none;border-radius:2px;padding:15px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;}
+.gate-btn:hover{opacity:.85;}
+.gate-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--terracotta);margin-top:12px;display:none;}
+
+#room{display:none;position:relative;z-index:2;}
+.hdr{border-bottom:1px solid var(--court);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,12,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+.hdr-left{display:flex;align-items:center;gap:18px;}
+.hdr-logo{font-family:'Archivo Black',sans-serif;font-size:17px;color:var(--bone);}
+.hdr-logo span{color:var(--blue);}
+.hdr-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.45;margin-top:3px;}
+.hdr-back{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.55;text-decoration:none;border:1px solid var(--court);border-radius:2px;padding:7px 13px;}
+.hdr-back:hover{opacity:1;border-color:var(--blue);}
+.hdr-right{text-align:right;}
+.hdr-client{font-size:14px;font-weight:600;}
+.hdr-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.4;margin-top:3px;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+.intro{padding:48px 0 26px;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);}
+h1{font-family:'Archivo Black',sans-serif;font-size:46px;letter-spacing:-.03em;text-transform:uppercase;line-height:.98;}
+.sub{font-size:16px;color:var(--chalk);max-width:790px;margin-top:18px;line-height:1.6;}
+
+.seclabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.55;padding:38px 0 16px;display:flex;align-items:center;gap:10px;}
+.seclabel::after{content:'';flex:1;height:1px;background:var(--court);}
+
+.thesis{background:linear-gradient(135deg,var(--concrete),#101015);border:1px solid var(--court);border-left:3px solid var(--canopy);border-radius:0 4px 4px 0;padding:28px 32px;}
+.thesis .tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--canopy);margin-bottom:12px;}
+.thesis p{font-size:19px;line-height:1.5;color:var(--bone);font-weight:500;max-width:880px;}
+.thesis p b{color:var(--canopy);font-weight:600;}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
+.col{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:26px 28px;}
+.col.win{border-top:3px solid var(--moss);}
+.col.fade{border-top:3px solid var(--terracotta);}
+.col h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px;}
+.col.win h4{color:var(--moss);} .col.fade h4{color:var(--terracotta);}
+.angle{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(34,34,42,.7);}
+.angle:last-child{border-bottom:none;}
+.angle .nm{font-size:14.5px;color:var(--bone);font-weight:600;flex:1;}
+.angle .ty{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:rgba(123,170,62,.15);color:var(--canopy);}
+.col.fade .ty{background:rgba(196,82,31,.18);color:var(--terracotta);}
+.col p{font-size:13px;color:var(--chalk);line-height:1.55;opacity:.85;}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.cmp{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:26px 28px;}
+.cmp.open{border-top:3px solid var(--blue);}
+.cmp.closed{border-top:3px solid var(--chalk);}
+.cmp .k{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-bottom:9px;}
+.cmp h3{font-family:'Archivo Black',sans-serif;font-size:19px;color:var(--bone);margin-bottom:12px;letter-spacing:-.01em;}
+.cmp ul{list-style:none;}
+.cmp li{font-size:13.5px;color:var(--chalk);padding:7px 0 7px 18px;position:relative;line-height:1.5;}
+.cmp li::before{content:'';position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;}
+.cmp.open li::before{background:var(--blue);}
+.cmp.closed li::before{background:var(--chalk);opacity:.5;}
+.callout{background:linear-gradient(100deg,rgba(27,155,209,.1),rgba(27,155,209,.02));border:1px solid rgba(27,155,209,.28);border-left:3px solid var(--blue);border-radius:0 4px 4px 0;padding:24px 28px;margin-top:16px;}
+.callout .ct{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.callout p{font-size:14.5px;color:var(--chalk);line-height:1.6;}
+.callout p b{color:var(--bone);font-weight:600;}
+
+.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.offer{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:22px 24px;}
+.offer .ol{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);margin-bottom:10px;}
+.offer h4{font-size:16px;font-weight:700;color:var(--bone);margin-bottom:7px;}
+.offer p{font-size:13px;color:var(--chalk);line-height:1.5;opacity:.85;}
+
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.slot{background:rgba(27,155,209,.05);border:1px dashed rgba(27,155,209,.35);border-radius:5px;padding:24px;}
+.slot .sl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.slot h4{font-size:15px;font-weight:600;color:var(--bone);margin-bottom:8px;}
+.slot p{font-size:12.5px;color:var(--chalk);line-height:1.55;opacity:.85;}
+.slot .src{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--blue);margin-top:12px;opacity:.8;}
+
+.flags{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:24px 28px;margin-top:14px;}
+.flags .fl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:14px;}
+.flag-item{display:flex;gap:11px;font-size:13px;color:var(--chalk);line-height:1.55;margin-bottom:11px;}
+.flag-item:last-child{margin-bottom:0;}
+.flag-item::before{content:'▸';color:var(--clay);flex-shrink:0;}
+.flag-item b{color:var(--bone);font-weight:600;}
+
+.foot{border-top:1px solid var(--court);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;margin-top:48px;}
+.foot-logo{font-family:'Archivo Black',sans-serif;font-size:14px;}.foot-logo span{color:var(--blue);}
+.foot-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.35;margin-top:3px;}
+.foot-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(27,155,209,.25);padding:6px 13px;border-radius:2px;}
+
+@media(max-width:880px){
+  .hdr,.foot{padding:14px 20px;}.wrap{padding:0 20px;}
+  h1{font-size:32px;}.cols,.compare,.offers,.slots{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">impact<span>able</span></div>
+    <div class="gate-client">Geotab · Message &amp; Creative</div>
+    <div class="gate-hint">Access Password</div>
+    <input type="password" id="pw" class="gate-input" placeholder="········" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="gate-btn" onclick="checkPw()">Enter →</button>
+    <div class="gate-err" id="err">Incorrect password</div>
+  </div>
+</div>
+
+<div id="room">
+  <div class="hdr">
+    <div class="hdr-left">
+      <a href="/" class="hdr-back">← Room</a>
+      <div><div class="hdr-logo">impact<span>able</span></div><div class="hdr-tag">Intelligence layer · Message &amp; creative</div></div>
+    </div>
+    <div class="hdr-right"><div class="hdr-client">Geotab · Field Service ABM</div><div class="hdr-meta">Directional · creative export pending</div></div>
+  </div>
+
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">Intelligence layer · what the market responds to</div>
+      <h1>Message &amp; creative</h1>
+      <p class="sub">What resonates, where the white space against Samsara sits, and the offers that move a fleet buyer. The angle read is directional, drawn from the live program messaging and the angles already in market. Creative-level performance, which specific headlines and units win, attaches when the LinkedIn Campaign Manager export lands.</p>
+    </div>
+
+    <div class="seclabel">What resonates</div>
+    <div class="thesis">
+      <div class="tag">The read</div>
+      <p>Cost-savings and outcome angles beat generic brand. The lines that earn engagement put a <b>number on the outcome</b>, not a value on the company.</p>
+    </div>
+    <div class="cols">
+      <div class="col win">
+        <h4>● Outperforming · cost-savings &amp; outcome</h4>
+        <div class="angle"><span class="nm">Up to 55% savings</span><span class="ty">Cost-savings</span></div>
+        <div class="angle"><span class="nm">25% more cost-effective</span><span class="ty">Cost-savings</span></div>
+        <div class="angle"><span class="nm">Cut fuel costs 25%</span><span class="ty">Outcome</span></div>
+        <div class="angle"><span class="nm">2.5 more jobs daily</span><span class="ty">Outcome</span></div>
+        <div class="angle"><span class="nm">Real-time dispatching</span><span class="ty">Capability</span></div>
+      </div>
+      <div class="col fade">
+        <h4>◆ Underperforming · generic brand</h4>
+        <div class="angle"><span class="nm">Brand and category awareness</span><span class="ty">Brand</span></div>
+        <div class="angle"><span class="nm">Feature lists without an outcome</span><span class="ty">Feature</span></div>
+        <div class="angle"><span class="nm">"Industry leader" positioning</span><span class="ty">Brand</span></div>
+        <p style="margin-top:14px;">The pattern is consistent: when the creative names a saving or a job-per-day gain, it earns the click. When it leads with the brand, it does not.</p>
+      </div>
+    </div>
+
+    <div class="seclabel">White space vs Samsara</div>
+    <div class="compare">
+      <div class="cmp open">
+        <div class="k">Geotab</div>
+        <h3>Open and extensible</h3>
+        <ul>
+          <li>MyGeotab marketplace and a published SDK</li>
+          <li>An ecosystem of add-ins and hardware partners</li>
+          <li>Integrations a fleet can build on, not around</li>
+          <li>The platform a buyer does not outgrow</li>
+        </ul>
+      </div>
+      <div class="cmp closed">
+        <div class="k">Samsara</div>
+        <h3>A closed stack</h3>
+        <ul>
+          <li>Proprietary, single-vendor hardware and software</li>
+          <li>A walled experience, harder to extend</li>
+          <li>Lock-in as the default, not the exception</li>
+          <li>The conversation we reframe on every conquest account</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="ct">◆ The conquest message</div>
+      <p>The displacement angle is not feature-versus-feature, it is <b>open versus closed</b>. MyGeotab's marketplace and extensibility is the line that travels into a Samsara-evaluating account, and it maps directly to the Samsara Competitive buying center on the segments surface. Lead the conquest creative here.</p>
+    </div>
+
+    <div class="seclabel">Offer architecture</div>
+    <div class="offers">
+      <div class="offer"><div class="ol">No-pay pilot</div><h4>60-day no-pay pilot</h4><p>Run the platform on real vehicles before a dollar is committed.</p></div>
+      <div class="offer"><div class="ol">No-pay pilot</div><h4>90-day no-pay pilot</h4><p>The extended trial for larger, slower-moving enterprise committees.</p></div>
+      <div class="offer"><div class="ol">Risk removal</div><h4>Risk-free 60-day pilot</h4><p>The risk-reversal framing that lowers the bar to the first yes.</p></div>
+      <div class="offer"><div class="ol">Onboarding</div><h4>Free installs</h4><p>Remove the setup cost objection and shorten time to first value.</p></div>
+      <div class="offer"><div class="ol">Engagement</div><h4>Interactive demo</h4><p>A self-serve product walk-through for the hands-on evaluator.</p></div>
+      <div class="offer"><div class="ol">Proof</div><h4>ROI calculator</h4><p>Lets the buyer put their own numbers behind the savings claim.</p></div>
+    </div>
+
+    <div class="seclabel">On the creative export, this surface gains</div>
+    <div class="slots">
+      <div class="slot">
+        <div class="sl">◇ Slot · headline performance</div>
+        <h4>Which headlines win</h4>
+        <p>Engagement and click-through by headline and angle, so the directional read above becomes a ranked, measured one.</p>
+        <div class="src">→ LinkedIn Campaign Manager export</div>
+      </div>
+      <div class="slot">
+        <div class="sl">◇ Slot · creative by format</div>
+        <h4>Format and unit performance</h4>
+        <p>Single image versus carousel versus document and video, by persona stream, to place spend behind the unit that converts.</p>
+        <div class="src">→ LinkedIn Campaign Manager export</div>
+      </div>
+      <div class="slot">
+        <div class="sl">◇ Slot · top performers</div>
+        <h4>Top creatives, named</h4>
+        <p>The specific winning assets to scale and the fatiguing ones to retire, refreshed each pull.</p>
+        <div class="src">→ LinkedIn Campaign Manager export</div>
+      </div>
+    </div>
+
+    <div class="flags">
+      <div class="fl">▸ Kept honest</div>
+      <div class="flag-item"><span><b>This is a directional read, not measured creative performance.</b> Which specific headlines and creatives win needs the LinkedIn Campaign Manager creative export. Until it lands, the angle read stands on the messaging in market, not on click-level data.</span></div>
+      <div class="flag-item"><span><b>The angles are real, the ranking is qualitative.</b> The cost-savings and outcome lines are pulled from live program creative. We are not putting a CTR next to them until the export supports it.</span></div>
+      <div class="flag-item"><span><b>The conquest message is strategy, not a claim audit.</b> The open-versus-closed framing is the positioning, not a line-by-line comparison of Samsara's current feature set.</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="foot-logo">impact<span>able</span></div><div class="foot-txt">Geotab · Message &amp; creative · Confidential</div></div>
+    <div class="foot-badge">LinkedIn Marketing Partner</div>
+  </div>
+</div>
+
+<script>
+var HASH='cbba7f209d8529e80a21be0d6feec3d3cefee93261d88be5dbd2bb62307b075f';
+function sha256(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
+function showRoom(){document.getElementById('gate').style.display='none';document.getElementById('room').style.display='block';}
+function checkPw(){sha256(document.getElementById('pw').value).then(function(h){if(h===HASH){try{sessionStorage.setItem('implab','1');}catch(e){}showRoom();}else{var e=document.getElementById('err');e.style.display='block';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
+try{if(sessionStorage.getItem('implab')==='1')showRoom();else document.getElementById('pw').focus();}catch(e){document.getElementById('pw').focus();}
+</script>
+</body>
+</html>

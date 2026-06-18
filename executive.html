@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab · Executive Review · Impactable</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#0A0A0C; --concrete:#15151A; --court:#22222A;
+  --bone:#F4F1EA; --chalk:#C8C4B8;
+  --blue:#1B9BD1; --blue-soft:#5BB8E0;
+  --canopy:#D4FF3D; --moss:#7BAA3E;
+  --hazard:#FF5A1F; --terracotta:#C4521F; --clay:#FFB627;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--asphalt);color:var(--bone);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,.025) 1px,transparent 0);background-size:4px 4px;pointer-events:none;z-index:0;}
+
+/* GATE */
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;z-index:2;}
+.gate-box{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:52px 56px;max-width:400px;width:100%;text-align:center;}
+.gate-logo{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);letter-spacing:.02em;margin-bottom:4px;}
+.gate-logo span{color:var(--blue);}
+.gate-client{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk);margin-bottom:40px;opacity:.6;}
+.gate-hint{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:14px;}
+.gate-input{width:100%;background:var(--asphalt);border:1px solid var(--court);border-radius:2px;padding:15px 18px;font-size:16px;color:var(--bone);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;margin-bottom:12px;letter-spacing:.12em;text-align:center;}
+.gate-input:focus{border-color:var(--blue);}
+.gate-input::placeholder{color:rgba(200,196,184,.2);font-size:22px;letter-spacing:.08em;}
+.gate-btn{width:100%;background:var(--blue);border:none;border-radius:2px;padding:15px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;transition:opacity .2s;}
+.gate-btn:hover{opacity:.85;}
+.gate-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--terracotta);margin-top:12px;letter-spacing:.1em;display:none;}
+
+/* ROOM */
+#room{display:none;position:relative;z-index:2;}
+
+/* HEADER */
+.hdr{border-bottom:1px solid var(--court);padding:16px 52px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,12,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+.hdr-left{display:flex;align-items:center;gap:18px;}
+.hdr-logo{font-family:'Archivo Black',sans-serif;font-size:17px;color:var(--bone);letter-spacing:.02em;}
+.hdr-logo span{color:var(--blue);}
+.hdr-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.45;margin-top:3px;}
+.hdr-back{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.55;text-decoration:none;border:1px solid var(--court);border-radius:2px;padding:7px 13px;transition:opacity .2s,border-color .2s;}
+.hdr-back:hover{opacity:1;border-color:var(--blue);}
+.hdr-right{text-align:right;}
+.hdr-client{font-size:14px;font-weight:600;color:var(--bone);}
+.hdr-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.4;margin-top:3px;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 52px;}
+
+/* HERO */
+.hero{padding:80px 0 64px;border-bottom:1px solid var(--court);position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;right:-160px;top:-120px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(27,155,209,.10),transparent 62%);pointer-events:none;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:22px;display:flex;align-items:center;gap:9px;}
+.hero-eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);}
+.hero h1{font-family:'Archivo Black',sans-serif;font-size:58px;line-height:.98;letter-spacing:-.03em;text-transform:uppercase;max-width:980px;}
+.hero h1 .alt{color:var(--blue);}
+.hero-sub{font-size:19px;color:var(--chalk);max-width:760px;margin-top:26px;line-height:1.55;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:46px;margin-top:46px;position:relative;z-index:1;}
+.hmeta-l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:7px;}
+.hmeta-v{font-size:16px;font-weight:600;color:var(--bone);}
+
+/* SECTION */
+section{padding:64px 0;border-bottom:1px solid var(--court);position:relative;z-index:1;}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.sec-num .b{width:24px;height:24px;border-radius:3px;background:var(--court);display:inline-flex;align-items:center;justify-content:center;color:var(--bone);font-size:11px;}
+.sec h2{font-family:'Archivo Black',sans-serif;font-size:34px;line-height:1.04;letter-spacing:-.02em;text-transform:uppercase;max-width:880px;}
+.sec .lead{font-size:17px;color:var(--chalk);max-width:840px;margin-top:18px;line-height:1.6;}
+
+/* THESIS */
+.thesis{background:linear-gradient(135deg,var(--concrete),#101015);border:1px solid var(--court);border-left:3px solid var(--blue);border-radius:4px;padding:36px 40px;margin-top:34px;position:relative;overflow:hidden;}
+.thesis::after{content:'';position:absolute;left:-50px;bottom:-50px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(27,155,209,.12),transparent 65%);}
+.thesis .tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.thesis p{font-size:21px;line-height:1.5;color:var(--bone);font-weight:500;max-width:900px;position:relative;z-index:1;}
+.thesis p .hl{color:var(--canopy);}
+
+/* STAT TILES */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--court);border:1px solid var(--court);border-radius:4px;overflow:hidden;margin-top:34px;}
+.stat{background:var(--concrete);padding:26px 24px;position:relative;}
+.stat .accent{position:absolute;top:0;left:0;right:0;height:2px;background:var(--blue);}
+.stat.ms .accent{background:var(--moss);} .stat.cl .accent{background:var(--clay);} .stat.cn .accent{background:var(--canopy);}
+.stat .v{font-family:'Archivo Black',sans-serif;font-size:38px;letter-spacing:-.03em;line-height:1;color:var(--bone);}
+.stat .v .u{font-size:18px;color:var(--blue);}
+.stat .l{font-size:12.5px;color:var(--chalk);margin-top:11px;line-height:1.5;}
+.stat .l b{color:var(--bone);font-weight:600;}
+
+/* CHANNEL TABLE */
+.tbl-wrap{margin-top:32px;border:1px solid var(--court);border-radius:4px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;font-size:14px;}
+thead th{background:var(--court);color:var(--bone);text-align:left;padding:13px 20px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;}
+tbody td{padding:15px 20px;border-top:1px solid var(--court);color:var(--chalk);vertical-align:top;line-height:1.5;}
+tbody tr{background:var(--concrete);}
+tbody td .ch{font-weight:600;color:var(--bone);font-size:14.5px;}
+.owner-imp{color:var(--blue-soft);font-weight:600;}
+.owner-cli{color:var(--chalk);opacity:.8;}
+.pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:2px;}
+.p-scale{background:rgba(123,170,62,.16);color:var(--moss);}
+.p-out{background:rgba(255,90,31,.14);color:var(--hazard);}
+.p-silo{background:rgba(200,196,184,.1);color:var(--chalk);}
+
+/* WIN / GAP COLUMNS */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:34px;}
+.col{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:28px 28px;}
+.col.win{border-top:3px solid var(--moss);}
+.col.opp{border-top:3px solid var(--clay);}
+.col h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:9px;}
+.col.win h4{color:var(--moss);} .col.opp h4{color:var(--clay);}
+.col ul{list-style:none;}
+.col li{font-size:14px;color:var(--chalk);padding:11px 0 11px 22px;position:relative;border-bottom:1px solid rgba(34,34,42,.7);line-height:1.55;}
+.col li:last-child{border-bottom:none;}
+.col li::before{content:'';position:absolute;left:0;top:18px;width:8px;height:8px;border-radius:2px;}
+.col.win li::before{background:var(--moss);} .col.opp li::before{background:var(--clay);}
+.col li b{color:var(--bone);font-weight:600;}
+
+/* MARQUEE CARDS */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+.mcard{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:28px;}
+.mcard.t{border-top:3px solid var(--moss);} .mcard.b{border-top:3px solid var(--blue);}
+.mcard .role{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:11px;}
+.mcard.t .role{color:var(--moss);} .mcard.b .role{color:var(--blue);}
+.mcard h4{font-family:'Archivo Black',sans-serif;font-size:21px;letter-spacing:-.01em;color:var(--bone);margin-bottom:12px;line-height:1.1;}
+.mcard p{font-size:14px;color:var(--chalk);line-height:1.6;}
+
+/* FUNNEL BAR */
+.funnel{margin-top:30px;background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:30px 32px;}
+.funnel-h{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-bottom:20px;}
+.fbar{display:flex;height:46px;border-radius:3px;overflow:hidden;border:1px solid var(--court);}
+.fseg{display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--asphalt);}
+.fseg.tof{background:var(--blue);} .fseg.mof{background:var(--clay);} .fseg.bof{background:var(--moss);}
+.fkey{display:flex;gap:28px;margin-top:18px;flex-wrap:wrap;}
+.fk{font-size:12.5px;color:var(--chalk);display:flex;align-items:center;gap:8px;}
+.fk .dot{width:10px;height:10px;border-radius:2px;}
+.fk .dot.tof{background:var(--blue);} .fk .dot.mof{background:var(--clay);} .fk .dot.bof{background:var(--moss);}
+.fk b{color:var(--bone);}
+
+/* BEFORE / AFTER */
+.ba{display:grid;grid-template-columns:1fr auto 1fr;gap:0;margin-top:34px;align-items:stretch;}
+.ba-col{background:var(--concrete);border:1px solid var(--court);padding:30px 30px;}
+.ba-col.now{border-radius:4px 0 0 4px;}
+.ba-col.next{border-radius:0 4px 4px 0;border-left:none;background:linear-gradient(135deg,#13161a,#0f1418);}
+.ba-arrow{display:flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;width:54px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;}
+.ba-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;}
+.ba-col.now .ba-lbl{color:var(--chalk);opacity:.6;} .ba-col.next .ba-lbl{color:var(--canopy);}
+.ba-col h4{font-family:'Archivo Black',sans-serif;font-size:20px;color:var(--bone);margin-bottom:14px;letter-spacing:-.01em;}
+.ba-col ul{list-style:none;}
+.ba-col li{font-size:13.5px;color:var(--chalk);padding:8px 0 8px 18px;position:relative;line-height:1.5;}
+.ba-col li::before{content:'';position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;background:var(--chalk);opacity:.5;}
+.ba-col.next li::before{background:var(--canopy);opacity:1;}
+
+/* MOVES */
+.moves{display:grid;grid-template-columns:1fr;gap:14px;margin-top:34px;}
+.move{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:28px 30px;display:grid;grid-template-columns:54px 1fr;gap:24px;align-items:start;position:relative;overflow:hidden;}
+.move::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue);}
+.move .n{font-family:'Archivo Black',sans-serif;font-size:30px;color:var(--court);line-height:1;}
+.move h4{font-family:'Archivo Black',sans-serif;font-size:20px;color:var(--bone);letter-spacing:-.01em;text-transform:uppercase;margin-bottom:10px;}
+.move p{font-size:14.5px;color:var(--chalk);line-height:1.6;}
+.move .unlock{margin-top:14px;padding-top:14px;border-top:1px dashed var(--court);font-size:13.5px;color:var(--chalk);}
+.move .unlock b{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--canopy);display:block;margin-bottom:6px;}
+
+/* CLOSE */
+.close{background:linear-gradient(135deg,var(--concrete),#101418);border:1px solid var(--court);border-radius:4px;padding:48px 48px;margin-top:34px;text-align:center;position:relative;overflow:hidden;}
+.close::after{content:'';position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(212,255,61,.07),transparent 65%);}
+.close h3{font-family:'Archivo Black',sans-serif;font-size:30px;letter-spacing:-.02em;text-transform:uppercase;color:var(--bone);max-width:760px;margin:0 auto;line-height:1.08;position:relative;z-index:1;}
+.close p{font-size:16px;color:var(--chalk);max-width:680px;margin:20px auto 0;line-height:1.6;position:relative;z-index:1;}
+
+.note{font-size:11.5px;color:var(--chalk);opacity:.5;margin-top:16px;line-height:1.5;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;}
+
+/* FOOTER */
+.foot{border-top:1px solid var(--court);padding:24px 52px;display:flex;justify-content:space-between;align-items:center;}
+.foot-logo{font-family:'Archivo Black',sans-serif;font-size:14px;color:var(--bone);}
+.foot-logo span{color:var(--blue);}
+.foot-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.35;margin-top:3px;}
+.foot-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(27,155,209,.25);padding:6px 13px;border-radius:2px;}
+
+@media(max-width:920px){
+  .hdr,.foot{padding:14px 22px;}
+  .wrap{padding:0 22px;}
+  .hero h1{font-size:38px;}
+  .hero{padding:52px 0 44px;}
+  .sec h2{font-size:26px;}
+  .stats{grid-template-columns:1fr 1fr;}
+  .cols,.grid2{grid-template-columns:1fr;}
+  .ba{grid-template-columns:1fr;}
+  .ba-col.now{border-radius:4px 4px 0 0;}
+  .ba-col.next{border-radius:0 0 4px 4px;border-left:1px solid var(--court);border-top:none;}
+  .ba-arrow{width:auto;height:44px;}
+  .move{grid-template-columns:1fr;gap:12px;}
+  .close{padding:36px 26px;}
+  .close h3{font-size:23px;}
+}
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">impact<span>able</span></div>
+    <div class="gate-client">Geotab · Executive Review</div>
+    <div class="gate-hint">Access Password</div>
+    <input type="password" id="pw" class="gate-input" placeholder="········" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="gate-btn" onclick="checkPw()">Enter →</button>
+    <div class="gate-err" id="err">Incorrect password</div>
+  </div>
+</div>
+
+<!-- ROOM -->
+<div id="room">
+
+  <div class="hdr">
+    <div class="hdr-left">
+      <a href="/" class="hdr-back">← Lab</a>
+      <div>
+        <div class="hdr-logo">impact<span>able</span></div>
+        <div class="hdr-tag">Executive Review</div>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div class="hdr-client">Geotab · Demand Program</div>
+      <div class="hdr-meta">Prepared for June 23, 2026 EBR</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-eyebrow">Executive Business Review · Strategic Overview</div>
+      <h1>A well-aimed demand engine.<br><span class="alt">Running in fragments.</span></h1>
+      <p class="hero-sub">A single, top-down view of every motion, channel, and market working for Geotab today, where the program is creating value, and the connected path that turns disconnected channels into one measurable growth system.</p>
+      <div class="hero-meta">
+        <div><div class="hmeta-l">Prepared for</div><div class="hmeta-v">Geotab Growth &amp; Demand Leadership</div></div>
+        <div><div class="hmeta-l">Markets live</div><div class="hmeta-v">North America · EMEA · APAC · LATAM</div></div>
+        <div><div class="hmeta-l">LinkedIn investment, YTD</div><div class="hmeta-v">$377K across 4 regions</div></div>
+        <div><div class="hmeta-l">Partner</div><div class="hmeta-v">Impactable · LinkedIn Marketing Partner</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. WHERE YOU ARE TODAY -->
+  <section>
+    <div class="wrap">
+      <div class="sec-num"><span class="b">01</span> The Picture Today</div>
+      <h2>A sophisticated, multichannel engine, assembled in one place for the first time.</h2>
+      <p class="lead">Geotab runs an enterprise-grade demand stack across four global markets and every major channel. The strength is real and the execution is sophisticated. The pattern that matters for the next chapter: these channels are firing independently, each measured on its own terms, with no single layer connecting awareness to qualification to pipeline.</p>
+
+      <div class="thesis">
+        <div class="tag">The thesis</div>
+        <p>The opportunity is not to add more. It is to <span class="hl">connect what already works</span> into one orchestrated, measurable system, with LinkedIn as the layer that qualifies demand and feeds your sales team the accounts that are ready.</p>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Motion / Channel</th><th>Run by</th><th>Role in the funnel</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="ch">ABM · Field Service Enterprise</span><br><span style="font-size:12px;opacity:.7">5 personas · 1:1 + aircover · sales-intel loop</span></td><td class="owner-imp">Impactable</td><td>Full funnel, feeding sales</td><td><span class="pill p-scale">Mature · scale it</span></td></tr>
+            <tr><td><span class="ch">Always-On Segments</span><br><span style="font-size:12px;opacity:.7">Field Service, T&amp;L, Public Sector, Vocational, Construction, Heavy Truck</span></td><td class="owner-imp">Impactable</td><td>Awareness + nurture</td><td><span class="pill p-silo">Built segment-first</span></td></tr>
+            <tr><td><span class="ch">Programmatic (StackAdapt)</span></td><td class="owner-imp">Impactable</td><td>Open-web retargeting / reach extension</td><td><span class="pill p-scale">Scaling efficiently</span></td></tr>
+            <tr><td><span class="ch">Google Ads</span></td><td class="owner-cli">Client / partner</td><td>In-market capture</td><td><span class="pill p-out">Outside the connected layer</span></td></tr>
+            <tr><td><span class="ch">Meta</span></td><td class="owner-cli">Client / partner</td><td>Capture / retargeting</td><td><span class="pill p-out">Outside the connected layer</span></td></tr>
+            <tr><td><span class="ch">Organic · Email (Marketo) · Reseller</span></td><td class="owner-cli">Geotab</td><td>Mature but siloed</td><td><span class="pill p-silo">Not yet integrated</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Channels shown by role and status. North America, EMEA, APAC and LATAM each run their own mix. EMEA reports in euros. Cross-channel cost comparisons are held until conversion definitions are normalized across platforms, so no channel is judged on a metric that does not fit its job.</p>
+    </div>
+  </section>
+
+  <!-- 2. WHAT'S WORKING -->
+  <section>
+    <div class="wrap">
+      <div class="sec-num"><span class="b">02</span> What's Working</div>
+      <h2>The model we would build from scratch is already running. It's called ABM.</h2>
+      <p class="lead">The Field Service ABM motion is the proof exhibit: orchestrated, signal-led, full-funnel, and measurable. It is producing the buying-committee signal your sales team acts on, and it is the live demo for everything this review recommends scaling.</p>
+
+      <div class="stats">
+        <div class="stat"><span class="accent"></span><div class="v">1,016</div><div class="l">Named accounts under <b>persona coverage</b> across the program</div></div>
+        <div class="stat ms"><span class="accent"></span><div class="v">257</div><div class="l">Accounts engaging across <b>2+ personas</b>, the buying-committee signal</div></div>
+        <div class="stat cl"><span class="accent"></span><div class="v">27<span class="u">/39</span></div><div class="l">Active named targets engaging, about <b>69%</b>, roughly <b>$25.4M ARR</b> in play</div></div>
+        <div class="stat cn"><span class="accent"></span><div class="v">$288K</div><div class="l">Qualified pipeline target, top 30 accounts, Q4, on a ~<b>$250K</b> program</div></div>
+      </div>
+
+      <div class="grid2">
+        <div class="mcard t">
+          <div class="role">Marquee accounts lit up across the full persona set</div>
+          <h4>Verizon · J&amp;J · Allied Universal · Charter · Labcorp</h4>
+          <p>Deep, multi-persona engagement at exactly the named accounts sales cares about. J&amp;J is the textbook case: in active negotiation, then a competitive-comparison surge flagged it as a deal worth protecting, and the signal reached the rep in time. That is ABM doing its job.</p>
+        </div>
+        <div class="mcard b">
+          <div class="role">The rest of the engine, where it earns its keep</div>
+          <h4>Efficient reach, signal, and conversion</h4>
+          <p>Programmatic extends reach across the open web and de-risks LinkedIn dependency. Mid-funnel nurture in Field Service is converting on a fraction of the budget. Cost-savings and outcome creative ("$400+ per vehicle," "cut maintenance 20%") consistently outperform generic brand messaging.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THE OPPORTUNITY -->
+  <section>
+    <div class="wrap">
+      <div class="sec-num"><span class="b">03</span> The Opportunity</div>
+      <h2>The pieces are strong. The connective tissue is the upside.</h2>
+      <p class="lead">None of this is a performance problem. It is an orchestration and measurement opportunity, the kind that compounds the return on spend you are already making rather than asking for more of it.</p>
+
+      <div class="cols">
+        <div class="col win">
+          <h4>● Strengths to scale</h4>
+          <ul>
+            <li><b>ABM motion.</b> full-funnel, signal-led, multi-persona, feeding sales. The blueprint.</li>
+            <li><b>Programmatic reach.</b> efficient open-web extension, actively de-risking single-channel dependency.</li>
+            <li><b>Mid-funnel efficiency.</b> strong engagement on lean budget, ready to replicate into other segments and markets.</li>
+            <li><b>Weekly sales-intel loop.</b> intent surges and competitive signals delivered to reps, already in the workflow.</li>
+          </ul>
+        </div>
+        <div class="col opp">
+          <h4>◆ Where the upside sits</h4>
+          <ul>
+            <li><b>Un-retargeted search intent.</b> NA paid search runs $80 to $90K per month, close to $1M a year, generating in-market intent that is not yet retargeted or nurtured. The single clearest rebalance signal.</li>
+            <li><b>Channels run disconnected.</b> efficient capture (Google, Meta, Programmatic) does not yet talk to the LinkedIn influence layer or to each other.</li>
+            <li><b>Measurement stops at the channel.</b> no closed-loop tie-back to CRM outside ABM; the reseller hand-off is an attribution blind spot.</li>
+            <li><b>Coverage built segment-first.</b> strong niches, but warm high-fit accounts can fall between segments without a clear owner.</li>
+            <li><b>Spend skews to awareness.</b> program-wide, the funnel weights heavily to the top, with room to rebalance toward conversion.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="funnel">
+        <div class="funnel-h">Program-wide spend by funnel stage · YTD, Jan to May · verified (Windsor) · $377,570</div>
+        <div class="fbar">
+          <div class="fseg tof" style="width:68%">TOF 68%</div>
+          <div class="fseg mof" style="width:27%">MOF 27%</div>
+          <div class="fseg bof" style="width:6%">BOF 6%</div>
+        </div>
+        <div class="funnel-h" style="margin-top:26px;">Program-wide · trailing 90 days · verified</div>
+        <div class="fbar">
+          <div class="fseg tof" style="width:63.5%">TOF 64%</div>
+          <div class="fseg mof" style="width:26.8%">MOF 27%</div>
+          <div class="fseg bof" style="width:9.7%">BOF 10%</div>
+        </div>
+        <div class="fkey">
+          <div class="fk"><span class="dot tof"></span> <b>Top of funnel</b> · awareness</div>
+          <div class="fk"><span class="dot mof"></span> <b>Mid funnel</b> · nurture &amp; qualify</div>
+          <div class="fk"><span class="dot bof"></span> <b>Bottom funnel</b> · conversion</div>
+        </div>
+        <p class="note">The YTD split ties to the $377,570 invested across four regions. Over the trailing 90 days the program runs hotter on the bottom of the funnel, 64 / 27 / 10, so the rebalance this review proposes is already underway. North America specifically runs 50 / 38 / 12 over the same window, verified against Windsor and matching the dashboard within date-window noise. The conclusion holds either way: the mid and bottom layers do the most on the least, and weighting toward them is the highest-leverage move available without new budget.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. THE DESIRED STATE -->
+  <section>
+    <div class="wrap">
+      <div class="sec-num"><span class="b">04</span> The Desired State</div>
+      <h2>From a set of channels to one orchestrated demand system.</h2>
+      <p class="lead">The destination is not more tools or more spend. It is one connected system where every channel plays its real role, demand is qualified before it reaches sales, and success is measured against pipeline instead of delivery metrics.</p>
+
+      <div class="ba">
+        <div class="ba-col now">
+          <div class="ba-lbl">Today</div>
+          <h4>Fragmented execution</h4>
+          <ul>
+            <li>Channels measured in isolation</li>
+            <li>Coverage built segment by segment</li>
+            <li>Capture spend disconnected from influence</li>
+            <li>Attribution stops before the CRM</li>
+            <li>Success defined on delivery metrics</li>
+          </ul>
+        </div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-col next">
+          <div class="ba-lbl">The path</div>
+          <h4>Orchestrated demand</h4>
+          <ul>
+            <li>One broad coverage layer, then segment where the data earns it</li>
+            <li>LinkedIn as the qualification and orchestration hub</li>
+            <li>Search and social intent feeding retargeting and ABM</li>
+            <li>Closed-loop measurement into Salesforce</li>
+            <li>Measured against pipeline and revenue</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. THE PATH FORWARD -->
+  <section>
+    <div class="wrap">
+      <div class="sec-num"><span class="b">05</span> The Path Forward</div>
+      <h2>Three moves. Each one compounds the spend you already make.</h2>
+      <p class="lead">A sequenced plan, each step framed by what it returns to Geotab, not what it adds to a scope. The goal is more pipeline per dollar already in market.</p>
+
+      <div class="moves">
+        <div class="move">
+          <div class="n">1</div>
+          <div>
+            <h4>Rebalance the funnel and catch the search intent</h4>
+            <p>Shift program weight from awareness-heavy toward the mid and bottom layers already converting most efficiently, and give warm high-fit accounts a clear owner so none fall between segments. The proof sits in plain view: NA paid search runs $80 to $90K per month, close to $1M a year, and that in-market intent is not yet retargeted. Stand up an always-on, org-level retargeting layer to hold it, and bring search under one orchestration, with no new budget to start.</p>
+            <div class="unlock"><b>What it unlocks</b>More qualified demand and conversion from spend already in market, starting with roughly $1M a year of search intent that currently goes un-nurtured.</div>
+          </div>
+        </div>
+        <div class="move">
+          <div class="n">2</div>
+          <div>
+            <h4>Connect the measurement layer</h4>
+            <p>Stand up closed-loop attribution from advertising into Salesforce, using our measurement layer (DemandSense) plus offline conversion sync, and close the reseller hand-off blind spot so influenced pipeline is finally visible end to end.</p>
+            <div class="unlock"><b>What it unlocks</b>One source of truth for what marketing is actually influencing, the exact investment-by-channel view leadership has asked for.</div>
+          </div>
+        </div>
+        <div class="move">
+          <div class="n">3</div>
+          <div>
+            <h4>Pilot person-level resolution (WebID)</h4>
+            <p>Add person-level identity to the highest-intent accounts as a focused pilot. Three capabilities in one: sharper measurement, deeper ABM intelligence, and named, ready-to-contact fuel for the sales team, including the high-engagement accounts not yet owned.</p>
+            <div class="unlock"><b>What it unlocks</b>Accounts already raising their hand, like AT&amp;T and Verizon, routed to a rep before a competitor gets there.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. GO DEEPER INTO THE ROOM -->
+  <section>
+    <div class="wrap">
+      <div class="sec-num"><span class="b">06</span> Go Deeper</div>
+      <h2>The living system beneath this review.</h2>
+      <p class="lead">This review is the point-in-time argument. The surfaces below are the same signal model read at different altitudes, refreshed on a weekly cadence. Marketing works the intelligence layer; the field works the activation layer.</p>
+      <div class="grid2" style="margin-top:28px;">
+        <a class="mcard b" style="text-decoration:none;display:block;" href="/account-signals">
+          <div class="role">Intelligence · marketing</div>
+          <h4>Account Signals →</h4>
+          <p>Heat-ranked leaderboard, movement, multithreading, and competitive flags across the named targets. The verified spine.</p>
+        </a>
+        <a class="mcard b" style="text-decoration:none;display:block;" href="/orchestration">
+          <div class="role">Strategy spine</div>
+          <h4>The Orchestration Model →</h4>
+          <p>How the channels connect into one measured system, anchored by the un-retargeted search intent that proves the rebalance.</p>
+        </a>
+        <a class="mcard b" style="text-decoration:none;display:block;" href="/program">
+          <div class="role">Intelligence · marketing</div>
+          <h4>Program Performance →</h4>
+          <p>The funnel by stage and region, with investment attaching on the Windsor pull.</p>
+        </a>
+        <a class="mcard b" style="text-decoration:none;display:block;" href="/segments">
+          <div class="role">Intelligence · marketing</div>
+          <h4>Audience &amp; Segments →</h4>
+          <p>The buying centers, persona depth, and the Safety and Compliance expansion Samsara targets.</p>
+        </a>
+        <a class="mcard t" style="text-decoration:none;display:block;" href="/field">
+          <div class="role">Field · sales</div>
+          <h4>My Accounts →</h4>
+          <p>Per-rep view scoped to Zach or Onur: assigned accounts, the play, and who to reach first.</p>
+        </a>
+        <a class="mcard t" style="text-decoration:none;display:block;" href="/top25">
+          <div class="role">Field · sales</div>
+          <h4>Top 25 Exec Prep →</h4>
+          <p>The escalation tier: one card per priority account, with the talking points for the call.</p>
+        </a>
+      </div>
+      <p class="note" style="margin-top:18px;"><a href="/" style="color:var(--blue);text-decoration:none;">Return to the Operating Room home →</a></p>
+    </div>
+  </section>
+
+  <!-- CLOSE -->
+  <section style="border-bottom:none;">
+    <div class="wrap">
+      <div class="close">
+        <h3>From a LinkedIn vendor to Geotab's connected growth partner.</h3>
+        <p>The engine is built and the proof is already running. The next chapter is connection and measurement, turning four strong markets and every channel into one system that leadership can see, trust, and scale. That is the work, and we are ready to lead it.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div>
+      <div class="foot-logo">impact<span>able</span></div>
+      <div class="foot-txt">Geotab · Executive Review · Confidential</div>
+    </div>
+    <div class="foot-badge">LinkedIn Marketing Partner</div>
+  </div>
+
+</div>
+
+<script>
+var HASH='cbba7f209d8529e80a21be0d6feec3d3cefee93261d88be5dbd2bb62307b075f';
+function sha256(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
+function showRoom(){document.getElementById('gate').style.display='none';document.getElementById('room').style.display='block';}
+function checkPw(){sha256(document.getElementById('pw').value).then(function(h){if(h===HASH){sessionStorage.setItem('implab','1');showRoom();}else{var e=document.getElementById('err');e.style.display='block';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
+if(sessionStorage.getItem('implab')==='1')showRoom();else document.getElementById('pw').focus();
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab · Audience &amp; Segments · Impactable</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#0A0A0C;--concrete:#15151A;--court:#22222A;
+  --bone:#F4F1EA;--chalk:#C8C4B8;
+  --blue:#1B9BD1;--canopy:#D4FF3D;--moss:#7BAA3E;
+  --hazard:#FF5A1F;--terracotta:#C4521F;--clay:#FFB627;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--asphalt);color:var(--bone);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,.025) 1px,transparent 0);background-size:4px 4px;pointer-events:none;z-index:0;}
+
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;z-index:2;}
+.gate-box{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:52px 56px;max-width:400px;width:100%;text-align:center;}
+.gate-logo{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);margin-bottom:4px;}
+.gate-logo span{color:var(--blue);}
+.gate-client{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk);margin-bottom:40px;opacity:.6;}
+.gate-hint{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:14px;}
+.gate-input{width:100%;background:var(--asphalt);border:1px solid var(--court);border-radius:2px;padding:15px 18px;font-size:16px;color:var(--bone);outline:none;margin-bottom:12px;letter-spacing:.12em;text-align:center;}
+.gate-input:focus{border-color:var(--blue);}
+.gate-btn{width:100%;background:var(--blue);border:none;border-radius:2px;padding:15px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;}
+.gate-btn:hover{opacity:.85;}
+.gate-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--terracotta);margin-top:12px;display:none;}
+
+#room{display:none;position:relative;z-index:2;}
+.hdr{border-bottom:1px solid var(--court);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,12,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+.hdr-left{display:flex;align-items:center;gap:18px;}
+.hdr-logo{font-family:'Archivo Black',sans-serif;font-size:17px;color:var(--bone);}
+.hdr-logo span{color:var(--blue);}
+.hdr-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.45;margin-top:3px;}
+.hdr-back{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.55;text-decoration:none;border:1px solid var(--court);border-radius:2px;padding:7px 13px;}
+.hdr-back:hover{opacity:1;border-color:var(--blue);}
+.hdr-right{text-align:right;}
+.hdr-client{font-size:14px;font-weight:600;}
+.hdr-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.4;margin-top:3px;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+.intro{padding:48px 0 26px;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);}
+h1{font-family:'Archivo Black',sans-serif;font-size:46px;letter-spacing:-.03em;text-transform:uppercase;line-height:.98;}
+.sub{font-size:16px;color:var(--chalk);max-width:790px;margin-top:18px;line-height:1.6;}
+
+.seclabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.55;padding:38px 0 16px;display:flex;align-items:center;gap:10px;}
+.seclabel::after{content:'';flex:1;height:1px;background:var(--court);}
+
+.personas{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.persona{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:24px 26px;border-top:3px solid var(--court);}
+.persona.ops{border-top-color:var(--canopy);}
+.persona.safety{border-top-color:var(--hazard);}
+.persona.route{border-top-color:var(--blue);}
+.persona.conquest{border-top-color:var(--clay);}
+.persona .pk{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-bottom:8px;}
+.persona h3{font-family:'Archivo Black',sans-serif;font-size:18px;color:var(--bone);letter-spacing:-.01em;margin-bottom:10px;}
+.persona .who{font-size:12px;color:var(--chalk);opacity:.85;line-height:1.5;margin-bottom:10px;}
+.persona .who b{color:var(--bone);font-weight:600;}
+.persona .ang{font-size:13px;color:var(--chalk);line-height:1.55;}
+.persona .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:2px;margin-top:12px;}
+.tag.nn{background:rgba(255,90,31,.15);color:var(--hazard);}
+.tag.core{background:rgba(123,170,62,.15);color:var(--canopy);}
+
+.streams{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:28px 32px;}
+.srow{display:flex;align-items:center;gap:16px;margin-bottom:13px;}
+.srow:last-child{margin-bottom:0;}
+.sname{width:130px;font-size:13px;color:var(--bone);flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.sbar{flex:1;height:22px;background:var(--asphalt);border-radius:2px;overflow:hidden;}
+.sbar span{display:block;height:100%;background:var(--blue);border-radius:2px;}
+.sval{width:130px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--chalk);flex-shrink:0;}
+.sval b{color:var(--bone);}
+
+.callout{background:linear-gradient(100deg,rgba(255,90,31,.1),rgba(255,90,31,.02));border:1px solid rgba(255,90,31,.28);border-left:3px solid var(--hazard);border-radius:0 5px 5px 0;padding:26px 30px;}
+.callout .ct{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--hazard);margin-bottom:12px;}
+.callout h3{font-family:'Archivo Black',sans-serif;font-size:21px;color:var(--bone);margin-bottom:12px;letter-spacing:-.01em;}
+.callout p{font-size:14px;color:var(--chalk);line-height:1.65;}
+.callout p b{color:var(--bone);font-weight:600;}
+
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.slot{background:rgba(27,155,209,.05);border:1px dashed rgba(27,155,209,.35);border-radius:5px;padding:24px;}
+.slot .sl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.slot h4{font-size:15px;font-weight:600;color:var(--bone);margin-bottom:8px;}
+.slot p{font-size:12.5px;color:var(--chalk);line-height:1.55;opacity:.85;}
+.slot .src{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--blue);margin-top:12px;opacity:.8;}
+
+.flags{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:24px 28px;margin-top:14px;}
+.flags .fl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:14px;}
+.flag-item{display:flex;gap:11px;font-size:13px;color:var(--chalk);line-height:1.55;margin-bottom:11px;}
+.flag-item:last-child{margin-bottom:0;}
+.flag-item::before{content:'▸';color:var(--clay);flex-shrink:0;}
+.flag-item b{color:var(--bone);font-weight:600;}
+
+.foot{border-top:1px solid var(--court);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;margin-top:48px;}
+.foot-logo{font-family:'Archivo Black',sans-serif;font-size:14px;}.foot-logo span{color:var(--blue);}
+.foot-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.35;margin-top:3px;}
+.foot-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(27,155,209,.25);padding:6px 13px;border-radius:2px;}
+
+@media(max-width:880px){
+  .hdr,.foot{padding:14px 20px;}.wrap{padding:0 20px;}
+  h1{font-size:32px;}.personas,.slots{grid-template-columns:1fr;}
+  .sname,.sval{width:88px;}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">impact<span>able</span></div>
+    <div class="gate-client">Geotab · Audience &amp; Segments</div>
+    <div class="gate-hint">Access Password</div>
+    <input type="password" id="pw" class="gate-input" placeholder="········" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="gate-btn" onclick="checkPw()">Enter →</button>
+    <div class="gate-err" id="err">Incorrect password</div>
+  </div>
+</div>
+
+<div id="room">
+  <div class="hdr">
+    <div class="hdr-left">
+      <a href="/" class="hdr-back">← Room</a>
+      <div><div class="hdr-logo">impact<span>able</span></div><div class="hdr-tag">Intelligence layer · Audience &amp; segments</div></div>
+    </div>
+    <div class="hdr-right"><div class="hdr-client">Geotab · Field Service ABM</div><div class="hdr-meta">Architecture verified · NA demographics in</div></div>
+  </div>
+
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">Intelligence layer · who is in the room</div>
+      <h1>Audience &amp; segments</h1>
+      <p class="sub">The buying centers the program speaks to, how broadly each is engaging, and the demographic cuts that attach on the pull. The persona architecture comes straight from the program's own definitions; the reach figures are measured from the engagement streams; the function, seniority, and size cuts are filled from the Windsor demographic pull for North America.</p>
+    </div>
+
+    <div class="seclabel">The buying-center architecture</div>
+    <div class="personas">
+      <div class="persona ops">
+        <div class="pk">Core operational buyer</div>
+        <h3>Operations</h3>
+        <div class="who"><b>COO, VP of Field Operations, VP of Asset Management.</b> Owns day-to-day fleet management and uptime.</div>
+        <div class="ang">Vehicle tracking and diagnostics, fuel management, asset uptime. The broadest and most consistent engagement in the program.</div>
+        <span class="tag core">Dominant reach</span>
+      </div>
+      <div class="persona route">
+        <div class="pk">Core operational buyer</div>
+        <h3>Routing &amp; Dispatching</h3>
+        <div class="who"><b>VP of Logistics, VP of Supply Chain.</b> Owns route efficiency and coordination.</div>
+        <div class="ang">Optimized schedules, accurate ETAs, more jobs per resource. Cost-savings and outcome angles carry this persona.</div>
+        <span class="tag core">Core</span>
+      </div>
+      <div class="persona safety">
+        <div class="pk">Net-new buying center</div>
+        <h3>Safety &amp; Compliance</h3>
+        <div class="who"><b>Chief Risk Officer, Chief Compliance Officer, VP-level safety.</b> Owns accident reduction and regulatory exposure.</div>
+        <div class="ang">Driver safety monitoring and coaching, camera and compliance tooling. The committee the camera-expansion program is built to reach.</div>
+        <span class="tag nn">Net-new · Expand &amp; Defend</span>
+      </div>
+      <div class="persona conquest">
+        <div class="pk">Conquest angle</div>
+        <h3>Samsara Competitive</h3>
+        <div class="who"><b>Accounts evaluating or running a competitor.</b> Battlecard-driven.</div>
+        <div class="ang">The open and extensible platform difference: MyGeotab's marketplace and ecosystem versus a closed stack. The displacement message.</div>
+        <span class="tag nn">Conquest</span>
+      </div>
+    </div>
+
+    <div class="seclabel">Engagement reach by stream</div>
+    <div class="streams">
+      <div class="srow"><div class="sname">Stream E</div><div class="sbar"><span style="width:100%"></span></div><div class="sval"><b>626</b> accounts</div></div>
+      <div class="srow"><div class="sname">Stream D</div><div class="sbar"><span style="width:74%"></span></div><div class="sval"><b>464</b></div></div>
+      <div class="srow"><div class="sname">Stream C</div><div class="sbar"><span style="width:22%"></span></div><div class="sval"><b>140</b></div></div>
+      <div class="srow"><div class="sname">Stream B</div><div class="sbar"><span style="width:9%"></span></div><div class="sval"><b>58</b></div></div>
+      <div class="srow"><div class="sname">Stream A</div><div class="sbar"><span style="width:6%"></span></div><div class="sval"><b>38</b></div></div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.55;margin-top:20px;line-height:1.6;">Unique accounts engaging each of the five campaign streams. The shape is what matters: two broad operational streams carry most of the reach, with three narrower, higher-intent streams beneath. Streams are labeled generically here on purpose, the exact stream-to-persona mapping is being confirmed against the campaign build before it is named in a client view.</p>
+    </div>
+
+    <div class="seclabel">The strategic read</div>
+    <div class="callout">
+      <div class="ct">◆ Where the expansion sits</div>
+      <h3>Operations is who you reach. Safety is who you need.</h3>
+      <p>The operational personas carry the program's reach today, which is the right base. The growth is in <b>Safety, Risk, and Compliance</b>, the buying center that owns cameras and driver behavior and the exact committee <b>Samsara targets to get inside an account</b>. The camera-expansion program is built to open that committee inside existing fleet customers before a competitor frames the conversation. Multithreading from a known operations contact into the safety owner is the play.</p>
+    </div>
+
+    <div class="seclabel">Demographics · North America, trailing 90 days · verified</div>
+    <div class="streams" style="margin-bottom:14px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-bottom:16px;">By job function · impressions</div>
+      <div class="srow"><div class="sname">Operations</div><div class="sbar"><span style="width:100%"></span></div><div class="sval"><b>2.05M</b> · 0.47% CTR</div></div>
+      <div class="srow"><div class="sname">Off-ICP spill</div><div class="sbar"><span style="width:34%;background:var(--clay);"></span></div><div class="sval"><b>~700K</b> · monitor</div></div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.55;margin-top:18px;line-height:1.6;">Operations dominates and is dead-on ICP. The healthy core also spans Business Development, IT, Engineering, and Sales. Monitor: roughly 700K impressions into Education, Community and Social Services, Healthcare, and HR, the expected spill on named-account lists.</p>
+    </div>
+    <div class="streams" style="margin-bottom:14px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-bottom:16px;">By seniority · impressions</div>
+      <div class="srow"><div class="sname">Senior</div><div class="sbar"><span style="width:100%"></span></div><div class="sval"><b>2.10M</b></div></div>
+      <div class="srow"><div class="sname">Director</div><div class="sbar"><span style="width:38%"></span></div><div class="sval"><b>794K</b></div></div>
+      <div class="srow"><div class="sname">Manager</div><div class="sbar"><span style="width:37%"></span></div><div class="sval"><b>782K</b></div></div>
+      <div class="srow"><div class="sname">VP</div><div class="sbar"><span style="width:22%"></span></div><div class="sval"><b>454K</b></div></div>
+      <div class="srow"><div class="sname">CXO</div><div class="sbar"><span style="width:14%"></span></div><div class="sval"><b>302K</b></div></div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.55;margin-top:18px;line-height:1.6;">Decision-makers, Director plus VP plus CXO, total roughly 1.55M impressions. A solid mix with real seniority depth behind the account-level signal.</p>
+    </div>
+    <div class="streams">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-bottom:16px;">By company size · impressions</div>
+      <div class="srow"><div class="sname">10,000+</div><div class="sbar"><span style="width:100%"></span></div><div class="sval"><b>1.45M</b></div></div>
+      <div class="srow"><div class="sname">1,000 to 5,000</div><div class="sbar"><span style="width:69%"></span></div><div class="sval"><b>1.0M</b></div></div>
+      <div class="srow"><div class="sname">Under 50</div><div class="sbar"><span style="width:44%;background:var(--clay);"></span></div><div class="sval"><b>~635K</b> · monitor</div></div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.55;margin-top:18px;line-height:1.6;">Enterprise carries it, exactly the 500-plus-fleet target. Monitor: roughly 635K impressions into sub-50-employee companies, off-ICP, most likely LinkedIn mis-sizing subsidiaries of the named enterprises.</p>
+    </div>
+
+    <div class="flags">
+      <div class="fl">▸ Kept honest</div>
+      <div class="flag-item"><span><b>Stream-to-persona labels are being confirmed.</b> The campaign streams do not line up cleanly with the workbook persona order, so streams stay generic until verified against the build. We do not put a wrong label in front of leadership.</span></div>
+      <div class="flag-item"><span><b>Demographic pivots carry impressions and clicks only.</b> LinkedIn does not return spend at the demographic grain, so these cuts show reach and engagement, not cost.</span></div>
+      <div class="flag-item"><span><b>Two off-ICP buckets to watch, not fix yet.</b> Roughly 700K impressions into adjacent functions and 635K into sub-50-employee companies. Both read as expected spill on named-account lists and likely LinkedIn mis-sizing, not a targeting error.</span></div>
+      <div class="flag-item"><span><b>Reach is from capped exports.</b> Stream counts are relative scale and a floor, not an exact census.</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="foot-logo">impact<span>able</span></div><div class="foot-txt">Geotab · Audience &amp; segments · Confidential</div></div>
+    <div class="foot-badge">LinkedIn Marketing Partner</div>
+  </div>
+</div>
+
+<script>
+var HASH='cbba7f209d8529e80a21be0d6feec3d3cefee93261d88be5dbd2bb62307b075f';
+function sha256(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
+function showRoom(){document.getElementById('gate').style.display='none';document.getElementById('room').style.display='block';}
+function checkPw(){sha256(document.getElementById('pw').value).then(function(h){if(h===HASH){try{sessionStorage.setItem('implab','1');}catch(e){}showRoom();}else{var e=document.getElementById('err');e.style.display='block';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
+try{if(sessionStorage.getItem('implab')==='1')showRoom();else document.getElementById('pw').focus();}catch(e){document.getElementById('pw').focus();}
+</script>
+</body>
+</html>

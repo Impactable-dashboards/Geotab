@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab · The Orchestration Model · Impactable</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#0A0A0C;--concrete:#15151A;--court:#22222A;
+  --bone:#F4F1EA;--chalk:#C8C4B8;
+  --blue:#1B9BD1;--blue-soft:#5BB8E0;--canopy:#D4FF3D;--moss:#7BAA3E;
+  --hazard:#FF5A1F;--terracotta:#C4521F;--clay:#FFB627;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--asphalt);color:var(--bone);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,.025) 1px,transparent 0);background-size:4px 4px;pointer-events:none;z-index:0;}
+
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;z-index:2;}
+.gate-box{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:52px 56px;max-width:400px;width:100%;text-align:center;}
+.gate-logo{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);margin-bottom:4px;}
+.gate-logo span{color:var(--blue);}
+.gate-client{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk);margin-bottom:40px;opacity:.6;}
+.gate-hint{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:14px;}
+.gate-input{width:100%;background:var(--asphalt);border:1px solid var(--court);border-radius:2px;padding:15px 18px;font-size:16px;color:var(--bone);outline:none;margin-bottom:12px;letter-spacing:.12em;text-align:center;}
+.gate-input:focus{border-color:var(--blue);}
+.gate-btn{width:100%;background:var(--blue);border:none;border-radius:2px;padding:15px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;}
+.gate-btn:hover{opacity:.85;}
+.gate-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--terracotta);margin-top:12px;display:none;}
+
+#room{display:none;position:relative;z-index:2;}
+.hdr{border-bottom:1px solid var(--court);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,12,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+.hdr-left{display:flex;align-items:center;gap:18px;}
+.hdr-logo{font-family:'Archivo Black',sans-serif;font-size:17px;color:var(--bone);}
+.hdr-logo span{color:var(--blue);}
+.hdr-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.45;margin-top:3px;}
+.hdr-back{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.55;text-decoration:none;border:1px solid var(--court);border-radius:2px;padding:7px 13px;}
+.hdr-back:hover{opacity:1;border-color:var(--blue);}
+.hdr-right{text-align:right;}
+.hdr-client{font-size:14px;font-weight:600;}
+.hdr-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.4;margin-top:3px;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+.intro{padding:48px 0 26px;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);}
+h1{font-family:'Archivo Black',sans-serif;font-size:46px;letter-spacing:-.03em;text-transform:uppercase;line-height:.98;}
+.sub{font-size:16px;color:var(--chalk);max-width:820px;margin-top:18px;line-height:1.6;}
+
+.seclabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.55;padding:40px 0 16px;display:flex;align-items:center;gap:10px;}
+.seclabel::after{content:'';flex:1;height:1px;background:var(--court);}
+
+/* HUB + channel roles */
+.hub{background:linear-gradient(120deg,rgba(27,155,209,.16),rgba(212,255,61,.05));border:1px solid rgba(27,155,209,.3);border-left:3px solid var(--blue);border-radius:0 5px 5px 0;padding:28px 32px;margin-bottom:14px;}
+.hub .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.hub h3{font-family:'Archivo Black',sans-serif;font-size:23px;color:var(--bone);letter-spacing:-.01em;margin-bottom:10px;}
+.hub p{font-size:14.5px;color:var(--chalk);line-height:1.6;max-width:820px;}
+.hub p b{color:var(--bone);font-weight:600;}
+.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.rcard{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:22px 22px;border-top:3px solid var(--court);}
+.rcard.cap{border-top-color:var(--clay);} .rcard.reach{border-top-color:var(--moss);} .rcard.sig{border-top-color:var(--blue-soft);} .rcard.loop{border-top-color:var(--canopy);}
+.rcard .rk{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-bottom:9px;}
+.rcard h4{font-size:16px;font-weight:700;color:var(--bone);margin-bottom:8px;}
+.rcard p{font-size:12.5px;color:var(--chalk);line-height:1.55;opacity:.88;}
+
+/* anchor */
+.anchor{background:linear-gradient(100deg,rgba(255,90,31,.12),rgba(255,90,31,.02));border:1px solid rgba(255,90,31,.3);border-left:3px solid var(--hazard);border-radius:0 5px 5px 0;padding:30px 34px;}
+.anchor .ct{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--hazard);margin-bottom:14px;}
+.anchor h3{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);letter-spacing:-.02em;line-height:1.1;margin-bottom:14px;max-width:840px;}
+.anchor p{font-size:15px;color:var(--chalk);line-height:1.65;max-width:860px;}
+.anchor p b{color:var(--bone);font-weight:600;}
+.astats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--court);border:1px solid var(--court);border-radius:4px;overflow:hidden;margin-top:22px;}
+.astat{background:var(--concrete);padding:20px 22px;}
+.astat .v{font-family:'Archivo Black',sans-serif;font-size:30px;letter-spacing:-.03em;color:var(--bone);line-height:1;}
+.astat.hz .v{color:var(--hazard);}
+.astat .l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-top:10px;line-height:1.5;}
+
+/* maturity */
+.maturity{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--court);border:1px solid var(--court);border-radius:5px;overflow:hidden;}
+.mstage{background:var(--concrete);padding:26px 26px;}
+.mstage .ms-k{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;}
+.mstage.mature .ms-k{color:var(--moss);} .mstage.gap .ms-k{color:var(--hazard);} .mstage.dest .ms-k{color:var(--canopy);}
+.mstage h4{font-family:'Archivo Black',sans-serif;font-size:18px;color:var(--bone);letter-spacing:-.01em;margin-bottom:10px;}
+.mstage p{font-size:13px;color:var(--chalk);line-height:1.55;opacity:.88;}
+.mstage .bar{height:5px;border-radius:3px;margin-bottom:18px;}
+.mstage.mature .bar{background:var(--moss);width:100%;}
+.mstage.gap .bar{background:var(--hazard);width:38%;}
+.mstage.dest .bar{background:var(--canopy);width:62%;opacity:.5;}
+
+/* moves */
+.moves{display:grid;grid-template-columns:1fr;gap:13px;}
+.move{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:24px 28px;display:grid;grid-template-columns:46px 1fr;gap:22px;align-items:start;position:relative;overflow:hidden;}
+.move::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--blue);}
+.move .n{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--court);line-height:1;}
+.move h4{font-family:'Archivo Black',sans-serif;font-size:18px;color:var(--bone);letter-spacing:-.01em;margin-bottom:8px;}
+.move p{font-size:14px;color:var(--chalk);line-height:1.6;}
+.move p b{color:var(--bone);font-weight:600;}
+.move .tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--canopy);margin-top:9px;display:inline-block;}
+
+.flags{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:24px 28px;margin-top:14px;}
+.flags .fl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:14px;}
+.flag-item{display:flex;gap:11px;font-size:13px;color:var(--chalk);line-height:1.55;margin-bottom:11px;}
+.flag-item:last-child{margin-bottom:0;}
+.flag-item::before{content:'▸';color:var(--clay);flex-shrink:0;}
+.flag-item b{color:var(--bone);font-weight:600;}
+
+.foot{border-top:1px solid var(--court);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;margin-top:48px;}
+.foot-logo{font-family:'Archivo Black',sans-serif;font-size:14px;}.foot-logo span{color:var(--blue);}
+.foot-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.35;margin-top:3px;}
+.foot-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(27,155,209,.25);padding:6px 13px;border-radius:2px;}
+
+@media(max-width:880px){
+  .hdr,.foot{padding:14px 20px;}.wrap{padding:0 20px;}
+  h1{font-size:32px;}.roles{grid-template-columns:1fr 1fr;}.astats,.maturity{grid-template-columns:1fr;}
+  .move{grid-template-columns:1fr;gap:10px;}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">impact<span>able</span></div>
+    <div class="gate-client">Geotab · The Orchestration Model</div>
+    <div class="gate-hint">Access Password</div>
+    <input type="password" id="pw" class="gate-input" placeholder="········" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="gate-btn" onclick="checkPw()">Enter →</button>
+    <div class="gate-err" id="err">Incorrect password</div>
+  </div>
+</div>
+
+<div id="room">
+  <div class="hdr">
+    <div class="hdr-left">
+      <a href="/" class="hdr-back">← Room</a>
+      <div><div class="hdr-logo">impact<span>able</span></div><div class="hdr-tag">Strategy spine · The orchestration model</div></div>
+    </div>
+    <div class="hdr-right"><div class="hdr-client">Geotab · Demand Program</div><div class="hdr-meta">Search figures Dec–Jan · confirm current</div></div>
+  </div>
+
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">Strategy spine · the centerpiece</div>
+      <h1>The orchestration model</h1>
+      <p class="sub">The strategy that ties every surface together. The execution is already strong across channels and markets. What is missing is the layer that connects them, qualifies demand before it reaches sales, and measures the whole thing against pipeline. This is the path from fragmented execution to orchestrated, measured demand.</p>
+    </div>
+
+    <div class="seclabel">The channel-role map</div>
+    <div class="hub">
+      <div class="k">● The hub</div>
+      <h3>LinkedIn · qualify and orchestrate</h3>
+      <p>LinkedIn is not just another channel, it is the layer that reads the buying-committee signal, qualifies the account, and routes it to the field. Every other channel feeds it or is fed by it. <b>This is where fragmented execution becomes one orchestrated motion.</b></p>
+    </div>
+    <div class="roles">
+      <div class="rcard cap">
+        <div class="rk">In-market capture</div>
+        <h4>Search</h4>
+        <p>Google and Microsoft catch active, in-market demand. The intent is real and high, but today it is captured and then dropped, not handed to the orchestration layer.</p>
+      </div>
+      <div class="rcard reach">
+        <div class="rk">Open-web reach</div>
+        <h4>Programmatic</h4>
+        <p>StackAdapt extends reach across the open web and de-risks single-channel dependency. Efficient at the top, ready to carry the always-on retargeting layer.</p>
+      </div>
+      <div class="rcard sig">
+        <div class="rk">Signal generators</div>
+        <h4>Organic, SEO, page, email</h4>
+        <p>Company page, SEO, and Marketo email are mature but siloed. Each one generates signal the orchestration layer should be reading, not losing.</p>
+      </div>
+      <div class="rcard loop">
+        <div class="rk">The loop to close</div>
+        <h4>Reseller</h4>
+        <p>The reseller hand-off is where attribution goes dark today. Closing this loop is what makes influenced pipeline visible end to end.</p>
+      </div>
+    </div>
+
+    <div class="seclabel">The anchor · un-retargeted intent</div>
+    <div class="anchor">
+      <div class="ct">● The evidence the rebalance turns on</div>
+      <h3>Close to a million a year of search intent, generated and not caught.</h3>
+      <p>NA paid search runs <b>$80 to $90K per month</b>, close to <b>$1M a year</b>, and it generates exactly the in-market intent the program wants. Today that intent is captured at the click and then goes un-nurtured, with no always-on layer holding it. The clearest single case sits in the spine: <b>Rogers Communications</b> was a top LinkedIn engager, then went to zero, while in the same window 6sense flagged it as the single biggest surge at <b>232 web visits</b>. The demand did not disappear. It fell through the gap between channels.</p>
+      <div class="astats">
+        <div class="astat hz"><div class="v">$80–90K</div><div class="l">NA paid search<br>per month</div></div>
+        <div class="astat hz"><div class="v">~$1M</div><div class="l">Per year of intent<br>going un-retargeted</div></div>
+        <div class="astat"><div class="v">0 vs 232</div><div class="l">Rogers · LinkedIn to zero<br>while 6sense surged</div></div>
+      </div>
+    </div>
+
+    <div class="seclabel">The maturity path</div>
+    <div class="maturity">
+      <div class="mstage mature">
+        <div class="bar"></div>
+        <div class="ms-k">● Mature</div>
+        <h4>Execution</h4>
+        <p>Enterprise-grade channels across four markets, a working ABM motion, and efficient reach. The hard part, building the engine, is done.</p>
+      </div>
+      <div class="mstage gap">
+        <div class="bar"></div>
+        <div class="ms-k">◆ Immature</div>
+        <h4>Orchestration &amp; measurement</h4>
+        <p>Channels run in isolation, intent falls between them, and attribution stops before the CRM. This is the gap, and it is where the upside sits.</p>
+      </div>
+      <div class="mstage dest">
+        <div class="bar"></div>
+        <div class="ms-k">→ Destination</div>
+        <h4>Measured demand</h4>
+        <p>One connected system, demand qualified before sales, measured against pipeline. Reached in tiers: the verified spine today, the Windsor pull next, person-level depth on the pilot.</p>
+      </div>
+    </div>
+
+    <div class="seclabel">The asks</div>
+    <div class="moves">
+      <div class="move">
+        <div class="n">1</div>
+        <div>
+          <h4>Rebalance the funnel</h4>
+          <p>Shift weight from awareness-heavy toward the mid and bottom layers already converting most efficiently, and give warm high-fit accounts a clear owner so none fall between segments.</p>
+        </div>
+      </div>
+      <div class="move">
+        <div class="n">2</div>
+        <div>
+          <h4>Stand up the always-on retargeting layer</h4>
+          <p>An organization-level retargeting layer that holds the search and web intent instead of letting it fall through, like the Rogers case. <b>No new budget to start</b>, it runs on what is already in market.</p>
+          <span class="tag">Catches the ~$1M a year of search intent</span>
+        </div>
+      </div>
+      <div class="move">
+        <div class="n">3</div>
+        <div>
+          <h4>Connect DemandSense to Salesforce</h4>
+          <p>Close the loop from advertising into the CRM so influenced pipeline is finally visible end to end, including the reseller hand-off that goes dark today.</p>
+        </div>
+      </div>
+      <div class="move">
+        <div class="n">4</div>
+        <div>
+          <h4>Pilot WebID</h4>
+          <p>Add person-level resolution to the highest-intent accounts as a focused pilot: sharper measurement, deeper ABM intelligence, and named, ready-to-contact fuel for the field.</p>
+        </div>
+      </div>
+      <div class="move">
+        <div class="n">5</div>
+        <div>
+          <h4>Bring search under one orchestration</h4>
+          <p>Pull paid search into the connected layer so capture and influence finally talk to each other.</p>
+          <span class="tag">Jen already asked for this in December</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flags">
+      <div class="fl">▸ Kept honest</div>
+      <div class="flag-item"><span><b>The search figures are December and January.</b> The $80 to $90K per month is from the Dec 2025 read and the Jan 2026 recap. Confirm the current monthly state before the number goes in front of leadership as live.</span></div>
+      <div class="flag-item"><span><b>Cross-channel CPA stays out until normalized.</b> We argue the orchestration case on intent and movement, not on a head-to-head cost-per-action across channels that do not yet share conversion definitions.</span></div>
+      <div class="flag-item"><span><b>Rogers may have moved, not vanished.</b> The LinkedIn-to-zero read is worth confirming against a campaign change before it is told as pure signal loss, though the orchestration point holds either way.</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="foot-logo">impact<span>able</span></div><div class="foot-txt">Geotab · The orchestration model · Confidential</div></div>
+    <div class="foot-badge">LinkedIn Marketing Partner</div>
+  </div>
+</div>
+
+<script>
+var HASH='cbba7f209d8529e80a21be0d6feec3d3cefee93261d88be5dbd2bb62307b075f';
+function sha256(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
+function showRoom(){document.getElementById('gate').style.display='none';document.getElementById('room').style.display='block';}
+function checkPw(){sha256(document.getElementById('pw').value).then(function(h){if(h===HASH){try{sessionStorage.setItem('implab','1');}catch(e){}showRoom();}else{var e=document.getElementById('err');e.style.display='block';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
+try{if(sessionStorage.getItem('implab')==='1')showRoom();else document.getElementById('pw').focus();}catch(e){document.getElementById('pw').focus();}
+</script>
+</body>
+</html>

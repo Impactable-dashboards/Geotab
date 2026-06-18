@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab · Top 25 Exec Prep · Impactable</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#0A0A0C;--concrete:#15151A;--court:#22222A;
+  --bone:#F4F1EA;--chalk:#C8C4B8;
+  --blue:#1B9BD1;--blue-soft:#5BB8E0;--canopy:#D4FF3D;--moss:#7BAA3E;
+  --hazard:#FF5A1F;--terracotta:#C4521F;--clay:#FFB627;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--asphalt);color:var(--bone);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,.025) 1px,transparent 0);background-size:4px 4px;pointer-events:none;z-index:0;}
+
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;z-index:2;}
+.gate-box{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:52px 56px;max-width:400px;width:100%;text-align:center;}
+.gate-logo{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);margin-bottom:4px;}
+.gate-logo span{color:var(--blue);}
+.gate-client{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk);margin-bottom:40px;opacity:.6;}
+.gate-hint{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:14px;}
+.gate-input{width:100%;background:var(--asphalt);border:1px solid var(--court);border-radius:2px;padding:15px 18px;font-size:16px;color:var(--bone);outline:none;margin-bottom:12px;letter-spacing:.12em;text-align:center;}
+.gate-input:focus{border-color:var(--blue);}
+.gate-btn{width:100%;background:var(--blue);border:none;border-radius:2px;padding:15px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;}
+.gate-btn:hover{opacity:.85;}
+.gate-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--terracotta);margin-top:12px;display:none;}
+
+#room{display:none;position:relative;z-index:2;}
+.hdr{border-bottom:1px solid var(--court);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,12,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+.hdr-left{display:flex;align-items:center;gap:18px;}
+.hdr-logo{font-family:'Archivo Black',sans-serif;font-size:17px;color:var(--bone);}
+.hdr-logo span{color:var(--blue);}
+.hdr-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.45;margin-top:3px;}
+.hdr-back{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.55;text-decoration:none;border:1px solid var(--court);border-radius:2px;padding:7px 13px;}
+.hdr-back:hover{opacity:1;border-color:var(--blue);}
+.hdr-right{text-align:right;}
+.hdr-client{font-size:14px;font-weight:600;}
+.hdr-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.4;margin-top:3px;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+.intro{padding:48px 0 22px;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);}
+h1{font-family:'Archivo Black',sans-serif;font-size:46px;letter-spacing:-.03em;text-transform:uppercase;line-height:.98;}
+.sub{font-size:16px;color:var(--chalk);max-width:780px;margin-top:18px;line-height:1.6;}
+
+/* tier escalation */
+.tiers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--court);border:1px solid var(--court);border-radius:5px;overflow:hidden;margin-top:26px;}
+.tier{background:var(--concrete);padding:20px 22px;position:relative;}
+.tier .tn{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);line-height:1;}
+.tier .tl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-top:9px;line-height:1.5;}
+.tier.focus{background:linear-gradient(120deg,rgba(255,90,31,.12),rgba(21,21,26,1));}
+.tier.focus .tn{color:var(--hazard);}
+
+.seclabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.55;padding:36px 0 16px;display:flex;align-items:center;gap:10px;}
+.seclabel::after{content:'';flex:1;height:1px;background:var(--court);}
+
+.t25cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.t25{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:26px 28px;border-top:3px solid var(--hazard);}
+.t25-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;}
+.t25-name{font-family:'Archivo Black',sans-serif;font-size:21px;color:var(--bone);letter-spacing:-.01em;}
+.t25-owner{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-top:5px;}
+.cflag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:2px;background:rgba(255,90,31,.15);color:var(--hazard);text-align:right;flex-shrink:0;max-width:150px;line-height:1.4;}
+.t25-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--court);border:1px solid var(--court);border-radius:3px;overflow:hidden;margin-bottom:16px;}
+.t25-stat{background:var(--concrete);padding:12px 13px;}
+.t25-stat .sv{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--bone);}
+.t25-stat .sv.pull{color:var(--blue);font-size:11px;font-weight:500;letter-spacing:.04em;}
+.t25-stat .sl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--chalk);opacity:.55;margin-top:6px;}
+.t25-stage{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;color:var(--clay);margin-bottom:13px;}
+.tps{list-style:none;}
+.tps .tph{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--canopy);margin-bottom:9px;}
+.tps li{font-size:13.5px;color:var(--chalk);line-height:1.55;padding:7px 0 7px 24px;position:relative;border-bottom:1px solid rgba(34,34,42,.6);}
+.tps li:last-child{border-bottom:none;}
+.tps li .qn{position:absolute;left:0;top:7px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--blue);}
+.tps li b{color:var(--bone);font-weight:600;}
+
+.flags{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:24px 28px;margin-top:16px;}
+.flags .fl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:14px;}
+.flag-item{display:flex;gap:11px;font-size:13px;color:var(--chalk);line-height:1.55;margin-bottom:11px;}
+.flag-item:last-child{margin-bottom:0;}
+.flag-item::before{content:'▸';color:var(--clay);flex-shrink:0;}
+.flag-item b{color:var(--bone);font-weight:600;}
+
+.foot{border-top:1px solid var(--court);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;margin-top:48px;}
+.foot-logo{font-family:'Archivo Black',sans-serif;font-size:14px;}.foot-logo span{color:var(--blue);}
+.foot-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.35;margin-top:3px;}
+.foot-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(27,155,209,.25);padding:6px 13px;border-radius:2px;}
+
+@media(max-width:880px){
+  .hdr,.foot{padding:14px 20px;}.wrap{padding:0 20px;}
+  h1{font-size:32px;}.tiers,.t25cards{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">impact<span>able</span></div>
+    <div class="gate-client">Geotab · Top 25 Exec Prep</div>
+    <div class="gate-hint">Access Password</div>
+    <input type="password" id="pw" class="gate-input" placeholder="········" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="gate-btn" onclick="checkPw()">Enter →</button>
+    <div class="gate-err" id="err">Incorrect password</div>
+  </div>
+</div>
+
+<div id="room">
+  <div class="hdr">
+    <div class="hdr-left">
+      <a href="/" class="hdr-back">← Room</a>
+      <div><div class="hdr-logo">impact<span>able</span></div><div class="hdr-tag">Field layer · Top 25 exec prep</div></div>
+    </div>
+    <div class="hdr-right"><div class="hdr-client">Geotab · Field Service ABM</div><div class="hdr-meta">Escalation tier · prep for the call</div></div>
+  </div>
+
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">Field layer · escalation tier</div>
+      <h1>Top 25 exec prep</h1>
+      <p class="sub">The tiered escalation the brief calls for: start with all accounts under coverage, narrow to the Top 100, then to the Top 25 that warrant an executive conversation. One card per priority account, with the signal, the committee, the competitive flag, and the three talking points to walk into the call with.</p>
+    </div>
+
+    <div class="tiers">
+      <div class="tier"><div class="tn">1,016</div><div class="tl">All accounts<br>under coverage</div></div>
+      <div class="tier"><div class="tn">Top 100</div><div class="tl">Multithreaded<br>and moving</div></div>
+      <div class="tier focus"><div class="tn">Top 25</div><div class="tl">Executive<br>conversation now</div></div>
+    </div>
+
+    <div class="seclabel">Priority accounts · the live cards</div>
+    <div class="t25cards" id="cards"></div>
+
+    <div class="flags">
+      <div class="fl">▸ Kept honest</div>
+      <div class="flag-item"><span><b>Per-account ARR attaches on the Salesforce pull.</b> Signal and committee depth are verified from the spine. The revenue figure on each card fills from the CRM, so we are not putting a dollar number next to an account until it is the real one.</span></div>
+      <div class="flag-item"><span><b>Talking points are built from the signal, not the contact.</b> They reflect persona breadth, movement, and competitive flags. The named decision-makers attach from Clay, a few are already known (Allied, Charter, Brightview).</span></div>
+      <div class="flag-item"><span><b>The cards shown are the live priority set.</b> The full Top 25 extends from the same Hot and marquee tier; these are the ones lit up enough to brief an executive on today.</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="foot-logo">impact<span>able</span></div><div class="foot-txt">Geotab · Top 25 exec prep · Confidential</div></div>
+    <div class="foot-badge">LinkedIn Marketing Partner</div>
+  </div>
+</div>
+
+<script>
+var HASH='cbba7f209d8529e80a21be0d6feec3d3cefee93261d88be5dbd2bb62307b075f';
+function sha256(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
+function showRoom(){document.getElementById('gate').style.display='none';document.getElementById('room').style.display='block';render();}
+function checkPw(){sha256(document.getElementById('pw').value).then(function(h){if(h===HASH){try{sessionStorage.setItem('implab','1');}catch(e){}showRoom();}else{var e=document.getElementById('err');e.style.display='block';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
+try{if(sessionStorage.getItem('implab')==='1')showRoom();else document.getElementById('pw').focus();}catch(e){document.getElementById('pw').focus();}
+
+var T25=[
+ {a:"Verizon",o:"Unowned · assign",sig:"714",com:"5 / 5",flag:"Bombora 7 · all 5",stage:"Widest reach, no owner",tps:[
+   "You are engaging across all five buying centers, the deepest committee in the program. We can connect operations, safety, and routing under one rollout.",
+   "6sense shows a sustained Bombora surge. This is active intent right now, not a cold outreach.",
+   "No single owner has the full fleet, safety, and dispatch picture yet. We can bring that one view to the table."]},
+ {a:"Johnson & Johnson",o:"Zach",sig:"320",com:"5 / 5",flag:"Competitive surge",stage:"Active negotiation · protect",tps:[
+   "You are in active evaluation. Here is the open-platform difference versus a closed stack, point by point.",
+   "A competitive-comparison surge flagged this account. Let us get ahead of the Samsara conversation before it sets the frame.",
+   "Five personas engaged means the committee is forming. We can align safety, operations, and compliance on one business case."]},
+ {a:"Allied Universal",o:"Onur",sig:"182",com:"5 / 5",flag:"7-week surge · no 1:1",stage:"Reach first · widest gap",tps:[
+   "Seven straight weeks of 6sense surge. Your team has been researching us. Let us make it a conversation.",
+   "All five personas are engaging, but we have never met 1:1. That is the gap we close today. Kristi Fearn is the known contact.",
+   "Security and guarding fleets live on uptime and routing. Here is the operations and safety case, built for your model."]},
+ {a:"Charter Communications",o:"Zach",sig:"136",com:"5 / 5",flag:"All 5 · climbing",stage:"Multithread to 1:1",tps:[
+   "All five personas and still climbing. The whole committee is paying attention, so let us multithread rather than single-thread. Kamal Masih is the known contact.",
+   "For a network operator, field service uptime is the lever. Here is the dispatch and routing outcome.",
+   "We can open the safety and compliance committee before a competitor frames that conversation for you."]},
+ {a:"Labcorp",o:"Zach",sig:"17",com:"5 / 5",flag:"CARB compliance",stage:"Compliance wedge",tps:[
+   "CARB compliance is clearly driving interest. Here is how the platform carries the reporting burden for you.",
+   "All five personas are engaged even at an early signal level. The committee breadth is the real story here.",
+   "Lab logistics is a routing and uptime problem at its core. Here is the operations outcome, in your terms."]},
+ {a:"Cintas",o:"Onur",sig:"508",com:"2 / 5",flag:"Strongest riser +508",stage:"Capitalize now",tps:[
+   "You are the single fastest riser in the program this period. Something shifted, so let us meet while it is hot.",
+   "Uniform and facility services run on routing efficiency. Here is the 2.5-more-jobs-a-day case.",
+   "Two personas engaged now, with room to widen. Let us bring operations and safety to the same table."]}
+];
+
+function render(){
+  document.getElementById('cards').innerHTML=T25.map(function(c){
+    var tps=c.tps.map(function(t,i){return '<li><span class="qn">'+(i+1)+'</span>'+t+'</li>';}).join('');
+    return '<div class="t25">'+
+      '<div class="t25-top"><div><div class="t25-name">'+c.a+'</div><div class="t25-owner">Owner · '+c.o+'</div></div><div class="cflag">'+c.flag+'</div></div>'+
+      '<div class="t25-stats">'+
+        '<div class="t25-stat"><div class="sv">'+c.sig+'</div><div class="sl">Signal (May)</div></div>'+
+        '<div class="t25-stat"><div class="sv">'+c.com+'</div><div class="sl">Committee</div></div>'+
+        '<div class="t25-stat"><div class="sv pull">Salesforce pull</div><div class="sl">ARR</div></div>'+
+      '</div>'+
+      '<div class="t25-stage">'+c.stage+'</div>'+
+      '<ul class="tps"><div class="tph">Three talking points for the call</div>'+tps+'</ul>'+
+    '</div>';
+  }).join('');
+}
+</script>
+</body>
+</html>

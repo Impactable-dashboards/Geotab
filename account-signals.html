@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab · Account Signals · Impactable</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#0A0A0C;--concrete:#15151A;--court:#22222A;
+  --bone:#F4F1EA;--chalk:#C8C4B8;
+  --blue:#1B9BD1;--blue-soft:#5BB8E0;--canopy:#D4FF3D;--moss:#7BAA3E;
+  --hazard:#FF5A1F;--terracotta:#C4521F;--clay:#FFB627;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--asphalt);color:var(--bone);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,.025) 1px,transparent 0);background-size:4px 4px;pointer-events:none;z-index:0;}
+
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;z-index:2;}
+.gate-box{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:52px 56px;max-width:400px;width:100%;text-align:center;}
+.gate-logo{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);margin-bottom:4px;}
+.gate-logo span{color:var(--blue);}
+.gate-client{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk);margin-bottom:40px;opacity:.6;}
+.gate-hint{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:14px;}
+.gate-input{width:100%;background:var(--asphalt);border:1px solid var(--court);border-radius:2px;padding:15px 18px;font-size:16px;color:var(--bone);outline:none;margin-bottom:12px;letter-spacing:.12em;text-align:center;}
+.gate-input:focus{border-color:var(--blue);}
+.gate-btn{width:100%;background:var(--blue);border:none;border-radius:2px;padding:15px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;}
+.gate-btn:hover{opacity:.85;}
+.gate-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--terracotta);margin-top:12px;display:none;}
+
+#room{display:none;position:relative;z-index:2;}
+.hdr{border-bottom:1px solid var(--court);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,12,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+.hdr-left{display:flex;align-items:center;gap:18px;}
+.hdr-logo{font-family:'Archivo Black',sans-serif;font-size:17px;color:var(--bone);}
+.hdr-logo span{color:var(--blue);}
+.hdr-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.45;margin-top:3px;}
+.hdr-back{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.55;text-decoration:none;border:1px solid var(--court);border-radius:2px;padding:7px 13px;}
+.hdr-back:hover{opacity:1;border-color:var(--blue);}
+.hdr-right{text-align:right;}
+.hdr-client{font-size:14px;font-weight:600;}
+.hdr-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.4;margin-top:3px;}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+.intro{padding:48px 0 28px;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);}
+h1{font-family:'Archivo Black',sans-serif;font-size:46px;letter-spacing:-.03em;text-transform:uppercase;line-height:.98;}
+.sub{font-size:16px;color:var(--chalk);max-width:760px;margin-top:18px;line-height:1.6;}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--court);border:1px solid var(--court);border-radius:4px;overflow:hidden;margin:30px 0;}
+.stat{background:var(--concrete);padding:22px 22px;}
+.stat .v{font-family:'Archivo Black',sans-serif;font-size:32px;letter-spacing:-.03em;color:var(--bone);line-height:1;}
+.stat .v small{font-size:16px;color:var(--blue);}
+.stat .l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-top:10px;line-height:1.5;}
+
+.seclabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.55;padding:36px 0 14px;display:flex;align-items:center;gap:10px;}
+.seclabel::after{content:'';flex:1;height:1px;background:var(--court);}
+
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.fbtn{background:var(--concrete);border:1px solid var(--court);border-radius:2px;color:var(--chalk);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:all .15s;}
+.fbtn:hover{border-color:var(--blue);color:var(--bone);}
+.fbtn.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+.tbl-wrap{border:1px solid var(--court);border-radius:4px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;font-size:13.5px;}
+thead th{background:var(--court);text-align:left;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);}
+thead th.r{text-align:right;}
+tbody td{padding:13px 16px;border-top:1px solid var(--court);color:var(--chalk);vertical-align:middle;}
+tbody tr{background:var(--concrete);}
+tbody tr:hover{background:#191920;}
+td.acct{font-weight:600;color:var(--bone);font-size:14px;}
+td.r{text-align:right;font-family:'JetBrains Mono',monospace;}
+.heat{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:2px;}
+.h-hot{background:rgba(255,90,31,.15);color:var(--hazard);}
+.h-warm{background:rgba(255,182,39,.15);color:var(--clay);}
+.h-watch{background:rgba(200,196,184,.1);color:var(--chalk);}
+.dots{display:inline-flex;gap:3px;}
+.dot{width:9px;height:9px;border-radius:2px;background:var(--court);}
+.dot.on{background:var(--moss);}
+.dot.on5{background:var(--hazard);}
+.mv{font-family:'JetBrains Mono',monospace;font-size:12px;}
+.mv.up{color:var(--moss);} .mv.dn{color:var(--terracotta);} .mv.fl{color:var(--chalk);opacity:.5;}
+.flag{font-size:11.5px;color:var(--clay);line-height:1.4;}
+.owner{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--chalk);opacity:.7;}
+
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.card{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:24px;}
+.card.alert{border-left:3px solid var(--hazard);border-radius:0 4px 4px 0;}
+.card.gap{border-left:3px solid var(--clay);border-radius:0 4px 4px 0;}
+.card .ct{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;}
+.card.alert .ct{color:var(--hazard);} .card.gap .ct{color:var(--clay);}
+.card h3{font-family:'Archivo Black',sans-serif;font-size:19px;letter-spacing:-.01em;color:var(--bone);margin-bottom:10px;}
+.card p{font-size:13.5px;color:var(--chalk);line-height:1.6;}
+.card p b{color:var(--bone);font-weight:600;}
+
+.movecols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.movecol{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:22px 24px;}
+.movecol h4{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;}
+.movecol.up h4{color:var(--moss);} .movecol.dn h4{color:var(--terracotta);}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(34,34,42,.7);font-size:13.5px;}
+.mrow:last-child{border-bottom:none;}
+.mrow .nm{color:var(--bone);}
+.mrow .vv{font-family:'JetBrains Mono',monospace;font-size:12px;}
+
+.breadth{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--court);border:1px solid var(--court);border-radius:4px;overflow:hidden;}
+.bcell{background:var(--concrete);padding:18px 16px;text-align:center;}
+.bcell .bn{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);}
+.bcell .bl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--chalk);opacity:.6;margin-top:6px;line-height:1.4;}
+.bcell.peak .bn{color:var(--hazard);}
+
+.pull{background:rgba(27,155,209,.06);border:1px solid rgba(27,155,209,.18);border-radius:4px;padding:22px 26px;margin-top:14px;}
+.pull .pl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.pull p{font-size:13.5px;color:var(--chalk);line-height:1.6;}
+.pull p b{color:var(--bone);font-weight:600;}
+
+.note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--chalk);opacity:.5;margin-top:14px;line-height:1.6;}
+
+.foot{border-top:1px solid var(--court);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;margin-top:48px;}
+.foot-logo{font-family:'Archivo Black',sans-serif;font-size:14px;}.foot-logo span{color:var(--blue);}
+.foot-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.35;margin-top:3px;}
+.foot-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(27,155,209,.25);padding:6px 13px;border-radius:2px;}
+
+@media(max-width:920px){
+  .hdr,.foot{padding:14px 20px;}.wrap{padding:0 20px;}
+  h1{font-size:32px;}.stats,.breadth{grid-template-columns:1fr 1fr;}
+  .cards2,.movecols{grid-template-columns:1fr;}
+  thead{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">impact<span>able</span></div>
+    <div class="gate-client">Geotab · Account Signals</div>
+    <div class="gate-hint">Access Password</div>
+    <input type="password" id="pw" class="gate-input" placeholder="········" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="gate-btn" onclick="checkPw()">Enter →</button>
+    <div class="gate-err" id="err">Incorrect password</div>
+  </div>
+</div>
+
+<div id="room">
+  <div class="hdr">
+    <div class="hdr-left">
+      <a href="/" class="hdr-back">← Lab</a>
+      <div><div class="hdr-logo">impact<span>able</span></div><div class="hdr-tag">Intelligence layer · Account signals</div></div>
+    </div>
+    <div class="hdr-right"><div class="hdr-client">Geotab · Field Service ABM</div><div class="hdr-meta">Snapshots Apr 13 → May 28 · NA</div></div>
+  </div>
+
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">Intelligence layer · the signal model</div>
+      <h1>Account signals</h1>
+      <p class="sub">Every named target scored on one model: account by persona by topic by time. This is the analysis surface, where marketing reads the signal, spots the clusters and concentrations, and assigns the play the field activates. Engagement intensity and movement come from the LinkedIn Company Hub snapshots; persona breadth from the five campaign streams; competitive and surge flags from 6sense.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="v">27<small> / 39</small></div><div class="l">Active named targets<br>showing engagement (~69%)</div></div>
+      <div class="stat"><div class="v">257</div><div class="l">Accounts engaging<br>2+ personas</div></div>
+      <div class="stat"><div class="v">38</div><div class="l">Accounts at<br>3+ personas</div></div>
+      <div class="stat"><div class="v">5</div><div class="l">Marquee accounts lit up<br>across all 5 personas</div></div>
+    </div>
+
+    <div class="seclabel">Heat-ranked leaderboard</div>
+    <div class="filters" id="filters">
+      <button class="fbtn on" data-f="all" onclick="setF(this)">All</button>
+      <button class="fbtn" data-f="hot" onclick="setF(this)">Hot only</button>
+      <button class="fbtn" data-f="multi" onclick="setF(this)">Multi-persona (2+)</button>
+      <button class="fbtn" data-f="marquee" onclick="setF(this)">Marquee (5)</button>
+      <button class="fbtn" data-f="up" onclick="setF(this)">Rising</button>
+      <button class="fbtn" data-f="down" onclick="setF(this)">Declining</button>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Account</th><th>Owner</th><th>Heat</th><th>Personas</th><th class="r">Signal (May)</th><th class="r">Move vs Apr</th><th>Signal flag</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="note">Heat rule, stated plainly: HOT = four or five personas engaged, or an active competitive/surge flag, or strong upward movement. WARM = two to three personas or sustained moderate engagement. WATCH = single persona, declining, or an open ownership gap. Signal is an engagement-intensity index from Company Hub paid and organic activity, not spend.</p>
+
+    <div class="seclabel">Movement this period</div>
+    <div class="movecols">
+      <div class="movecol up">
+        <h4>▲ Rising</h4>
+        <div class="mrow"><span class="nm">Cintas</span><span class="vv up">+508 · strongest riser</span></div>
+        <div class="mrow"><span class="nm">Allied Universal</span><span class="vv up">+182 · now all 5 personas</span></div>
+        <div class="mrow"><span class="nm">Compass Group</span><span class="vv up">+138 · newly active</span></div>
+        <div class="mrow"><span class="nm">Johnson &amp; Johnson</span><span class="vv up">+99 · marquee, climbing</span></div>
+        <div class="mrow"><span class="nm">Charter Communications</span><span class="vv up">+68 · all 5 personas</span></div>
+      </div>
+      <div class="movecol dn">
+        <h4>▼ Declining or gone dark</h4>
+        <div class="mrow"><span class="nm">Rogers Communications</span><span class="vv dn">to 0 on LinkedIn</span></div>
+        <div class="mrow"><span class="nm">AT&amp;T</span><span class="vv dn">−1,782 · still unowned</span></div>
+        <div class="mrow"><span class="nm">TELUS</span><span class="vv dn">−1,709</span></div>
+        <div class="mrow"><span class="nm">Verizon</span><span class="vv dn">−377 · still all 5, unowned</span></div>
+        <div class="mrow"><span class="nm">Apex Service Partners</span><span class="vv dn">−76</span></div>
+      </div>
+    </div>
+
+    <div class="seclabel">Signals to act on</div>
+    <div class="cards2">
+      <div class="card alert">
+        <div class="ct">● Signal divergence · the orchestration case</div>
+        <h3>Rogers Communications</h3>
+        <p>Rogers was a top LinkedIn engager in April, then went to <b>zero in May</b>. In the same window 6sense shows it as the <b>single biggest surge, 232 web visits</b>. That is real, high intent we are generating and not catching on LinkedIn. It is the clearest argument in the program for a persistent, organization-level retargeting layer that holds the signal instead of letting it fall through. Worth confirming the account was not simply moved to another campaign.</p>
+      </div>
+      <div class="card gap">
+        <div class="ct">◆ Activation gaps · top plays to assign</div>
+        <h3>Verizon &amp; Allied Universal</h3>
+        <p><b>Verizon</b> engages across all five personas and is still <b>unowned</b>, the widest reach with no rep. <b>Allied Universal</b> engages across all five, is rising, carries a seven-week 6sense surge, and has <b>never had a 1:1 activated</b>, the widest intent-to-action gap in the book. Both are Top 25 escalations: assign an owner, stand up the play.</p>
+      </div>
+    </div>
+
+    <div class="seclabel">Buying-committee depth</div>
+    <div class="breadth">
+      <div class="bcell peak"><div class="bn">5</div><div class="bl">All personas<br>Verizon · J&amp;J · Allied · Charter · Labcorp</div></div>
+      <div class="bcell"><div class="bn">38</div><div class="bl">3+ personas<br>deepest committees</div></div>
+      <div class="bcell"><div class="bn">257</div><div class="bl">2+ personas<br>multithreaded</div></div>
+      <div class="bcell"><div class="bn">1,016</div><div class="bl">accounts under<br>coverage</div></div>
+      <div class="bcell"><div class="bn">27</div><div class="bl">of 39 named<br>targets active</div></div>
+    </div>
+    <p class="note">Multithreading is the buying-committee signal the brief asks for. An account engaging two or more personas is a cluster candidate; concentrated single-account intent across personas plus a competitive flag is a 1:1 candidate.</p>
+
+    <div class="pull">
+      <div class="pl">What the Windsor pull added, and the one gap</div>
+      <p><b>Spend per 1:1 account</b> is now live on Program Performance, and the <b>demographic cuts</b> (function, seniority, size) are live on Audience &amp; Segments, so signal now sits next to investment and committee shape. The one gap is <b>web-visit volume</b>: there is no Geotab GA4 property connected to Windsor, so the off-LinkedIn signal the Rogers case points to still needs direct GA4 access.</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="foot-logo">impact<span>able</span></div><div class="foot-txt">Geotab · Account signals · Confidential</div></div>
+    <div class="foot-badge">LinkedIn Marketing Partner</div>
+  </div>
+</div>
+
+<script>
+var HASH='cbba7f209d8529e80a21be0d6feec3d3cefee93261d88be5dbd2bb62307b075f';
+function sha256(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
+function showRoom(){document.getElementById('gate').style.display='none';document.getElementById('room').style.display='block';render('all');}
+function checkPw(){sha256(document.getElementById('pw').value).then(function(h){if(h===HASH){sessionStorage.setItem('implab','1');showRoom();}else{var e=document.getElementById('err');e.style.display='block';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
+if(sessionStorage.getItem('implab')==='1')showRoom();else document.getElementById('pw').focus();
+
+var DATA=[
+ {a:"Verizon",o:"unowned",t:"NN",p:5,m:714,d:-377,h:"hot",f:"6sense Bombora 7 · all 5 personas · unowned"},
+ {a:"Johnson & Johnson",o:"Zach",t:"NN",p:5,m:320,d:99,h:"hot",f:"Marquee · competitive surge history (J&J)"},
+ {a:"Allied Universal",o:"Onur",t:"NN",p:5,m:182,d:182,h:"hot",f:"7-week 6sense surge · no 1:1 yet"},
+ {a:"Charter Communications",o:"Zach",t:"NN",p:5,m:136,d:68,h:"hot",f:"All 5 personas · climbing"},
+ {a:"Labcorp",o:"Zach",t:"NN",p:5,m:17,d:17,h:"hot",f:"CARB compliance surge"},
+ {a:"Cintas",o:"Onur",t:"NN",p:2,m:508,d:508,h:"hot",f:"Strongest new riser this period"},
+ {a:"Compass Group",o:"Zach",t:"EXP",p:1,m:138,d:138,h:"warm",f:"Newly active · 20% collaboration"},
+ {a:"TruGreen",o:"Onur",t:"NN",p:3,m:52,d:52,h:"warm",f:"1:1 live · 10% engaged"},
+ {a:"Comcast",o:"Zach",t:"EXP",p:1,m:157,d:-20,h:"warm",f:"Camera-focused expansion"},
+ {a:"Walt Disney Imagineering",o:"Onur",t:"NN",p:3,m:8,d:8,h:"warm",f:"10% engaged"},
+ {a:"AT&T",o:"unowned",t:"NN",p:2,m:1692,d:-1782,h:"watch",f:"High base, declining · unowned"},
+ {a:"TELUS",o:"Zach",t:"EXP",p:0,m:1343,d:-1709,h:"watch",f:"High base, declining"},
+ {a:"Rogers Communications",o:"Onur",t:"NN",p:0,m:0,d:-1910,h:"hot",f:"LinkedIn 0 vs 6sense 232 visits · divergence"},
+ {a:"Alsco Uniforms",o:"Onur",t:"NN",p:1,m:51,d:1,h:"watch",f:""},
+ {a:"Amgen",o:"Zach",t:"EXP",p:0,m:41,d:-2,h:"watch",f:""},
+ {a:"Groundworks",o:"Onur",t:"EXP",p:1,m:16,d:13,h:"watch",f:""},
+ {a:"Vestis",o:"Onur",t:"EXP",p:1,m:14,d:14,h:"watch",f:""},
+ {a:"Brightspeed",o:"Zach",t:"NN",p:1,m:12,d:-20,h:"watch",f:"10% engaged"},
+ {a:"Everon",o:"Zach",t:"EXP",p:1,m:8,d:8,h:"watch",f:""},
+ {a:"Apex Service Partners",o:"Onur",t:"EXP",p:1,m:6,d:-76,h:"watch",f:"75% negotiations"},
+ {a:"ABM Industries",o:"unowned",t:"NN",p:0,m:18,d:18,h:"watch",f:""},
+ {a:"USIC",o:"unowned",t:"NN",p:2,m:0,d:-18,h:"watch",f:""},
+ {a:"Windstream",o:"Onur",t:"EXP",p:2,m:0,d:0,h:"watch",f:"Net-new committee, not yet active"}
+];
+function idx(r){return r.p*200 + Math.min(r.m,1200)/12 + (r.d>50?100:0) + (r.f?120:0);}
+function dots(n){var s='<span class="dots">';for(var i=1;i<=5;i++){s+='<span class="dot '+(i<=n?(n===5?'on5':'on'):'')+'"></span>';}return s+'</span>';}
+function mv(d){if(d>5)return '<span class="mv up">▲ +'+d.toLocaleString()+'</span>';if(d<-5)return '<span class="mv dn">▼ '+d.toLocaleString()+'</span>';return '<span class="mv fl">flat</span>';}
+function render(f){
+  var list=DATA.slice().sort(function(x,y){return idx(y)-idx(x);});
+  if(f==='hot')list=list.filter(function(r){return r.h==='hot';});
+  if(f==='multi')list=list.filter(function(r){return r.p>=2;});
+  if(f==='marquee')list=list.filter(function(r){return r.p===5;});
+  if(f==='up')list=list.filter(function(r){return r.d>5;});
+  if(f==='down')list=list.filter(function(r){return r.d<-5;});
+  var html=list.map(function(r){
+    return '<tr><td class="acct">'+r.a+'</td>'+
+    '<td class="owner">'+r.o+'</td>'+
+    '<td><span class="heat h-'+r.h+'">'+r.h+'</span></td>'+
+    '<td>'+dots(r.p)+'</td>'+
+    '<td class="r">'+(r.m?r.m.toLocaleString():'·')+'</td>'+
+    '<td class="r">'+mv(r.d)+'</td>'+
+    '<td><span class="flag">'+(r.f||'')+'</span></td></tr>';
+  }).join('');
+  document.getElementById('rows').innerHTML=html;
+}
+function setF(b){document.querySelectorAll('#filters .fbtn').forEach(function(x){x.classList.remove('on');});b.classList.add('on');render(b.dataset.f);}
+</script>
+</body>
+</html>

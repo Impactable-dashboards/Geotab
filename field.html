@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab · My Accounts · Impactable</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#0A0A0C;--concrete:#15151A;--court:#22222A;
+  --bone:#F4F1EA;--chalk:#C8C4B8;
+  --blue:#1B9BD1;--blue-soft:#5BB8E0;--canopy:#D4FF3D;--moss:#7BAA3E;
+  --hazard:#FF5A1F;--terracotta:#C4521F;--clay:#FFB627;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--asphalt);color:var(--bone);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,.025) 1px,transparent 0);background-size:4px 4px;pointer-events:none;z-index:0;}
+
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;z-index:2;}
+.gate-box{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:52px 56px;max-width:400px;width:100%;text-align:center;}
+.gate-logo{font-family:'Archivo Black',sans-serif;font-size:26px;color:var(--bone);margin-bottom:4px;}
+.gate-logo span{color:var(--blue);}
+.gate-client{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk);margin-bottom:40px;opacity:.6;}
+.gate-hint{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:14px;}
+.gate-input{width:100%;background:var(--asphalt);border:1px solid var(--court);border-radius:2px;padding:15px 18px;font-size:16px;color:var(--bone);outline:none;margin-bottom:12px;letter-spacing:.12em;text-align:center;}
+.gate-input:focus{border-color:var(--blue);}
+.gate-btn{width:100%;background:var(--blue);border:none;border-radius:2px;padding:15px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;}
+.gate-btn:hover{opacity:.85;}
+.gate-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--terracotta);margin-top:12px;display:none;}
+
+#room{display:none;position:relative;z-index:2;}
+.hdr{border-bottom:1px solid var(--court);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,12,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+.hdr-left{display:flex;align-items:center;gap:18px;}
+.hdr-logo{font-family:'Archivo Black',sans-serif;font-size:17px;color:var(--bone);}
+.hdr-logo span{color:var(--blue);}
+.hdr-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.45;margin-top:3px;}
+.hdr-back{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.55;text-decoration:none;border:1px solid var(--court);border-radius:2px;padding:7px 13px;}
+.hdr-back:hover{opacity:1;border-color:var(--blue);}
+.hdr-right{text-align:right;}
+.hdr-client{font-size:14px;font-weight:600;}
+.hdr-meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.4;margin-top:3px;}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+.intro{padding:48px 0 20px;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:9px;}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);}
+h1{font-family:'Archivo Black',sans-serif;font-size:46px;letter-spacing:-.03em;text-transform:uppercase;line-height:.98;}
+.sub{font-size:16px;color:var(--chalk);max-width:760px;margin-top:18px;line-height:1.6;}
+
+/* rep selector */
+.repsel{display:flex;gap:10px;margin:26px 0 6px;align-items:center;}
+.repsel .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.55;margin-right:6px;}
+.rbtn{background:var(--concrete);border:1px solid var(--court);border-radius:2px;color:var(--chalk);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;cursor:pointer;transition:all .15s;}
+.rbtn:hover{border-color:var(--blue);color:var(--bone);}
+.rbtn.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+.seclabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.55;padding:34px 0 14px;display:flex;align-items:center;gap:10px;}
+.seclabel::after{content:'';flex:1;height:1px;background:var(--court);}
+
+/* reach first */
+.reach{background:linear-gradient(100deg,rgba(255,90,31,.12),rgba(255,90,31,.02));border:1px solid rgba(255,90,31,.3);border-left:3px solid var(--hazard);border-radius:0 5px 5px 0;padding:22px 26px;}
+.reach .rk{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--hazard);margin-bottom:10px;}
+.reach h3{font-family:'Archivo Black',sans-serif;font-size:20px;color:var(--bone);letter-spacing:-.01em;margin-bottom:8px;}
+.reach p{font-size:14px;color:var(--chalk);line-height:1.6;}
+.reach p b{color:var(--bone);font-weight:600;}
+
+/* account cards */
+.fcards{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fcard{background:var(--concrete);border:1px solid var(--court);border-radius:5px;padding:22px 24px;}
+.fcard.hot{border-left:3px solid var(--hazard);border-radius:0 5px 5px 0;}
+.fcard.warm{border-left:3px solid var(--clay);border-radius:0 5px 5px 0;}
+.fcard.watch{border-left:3px solid var(--court);border-radius:0 5px 5px 0;}
+.fc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:12px;}
+.fc-name{font-size:17px;font-weight:700;color:var(--bone);}
+.heat{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:2px;flex-shrink:0;}
+.h-hot{background:rgba(255,90,31,.15);color:var(--hazard);}
+.h-warm{background:rgba(255,182,39,.15);color:var(--clay);}
+.h-watch{background:rgba(200,196,184,.1);color:var(--chalk);}
+.fc-meta{display:flex;align-items:center;gap:16px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(34,34,42,.7);}
+.dots{display:inline-flex;gap:3px;}
+.dot{width:9px;height:9px;border-radius:2px;background:var(--court);}
+.dot.on{background:var(--moss);} .dot.on5{background:var(--hazard);}
+.dl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--chalk);opacity:.5;}
+.mv{font-family:'JetBrains Mono',monospace;font-size:12px;margin-left:auto;}
+.mv.up{color:var(--moss);} .mv.dn{color:var(--terracotta);} .mv.fl{color:var(--chalk);opacity:.5;}
+.fc-stage{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;color:var(--blue);margin-bottom:8px;}
+.fc-next{font-size:14px;color:var(--bone);line-height:1.55;}
+.fc-next .nlabel{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--canopy);display:block;margin-bottom:5px;}
+.fc-flag{font-size:11.5px;color:var(--clay);line-height:1.45;margin-top:12px;padding-top:12px;border-top:1px dashed var(--court);}
+
+/* assignment + pull */
+.assign{background:var(--concrete);border:1px solid var(--court);border-left:3px solid var(--clay);border-radius:0 5px 5px 0;padding:24px 28px;}
+.assign .ak{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:12px;}
+.assign .arow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(34,34,42,.7);font-size:14px;}
+.assign .arow:last-child{border-bottom:none;}
+.assign .arow .an{color:var(--bone);font-weight:600;}
+.assign .arow .af{font-size:12px;color:var(--chalk);opacity:.8;}
+.slot{background:rgba(27,155,209,.05);border:1px dashed rgba(27,155,209,.35);border-radius:5px;padding:24px 26px;margin-top:14px;}
+.slot .sl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+.slot h4{font-size:15px;font-weight:600;color:var(--bone);margin-bottom:8px;}
+.slot p{font-size:13px;color:var(--chalk);line-height:1.55;opacity:.9;}
+.slot .known{margin-top:12px;font-size:13px;color:var(--chalk);line-height:1.7;}
+.slot .known b{color:var(--bone);}
+.slot .src{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--blue);margin-top:12px;opacity:.8;}
+
+.foot{border-top:1px solid var(--court);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;margin-top:48px;}
+.foot-logo{font-family:'Archivo Black',sans-serif;font-size:14px;}.foot-logo span{color:var(--blue);}
+.foot-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.35;margin-top:3px;}
+.foot-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(27,155,209,.25);padding:6px 13px;border-radius:2px;}
+
+@media(max-width:880px){
+  .hdr,.foot{padding:14px 20px;}.wrap{padding:0 20px;}
+  h1{font-size:32px;}.fcards{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">impact<span>able</span></div>
+    <div class="gate-client">Geotab · My Accounts</div>
+    <div class="gate-hint">Access Password</div>
+    <input type="password" id="pw" class="gate-input" placeholder="········" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="gate-btn" onclick="checkPw()">Enter →</button>
+    <div class="gate-err" id="err">Incorrect password</div>
+  </div>
+</div>
+
+<div id="room">
+  <div class="hdr">
+    <div class="hdr-left">
+      <a href="/" class="hdr-back">← Room</a>
+      <div><div class="hdr-logo">impact<span>able</span></div><div class="hdr-tag">Field layer · My accounts</div></div>
+    </div>
+    <div class="hdr-right"><div class="hdr-client">Geotab · Field Service ABM</div><div class="hdr-meta">Role-scoped · act in under 5 minutes</div></div>
+  </div>
+
+  <div class="wrap">
+    <div class="intro">
+      <div class="eyebrow">Field layer · for sales</div>
+      <h1>My accounts</h1>
+      <p class="sub">Your named accounts, the play assigned to each, who is moving, and who to reach before a competitor does. No analysis, no clutter. Pick your name, see your book, act on the one or two that matter today.</p>
+    </div>
+
+    <div class="repsel">
+      <span class="lbl">Viewing as</span>
+      <button class="rbtn on" data-rep="Zach" onclick="setRep(this)">Zach</button>
+      <button class="rbtn" data-rep="Onur" onclick="setRep(this)">Onur</button>
+    </div>
+
+    <div class="seclabel">Reach first</div>
+    <div class="reach" id="reach"></div>
+
+    <div class="seclabel" id="bookLabel">Your book</div>
+    <div class="fcards" id="cards"></div>
+
+    <div class="seclabel">Unowned, high signal · flag for assignment</div>
+    <div class="assign">
+      <div class="ak">◆ Engaging hard with no rep. Claim or assign.</div>
+      <div class="arow"><span class="an">Verizon</span><span class="af">All 5 personas · still unowned · the widest reach with no owner</span></div>
+      <div class="arow"><span class="an">AT&amp;T</span><span class="af">High base, declining 1,782 · unowned · re-engage before it goes dark</span></div>
+      <div class="arow"><span class="an">ABM Industries</span><span class="af">Net-new activity, rising · no owner yet</span></div>
+      <div class="arow"><span class="an">USIC</span><span class="af">Two personas forming · no owner yet</span></div>
+    </div>
+
+    <div class="slot">
+      <div class="sl">◇ Slot · decision-maker names</div>
+      <h4>Named contacts per account</h4>
+      <p>The committee names attach from Clay enrichment, so each card carries who to call, not just which account. A few are already in the workbook Contact Names sheet:</p>
+      <div class="known"><b>Kristi Fearn</b> · Allied Universal &nbsp;·&nbsp; <b>David Burk</b> · Brightview &nbsp;·&nbsp; <b>Kamal Masih</b> · Charter</div>
+      <div class="src">→ Clay · contact enrichment</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="foot-logo">impact<span>able</span></div><div class="foot-txt">Geotab · My accounts · Confidential</div></div>
+    <div class="foot-badge">LinkedIn Marketing Partner</div>
+  </div>
+</div>
+
+<script>
+var HASH='cbba7f209d8529e80a21be0d6feec3d3cefee93261d88be5dbd2bb62307b075f';
+function sha256(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(h){return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');});}
+function showRoom(){document.getElementById('gate').style.display='none';document.getElementById('room').style.display='block';render('Zach');}
+function checkPw(){sha256(document.getElementById('pw').value).then(function(h){if(h===HASH){try{sessionStorage.setItem('implab','1');}catch(e){}showRoom();}else{var e=document.getElementById('err');e.style.display='block';document.getElementById('pw').value='';document.getElementById('pw').focus();}});}
+try{if(sessionStorage.getItem('implab')==='1')showRoom();else document.getElementById('pw').focus();}catch(e){document.getElementById('pw').focus();}
+
+var BOOK={
+ Zach:{
+   reach:{a:"Johnson & Johnson",t:"Protect the deal. J&J is in active negotiation and a Samsara comparison surge just flagged it. Keep aircover on the committee and reinforce the battlecard this week."},
+   accts:[
+    {a:"Johnson & Johnson",heat:"hot",p:5,d:99,stage:"Marquee · active negotiation",next:"Reinforce the competitive battlecard and hold aircover on the full committee.",flag:"Competitive surge history. Treat as a deal to protect."},
+    {a:"Charter Communications",heat:"hot",p:5,d:68,stage:"All 5 personas · climbing",next:"Open a 1:1 into the safety owner while the whole committee is lit.",flag:"Kamal Masih is a known contact (workbook)."},
+    {a:"Labcorp",heat:"hot",p:5,d:17,stage:"CARB compliance surge",next:"Lead with safety and compliance. CARB is the wedge into the committee.",flag:""},
+    {a:"Compass Group",heat:"warm",p:1,d:138,stage:"Newly active",next:"Qualify the fit and find the operations owner. 20% collaboration, moving fast.",flag:""},
+    {a:"Comcast",heat:"warm",p:1,d:-20,stage:"Camera-focused expansion",next:"Bring the Safety and Compliance committee in on the camera angle.",flag:""},
+    {a:"TELUS",heat:"watch",p:0,d:-1709,stage:"High base, declining",next:"Down 1,709. Check what lapsed before it goes fully dark.",flag:""},
+    {a:"Brightspeed",heat:"watch",p:1,d:-20,stage:"Early, slipping",next:"10% engaged, single persona, drifting down. Keep on nurture.",flag:""},
+    {a:"Everon",heat:"watch",p:1,d:8,stage:"Early riser",next:"Small but rising. Watch for a second persona before acting.",flag:""},
+    {a:"Amgen",heat:"watch",p:0,d:-2,stage:"Low signal",next:"Flat and quiet. Nurture only, no 1:1 yet.",flag:""}
+   ]
+ },
+ Onur:{
+   reach:{a:"Allied Universal",t:"Reach first. All 5 personas, a 7-week 6sense surge, and never a 1:1 activated. This is the widest intent-to-action gap in the book. Open the conversation now."},
+   accts:[
+    {a:"Allied Universal",heat:"hot",p:5,d:182,stage:"7-week surge · no 1:1 yet",next:"Open the 1:1 today. Widest intent-to-action gap in the book.",flag:"Kristi Fearn is a known contact (workbook)."},
+    {a:"Cintas",heat:"hot",p:2,d:508,stage:"Strongest riser this period",next:"Strike while it peaks. Confirm the committee and push for a meeting.",flag:""},
+    {a:"Rogers Communications",heat:"hot",p:0,d:-1910,stage:"Signal divergence",next:"LinkedIn to 0 while 6sense surged 232 visits. Confirm if it moved, then re-engage the web intent.",flag:"The orchestration case. High web intent we are not catching."},
+    {a:"TruGreen",heat:"warm",p:3,d:52,stage:"1:1 live · 10% engaged",next:"Push the live 1:1 toward a meeting.",flag:""},
+    {a:"Walt Disney Imagineering",heat:"warm",p:3,d:8,stage:"Engaging, 3 personas",next:"Qualify the buying center. 10% engaged and steady.",flag:""},
+    {a:"Apex Service Partners",heat:"watch",p:1,d:-76,stage:"75% negotiations",next:"Late stage but signal down 76. Confirm true deal status.",flag:""},
+    {a:"Windstream",heat:"watch",p:2,d:0,stage:"Net-new committee",next:"Two personas formed but not yet active. Activate the committee.",flag:""},
+    {a:"Groundworks",heat:"watch",p:1,d:13,stage:"Early riser",next:"Small and rising. Watch for breadth.",flag:""},
+    {a:"Vestis",heat:"watch",p:1,d:14,stage:"Newly active",next:"Single persona, just lit up. Watch.",flag:""},
+    {a:"Alsco Uniforms",heat:"watch",p:1,d:1,stage:"Flat",next:"Single persona, flat. Nurture.",flag:""}
+   ]
+ }
+};
+
+function dots(n){var s='<span class="dots">';for(var i=1;i<=5;i++){s+='<span class="dot '+(i<=n?(n===5?'on5':'on'):'')+'"></span>';}return s+'</span>';}
+function mv(d){if(d>5)return '<span class="mv up">▲ +'+d.toLocaleString()+'</span>';if(d<-5)return '<span class="mv dn">▼ '+d.toLocaleString()+'</span>';return '<span class="mv fl">flat</span>';}
+function render(rep){
+  var b=BOOK[rep];
+  document.getElementById('reach').innerHTML='<div class="rk">● Reach first · '+rep+'</div><h3>'+b.reach.a+'</h3><p>'+b.reach.t+'</p>';
+  document.getElementById('bookLabel').firstChild.textContent=rep+"'s book · "+b.accts.length+' accounts';
+  document.getElementById('cards').innerHTML=b.accts.map(function(c){
+    return '<div class="fcard '+c.heat+'">'+
+      '<div class="fc-top"><span class="fc-name">'+c.a+'</span><span class="heat h-'+c.heat+'">'+c.heat+'</span></div>'+
+      '<div class="fc-meta">'+dots(c.p)+'<span class="dl">'+(c.p?c.p+' persona'+(c.p>1?'s':''):'committee forming')+'</span>'+mv(c.d)+'</div>'+
+      '<div class="fc-stage">'+c.stage+'</div>'+
+      '<div class="fc-next"><span class="nlabel">Next move</span>'+c.next+'</div>'+
+      (c.flag?'<div class="fc-flag">'+c.flag+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+function setRep(b){document.querySelectorAll('.repsel .rbtn').forEach(function(x){x.classList.remove('on');});b.classList.add('on');render(b.dataset.rep);}
+</script>
+</body>
+</html>
