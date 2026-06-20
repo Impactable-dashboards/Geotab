@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6sense Week 9 Surge Report — Geotab</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asphalt:#0A0A0C;--concrete:#15151A;--court:#22222A;
+  --bone:#F4F1EA;--chalk:#C8C4B8;
+  --blue:#1B9BD1;--blue-soft:#5BB8E0;
+  --moss:#7BAA3E;--hazard:#FF5A1F;--terracotta:#C4521F;--clay:#FFB627;--canopy:#D4FF3D;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--asphalt);color:var(--bone);-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,.025) 1px,transparent 0);background-size:4px 4px;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px;position:relative;z-index:1;}
+
+/* HERO */
+.hero{padding:48px 0 36px;border-bottom:1px solid var(--court);}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue);}
+.hero-title{font-family:'Archivo Black',sans-serif;font-size:46px;line-height:.95;text-transform:uppercase;letter-spacing:-.03em;margin-bottom:16px;}
+.hero-sub{font-size:15px;color:var(--chalk);line-height:1.6;max-width:680px;}
+.hero-meta{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap;}
+.hm{font-family:'JetBrains Mono',monospace;}
+.hm-label{font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);opacity:.5;margin-bottom:4px;}
+.hm-val{font-size:14px;color:var(--bone);font-weight:500;}
+
+/* SECTION */
+.sec{padding:40px 0;border-bottom:1px solid var(--court);}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk);opacity:.55;margin-bottom:6px;}
+.sec-title{font-family:'Archivo Black',sans-serif;font-size:24px;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:22px;}
+
+/* ANOMALY CARDS */
+.anoms{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.anom{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:22px;position:relative;overflow:hidden;}
+.anom::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--ac,var(--blue));}
+.anom.up{--ac:var(--moss);} .anom.watch{--ac:var(--clay);} .anom.hot{--ac:var(--hazard);} .anom.comp{--ac:var(--terracotta);}
+.anom-tag{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac,var(--blue));margin-bottom:8px;}
+.anom-acct{font-family:'Archivo Black',sans-serif;font-size:17px;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:8px;}
+.anom-body{font-size:13px;color:var(--chalk);line-height:1.6;}
+.anom-body strong{color:var(--bone);font-weight:700;}
+
+/* BOMBORA BARS */
+.bom-row{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+.bom-name{width:170px;flex-shrink:0;font-size:13px;font-weight:600;color:var(--bone);}
+.bom-track{flex:1;height:22px;background:var(--concrete);border:1px solid var(--court);border-radius:2px;overflow:hidden;position:relative;}
+.bom-fill{height:100%;background:linear-gradient(90deg,rgba(27,155,209,.25),var(--blue));display:flex;align-items:center;padding-left:8px;}
+.bom-fill.lead{background:linear-gradient(90deg,rgba(255,90,31,.25),var(--hazard));}
+.bom-val{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#fff;}
+.bom-delta{font-family:'JetBrains Mono',monospace;font-size:10px;width:42px;flex-shrink:0;text-align:right;}
+.bom-delta.pos{color:var(--moss);}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--court);border-radius:4px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:760px;}
+thead th{background:var(--concrete);font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);opacity:.7;text-align:left;padding:12px 14px;border-bottom:1px solid var(--court);white-space:nowrap;}
+tbody td{padding:12px 14px;border-bottom:1px solid rgba(34,34,42,.5);color:var(--chalk);vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:rgba(27,155,209,.03);}
+.t-acct{color:var(--bone);font-weight:600;}
+.t-flag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;padding:2px 6px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;}
+.f-new{background:rgba(123,170,62,.15);color:var(--moss);border:1px solid rgba(123,170,62,.3);}
+.f-hot{background:rgba(255,90,31,.15);color:var(--hazard);border:1px solid rgba(255,90,31,.3);}
+.f-watch{background:rgba(255,182,39,.12);color:var(--clay);border:1px solid rgba(255,182,39,.3);}
+.f-comp{background:rgba(196,82,31,.15);color:var(--terracotta);border:1px solid rgba(196,82,31,.3);}
+.t-num{font-family:'JetBrains Mono',monospace;color:var(--bone);}
+
+/* ACTION LIST */
+.act{background:var(--concrete);border:1px solid var(--court);border-radius:4px;padding:18px 20px;margin-bottom:10px;display:flex;gap:16px;align-items:flex-start;}
+.act-owner{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:2px;flex-shrink:0;white-space:nowrap;margin-top:1px;}
+.o-zach{background:rgba(27,155,209,.12);color:var(--blue-soft);border:1px solid rgba(27,155,209,.3);}
+.o-onur{background:rgba(123,170,62,.12);color:var(--moss);border:1px solid rgba(123,170,62,.3);}
+.o-team{background:rgba(255,182,39,.1);color:var(--clay);border:1px solid rgba(255,182,39,.3);}
+.act-body{font-size:13px;color:var(--chalk);line-height:1.55;}
+.act-body strong{color:var(--bone);}
+
+/* CALLOUT */
+.callout{background:rgba(255,182,39,.05);border:1px solid rgba(255,182,39,.2);border-radius:4px;padding:18px 20px;margin-top:20px;}
+.callout-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:8px;}
+.callout-body{font-size:13px;color:var(--chalk);line-height:1.6;}
+.callout-body strong{color:var(--bone);}
+
+.foot{padding:28px 0 48px;}
+.foot-txt{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--chalk);opacity:.35;letter-spacing:.06em;}
+
+@media(max-width:780px){
+  .wrap{padding:0 18px;} .hero-title{font-size:32px;} .anoms{grid-template-columns:1fr;}
+  .bom-name{width:120px;} .act{flex-direction:column;gap:10px;}
+}
+</style>
+</head>
+<body>
+<div id="__implab_nav" style="position:sticky;top:0;z-index:9999;background:rgba(10,10,12,.96);backdrop-filter:blur(12px);border-bottom:1px solid #22222A;padding:0 28px;display:flex;align-items:center;height:46px;font-family:'Inter',sans-serif">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;border-right:1px solid #22222A;padding-right:16px;margin-right:16px;flex-shrink:0">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="opacity:.5"><path d="M9 11.5L4.5 7 9 2.5" stroke="#C8C4B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span style="font-family:'Archivo Black',sans-serif;font-size:13px;color:#F4F1EA;letter-spacing:.01em">impact<span style="color:#1B9BD1">able</span></span>
+  </a>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#1B9BD1;flex-shrink:0">6sense Intent</span>
+  <a href="/" style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#C8C4B8;opacity:.5;text-decoration:none;flex-shrink:0">All Reports →</a>
+</div>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">6sense Intent · Week 9</div>
+    <div class="hero-title">Surge<br>Report</div>
+    <div class="hero-sub">Weekly intent and engagement across the Field Service named-account segment. Web visits, keyword research, and Bombora company surge topics, cross-referenced against the ABX target list and prior weeks.</div>
+    <div class="hero-meta">
+      <div class="hm"><div class="hm-label">Data Window</div><div class="hm-val">Jun 1 – Jun 7, 2026</div></div>
+      <div class="hm"><div class="hm-label">Segment</div><div class="hm-val">FieldService · NN · May2026</div></div>
+      <div class="hm"><div class="hm-label">Top Accounts</div><div class="hm-val">20 this week</div></div>
+      <div class="hm"><div class="hm-label">Generated</div><div class="hm-val">Jun 8, 2026</div></div>
+    </div>
+  </div>
+
+  <!-- ANOMALY WATCH -->
+  <div class="sec">
+    <div class="sec-label">What moved this week</div>
+    <div class="sec-title">Anomaly Watch</div>
+    <div class="anoms">
+
+      <div class="anom hot">
+        <div class="anom-tag">◆ Web Visit Spike</div>
+        <div class="anom-acct">Rogers Communications</div>
+        <div class="anom-body"><strong>232 web visits</strong> — a program record, far above any account this week. 47 to the homepage, 19 to fleet-management, and <strong>5 to the GO Focus Plus product page</strong>. The caveat: keyword research skews <strong>Trimble (163)</strong>, which sits on the ignore list, with Samsara only 10. Real engagement, mixed-quality intent. Canada-based — confirm coverage owner.</div>
+      </div>
+
+      <div class="anom watch">
+        <div class="anom-tag">▼ Risk Signal Cleared</div>
+        <div class="anom-acct">BrightView Landscapes</div>
+        <div class="anom-body">Last week's <strong>Lytx research (5 searches at 75% deal stage)</strong> has vanished. BrightView cooled to 12 keywords / 25 researches, no Bombora surge, no Lytx. The dashcam-competitor risk flag is gone. Either the deal progressed past evaluation or it stalled — <strong>Zach should confirm which.</strong></div>
+      </div>
+
+      <div class="anom up">
+        <div class="anom-tag">▲ Compliance Surge</div>
+        <div class="anom-acct">Labcorp</div>
+        <div class="anom-body"><strong>California Air Resources Board researched 73 times</strong> — a heavy CARB compliance signal, squarely P1 Safety & Compliance. Plus 5 web visits (3 to the homepage). CARB is a priority compliance term. This is a clean P1 messaging entry point.</div>
+      </div>
+
+      <div class="anom comp">
+        <div class="anom-tag">▲ Bombora Leader · No Owner</div>
+        <div class="anom-acct">Verizon</div>
+        <div class="anom-body"><strong>7 Bombora surge topics</strong>, up from 5 — the week's leader and the 9-week cumulative leader at 51. Heavy predictive maintenance (67) and oem (76) research, 14 web visits. The standing issue remains: <strong>no BDE owner assigned</strong> after nine weeks of persistent signal.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOMBORA LEADERBOARD -->
+  <div class="sec">
+    <div class="sec-label">Partner intent · company surge topics</div>
+    <div class="sec-title">Bombora Surge Leaderboard — This Week</div>
+    <div class="bom-row"><div class="bom-name">Verizon</div><div class="bom-track"><div class="bom-fill lead" style="width:100%"><span class="bom-val">7</span></div></div><div class="bom-delta pos">+2</div></div>
+    <div class="bom-row"><div class="bom-name">Allied Universal</div><div class="bom-track"><div class="bom-fill" style="width:71%"><span class="bom-val">5</span></div></div><div class="bom-delta">−3</div></div>
+    <div class="bom-row"><div class="bom-name">McDonald's</div><div class="bom-track"><div class="bom-fill" style="width:57%"><span class="bom-val">4</span></div></div><div class="bom-delta pos">+1</div></div>
+    <div class="bom-row"><div class="bom-name">Disney</div><div class="bom-track"><div class="bom-fill" style="width:43%"><span class="bom-val">3</span></div></div><div class="bom-delta">—</div></div>
+    <div class="bom-row"><div class="bom-name">Johnson & Johnson</div><div class="bom-track"><div class="bom-fill" style="width:43%"><span class="bom-val">3</span></div></div><div class="bom-delta">−1</div></div>
+    <div class="bom-row"><div class="bom-name">Cintas</div><div class="bom-track"><div class="bom-fill" style="width:43%"><span class="bom-val">3</span></div></div><div class="bom-delta">−1</div></div>
+    <div class="bom-row"><div class="bom-name">Eli Lilly</div><div class="bom-track"><div class="bom-fill" style="width:29%"><span class="bom-val">2</span></div></div><div class="bom-delta">—</div></div>
+    <div class="bom-row"><div class="bom-name">Comfort Systems</div><div class="bom-track"><div class="bom-fill" style="width:29%"><span class="bom-val">2</span></div></div><div class="bom-delta pos">NEW</div></div>
+    <div class="callout">
+      <div class="callout-label">9-Week Cumulative Bombora — Top 5</div>
+      <div class="callout-body"><strong>Verizon 51</strong> · <strong>Allied Universal 46</strong> · Labcorp 29 · Disney 27 · J&amp;J 24. Verizon and Allied Universal remain the two most persistent intent accounts in the program. Allied Universal cooled this week (8 → 5) but holds the No. 2 cumulative position across nine consecutive weeks — and remains unactivated.</div>
+    </div>
+  </div>
+
+  <!-- HOT ACCOUNTS TABLE -->
+  <div class="sec">
+    <div class="sec-label">Full segment · Jun 1–7</div>
+    <div class="sec-title">Hot Accounts</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Account</th><th>Flag</th><th>Web Visits</th><th>Keywords</th><th>Bombora</th><th>Top Signal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="t-acct">Rogers Communications</td><td><span class="t-flag f-hot">Web Spike</span></td><td class="t-num">232</td><td class="t-num">84 / 1,025</td><td class="t-num">0</td><td>GO Focus Plus visits; Trimble 163 (noise)</td></tr>
+          <tr><td class="t-acct">Verizon</td><td><span class="t-flag f-comp">No Owner</span></td><td class="t-num">14</td><td class="t-num">65 / 401</td><td class="t-num">7</td><td>predictive maint 67, oem 76</td></tr>
+          <tr><td class="t-acct">Disney</td><td><span class="t-flag f-comp">Samsara</span></td><td class="t-num">8</td><td class="t-num">47 / 205</td><td class="t-num">3</td><td>samsara 14 — top competitive eval</td></tr>
+          <tr><td class="t-acct">Johnson &amp; Johnson</td><td><span class="t-flag f-hot">Demo Intent</span></td><td class="t-num">7</td><td class="t-num">51 / 318</td><td class="t-num">3</td><td>request-demo + pharma-fleet page</td></tr>
+          <tr><td class="t-acct">State Farm</td><td><span class="t-flag f-watch">Insurance</span></td><td class="t-num">5</td><td class="t-num">47 / 243</td><td class="t-num">1</td><td>Trimble 25, predictive maint 49</td></tr>
+          <tr><td class="t-acct">Labcorp</td><td><span class="t-flag f-hot">CARB</span></td><td class="t-num">5</td><td class="t-num">31 / 233</td><td class="t-num">1</td><td>CARB 73 — compliance surge</td></tr>
+          <tr><td class="t-acct">Eli Lilly</td><td></td><td class="t-num">3</td><td class="t-num">25 / 99</td><td class="t-num">2</td><td>truck safety 11, TPMS 6</td></tr>
+          <tr><td class="t-acct">Comfort Systems USA</td><td><span class="t-flag f-new">New · ICP</span></td><td class="t-num">3</td><td class="t-num">6 / 22</td><td class="t-num">2</td><td>HVAC field service — clean fit</td></tr>
+          <tr><td class="t-acct">Travelers</td><td><span class="t-flag f-watch">Insurance</span></td><td class="t-num">2</td><td class="t-num">56 / 425</td><td class="t-num">2</td><td>oem 262 (generic), routing visit</td></tr>
+          <tr><td class="t-acct">Progressive</td><td><span class="t-flag f-watch">Insurance</span></td><td class="t-num">1</td><td class="t-num">39 / 149</td><td class="t-num">0</td><td>SwiftRide case study visit</td></tr>
+          <tr><td class="t-acct">Cintas</td><td></td><td class="t-num">1</td><td class="t-num">32 / 149</td><td class="t-num">3</td><td>6th consecutive week; samsara 8</td></tr>
+          <tr><td class="t-acct">Allied Universal</td><td><span class="t-flag f-hot">Unactivated</span></td><td class="t-num">—</td><td class="t-num">27 / 86</td><td class="t-num">5</td><td>vehicle inspection 12, truck safety 10</td></tr>
+          <tr><td class="t-acct">Farmers Insurance</td><td><span class="t-flag f-watch">Insurance</span></td><td class="t-num">—</td><td class="t-num">23 / 96</td><td class="t-num">1</td><td>predictive maint 26</td></tr>
+          <tr><td class="t-acct">Mary Kay</td><td><span class="t-flag f-new">New</span></td><td class="t-num">—</td><td class="t-num">13 / 31</td><td class="t-num">2</td><td>route planning 4</td></tr>
+          <tr><td class="t-acct">COUNTRY Financial</td><td><span class="t-flag f-watch">Insurance</span></td><td class="t-num">—</td><td class="t-num">11 / 32</td><td class="t-num">2</td><td>fleet insurance terms</td></tr>
+          <tr><td class="t-acct">BrightView Landscapes</td><td><span class="t-flag f-watch">Cooled</span></td><td class="t-num">—</td><td class="t-num">12 / 25</td><td class="t-num">0</td><td>Lytx signal gone</td></tr>
+          <tr><td class="t-acct">McDonald's</td><td></td><td class="t-num">—</td><td class="t-num">4 / 5</td><td class="t-num">4</td><td>EV battery, supply chain</td></tr>
+          <tr><td class="t-acct">TruGreen</td><td></td><td class="t-num">1</td><td class="t-num">4 / 5</td><td class="t-num">2</td><td>routing-dispatching visit, ADAS</td></tr>
+          <tr><td class="t-acct">Danaher</td><td><span class="t-flag f-new">New</span></td><td class="t-num">—</td><td class="t-num">5 / 11</td><td class="t-num">0</td><td>vehicle video camera 3</td></tr>
+          <tr><td class="t-acct">CoolSys Refrigeration &amp; HVAC</td><td><span class="t-flag f-new">New · ICP</span></td><td class="t-num">—</td><td class="t-num">4 / 9</td><td class="t-num">1</td><td>refrigeration field service — clean fit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Standing Caveat · Insurance Cluster</div>
+      <div class="callout-body">Six insurance and financial accounts (State Farm, Travelers, Progressive, Farmers, COUNTRY Financial, Mary Kay) persist in the segment. Their research often centers on generic <strong>oem</strong> and <strong>predictive maintenance</strong> terms and may reflect underwriting or fleet-insurance product research rather than telematics buying intent. <strong>ICP fit unconfirmed</strong> — flagged for monitoring, not yet for activation.</div>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="sec">
+    <div class="sec-label">Sales handshake · this week's priorities</div>
+    <div class="sec-title">Recommended Actions</div>
+
+    <div class="act"><div class="act-owner o-zach">Zach</div><div class="act-body"><strong>BrightView — confirm deal status.</strong> The Lytx evaluation signal disappeared this week. Determine whether the deal advanced past competitive evaluation or stalled, and adjust the play accordingly. The dashcam-capability conversation may no longer be the blocker.</div></div>
+
+    <div class="act"><div class="act-owner o-zach">Zach</div><div class="act-body"><strong>Labcorp — lead with CARB compliance.</strong>73 CARB researches plus homepage visits is a clean P1 Safety & Compliance entry. Open with audit-readiness and compliance positioning, not generic telematics.</div></div>
+
+    <div class="act"><div class="act-owner o-zach">Zach</div><div class="act-body"><strong>J&amp;J — schedule the demo.</strong> Second consecutive week hitting /request-demo/, now with the pharmaceutical-fleet vertical page. Demo intent is sustained; convert the signal into a booked meeting.</div></div>
+
+    <div class="act"><div class="act-owner o-team">Assign</div><div class="act-body"><strong>Verizon — assign a BDE owner.</strong> Nine weeks of persistent intent, now the cumulative Bombora leader at 51, still unowned. This is the single clearest coverage gap in the program.</div></div>
+
+    <div class="act"><div class="act-owner o-team">Coverage</div><div class="act-body"><strong>Rogers — confirm Canada coverage.</strong> 232 web visits including product pages is real engagement worth a fast response, even with Trimble-skewed intent. Route to the right owner for the Canadian market.</div></div>
+
+    <div class="act"><div class="act-owner o-onur">Onur</div><div class="act-body"><strong>Allied Universal — activate now.</strong> Nine consecutive weeks of signal, No. 2 cumulative Bombora, still never actioned. Even cooled to 5 surges this week, the persistence alone warrants outreach. This is the longest-standing open signal in the program.</div></div>
+
+    <div class="act"><div class="act-owner o-onur">Onur</div><div class="act-body"><strong>New ICP entrants — add to nurture.</strong> Comfort Systems USA (HVAC) and CoolSys (Refrigeration &amp; HVAC) are clean field-service-vertical fits with fresh Bombora surges. Add to the always-on layer and watch for a second week of signal before 1:1 activation.</div></div>
+  </div>
+
+  <div class="foot">
+    <div class="foot-txt">Impactable · 6sense Week 9 Surge Report · Geotab Field Service Enterprise · Confidential · Generated Jun 8, 2026</div>
+  </div>
+
+</div>
+<div id="__ai_btn" onclick="__openAI()" style="position:fixed;bottom:24px;right:24px;z-index:9998;cursor:pointer;background:#1B9BD1;border-radius:3px;padding:12px 18px;display:flex;align-items:center;gap:9px;box-shadow:0 8px 28px rgba(27,155,209,.3);font-family:'Inter',sans-serif;transition:transform .15s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" stroke="#fff" stroke-width="1.4"/><path d="M5 7.5h5M5 5.5h3M5 9.5h4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff">Ask the Data</span>
+</div>
+<div id="__ai_overlay" onclick="__closeAI()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9998;backdrop-filter:blur(6px)"></div>
+<div id="__ai_panel" style="display:none;position:fixed;right:0;top:0;bottom:0;width:460px;max-width:95vw;background:#15151A;border-left:1px solid #22222A;z-index:9999;flex-direction:column;overflow:hidden;font-family:'Inter',sans-serif">
+  <div style="padding:20px 22px 16px;border-bottom:1px solid #22222A;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:#0A0A0C">
+    <div>
+      <div style="font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:-.01em;color:#F4F1EA">Ask the Data</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#C8C4B8;opacity:.45;margin-top:3px">Live Data · Impactable Intelligence</div>
+    </div>
+    <button onclick="__closeAI()" style="background:#22222A;border:none;border-radius:2px;color:#C8C4B8;cursor:pointer;padding:7px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;opacity:.6">Esc</button>
+  </div>
+  <div id="__ai_msgs" style="flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:11px">
+    <div style="background:#0A0A0C;border:1px solid #22222A;border-radius:4px;padding:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin-bottom:8px">Impactable AI</div>
+      <div style="font-size:13px;color:#C8C4B8;line-height:1.6;margin-bottom:12px">Ask about this report or the wider Geotab program. I pull live LinkedIn data and Impactable's strategy playbooks.</div>
+      <div style="display:flex;flex-direction:column;gap:6px" id="__ai_sugg">
+        <button class="__sg" onclick="__sugg(this)">What stands out in this report?</button>
+        <button class="__sg" onclick="__sugg(this)">What should we action this week?</button>
+        <button class="__sg" onclick="__sugg(this)">How does this compare to best practice?</button>
+      </div>
+    </div>
+  </div>
+  <div style="padding:14px 18px;border-top:1px solid #22222A;flex-shrink:0;display:flex;gap:9px;align-items:flex-end;background:#0A0A0C">
+    <textarea id="__ai_in" placeholder="Ask anything..." style="flex:1;background:#22222A;border:1px solid rgba(255,255,255,.06);border-radius:2px;padding:11px 13px;font-size:13px;color:#F4F1EA;font-family:'Inter',sans-serif;resize:none;min-height:46px;max-height:120px;outline:none;line-height:1.5" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();__send();}"></textarea>
+    <button onclick="__send()" id="__ai_send" style="background:#1B9BD1;border:none;border-radius:2px;padding:11px 17px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#fff;cursor:pointer;flex-shrink:0;height:46px">Send</button>
+  </div>
+</div>
+<style>.__sg{background:rgba(27,155,209,.06);border:1px solid rgba(27,155,209,.15);border-radius:2px;padding:8px 12px;font-size:12px;color:#5BB8E0;cursor:pointer;text-align:left;font-family:'Inter',sans-serif;transition:background .15s}.__sg:hover{background:rgba(27,155,209,.13)}#__ai_u{background:#22222A;border-radius:4px 4px 2px 4px;padding:10px 13px;align-self:flex-end;max-width:88%}#__aidot1,#__aidot2,#__aidot3{width:5px;height:5px;background:#1B9BD1;border-radius:50%;display:inline-block;animation:__blink 1.2s infinite}#__aidot2{animation-delay:.2s}#__aidot3{animation-delay:.4s}@keyframes __blink{0%,100%{opacity:.2}50%{opacity:1}}</style>
+<script>
+var __aiH=[];
+function __openAI(){document.getElementById('__ai_overlay').style.display='block';document.getElementById('__ai_panel').style.display='flex';document.getElementById('__ai_btn').style.display='none';document.getElementById('__ai_in').focus();}
+function __closeAI(){document.getElementById('__ai_overlay').style.display='none';document.getElementById('__ai_panel').style.display='none';document.getElementById('__ai_btn').style.display='flex';}
+function __sugg(b){document.getElementById('__ai_in').value=b.textContent;document.getElementById('__ai_sugg').style.display='none';__send();}
+function __esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function __fmtMd(t){
+  t=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  t=t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  t=t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  var lines=t.split(/\n/);var out=[];var listType=null;var listItems=[];var para=[];
+  function fP(){if(para.length){out.push('<p>'+para.join(' ')+'</p>');para=[];}}
+  function fL(){if(listItems.length){out.push('<'+listType+'>'+listItems.map(function(li){return '<li>'+li+'</li>';}).join('')+'</'+listType+'>');listItems=[];listType=null;}}
+  for(var i=0;i<lines.length;i++){var ln=lines[i].trim();if(!ln){fP();fL();continue;}
+    var num=ln.match(/^(\d+)[.)]\s+(.*)$/);var bul=ln.match(/^[-*\u2022]\s+(.*)$/);var hdr=ln.match(/^([A-Z][A-Z\s&]{2,40}):?$/);
+    if(num){fP();if(listType&&listType!=='ol')fL();listType='ol';listItems.push(num[2]);}
+    else if(bul){fP();if(listType&&listType!=='ul')fL();listType='ul';listItems.push(bul[1]);}
+    else if(hdr&&ln.indexOf('<a ')<0){fP();fL();out.push('<h4>'+ln.replace(/:$/,'')+'</h4>');}
+    else{fL();para.push(ln);}}
+  fP();fL();return out.join('');
+}
+function __add(r,t){var m=document.getElementById('__ai_msgs');var d=document.createElement('div');if(r==='u'){d.id='__ai_u';d.innerHTML='<div style="font-size:13px;color:#F4F1EA;line-height:1.5">'+__esc(t)+'</div>';}else if(r==='t'){d.id='__ai_ti';d.style.cssText='background:rgba(27,155,209,.05);border:1px solid rgba(27,155,209,.12);border-radius:4px 4px 4px 2px;padding:12px 14px;align-self:flex-start';d.innerHTML='<span id="__aidot1"></span> <span id="__aidot2"></span> <span id="__aidot3"></span>';}else{d.style.cssText='background:rgba(27,155,209,.05);border:1px solid rgba(27,155,209,.12);border-radius:4px 4px 4px 2px;padding:13px 15px;align-self:flex-start;max-width:95%';d.innerHTML='<div style="font-family:\'JetBrains Mono\',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin-bottom:7px">Impactable AI</div><div class="__md">'+__fmtMd(t)+'</div>';}m.appendChild(d);m.scrollTop=m.scrollHeight;return d;}
+async function __sendQ(q){document.getElementById('__ai_send').disabled=true;__add('u',q);var ty=__add('t','');__aiH.push({role:'user',content:q});try{var r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:__aiH.slice(0,-1)})});var d=await r.json();ty.remove();var a=d.answer||'No response.';__add('a',a);__aiH.push({role:'assistant',content:a});if(__aiH.length>20)__aiH=__aiH.slice(-20);}catch(e){ty.remove();__add('a','Error reaching data layer. Try again.');}document.getElementById('__ai_send').disabled=false;document.getElementById('__ai_in').focus();}
+function __send(){var i=document.getElementById('__ai_in');var q=i.value.trim();if(!q)return;i.value='';__sendQ(q);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')__closeAI();});
+</script>
+<style>.__md{font-size:13px;color:#F4F1EA;line-height:1.6;opacity:.92}.__md strong{color:#fff;font-weight:700}.__md a{color:#5BB8E0;text-decoration:underline;text-underline-offset:2px}.__md a:hover{color:#1B9BD1}.__md p{margin:0 0 10px}.__md p:last-child{margin-bottom:0}.__md ul,.__md ol{margin:6px 0 12px;padding-left:4px;list-style:none}.__md li{position:relative;padding-left:20px;margin-bottom:7px;line-height:1.55}.__md ul li::before{content:"";position:absolute;left:4px;top:8px;width:4px;height:4px;border-radius:50%;background:#1B9BD1}.__md ol{counter-reset:m}.__md ol li{counter-increment:m}.__md ol li::before{content:counter(m);position:absolute;left:0;top:0;font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;color:#1B9BD1;background:rgba(27,155,209,.1);width:16px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center}.__md h4{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin:14px 0 8px;font-weight:700}.__md h4:first-child{margin-top:0}</style>
+</body>
+</html>
