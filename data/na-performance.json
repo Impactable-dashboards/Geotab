@@ -1553,6 +1553,118 @@
       }
     ]
   },
+  "stageWeekly": [
+    {
+      "wk": "Wk13",
+      "TOF": 3133,
+      "MOF": 1681,
+      "BOF": 910,
+      "Other": 653
+    },
+    {
+      "wk": "Wk14",
+      "TOF": 3038,
+      "MOF": 1923,
+      "BOF": 1623,
+      "Other": 810
+    },
+    {
+      "wk": "Wk15",
+      "TOF": 2738,
+      "MOF": 2117,
+      "BOF": 1164,
+      "Other": 728
+    },
+    {
+      "wk": "Wk16",
+      "TOF": 2548,
+      "MOF": 2402,
+      "BOF": 933,
+      "Other": 711
+    },
+    {
+      "wk": "Wk17",
+      "TOF": 7648,
+      "MOF": 5482,
+      "BOF": 1429,
+      "Other": 806
+    },
+    {
+      "wk": "Wk18",
+      "TOF": 7609,
+      "MOF": 5577,
+      "BOF": 1950,
+      "Other": 944
+    },
+    {
+      "wk": "Wk19",
+      "TOF": 5724,
+      "MOF": 3863,
+      "BOF": 1228,
+      "Other": 981
+    },
+    {
+      "wk": "Wk20",
+      "TOF": 6405,
+      "MOF": 3651,
+      "BOF": 1091,
+      "Other": 827
+    },
+    {
+      "wk": "Wk21",
+      "TOF": 6144,
+      "MOF": 3569,
+      "BOF": 1289,
+      "Other": 830
+    },
+    {
+      "wk": "Wk22",
+      "TOF": 6746,
+      "MOF": 3740,
+      "BOF": 1324,
+      "Other": 876
+    },
+    {
+      "wk": "Wk23",
+      "TOF": 7269,
+      "MOF": 3674,
+      "BOF": 1308,
+      "Other": 1000
+    },
+    {
+      "wk": "Wk24",
+      "TOF": 7661,
+      "MOF": 3650,
+      "BOF": 1400,
+      "Other": 1070
+    }
+  ],
+  "stageTotals": {
+    "TOF": {
+      "spend": 73173,
+      "impr": 1612373,
+      "clicks": 9383,
+      "conv": 20
+    },
+    "MOF": {
+      "spend": 44537,
+      "impr": 1421753,
+      "clicks": 9082,
+      "conv": 23
+    },
+    "BOF": {
+      "spend": 16934,
+      "impr": 125949,
+      "clicks": 2072,
+      "conv": 2
+    },
+    "Other": {
+      "spend": 11198,
+      "impr": 1677114,
+      "clicks": 898,
+      "conv": 17
+    }
+  },
   "campaigns": [
     {
       "name": "GO Focus Plus | TOFU | WV | Image | 05/2026",
@@ -1778,6 +1890,231 @@
       "freq90": 3.56,
       "pen30": 0.059,
       "pen90": 0.101
+    },
+    {
+      "name": "MOF | ENG | Doc | 90D | 6Sense | Public Sector | 3…",
+      "stage": "MOF",
+      "spend": 3407,
+      "impr": 22572,
+      "clicks": 1014,
+      "cpc": 3.36,
+      "cpm": 150.93,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 4.91,
+      "freq90": 7.82,
+      "pen30": 0.491,
+      "pen90": 0.458
+    },
+    {
+      "name": "TOF | WV | Image | 6Sense | Vocational | 110K | 04…",
+      "stage": "TOF",
+      "spend": 3297,
+      "impr": 55445,
+      "clicks": 250,
+      "cpc": 13.19,
+      "cpm": 59.46,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 2.77,
+      "freq90": 4.18,
+      "pen30": 0.056,
+      "pen90": 0.095
+    },
+    {
+      "name": "BOF | ENG | Doc | 60D | 6Sense | Transport & Logis…",
+      "stage": "BOF",
+      "spend": 3275,
+      "impr": 19907,
+      "clicks": 836,
+      "cpc": 3.92,
+      "cpm": 164.5,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 5.41,
+      "freq90": 5.96,
+      "pen30": 0.32,
+      "pen90": 0.458
+    },
+    {
+      "name": "Geotab Signals | MOFU | Video | WV | 04/2026",
+      "stage": "MOF",
+      "spend": 2940,
+      "impr": 63236,
+      "clicks": 300,
+      "cpc": 9.8,
+      "cpm": 46.49,
+      "conv": 3,
+      "costPerConv": 980,
+      "freq30": 2.84,
+      "freq90": 4.21,
+      "pen30": 0.268,
+      "pen90": 0.3
+    },
+    {
+      "name": "MOF | ENG | Doc | 90D | 6Sense | Transport & Logis…",
+      "stage": "MOF",
+      "spend": 2899,
+      "impr": 22556,
+      "clicks": 855,
+      "cpc": 3.39,
+      "cpm": 128.54,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 4.78,
+      "freq90": 6.35,
+      "pen30": 0.355,
+      "pen90": 0.462
+    },
+    {
+      "name": "BOF | WV | Image | 60D | 6Sense | Public Sector | …",
+      "stage": "BOF",
+      "spend": 2891,
+      "impr": 23936,
+      "clicks": 164,
+      "cpc": 17.63,
+      "cpm": 120.77,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 9.2,
+      "freq90": 12.97,
+      "pen30": 0.372,
+      "pen90": 0.414
+    },
+    {
+      "name": "MOFU | Thought Leader Image | Engagement | 03.03.2…",
+      "stage": "MOF",
+      "spend": 2730,
+      "impr": 20256,
+      "clicks": 738,
+      "cpc": 3.7,
+      "cpm": 134.77,
+      "conv": 3,
+      "costPerConv": 910,
+      "freq30": 2.14,
+      "freq90": 2.76,
+      "pen30": 0.218,
+      "pen90": 0.255
+    },
+    {
+      "name": "BOF | WV | Image | 6Sense | Vocational | 1.2K | 06…",
+      "stage": "BOF",
+      "spend": 2663,
+      "impr": 23026,
+      "clicks": 193,
+      "cpc": 13.8,
+      "cpm": 115.65,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 10.66,
+      "freq90": 17.44,
+      "pen30": 0.46,
+      "pen90": 0.58
+    },
+    {
+      "name": "TOF | VV | Video | 6Sense | Transport & Logistics …",
+      "stage": "TOF",
+      "spend": 2581,
+      "impr": 46041,
+      "clicks": 75,
+      "cpc": 34.42,
+      "cpm": 56.06,
+      "conv": 1,
+      "costPerConv": 2581,
+      "freq30": 1.52,
+      "freq90": 2.6,
+      "pen30": 0.035,
+      "pen90": 0.069
+    },
+    {
+      "name": "TOF | ROI Calculator Targeting | 60K | 01.30.26",
+      "stage": "TOF",
+      "spend": 2574,
+      "impr": 42250,
+      "clicks": 169,
+      "cpc": 15.23,
+      "cpm": 60.92,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 4.28,
+      "freq90": 7.75,
+      "pen30": 0.042,
+      "pen90": 0.081
+    },
+    {
+      "name": "2501_NA_Image_NS_BA_M_N_IP_LI",
+      "stage": "Other",
+      "spend": 2381,
+      "impr": 33187,
+      "clicks": 215,
+      "cpc": 11.08,
+      "cpm": 71.75,
+      "conv": 1,
+      "costPerConv": 2381,
+      "freq30": 5.18,
+      "freq90": 8.8,
+      "pen30": 0.271,
+      "pen90": 0.435
+    },
+    {
+      "name": "BOF | WV | Image | 60D | 6Sense | Transport & Logi…",
+      "stage": "BOF",
+      "spend": 2310,
+      "impr": 22662,
+      "clicks": 140,
+      "cpc": 16.5,
+      "cpm": 101.94,
+      "conv": 1,
+      "costPerConv": 2310,
+      "freq30": 3.32,
+      "freq90": 6.99,
+      "pen30": 0.221,
+      "pen90": 0.44
+    },
+    {
+      "name": "MOF | ENG | Doc | 90D | 6Sense | Vocational | 6.9K…",
+      "stage": "MOF",
+      "spend": 2040,
+      "impr": 16290,
+      "clicks": 809,
+      "cpc": 2.52,
+      "cpm": 125.23,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 3.48,
+      "freq90": 5.12,
+      "pen30": 0.281,
+      "pen90": 0.289
+    },
+    {
+      "name": "Geotab Signals | MOFU | Image | WV | 04/2026",
+      "stage": "MOF",
+      "spend": 1860,
+      "impr": 32273,
+      "clicks": 206,
+      "cpc": 9.03,
+      "cpm": 57.63,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 3.02,
+      "freq90": 4.08,
+      "pen30": 0.157,
+      "pen90": 0.203
+    },
+    {
+      "name": "Field Service | MOFU | Interactive Buyer's Guide |…",
+      "stage": "MOF",
+      "spend": 1590,
+      "impr": 18225,
+      "clicks": 121,
+      "cpc": 13.14,
+      "cpm": 87.24,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 6.75,
+      "freq90": 9.53,
+      "pen30": 0.45,
+      "pen90": 0.503
     }
   ]
 }
