@@ -1,0 +1,275 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Geotab — Messaging &amp; Format Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1628;--card:rgba(17,29,51,.7);--line:rgba(255,255,255,.08);--ink:#e8eef7;--mut:#8aa0bd;
+--blue:#0099d1;--teal:#00c4b3;--orange:#f4a261;--green:#22c55e;--red:#ef4444;--purple:#a78bfa;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.5;
+background-image:radial-gradient(900px 500px at 80% -10%,rgba(0,153,209,.10),transparent),radial-gradient(700px 400px at 0% 0%,rgba(0,196,179,.07),transparent);}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
+.mono{font-family:'JetBrains Mono',monospace}
+header.hd{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:26px}
+.eyebrow{color:var(--blue);font-weight:700;letter-spacing:.14em;font-size:11px;text-transform:uppercase}
+h1{font-size:29px;font-weight:700;margin:8px 0 6px;letter-spacing:-.02em}
+.sub{color:var(--mut);font-size:14px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.badge{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 13px;font-size:12px;color:var(--mut)}
+.badge b{color:var(--ink);font-family:'JetBrains Mono';font-size:14px}
+h2{font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);margin:38px 0 14px;font-weight:700;display:flex;align-items:center;gap:10px}
+h2:before{content:'';width:3px;height:15px;background:var(--blue);border-radius:2px}
+.alert{background:linear-gradient(90deg,rgba(244,162,97,.13),rgba(244,162,97,.03));border:1px solid rgba(244,162,97,.35);border-radius:12px;padding:15px 17px;font-size:13.5px;color:#f6d2af;margin-bottom:8px}
+.alert b{color:#ffd9b0}
+.grid{display:grid;gap:14px} .g5{grid-template-columns:repeat(5,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.g5,.g4,.g3{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.stat .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em}
+.stat .v{font-family:'JetBrains Mono';font-size:22px;font-weight:700;margin:7px 0 3px}
+.stat .d{font-size:12px;color:var(--mut)}
+.pos{color:var(--green)}.neg{color:var(--red)}.warn{color:var(--orange)}.tealc{color:var(--teal)}.bluec{color:var(--blue)}.purp{color:var(--purple)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:right;padding:9px 10px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--ink)}
+tbody tr:hover{background:rgba(255,255,255,.025)}
+.barcell{position:relative}.barfill{position:absolute;left:0;top:0;bottom:0;background:rgba(0,153,209,.16);border-right:1px solid rgba(0,153,209,.45);z-index:0}
+.barcell span{position:relative;z-index:1;font-family:'JetBrains Mono'}
+.v-badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700;letter-spacing:.04em}
+.INVEST{background:rgba(34,197,94,.16);color:#7ee2a0;border:1px solid rgba(34,197,94,.4)}
+.HOLD{background:rgba(0,153,209,.16);color:#6fcdf0;border:1px solid rgba(0,153,209,.4)}
+.REDUCE{background:rgba(244,162,97,.16);color:#f6c08a;border:1px solid rgba(244,162,97,.4)}
+.EXCLUDE{background:rgba(239,68,68,.15);color:#f59a9a;border:1px solid rgba(239,68,68,.4)}
+.WATCH{background:rgba(167,139,250,.16);color:#c4b1fb;border:1px solid rgba(167,139,250,.4)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:8px 15px;border-radius:9px;cursor:pointer;font-size:12.5px;font-weight:600}
+.tab.on{background:rgba(0,153,209,.16);border-color:rgba(0,153,209,.5);color:#aee2f7}
+.note{font-size:12px;color:var(--mut);margin-top:10px}
+.cards{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}@media(max-width:820px){.cards{grid-template-columns:1fr}}
+.ins{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:15px 16px}
+.ins.op{border-left-color:var(--green)}.ins.cr{border-left-color:var(--red)}.ins.wa{border-left-color:var(--orange)}
+.ins .tg{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.ins.op .tg{color:#7ee2a0}.ins.cr .tg{color:#f59a9a}.ins.wa .tg{color:#f6c08a}
+.ins h4{font-size:15px;margin:6px 0 6px}.ins p{font-size:13px;color:#c2d2e6}
+.ins .num{font-family:'JetBrains Mono';color:var(--ink);font-weight:700}
+.tcamp{display:grid;grid-template-columns:1fr;gap:9px}
+.tc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.tc .nm{font-size:13px} .tc .meta{font-size:11px;color:var(--mut);margin-top:2px}
+.tc .st{font-family:'JetBrains Mono';font-size:12px;white-space:nowrap;text-align:right}
+.pmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}@media(max-width:820px){.pmap{grid-template-columns:1fr}}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px;border-top:3px solid var(--orange)}
+.pc .nm{font-size:15px;font-weight:700}.pc .rl{font-size:11.5px;color:var(--blue);margin-bottom:9px}
+.pc .row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px dashed var(--line)}
+.pc .row span:first-child{color:var(--mut)} .pc .rec{font-size:12px;color:#c2d2e6;margin-top:9px}
+footer{margin-top:46px;border-top:1px solid var(--line);padding-top:18px;font-size:11.5px;color:var(--mut)}
+</style></head><body>
+<div id="__implab_nav" style="position:sticky;top:0;z-index:9999;background:rgba(10,10,12,.96);backdrop-filter:blur(12px);border-bottom:1px solid #22222A;padding:0 28px;display:flex;align-items:center;height:46px;font-family:'Inter',sans-serif">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;border-right:1px solid #22222A;padding-right:16px;margin-right:16px;flex-shrink:0">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="opacity:.5"><path d="M9 11.5L4.5 7 9 2.5" stroke="#C8C4B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span style="font-family:'Archivo Black',sans-serif;font-size:13px;color:#F4F1EA;letter-spacing:.01em">impact<span style="color:#1B9BD1">able</span></span>
+  </a>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#7BAA3E;flex-shrink:0">Performance</span>
+  <a href="/" style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#C8C4B8;opacity:.5;text-decoration:none;flex-shrink:0">All Reports →</a>
+</div>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<div class="wrap">
+
+<header class="hd">
+<div class="eyebrow">Impactable · Messaging &amp; Format Intelligence — Internal Diagnostic</div>
+<h1>Geotab North America — What Format &amp; Message Actually Converts</h1>
+<div class="sub">YTD 2026 (Jan 1 – May 30) · LinkedIn, North America account (506925310) · 93 campaigns · Source: LinkedIn via DemandSense (campaign-level)</div>
+<div class="badges">
+<div class="badge">NA spend analyzed <b>$185,885</b></div>
+<div class="badge">Campaigns <b>93</b></div>
+<div class="badge">Formats <b>11</b></div>
+<div class="badge">Messaging angles <b>28</b></div>
+<div class="badge">Tracked conversions <b>81</b></div>
+</div>
+</header>
+
+<div class="alert"><b>Read this first — two measurement rules.</b> (1) <b>CTR is not comparable across objectives.</b> Engagement-objective campaigns (Document/ENG) report "clicks" that are document expands, not website visits: they post a <b>5.18% CTR on $30K of spend but only 2 site conversions</b>. Website-Visit campaigns are the comparable set (benchmark CTR <b>0.183%</b>). (2) Conversions are sparse (81 total) so CPA is an <b>efficiency signal to validate at scale</b>, not a precise cost. Literal ad-copy/headline analysis needs the LinkedIn Creative Performance Export (not yet provided); Google search-term and organic sections are N/A (no Google in scope).</div>
+
+<h2>The headline finding</h2>
+<div class="grid g3">
+<div class="stat"><div class="k">Spotlight — conversion MVP</div><div class="v pos">$221 CPA</div><div class="d">18 conv on just $3,974 spend</div></div>
+<div class="stat"><div class="k">Text — second cheapest</div><div class="v pos">$369 CPA</div><div class="d">15 conv on $5,528 spend</div></div>
+<div class="stat"><div class="k">Image — absorbs the budget</div><div class="v warn">$3,139 CPA</div><div class="d">32 conv but $100,459 (54% of spend)</div></div>
+</div>
+<div class="ins op" style="margin-top:14px"><div class="tg">The single clearest reallocation</div><h4>The two most efficient formats are the two least funded.</h4>
+<p>Spotlight and Text together drove <span class="num">33 of 81 conversions</span> (41%) on <span class="num">$9,502</span> of spend — a blended CPA near <span class="num">$290</span>. Image and Document together absorbed <span class="num">$138,115</span> (74% of NA spend) for 34 conversions, with Document delivering near-zero pipeline. Shifting even 15–20% of Image/Document budget into Spotlight and Text is the highest-confidence efficiency move in the account.</p></div>
+
+<h2>Format performance <span></span></h2>
+<div class="tabs"><div class="tab on" data-d="FMT">By Format</div><div class="tab" data-d="ANG">By Messaging Angle</div></div>
+<div class="panel"><table id="T"><thead></thead><tbody></tbody></table><div class="note" id="N"></div></div>
+
+<h2>Objective integrity &amp; funnel shape</h2>
+<div class="cards">
+<div class="ins cr"><div class="tg">Critical · measurement</div><h4>$30K of engagement spend, 2 conversions.</h4>
+<p>Engagement-objective Document ads post a <span class="num">5.18% CTR</span> (28x the website-visit benchmark) because the "clicks" are doc expands. They generate the dashboard's biggest click numbers and almost no pipeline. Report these on engagement, never blended into CTR, and question the $29,940 allocation.</p></div>
+<div class="ins wa"><div class="tg">Watch · funnel</div><h4>Bottom-funnel is under-funded for how it converts.</h4>
+<p>BOF is only <span class="num">$24,323</span> (13% of spend) but produced <span class="num">18 conversions</span> at the best efficiency in the account (Spotlight Request-Demo at $106 CPA). TOF absorbs <span class="num">$87,099</span>. There is room to move spend down-funnel where intent and conversion are highest.</p></div>
+<div class="ins op"><div class="tg">Opportunity · angle</div><h4>Transport &amp; Logistics is the messaging winner.</h4>
+<p>T&amp;L is the largest angle (<span class="num">$28,941</span>) AND the conversion leader (<span class="num">20 conv, $1,447 CPA</span>). Retargeting/warm audiences convert cheapest (<span class="num">17 conv at $457</span>) and Case Studies content punches above weight (<span class="num">7 conv at $980</span>). Concentrate message + budget here.</p></div>
+<div class="ins cr"><div class="tg">Critical · strategy</div><h4>The 7-Play persona system is running on fumes.</h4>
+<p>The five named-persona ABM campaigns (Safety, Operations, Routing, Samsara, Deal Accel) carry tiny budgets (each under $700) and produced near-zero clicks and <span class="num">0 conversions</span> YTD. The client-facing framework is effectively unfunded. Decision needed: fund it to a testable level or fold it into the vertical structure that is working.</p></div>
+</div>
+
+<h2>Top converting campaigns <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--mut);font-size:11px">(proxy for top headlines — literal copy pending the Creative Export)</span></h2>
+<div class="panel"><div class="tcamp"><div class="tc"><div><div class="nm">2408_NA_Spotlight Ads Request Demo_NS_DG_M_N_IP_LI</div><div class="meta">Spotlight · Brand / Retargeting (generic) · BOF</div></div>
+    <div class="st"><span class="pos">13 conv</span> · $106 CPA<br><span style="color:var(--mut)">888,781 impr · 104 clk</span></div></div><div class="tc"><div><div class="nm">2502_NA_Video-Case-Studies-Doc_NS_BA_M_N_IP_LI</div><div class="meta">Video · Offer: Case Studies · Other</div></div>
+    <div class="st"><span class="pos">7 conv</span> · $980 CPA<br><span style="color:var(--mut)">139,779 impr · 907 clk</span></div></div><div class="tc"><div><div class="nm">GO Focus Plus | TOFU | WV | Image | 12/2025</div><div class="meta">Image · Product: GO Focus Plus (dashcam) · TOF</div></div>
+    <div class="st"><span class="pos">5 conv</span> · $698 CPA<br><span style="color:var(--mut)">103,114 impr · 417 clk</span></div></div><div class="tc"><div><div class="nm">MOF | WV | Image | 90D | 6Sense | Transport & Logistics | 2K</div><div class="meta">Image · Vertical: Transport & Logistics · MOF</div></div>
+    <div class="st"><span class="pos">5 conv</span> · $1,441 CPA<br><span style="color:var(--mut)">79,634 impr · 552 clk</span></div></div><div class="tc"><div><div class="nm">TOF | WV | Text | 6Sense | Transport & Logistics | 110K</div><div class="meta">Text · Vertical: Transport & Logistics · TOF</div></div>
+    <div class="st"><span class="pos">4 conv</span> · $78 CPA<br><span style="color:var(--mut)">470,475 impr · 35 clk</span></div></div><div class="tc"><div><div class="nm">2403_NA_Text Ads RT_NS_BA_M_N_IP_LI</div><div class="meta">Text · Brand / Retargeting (generic) · MOF</div></div>
+    <div class="st"><span class="pos">4 conv</span> · $87 CPA<br><span style="color:var(--mut)">733,225 impr · 51 clk</span></div></div><div class="tc"><div><div class="nm">BOF | WV | Image | 60D | 6Sense | Transport & Logistics | 1.5K</div><div class="meta">Image · Vertical: Transport & Logistics · BOF</div></div>
+    <div class="st"><span class="pos">4 conv</span> · $1,120 CPA<br><span style="color:var(--mut)">53,310 impr · 366 clk</span></div></div><div class="tc"><div><div class="nm">MOF | WV | Spotlight 180D | 6Sense | Vocational | 12K | 04.30.25</div><div class="meta">Spotlight · Vertical: Vocational · MOF</div></div>
+    <div class="st"><span class="pos">3 conv</span> · $201 CPA<br><span style="color:var(--mut)">369,180 impr · 76 clk</span></div></div><div class="tc"><div><div class="nm">TOF | WV | Image | 6Sense | Field Service | 52K</div><div class="meta">Image · Vertical: Field Service · TOF</div></div>
+    <div class="st"><span class="pos">3 conv</span> · $2,039 CPA<br><span style="color:var(--mut)">70,138 impr · 323 clk</span></div></div><div class="tc"><div><div class="nm">MOF | 180D | WV | Text | Heavy Truck | 12K | 6.19.2024</div><div class="meta">Text · Vertical: Heavy Truck · MOF</div></div>
+    <div class="st"><span class="pos">2 conv</span> · $109 CPA<br><span style="color:var(--mut)">243,587 impr · 49 clk</span></div></div></div><div class="note">These are campaign-level converters. The actual winning <b>headlines and copy</b> inside them require the LinkedIn Campaign Manager Creative Performance Export — drop that in and this becomes a headline-level "what words convert" section.</div></div>
+
+<h2>Persona-to-messaging map (the gap)</h2>
+<div class="pmap">
+<div class="pc"><div class="nm">The Fleet Operator (P2 Operations)</div><div class="rl">Economic buyer · owns the telematics call</div>
+<div class="row"><span>Current</span><span class="mono">Persona Ops campaign: $80 spend, 1 click, 0 conv</span></div>
+<div class="row"><span>What works for them</span><span class="mono">T&amp;L vertical + Spotlight Demo</span></div>
+<div class="rec">Recommended angle: operational-efficiency + uptime, delivered in Spotlight/Text (the converting formats), not the starved persona campaign. Test headline: "Cut unplanned downtime across your fleet."</div></div>
+
+<div class="pc"><div class="nm">The Safety Lead (P1 Safety)</div><div class="rl">Influencer · risk &amp; compliance</div>
+<div class="row"><span>Current</span><span class="mono">Persona Safety: $32 spend, ~0 engagement</span></div>
+<div class="row"><span>Signal</span><span class="mono">Safety/Fleet Mgr titles = best CTRs (audience report)</span></div>
+<div class="rec">Strong audience signal, no funded message. Route GO Focus Plus safety/liability creative here as MOFU retargeting (not cold TOFU, where it is posting 0 conv). Test: "See the incident before it costs you."</div></div>
+
+<div class="pc"><div class="nm">The Competitive Switcher (P4 Samsara)</div><div class="rl">Conquest · evaluating alternatives</div>
+<div class="row"><span>Current</span><span class="mono">P4 Text+Spotlight: $1,262, 8 clicks, 0 conv</span></div>
+<div class="row"><span>CTR</span><span class="mono">~0.004% — not landing</span></div>
+<div class="rec">Highest-value play, weakest execution. Competitive message is not resonating in current format. Test a Spotlight "Request Demo" against accounts showing dual Geotab+Samsara intent. Validate copy via the Creative Export.</div></div>
+
+<div class="pc"><div class="nm">The Deal Accelerator (P5)</div><div class="rl">Late-stage · nudge to close</div>
+<div class="row"><span>Current</span><span class="mono">P5 Text+Spotlight: $504, 2 clicks, 0 conv</span></div>
+<div class="row"><span>What works</span><span class="mono">BOF Spotlight Demo (18 conv, $221)</span></div>
+<div class="rec">P5 should mirror the proven BOF Spotlight Request-Demo motion that already converts at $221. Point it at engaged/late-stage accounts with a Geotab Academy demo CTA.</div></div>
+</div>
+<div class="ins wa" style="margin-top:13px"><div class="tg">The biggest creative opportunity</div><h4>Move the personas onto the formats that convert.</h4>
+<p>The persona angles are strategically right but executed in starved, low-converting setups. The account already proves Spotlight and Text convert at <span class="num">$221–$369</span>. Rebuilding the five personas as Spotlight/Text BOF-MOF motions (instead of the current near-zero campaigns) is the path to making the 7-Play system actually produce pipeline.</p></div>
+
+<h2>Five messaging &amp; format priorities</h2>
+<div class="grid g3">
+<div class="stat"><div class="k">1 · Reallocate</div><div class="v bluec" style="font-size:16px">Fund Spotlight + Text</div><div class="d">Shift 15–20% of Image/Document budget to the $221–$369 CPA formats.</div></div>
+<div class="stat"><div class="k">2 · Fix measurement</div><div class="v bluec" style="font-size:16px">Split ENG out of CTR</div><div class="d">Report Document/engagement separately; reassess the $30K allocation vs 2 conv.</div></div>
+<div class="stat"><div class="k">3 · Rebuild personas</div><div class="v bluec" style="font-size:16px">7-Play on converting formats</div><div class="d">Re-launch P1–P5 as Spotlight/Text MOF-BOF, not starved standalone campaigns.</div></div>
+<div class="stat"><div class="k">4 · Re-aim GO Focus</div><div class="v bluec" style="font-size:16px">Dashcam → MOFU retarget</div><div class="d">New TOFU GO Focus posts 0 conv; the warm 12/2025 version drove 5. Move to retargeting.</div></div>
+<div class="stat"><div class="k">5 · Concentrate angle</div><div class="v bluec" style="font-size:16px">Lean into T&amp;L + warm RT</div><div class="d">Scale the proven converting angles; get the Creative Export to optimize headlines.</div></div>
+</div>
+
+<footer>
+<b>Geotab — Messaging &amp; Format Intelligence Diagnostic</b> · YTD 2026 (Jan 1 – May 30) · North America (LinkedIn account 506925310)<br>
+Data source: LinkedIn via DemandSense, campaign-level (spend, impressions, clicks, conversions). Campaign totals reconcile to the account-level YTD pull ($185,885, 81 conversions).<br>
+Method: every campaign classified by format, messaging angle, funnel stage, and objective from naming convention. CTR benchmarked within Website-Visit objective only (0.183%). Verdicts: Scale / Refine / Test More / Hold / Reduce / Cut. Conversions sparse — CPA is directional. Literal headline/copy analysis pending the LinkedIn Creative Performance Export; Google sections N/A (no Google in scope).<br>
+Prepared by Impactable · Internal diagnostic — feeds the leadership EBR. Not for external distribution in this form.
+</footer>
+</div>
+<script>
+const DATA={"FMT": [{"k": "Image", "s": 100459, "i": 1510004, "clk": 7936, "v": 32, "n": 28, "ctr": 0.526, "cpc": 12.66, "cpa": 3139, "objs": ["Website Visits"], "verdict": "Scale"}, {"k": "Document", "s": 37656, "i": 440455, "clk": 12767, "v": 2, "n": 15, "ctr": 2.899, "cpc": 2.95, "cpa": 18828, "objs": ["Engagement", "Website Visits"], "verdict": "Refine"}, {"k": "Video", "s": 19755, "i": 467537, "clk": 1616, "v": 10, "n": 8, "ctr": 0.346, "cpc": 12.22, "cpa": 1976, "objs": ["Video Views", "Website Visits"], "verdict": "Scale"}, {"k": "Carousel", "s": 8097, "i": 155185, "clk": 651, "v": 1, "n": 5, "ctr": 0.419, "cpc": 12.44, "cpa": 8097, "objs": ["Website Visits"], "verdict": "Refine"}, {"k": "Text", "s": 5528, "i": 3111307, "clk": 284, "v": 15, "n": 17, "ctr": 0.009, "cpc": 19.46, "cpa": 369, "objs": ["Website Visits"], "verdict": "Scale"}, {"k": "Spotlight", "s": 3974, "i": 1838286, "clk": 294, "v": 18, "n": 11, "ctr": 0.016, "cpc": 13.52, "cpa": 221, "objs": ["Demand Gen", "Website Visits"], "verdict": "Scale"}, {"k": "Interactive", "s": 3450, "i": 61679, "clk": 237, "v": 0, "n": 1, "ctr": 0.384, "cpc": 14.56, "cpa": null, "objs": ["Website Visits"], "verdict": "Test More"}, {"k": "Thought Leader", "s": 2706, "i": 19600, "clk": 768, "v": 2, "n": 1, "ctr": 3.918, "cpc": 3.52, "cpa": 1353, "objs": ["Engagement"], "verdict": "Refine"}, {"k": "Animation", "s": 1894, "i": 44937, "clk": 134, "v": 0, "n": 1, "ctr": 0.298, "cpc": 14.14, "cpa": null, "objs": ["Website Visits"], "verdict": "Test More"}, {"k": "Other", "s": 1500, "i": 30565, "clk": 171, "v": 0, "n": 5, "ctr": 0.559, "cpc": 8.77, "cpa": null, "objs": ["Website Visits"], "verdict": "Test More"}, {"k": "Followers", "s": 866, "i": 343985, "clk": 134, "v": 1, "n": 1, "ctr": 0.039, "cpc": 6.46, "cpa": 866, "objs": ["Followers"], "verdict": "Hold"}], "ANG": [{"k": "Vertical: Transport & Logistics", "s": 28941, "i": 1369290, "clk": 3171, "v": 20, "n": 11, "ctr": 0.232, "cpc": 9.13, "cpa": 1447, "objs": ["Engagement", "Video Views", "Website Visits"], "verdict": "Scale"}, {"k": "Vertical: Public Sector", "s": 26863, "i": 825248, "clk": 2820, "v": 5, "n": 10, "ctr": 0.342, "cpc": 9.53, "cpa": 5373, "objs": ["Engagement", "Video Views", "Website Visits"], "verdict": "Scale"}, {"k": "Vertical: Vocational", "s": 18577, "i": 847369, "clk": 2033, "v": 6, "n": 9, "ctr": 0.24, "cpc": 9.14, "cpa": 3096, "objs": ["Engagement", "Video Views", "Website Visits"], "verdict": "Scale"}, {"k": "Vertical: Field Service", "s": 14977, "i": 190811, "clk": 7365, "v": 3, "n": 5, "ctr": 3.86, "cpc": 2.03, "cpa": 4992, "objs": ["Engagement", "Website Visits"], "verdict": "Scale"}, {"k": "Vertical: Public Admin/Safety", "s": 13234, "i": 396123, "clk": 1099, "v": 1, "n": 8, "ctr": 0.277, "cpc": 12.04, "cpa": 13234, "objs": ["Video Views", "Website Visits"], "verdict": "Refine"}, {"k": "Product: GO Focus Plus (dashcam)", "s": 12709, "i": 266614, "clk": 1174, "v": 5, "n": 3, "ctr": 0.44, "cpc": 10.83, "cpa": 2542, "objs": ["Website Visits"], "verdict": "Scale"}, {"k": "Vertical: Car Rental & Leasing", "s": 12074, "i": 137569, "clk": 1801, "v": 2, "n": 2, "ctr": 1.309, "cpc": 6.7, "cpa": 6037, "objs": ["Engagement", "Website Visits"], "verdict": "Refine"}, {"k": "Offer: Ungated Content", "s": 8153, "i": 203368, "clk": 354, "v": 1, "n": 5, "ctr": 0.174, "cpc": 23.03, "cpa": 8153, "objs": ["Website Visits"], "verdict": "Hold"}, {"k": "Brand / Retargeting (generic)", "s": 7765, "i": 1717076, "clk": 926, "v": 17, "n": 5, "ctr": 0.054, "cpc": 8.39, "cpa": 457, "objs": ["Demand Gen", "Engagement", "Website Visits"], "verdict": "Scale"}, {"k": "Offer: Case Studies", "s": 6862, "i": 139779, "clk": 907, "v": 7, "n": 1, "ctr": 0.649, "cpc": 7.57, "cpa": 980, "objs": ["Website Visits"], "verdict": "Scale"}, {"k": "Vertical: Construction", "s": 6289, "i": 676319, "clk": 396, "v": 2, "n": 3, "ctr": 0.059, "cpc": 15.88, "cpa": 3145, "objs": ["Website Visits"], "verdict": "Hold"}, {"k": "Product: Geotab Vitality", "s": 5120, "i": 110654, "clk": 452, "v": 3, "n": 2, "ctr": 0.408, "cpc": 11.33, "cpa": 1707, "objs": ["Website Visits"], "verdict": "Scale"}, {"k": "Offer: Interactive Buyer Guide", "s": 3654, "i": 46564, "clk": 297, "v": 2, "n": 2, "ctr": 0.638, "cpc": 12.3, "cpa": 1827, "objs": ["Website Visits"], "verdict": "Refine"}, {"k": "Product: Geotab Signals", "s": 3540, "i": 69386, "clk": 364, "v": 1, "n": 2, "ctr": 0.525, "cpc": 9.72, "cpa": 3540, "objs": ["Website Visits"], "verdict": "Refine"}, {"k": "Offer: ROI Calculator", "s": 3450, "i": 61679, "clk": 237, "v": 0, "n": 1, "ctr": 0.384, "cpc": 14.56, "cpa": null, "objs": ["Website Visits"], "verdict": "Test More"}, {"k": "Thought Leadership", "s": 2706, "i": 19600, "clk": 768, "v": 2, "n": 1, "ctr": 3.918, "cpc": 3.52, "cpa": 1353, "objs": ["Engagement"], "verdict": "Refine"}, {"k": "Vertical: Truckload Carrier", "s": 2217, "i": 58135, "clk": 264, "v": 1, "n": 2, "ctr": 0.454, "cpc": 8.4, "cpa": 2217, "objs": ["Website Visits"], "verdict": "Refine"}, {"k": "Brand: Connect/Follow", "s": 1931, "i": 361261, "clk": 227, "v": 1, "n": 2, "ctr": 0.063, "cpc": 8.51, "cpa": 1931, "objs": ["Followers", "Website Visits"], "verdict": "Hold"}, {"k": "Vertical: Winter Ops", "s": 1740, "i": 28741, "clk": 134, "v": 0, "n": 1, "ctr": 0.466, "cpc": 12.99, "cpa": null, "objs": ["Website Visits"], "verdict": "Test More"}, {"k": "Vertical: Waste Mgmt", "s": 1640, "i": 18464, "clk": 75, "v": 0, "n": 2, "ctr": 0.406, "cpc": 21.87, "cpa": null, "objs": ["Website Visits"], "verdict": "Test More"}, {"k": "Persona: Samsara Competitive (P4)", "s": 1262, "i": 135696, "clk": 8, "v": 0, "n": 2, "ctr": 0.006, "cpc": 157.77, "cpa": null, "objs": ["Website Visits"], "verdict": "Hold"}, {"k": "1:1 Named Account", "s": 925, "i": 8103, "clk": 53, "v": 0, "n": 3, "ctr": 0.654, "cpc": 17.45, "cpa": null, "objs": ["Website Visits"], "verdict": "Test More"}, {"k": "Persona: Deal Acceleration (P5)", "s": 504, "i": 55817, "clk": 2, "v": 0, "n": 2, "ctr": 0.004, "cpc": 252.09, "cpa": null, "objs": ["Website Visits"], "verdict": "Hold"}, {"k": "Offer: Webinar", "s": 240, "i": 3557, "clk": 12, "v": 0, "n": 2, "ctr": 0.337, "cpc": 19.99, "cpa": null, "objs": ["Website Visits"], "verdict": "Test More"}, {"k": "Vertical: Heavy Truck", "s": 218, "i": 243587, "clk": 49, "v": 2, "n": 1, "ctr": 0.02, "cpc": 4.45, "cpa": 109, "objs": ["Website Visits"], "verdict": "Hold"}, {"k": "Persona: Operations (P2)", "s": 185, "i": 21169, "clk": 2, "v": 0, "n": 2, "ctr": 0.009, "cpc": 92.72, "cpa": null, "objs": ["Website Visits"], "verdict": "Hold"}, {"k": "Persona: Routing (P3)", "s": 57, "i": 6242, "clk": 1, "v": 0, "n": 2, "ctr": 0.016, "cpc": 57.37, "cpa": null, "objs": ["Website Visits"], "verdict": "Hold"}, {"k": "Persona: Safety (P1)", "s": 51, "i": 5319, "clk": 1, "v": 0, "n": 2, "ctr": 0.019, "cpc": 51.03, "cpa": null, "objs": ["Website Visits"], "verdict": "Hold"}]};
+const COLS={
+ FMT:[['k','Format','t'],['s','Spend','m'],['n','#','n'],['i','Impr','b'],['clk','Clicks','n'],['ctr','CTR','p'],['cpc','CPC','d'],['v','Conv','n'],['cpa','CPA','d'],['verdict','Verdict','vb']],
+ ANG:[['k','Messaging Angle','t'],['s','Spend','m'],['n','#','n'],['i','Impr','b'],['clk','Clicks','n'],['ctr','CTR','p'],['v','Conv','n'],['cpa','CPA','d'],['verdict','Verdict','vb']]
+};
+const VC={"Scale": "INVEST", "Refine": "HOLD", "Test More": "WATCH", "Hold": "HOLD", "Reduce": "REDUCE", "Cut": "EXCLUDE"};
+let cur='FMT',sortK='s',asc=false;
+function cell(v,t,maxI){
+ if(v===null||v===undefined)return '<td class=mono>-</td>';
+ if(t==='t')return `<td>${v}</td>`;
+ if(t==='m')return `<td class=mono>$${Number(v).toLocaleString()}</td>`;
+ if(t==='n')return `<td class=mono>${Number(v).toLocaleString()}</td>`;
+ if(t==='p')return `<td class=mono>${Number(v).toFixed(3)}%</td>`;
+ if(t==='d')return `<td class=mono>$${Number(v).toLocaleString()}</td>`;
+ if(t==='b'){const w=(v/maxI*100).toFixed(1);return `<td class="barcell"><div class="barfill" style="width:${w}%"></div><span>${Number(v).toLocaleString()}</span></td>`;}
+ if(t==='vb'){const cls=VC[v]||'HOLD';return `<td><span class="v-badge ${cls}">${v}</span></td>`;}
+ return `<td>${v}</td>`;
+}
+function render(){
+ const rows=DATA[cur],cols=COLS[cur],maxI=Math.max(...rows.map(r=>r.i));
+ const th=document.querySelector('#T thead'),tb=document.querySelector('#T tbody');
+ th.innerHTML='<tr>'+cols.map(c=>`<th data-k="${c[0]}">${c[1]}${sortK===c[0]?(asc?' ▲':' ▼'):''}</th>`).join('')+'</tr>';
+ let rs=[...rows].sort((a,b)=>{let x=a[sortK],y=b[sortK];if(x===null)x=-1;if(y===null)y=-1;if(typeof x==='string')return asc?x.localeCompare(y):y.localeCompare(x);return asc?x-y:y-x;});
+ tb.innerHTML=rs.map(r=>'<tr>'+cols.map(c=>cell(r[c[0]],c[2],maxI)).join('')+'</tr>').join('');
+ th.querySelectorAll('th').forEach(h=>h.onclick=()=>{const k=h.dataset.k;if(sortK===k)asc=!asc;else{sortK=k;asc=false;}render();});
+ document.getElementById('N').innerHTML = cur==='FMT'
+  ? 'Spotlight and Text are the conversion-efficient formats ($221 / $369 CPA) but the least funded. Image carries 54% of spend; Document is engagement-objective (CTR not comparable, ~0 pipeline).'
+  : 'Angles sorted by spend. Transport &amp; Logistics leads on both volume and conversion. Persona (P1–P5) angles are present but near-zero spend/conversion — see the persona map below.';
+}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');cur=t.dataset.d;sortK='s';asc=false;render();});
+render();
+</script>
+<!-- AI ASSISTANT PANEL -->
+<div id="ai-btn" onclick="openAI()" style="position:fixed;bottom:28px;right:28px;z-index:8000;cursor:pointer;
+  background:linear-gradient(135deg,#0d6e54,#12c98e);border-radius:50px;
+  padding:12px 20px;display:flex;align-items:center;gap:9px;
+  box-shadow:0 8px 32px rgba(18,201,142,.35);transition:transform .15s,box-shadow .15s;"
+  onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 40px rgba(18,201,142,.45)'"
+  onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(18,201,142,.35)'">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#fff" stroke-width="1.5"/><path d="M5 8h6M5 5.5h3M5 10.5h4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+  <span style="font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:#fff;letter-spacing:-.01em">Ask the Data</span>
+</div>
+
+<div id="__ai_btn" onclick="__openAI()" style="position:fixed;bottom:24px;right:24px;z-index:9998;cursor:pointer;background:#1B9BD1;border-radius:3px;padding:12px 18px;display:flex;align-items:center;gap:9px;box-shadow:0 8px 28px rgba(27,155,209,.3);font-family:'Inter',sans-serif;transition:transform .15s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" stroke="#fff" stroke-width="1.4"/><path d="M5 7.5h5M5 5.5h3M5 9.5h4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff">Ask the Data</span>
+</div>
+<div id="__ai_overlay" onclick="__closeAI()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9998;backdrop-filter:blur(6px)"></div>
+<div id="__ai_panel" style="display:none;position:fixed;right:0;top:0;bottom:0;width:460px;max-width:95vw;background:#15151A;border-left:1px solid #22222A;z-index:9999;flex-direction:column;overflow:hidden;font-family:'Inter',sans-serif">
+  <div style="padding:20px 22px 16px;border-bottom:1px solid #22222A;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:#0A0A0C">
+    <div>
+      <div style="font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:-.01em;color:#F4F1EA">Ask the Data</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#C8C4B8;opacity:.45;margin-top:3px">Live Data · Impactable Intelligence</div>
+    </div>
+    <button onclick="__closeAI()" style="background:#22222A;border:none;border-radius:2px;color:#C8C4B8;cursor:pointer;padding:7px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;opacity:.6">Esc</button>
+  </div>
+  <div id="__ai_msgs" style="flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:11px">
+    <div style="background:#0A0A0C;border:1px solid #22222A;border-radius:4px;padding:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin-bottom:8px">Impactable AI</div>
+      <div style="font-size:13px;color:#C8C4B8;line-height:1.6;margin-bottom:12px">Ask about this report or the wider Geotab program. I pull live LinkedIn data and Impactable's strategy playbooks.</div>
+      <div style="display:flex;flex-direction:column;gap:6px" id="__ai_sugg">
+        <button class="__sg" onclick="__sugg(this)">What stands out in this report?</button>
+        <button class="__sg" onclick="__sugg(this)">What should we action this week?</button>
+        <button class="__sg" onclick="__sugg(this)">How does this compare to best practice?</button>
+      </div>
+    </div>
+  </div>
+  <div style="padding:14px 18px;border-top:1px solid #22222A;flex-shrink:0;display:flex;gap:9px;align-items:flex-end;background:#0A0A0C">
+    <textarea id="__ai_in" placeholder="Ask anything..." style="flex:1;background:#22222A;border:1px solid rgba(255,255,255,.06);border-radius:2px;padding:11px 13px;font-size:13px;color:#F4F1EA;font-family:'Inter',sans-serif;resize:none;min-height:46px;max-height:120px;outline:none;line-height:1.5" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();__send();}"></textarea>
+    <button onclick="__send()" id="__ai_send" style="background:#1B9BD1;border:none;border-radius:2px;padding:11px 17px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#fff;cursor:pointer;flex-shrink:0;height:46px">Send</button>
+  </div>
+</div>
+<style>.__sg{background:rgba(27,155,209,.06);border:1px solid rgba(27,155,209,.15);border-radius:2px;padding:8px 12px;font-size:12px;color:#5BB8E0;cursor:pointer;text-align:left;font-family:'Inter',sans-serif;transition:background .15s}.__sg:hover{background:rgba(27,155,209,.13)}#__ai_u{background:#22222A;border-radius:4px 4px 2px 4px;padding:10px 13px;align-self:flex-end;max-width:88%}#__aidot1,#__aidot2,#__aidot3{width:5px;height:5px;background:#1B9BD1;border-radius:50%;display:inline-block;animation:__blink 1.2s infinite}#__aidot2{animation-delay:.2s}#__aidot3{animation-delay:.4s}@keyframes __blink{0%,100%{opacity:.2}50%{opacity:1}}</style>
+<script>
+var __aiH=[];
+function __openAI(){document.getElementById('__ai_overlay').style.display='block';document.getElementById('__ai_panel').style.display='flex';document.getElementById('__ai_btn').style.display='none';document.getElementById('__ai_in').focus();}
+function __closeAI(){document.getElementById('__ai_overlay').style.display='none';document.getElementById('__ai_panel').style.display='none';document.getElementById('__ai_btn').style.display='flex';}
+function __sugg(b){document.getElementById('__ai_in').value=b.textContent;document.getElementById('__ai_sugg').style.display='none';__send();}
+function __esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function __fmtMd(t){
+  t=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  t=t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  t=t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  var lines=t.split(/\n/);var out=[];var listType=null;var listItems=[];var para=[];
+  function fP(){if(para.length){out.push('<p>'+para.join(' ')+'</p>');para=[];}}
+  function fL(){if(listItems.length){out.push('<'+listType+'>'+listItems.map(function(li){return '<li>'+li+'</li>';}).join('')+'</'+listType+'>');listItems=[];listType=null;}}
+  for(var i=0;i<lines.length;i++){var ln=lines[i].trim();if(!ln){fP();fL();continue;}
+    var num=ln.match(/^(\d+)[.)]\s+(.*)$/);var bul=ln.match(/^[-*\u2022]\s+(.*)$/);var hdr=ln.match(/^([A-Z][A-Z\s&]{2,40}):?$/);
+    if(num){fP();if(listType&&listType!=='ol')fL();listType='ol';listItems.push(num[2]);}
+    else if(bul){fP();if(listType&&listType!=='ul')fL();listType='ul';listItems.push(bul[1]);}
+    else if(hdr&&ln.indexOf('<a ')<0){fP();fL();out.push('<h4>'+ln.replace(/:$/,'')+'</h4>');}
+    else{fL();para.push(ln);}}
+  fP();fL();return out.join('');
+}
+function __add(r,t){var m=document.getElementById('__ai_msgs');var d=document.createElement('div');if(r==='u'){d.id='__ai_u';d.innerHTML='<div style="font-size:13px;color:#F4F1EA;line-height:1.5">'+__esc(t)+'</div>';}else if(r==='t'){d.id='__ai_ti';d.style.cssText='background:rgba(27,155,209,.05);border:1px solid rgba(27,155,209,.12);border-radius:4px 4px 4px 2px;padding:12px 14px;align-self:flex-start';d.innerHTML='<span id="__aidot1"></span> <span id="__aidot2"></span> <span id="__aidot3"></span>';}else{d.style.cssText='background:rgba(27,155,209,.05);border:1px solid rgba(27,155,209,.12);border-radius:4px 4px 4px 2px;padding:13px 15px;align-self:flex-start;max-width:95%';d.innerHTML='<div style="font-family:\'JetBrains Mono\',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin-bottom:7px">Impactable AI</div><div class="__md">'+__fmtMd(t)+'</div>';}m.appendChild(d);m.scrollTop=m.scrollHeight;return d;}
+async function __sendQ(q){document.getElementById('__ai_send').disabled=true;__add('u',q);var ty=__add('t','');__aiH.push({role:'user',content:q});try{var r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:__aiH.slice(0,-1)})});var d=await r.json();ty.remove();var a=d.answer||'No response.';__add('a',a);__aiH.push({role:'assistant',content:a});if(__aiH.length>20)__aiH=__aiH.slice(-20);}catch(e){ty.remove();__add('a','Error reaching data layer. Try again.');}document.getElementById('__ai_send').disabled=false;document.getElementById('__ai_in').focus();}
+function __send(){var i=document.getElementById('__ai_in');var q=i.value.trim();if(!q)return;i.value='';__sendQ(q);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')__closeAI();});
+</script>
+
+<style>.__md{font-size:13px;color:#F4F1EA;line-height:1.6;opacity:.92}.__md strong{color:#fff;font-weight:700}.__md a{color:#5BB8E0;text-decoration:underline;text-underline-offset:2px}.__md a:hover{color:#1B9BD1}.__md p{margin:0 0 10px}.__md p:last-child{margin-bottom:0}.__md ul,.__md ol{margin:6px 0 12px;padding-left:4px;list-style:none}.__md li{position:relative;padding-left:20px;margin-bottom:7px;line-height:1.55}.__md ul li::before{content:"";position:absolute;left:4px;top:8px;width:4px;height:4px;border-radius:50%;background:#1B9BD1}.__md ol{counter-reset:m}.__md ol li{counter-increment:m}.__md ol li::before{content:counter(m);position:absolute;left:0;top:0;font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;color:#1B9BD1;background:rgba(27,155,209,.1);width:16px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center}.__md h4{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin:14px 0 8px;font-weight:700}.__md h4:first-child{margin-top:0}</style>
+</body></html>
