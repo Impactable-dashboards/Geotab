@@ -29,19 +29,24 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch latest data from Windsor
+      - name: Fetch Campaign Performance data from Windsor
         env:
           WINDSOR_API_KEY: ${{ secrets.WINDSOR_API_KEY }}
         run: node scripts/fetch-campaign-performance.mjs
+
+      - name: Fetch NA Performance data from Windsor
+        env:
+          WINDSOR_API_KEY: ${{ secrets.WINDSOR_API_KEY }}
+        run: node scripts/fetch-na-performance.mjs
 
       - name: Commit if changed
         run: |
           git config user.name "geotab-data-bot"
           git config user.email "actions@github.com"
-          if git diff --quiet -- data/campaign-performance.json; then
+          git add data/campaign-performance.json data/na-performance.json
+          if git diff --cached --quiet; then
             echo "No data changes."
           else
-            git add data/campaign-performance.json
-            git commit -m "Refresh campaign-performance data ($(date -u +%Y-%m-%d))"
+            git commit -m "Refresh dashboard data ($(date -u +%Y-%m-%d))"
             git push
           fi
