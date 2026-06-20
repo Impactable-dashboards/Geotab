@@ -4,284 +4,348 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Geotab — NA LinkedIn Performance</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
-  --bg:#07090d;--s1:#0d1017;--s2:#121820;--s3:#181f2a;
-  --border:#1a2537;--border2:#223040;--text:#d8e2f0;--muted:#4e637d;
-  --blue:#28b4e0;--green:#12c98e;--red:#e04040;--yellow:#d49a0a;--orange:#f4a261;--purple:#8b5cf6;
+  --bg:#0a0d12;--s1:#10141c;--s2:#141923;--s3:#1b2230;
+  --border:#1e2735;--border2:#283449;--text:#d8e2f0;--muted:#5a6b82;--muted2:#8294ac;
+  --blue:#3aa8e0;--green:#3ecf8e;--red:#e05252;--amber:#e0a83a;--orange:#f4732a;--purple:#9d7bea;--lime:#9bd534;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;line-height:1.55;}
-.masthead{background:linear-gradient(135deg,#050c1a 0%,#0a1f3d 55%,#091929 100%);border-bottom:2px solid var(--blue);position:relative;overflow:hidden;padding-top:40px;}
-.masthead::after{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(40,180,224,.08) 0%,transparent 65%);pointer-events:none;}
-.mi{max-width:1280px;margin:0 auto;padding:28px 48px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;position:relative;z-index:1;}
-.brand-n{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.02em;}
-.brand-n span{color:var(--blue);}
-.brand-s{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);}
-.mey{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:7px;}
-.mh1{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.025em;line-height:1.1;}
-.mh1 em{color:var(--blue);font-style:normal;}
-.msub{font-size:11px;color:rgba(255,255,255,.35);margin-top:5px;font-weight:300;}
-.mr{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
-.mchip{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);}
-.mchip strong{color:rgba(255,255,255,.6);}
-.li-badge{margin-top:6px;padding:4px 10px;border:1px solid rgba(40,180,224,.3);border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);background:rgba(40,180,224,.06);}
+body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;font-size:13px;line-height:1.5;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+.wrap{max-width:1320px;margin:0 auto;padding:0 28px 64px;}
 
-.body{max-width:1280px;margin:0 auto;padding:0 48px 72px;}
-.sh{display:flex;align-items:baseline;gap:12px;padding:28px 0 12px;border-top:1px solid var(--border);margin-top:4px;}
-.sh.first{border-top:none;}
-.sh-num{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--blue);font-weight:500;letter-spacing:.06em;}
-.sh-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.01em;}
-.sh-desc{font-size:11px;color:var(--muted);margin-bottom:16px;}
+/* CONTROL BAR */
+.ctrls{display:flex;align-items:center;gap:16px;padding:22px 0 18px;flex-wrap:wrap;}
+.selbox{background:var(--s2);border:1px solid var(--border2);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;min-width:300px;flex:1;}
+.selbox .lbl{font-size:17px;font-weight:600;color:#fff;}
+.selbox .cv{margin-left:auto;color:var(--muted);}
+.seg{display:flex;background:var(--s2);border:1px solid var(--border2);border-radius:10px;overflow:hidden;}
+.seg button{background:none;border:none;color:var(--muted2);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:13px 20px;cursor:pointer;transition:all .12s;}
+.seg button.on{background:var(--blue);color:#04121b;font-weight:600;}
+.live{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+.live::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
 
-/* FUNNEL CARDS */
-.fgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
-.fc{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative;overflow:hidden;}
-.fc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.fc.tof::before{background:var(--blue);}
-.fc.mof::before{background:var(--green);}
-.fc.bof::before{background:var(--orange);}
-.fc.other::before{background:var(--muted);}
-.fc-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.fc-stage{font-size:20px;font-weight:800;color:#fff;line-height:1;}
-.fc-spend{font-size:26px;font-weight:800;color:#fff;line-height:1;margin:6px 0 2px;}
-.fc-share{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);}
-.fc-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:12px;}
-.fcm{background:var(--s3);border-radius:5px;padding:6px;text-align:center;}
-.fcm-v{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#fff;line-height:1;margin-bottom:2px;}
-.fcm-l{font-family:'IBM Plex Mono',monospace;font-size:7px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+/* KPI CARDS */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px;}
+.kpi{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.kpi-l{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.kpi-v{font-size:30px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em;}
+.kpi-d{font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:9px;display:flex;gap:8px;align-items:center;}
+.kpi-d .pct{font-weight:600;}
+.up{color:var(--green);} .down{color:var(--red);} .flat{color:var(--muted2);}
+.tag{font-size:10px;}
+.tag.good{color:var(--green);} .tag.bad{color:var(--red);} .tag.neu{color:var(--muted2);}
 
-/* CHART + STAT */
-.crow{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px;}
-.cbox{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:18px;}
-.ctitle{font-size:11px;font-weight:700;color:var(--text);margin-bottom:14px;}
-canvas{max-height:240px;}
-.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
-.stat{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;}
-.stat-v{font-size:30px;font-weight:800;color:#fff;line-height:1;}
-.stat-l{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+/* ALERTS */
+.alerts{margin-bottom:18px;display:grid;gap:8px;}
+.alert{display:flex;gap:12px;align-items:flex-start;background:var(--s2);border:1px solid var(--border);border-left:3px solid var(--muted);border-radius:0 9px 9px 0;padding:11px 15px;}
+.alert.warn{border-left-color:var(--amber);} .alert.crit{border-left-color:var(--red);} .alert.good{border-left-color:var(--green);}
+.alert-ic{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:1px;}
+.alert.warn .alert-ic{background:rgba(224,168,58,.14);color:var(--amber);}
+.alert.crit .alert-ic{background:rgba(224,82,82,.14);color:var(--red);}
+.alert.good .alert-ic{background:rgba(62,207,142,.14);color:var(--green);}
+.alert-tx{font-size:12px;color:var(--text);line-height:1.5;}
+.alert-tx strong{color:#fff;}
 
-/* CALLOUT */
-.callout{background:var(--s2);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 16px;margin:4px 0 16px;}
-.ct{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px;}
-.cb{font-size:11px;color:var(--muted);line-height:1.5;}
-.cb strong{color:var(--text);}
+/* PANELS */
+.panel{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:16px;}
+.panel-h{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);margin-bottom:16px;}
+.crow{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+canvas{max-height:230px;}
 
 /* TABLE */
-.tbl-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border);}
-.tbl{width:100%;border-collapse:separate;border-spacing:0;}
-.tbl thead tr{background:var(--s2);}
-.tbl thead th{padding:9px 11px;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;border-bottom:1px solid var(--border2);white-space:nowrap;}
-.tbl td{padding:9px 11px;border-bottom:1px solid var(--border);vertical-align:middle;}
-.tbl tbody tr:last-child td{border-bottom:none;}
-.tbl tbody tr:hover td{background:rgba(40,180,224,.03);}
-.cname{font-size:12px;font-weight:600;color:#fff;}
-.mono{font-family:'IBM Plex Mono',monospace;font-size:11px;}
+.tbl-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:920px;}
+thead th{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;padding:8px 10px;border-bottom:1px solid var(--border2);white-space:nowrap;}
+thead th:first-child{text-align:left;}
+tbody td{padding:10px 10px;border-bottom:1px solid var(--border);text-align:right;font-family:'IBM Plex Mono',monospace;color:var(--muted2);white-space:nowrap;}
+tbody td:first-child{text-align:left;font-family:'Poppins',sans-serif;color:#fff;font-weight:500;white-space:normal;min-width:230px;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:rgba(58,168,224,.03);}
+.cell-g{color:var(--green);} .cell-a{color:var(--amber);} .cell-r{color:var(--red);}
+.stage{font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;margin-right:7px;vertical-align:middle;}
+.st-tof{background:rgba(58,168,224,.15);color:var(--blue);} .st-mof{background:rgba(62,207,142,.15);color:var(--green);}
+.st-bof{background:rgba(244,115,42,.15);color:var(--orange);} .st-other{background:rgba(120,135,160,.15);color:var(--muted2);}
+.satflag{background:rgba(244,115,42,.06);border:1px solid rgba(244,115,42,.25);border-left:3px solid var(--orange);border-radius:0 9px 9px 0;padding:13px 16px;margin-top:14px;font-size:12px;color:var(--muted2);line-height:1.55;}
+.satflag strong{color:#fff;}
 
-/* FOOT */
-.foot{background:linear-gradient(90deg,#050c1a 0%,#0a1f3d 100%);border-top:2px solid var(--blue);padding:16px 48px;display:flex;justify-content:space-between;align-items:center;gap:20px;}
-.fb{font-family:'Poppins',sans-serif;font-size:14px;font-weight:800;color:#fff;letter-spacing:-.02em;}
-.fb span{color:var(--blue);}
-.ft{font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);margin-top:2px;}
-.fbadge{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);background:rgba(40,180,224,.08);border:1px solid rgba(40,180,224,.2);padding:4px 10px;border-radius:4px;}
-
-@media(max-width:900px){
-  .mi{grid-template-columns:1fr;gap:12px;}.body{padding:0 20px 48px;}
-  .fgrid{grid-template-columns:1fr 1fr;}.crow{grid-template-columns:1fr;}
-  .statgrid{grid-template-columns:1fr;}.foot{flex-direction:column;padding:16px 20px;}
-}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 0 0;border-top:1px solid var(--border);margin-top:8px;}
+.fb{font-size:14px;font-weight:800;color:#fff;}.fb span{color:var(--blue);}
+.ft{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);}
+@media(max-width:1000px){.kpis{grid-template-columns:1fr 1fr;}.crow{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-<div id="__implab_nav" style="position:sticky;top:0;z-index:9999;background:rgba(10,10,12,.96);backdrop-filter:blur(12px);border-bottom:1px solid #22222A;padding:0 28px;display:flex;align-items:center;height:46px;font-family:'Inter',sans-serif">
-  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;border-right:1px solid #22222A;padding-right:16px;margin-right:16px;flex-shrink:0">
+<div id="__implab_nav" style="position:sticky;top:0;z-index:9999;background:rgba(10,13,18,.96);backdrop-filter:blur(12px);border-bottom:1px solid #1e2735;padding:0 28px;display:flex;align-items:center;height:46px;font-family:'Inter',sans-serif">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;border-right:1px solid #1e2735;padding-right:16px;margin-right:16px;flex-shrink:0">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="opacity:.5"><path d="M9 11.5L4.5 7 9 2.5" stroke="#C8C4B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span style="font-family:'Archivo Black',sans-serif;font-size:13px;color:#F4F1EA;letter-spacing:.01em">impact<span style="color:#1B9BD1">able</span></span>
+    <span style="font-family:'Archivo Black',sans-serif;font-size:13px;color:#F4F1EA">impact<span style="color:#3aa8e0">able</span></span>
   </a>
-  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#28b4e0;flex-shrink:0">NA Performance</span>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#3aa8e0;flex-shrink:0">NA Performance</span>
   <a href="/" style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#C8C4B8;opacity:.5;text-decoration:none;flex-shrink:0">All Reports →</a>
 </div>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-<div class="masthead">
-  <div class="mi">
-    <div><div class="brand-n">impact<span>able</span></div><div class="brand-s">Campaign Intelligence</div></div>
-    <div>
-      <div class="mey">Geotab · LinkedIn Ads · North America</div>
-      <h1 class="mh1">NA LinkedIn <em>Performance</em></h1>
-      <div class="msub" id="mSub">Funnel mix, frequency &amp; saturation, named 1:1 accounts — Last 30 days + 12-week trend · via Windsor</div>
+<div class="wrap">
+
+  <div class="ctrls">
+    <div class="selbox"><span class="lbl">All campaigns</span><span class="cv mono" id="campCount">Geotab North America</span></div>
+    <div class="seg" id="granSeg">
+      <button data-g="daily">Daily</button>
+      <button data-g="weekly" class="on">Weekly</button>
+      <button data-g="monthly">Monthly</button>
     </div>
-    <div class="mr">
-      <div class="mchip">Spend (30d) <strong id="mSpend">$56,276</strong></div>
-      <div class="mchip">Impressions <strong id="mImpr">1.5M</strong></div>
-      <div class="mchip">Unique reach <strong id="mReach">137,372</strong></div>
-      <div class="mchip">Avg frequency <strong id="mFreq">11.2</strong></div>
-      <div class="mchip">Data pulled <strong id="mDate">Jun 20, 2026</strong></div>
-      <div class="li-badge">Windsor · Live</div>
+    <div class="live mono" id="rangeLabel">Live</div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="alerts" id="alerts"></div>
+
+  <div class="panel">
+    <div class="panel-h" id="scTitle">Spend &amp; Conversions · Weekly</div>
+    <canvas id="scChart"></canvas>
+  </div>
+
+  <div class="crow">
+    <div class="panel"><div class="panel-h">CPC &amp; CPM (Cost Efficiency)</div><canvas id="ccChart"></canvas></div>
+    <div class="panel"><div class="panel-h">CTR (Engagement Rate)</div><canvas id="ctrChart"></canvas></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-h">Top 10 Campaigns by Spend</div>
+    <p style="font-size:11px;color:var(--muted);margin:-8px 0 14px;line-height:1.5">90-day spend, impressions, clicks, CPC, CPM, conversions, cost/conv · frequency &amp; penetration shown 30d vs 90d (LinkedIn caps reach metrics at 92 days) · conversions = external website conversions</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Campaign</th><th>Spend</th><th>Impr</th><th>Clicks</th><th>CPC</th><th>CPM</th><th>Conv</th><th>Cost/Conv</th>
+          <th>Freq 30d</th><th>Freq 90d</th><th>Pen 30d</th><th>Pen 90d</th>
+        </tr></thead>
+        <tbody id="campBody"></tbody>
+      </table>
     </div>
+    <div class="satflag" id="satFlag"></div>
   </div>
-</div>
 
-<div class="body">
-
-<!-- 01 FUNNEL MIX -->
-<div class="sh first"><span class="sh-num">01</span><span class="sh-title">Funnel Mix — Spend &amp; Efficiency by Stage</span></div>
-<p class="sh-desc">Stage derived from LinkedIn campaign naming (TOF / MOF / BOF). Always-On and persona prospecting campaigns are grouped separately. CTR rises down-funnel as expected.</p>
-<div class="fgrid" id="fgrid"></div>
-<div class="crow">
-  <div class="cbox"><div class="ctitle">Spend Distribution by Funnel Stage (30d)</div><canvas id="funnelPie"></canvas></div>
-  <div class="cbox"><div class="ctitle">12-Week Funnel Spend Trend</div><canvas id="trendChart"></canvas></div>
-</div>
-
-<!-- 02 FREQUENCY & SATURATION -->
-<div class="sh"><span class="sh-num">02</span><span class="sh-title">Frequency &amp; Saturation</span></div>
-<p class="sh-desc">Reach is the count of unique member accounts with at least one impression; frequency is average impressions per reached account, across the named-account audience.</p>
-<div class="statgrid" id="statgrid"></div>
-<div class="callout">
-  <div class="ct">Saturation read</div>
-  <div class="cb" id="satNote"></div>
-</div>
-
-<!-- 03 NAMED 1:1 ACCOUNTS -->
-<div class="sh"><span class="sh-num">03</span><span class="sh-title">Named 1:1 Accounts</span></div>
-<p class="sh-desc">Dedicated 1:1 ABM campaigns running against individually named target accounts. Small, precise audiences — judge on engagement, not volume.</p>
-<div class="tbl-wrap">
-<table class="tbl">
-<thead><tr><th>Account</th><th>Spend</th><th>Impressions</th><th>Clicks</th><th>CTR</th></tr></thead>
-<tbody id="namedBody"></tbody>
-</table>
-</div>
-
-</div><!-- /body -->
-
-<div class="foot">
-  <div>
-    <div class="fb">impact<span>able</span></div>
-    <div class="ft">NA LinkedIn Performance &nbsp;·&nbsp; Geotab North America</div>
-    <div class="ft" id="fFoot">LinkedIn Ads via Windsor &nbsp;·&nbsp; Geotab North America &nbsp;·&nbsp; refreshed Jun 20, 2026</div>
+  <div class="foot">
+    <div><div class="fb">impact<span>able</span></div><div class="ft" id="fFoot">LinkedIn Ads via Windsor · Geotab North America</div></div>
+    <div class="ft">Confidential</div>
   </div>
-  <div class="fbadge">Windsor · Live</div>
 </div>
 
 <script>
-Chart.defaults.color='#4e637d';
-Chart.defaults.borderColor='#1a2537';
+Chart.defaults.color='#5a6b82';
+Chart.defaults.borderColor='#1e2735';
 Chart.defaults.font.family="'Poppins',sans-serif";
 
 // ---- LIVE DATA (with built-in fallback) ----
 // /data/na-performance.json is rewritten daily from Windsor (LinkedIn Ads,
-// Geotab North America) by the refresh GitHub Action. Fallback below keeps
-// the page working if the file is missing.
+// Geotab North America) by the refresh GitHub Action. Fallback keeps the page
+// working if the file is missing; the Action also fills in the daily series.
 var FALLBACK={
-  meta:{generated:'Jun 20, 2026',window:'Last 30 days',totalSpend:'$56,276',totalImpressions:'1.5M',reach:137372,frequency:11.2},
-  funnel:[
-    {stage:'TOF',label:'Top of Funnel',spend:30798,impr:548901,clicks:3124,ctr:0.0057},
-    {stage:'MOF',label:'Mid Funnel',spend:15632,impr:406495,clicks:3442,ctr:0.0085},
-    {stage:'BOF',label:'Bottom of Funnel',spend:5728,impr:42521,clicks:729,ctr:0.0171},
-    {stage:'Other',label:'Always-On / Persona',spend:3750,impr:541471,clicks:237,ctr:0.0004}
-  ],
-  trend:[
-    {wk:'Wk13',tof:3133,mof:1681,bof:910},{wk:'Wk14',tof:3038,mof:1923,bof:1623},
-    {wk:'Wk15',tof:2738,mof:2117,bof:1164},{wk:'Wk16',tof:2548,mof:2402,bof:933},
-    {wk:'Wk17',tof:7648,mof:5482,bof:1429},{wk:'Wk18',tof:7609,mof:5577,bof:1950},
-    {wk:'Wk19',tof:5724,mof:3863,bof:1228},{wk:'Wk20',tof:6405,mof:3651,bof:1091},
-    {wk:'Wk21',tof:6144,mof:3569,bof:1289},{wk:'Wk22',tof:6746,mof:3740,bof:1324},
-    {wk:'Wk23',tof:7269,mof:3674,bof:1308},{wk:'Wk24',tof:7661,mof:3650,bof:1400}
-  ],
-  named:[
-    {account:'BrightView',spend:238,impr:754,clicks:29,ctr:0.0385},
-    {account:'Allied Universal',spend:103,impr:1145,clicks:29,ctr:0.0253},
-    {account:'TruGreen',spend:27,impr:306,clicks:8,ctr:0.0261}
+  meta:{account:'Geotab North America',generated:'Jun 20, 2026',rangeStart:'2026-02-15',rangeEnd:'2026-06-20'},
+  series:{
+    daily:[],
+    weekly:[
+      {label:'Wk07',spend:7105.7,conversions:5,clicks:655,impressions:376205,cpc:10.85,cpm:18.89,ctr:0.0017},
+      {label:'Wk08',spend:6493.0,conversions:5,clicks:711,impressions:366722,cpc:9.13,cpm:17.71,ctr:0.0019},
+      {label:'Wk09',spend:6212.77,conversions:3,clicks:900,impressions:439159,cpc:6.90,cpm:14.15,ctr:0.0021},
+      {label:'Wk10',spend:6256.14,conversions:3,clicks:832,impressions:363705,cpc:7.52,cpm:17.20,ctr:0.0023},
+      {label:'Wk11',spend:6387.74,conversions:1,clicks:878,impressions:369147,cpc:7.28,cpm:17.30,ctr:0.0024},
+      {label:'Wk12',spend:6280.44,conversions:8,clicks:891,impressions:392727,cpc:7.05,cpm:15.99,ctr:0.0023},
+      {label:'Wk13',spend:6377.75,conversions:3,clicks:866,impressions:375209,cpc:7.36,cpm:17.00,ctr:0.0023},
+      {label:'Wk14',spend:7393.69,conversions:3,clicks:992,impressions:376334,cpc:7.45,cpm:19.65,ctr:0.0026},
+      {label:'Wk15',spend:6746.99,conversions:3,clicks:1076,impressions:348595,cpc:6.27,cpm:19.35,ctr:0.0031},
+      {label:'Wk16',spend:6594.23,conversions:3,clicks:967,impressions:338731,cpc:6.82,cpm:19.47,ctr:0.0029},
+      {label:'Wk17',spend:15365.0,conversions:3,clicks:2546,impressions:399194,cpc:6.04,cpm:38.49,ctr:0.0064},
+      {label:'Wk18',spend:16080.04,conversions:4,clicks:2479,impressions:402136,cpc:6.49,cpm:39.99,ctr:0.0062},
+      {label:'Wk19',spend:11796.06,conversions:3,clicks:1934,impressions:413849,cpc:6.10,cpm:28.50,ctr:0.0047},
+      {label:'Wk20',spend:11974.54,conversions:7,clicks:1808,impressions:398266,cpc:6.62,cpm:30.07,ctr:0.0045},
+      {label:'Wk21',spend:11831.68,conversions:7,clicks:1835,impressions:368321,cpc:6.45,cpm:32.12,ctr:0.0050},
+      {label:'Wk22',spend:12685.49,conversions:3,clicks:1789,impressions:344022,cpc:7.09,cpm:36.87,ctr:0.0052},
+      {label:'Wk23',spend:13250.3,conversions:9,clicks:1727,impressions:367423,cpc:7.67,cpm:36.06,ctr:0.0047},
+      {label:'Wk24',spend:13781.67,conversions:5,clicks:1822,impressions:353054,cpc:7.56,cpm:39.04,ctr:0.0052},
+      {label:'Wk25',spend:11458.4,conversions:5,clicks:1522,impressions:323368,cpc:7.53,cpm:35.43,ctr:0.0047}
+    ],
+    monthly:[
+      {label:'Jan',spend:33769.96,conversions:13,clicks:3241,impressions:1583031,cpc:10.42,cpm:21.33,ctr:0.0021},
+      {label:'Feb',spend:28567.20,conversions:22,clicks:3014,impressions:1568466,cpc:9.48,cpm:18.21,ctr:0.0019},
+      {label:'Mar',spend:27855.09,conversions:15,clicks:3850,impressions:1670215,cpc:7.24,cpm:16.68,ctr:0.0023},
+      {label:'Apr',spend:44333.30,conversions:16,clicks:6975,impressions:1598826,cpc:6.36,cpm:27.73,ctr:0.0044},
+      {label:'May',spend:53818.58,conversions:20,clicks:8142,impressions:1644274,cpc:6.61,cpm:32.73,ctr:0.0050},
+      {label:'Jun',spend:38490.37,conversions:19,clicks:5071,impressions:1043848,cpc:7.59,cpm:36.87,ctr:0.0049}
+    ]
+  },
+  campaigns:[
+    {name:'GO Focus Plus · TOFU Image 05/26',stage:'TOF',spend:12732,impr:206726,clicks:1030,cpc:12.36,cpm:61.59,conv:1,costPerConv:12732,freq30:6.4,freq90:7.9,pen30:0.065,pen90:0.090},
+    {name:'Car Rental & Leasing · TOF Image 370K',stage:'TOF',spend:10288,impr:127295,clicks:644,cpc:15.98,cpm:80.82,conv:2,costPerConv:5144,freq30:3.5,freq90:5.1,pen30:0.036,pen90:0.066},
+    {name:'Field Service · TOF Image 52K',stage:'TOF',spend:7394,impr:75352,clicks:375,cpc:19.72,cpm:98.13,conv:3,costPerConv:2465,freq30:6.0,freq90:8.6,pen30:0.057,pen90:0.112},
+    {name:'Public Sector · TOF Image 70K',stage:'TOF',spend:6731,impr:81647,clicks:412,cpc:16.34,cpm:82.44,conv:1,costPerConv:6731,freq30:4.4,freq90:6.4,pen30:0.041,pen90:0.087},
+    {name:'Transport & Logistics · MOF Image 90D 2K',stage:'MOF',spend:6245,impr:48078,clicks:340,cpc:18.37,cpm:129.89,conv:1,costPerConv:6245,freq30:6.6,freq90:9.9,pen30:0.377,pen90:0.584},
+    {name:'Transport & Logistics · TOF Image 100K',stage:'TOF',spend:5533,impr:65627,clicks:320,cpc:17.29,cpm:84.31,conv:2,costPerConv:2767,freq30:2.7,freq90:4.3,pen30:0.027,pen90:0.059},
+    {name:'Field Service · TOF ENG Doc 280K',stage:'TOF',spend:5231,impr:71478,clicks:4778,cpc:1.09,cpm:73.18,conv:0,costPerConv:null,freq30:2.4,freq90:4.4,pen30:0.024,pen90:0.043},
+    {name:'Field Service · MOF ENG Doc 7.1K',stage:'MOF',spend:4766,impr:33815,clicks:2243,cpc:2.12,cpm:140.94,conv:1,costPerConv:4766,freq30:3.1,freq90:5.0,pen30:0.439,pen90:0.517},
+    {name:'GO Focus Plus · TOFU Animation 05/26',stage:'TOF',spend:4704,impr:97560,clicks:290,cpc:16.22,cpm:48.21,conv:1,costPerConv:4704,freq30:3.8,freq90:4.2,pen30:0.064,pen90:0.080},
+    {name:'Car Rental & Leasing · MOF ENG Doc 1.2K',stage:'MOF',spend:4396,impr:34794,clicks:1644,cpc:2.67,cpm:126.34,conv:0,costPerConv:null,freq30:8.8,freq90:21.7,pen30:0.722,pen90:0.762}
   ]
 };
 
-var D=FALLBACK;
-var STAGE_CLASS={TOF:'tof',MOF:'mof',BOF:'bof',Other:'other'};
-function fmtN(n){return n>=1000000?(n/1000000).toFixed(2)+'M':n>=1000?(n/1000).toFixed(1)+'K':(''+n);}
+var D=FALLBACK, GRAN='weekly', charts={};
+var GRAN_TITLE={daily:'Daily',weekly:'Weekly',monthly:'Monthly'};
+
+function nf(n){return (n||0).toLocaleString('en-US');}
+function money(n){return '$'+Math.round(n||0).toLocaleString('en-US');}
+function moneyK(n){return n>=1000?'$'+(n/1000).toFixed(1)+'K':'$'+Math.round(n);}
+function pct(n){return (n*100).toFixed(2)+'%';}
 function setText(id,v){var el=document.getElementById(id);if(el&&v!=null)el.textContent=v;}
 
-function renderMeta(){
-  var m=D.meta||{};
-  setText('mSpend',m.totalSpend); setText('mImpr',m.totalImpressions);
-  setText('mReach',(m.reach||0).toLocaleString()); setText('mFreq',m.frequency); setText('mDate',m.generated);
-  if(m.generated)setText('fFoot','LinkedIn Ads via Windsor · Geotab North America · refreshed '+m.generated);
+// direction: +1 means "up is good", -1 means "down is good", 0 neutral
+function deltaCard(label,cur,prev,fmt,dir){
+  var d=prev?((cur-prev)/Math.abs(prev)):0;
+  var arrow=d>0.001?'↑':d<-0.001?'↓':'→';
+  var dcls=d>0.001?'up':d<-0.001?'down':'flat';
+  var good= dir===0?'neu':((d>0?dir>0:dir<0)?'good':'bad');
+  if(Math.abs(d)<0.001)good='neu';
+  var tag= good==='good'?'improving':good==='bad'?'watch':'flat';
+  return '<div class="kpi"><div class="kpi-l">'+label+' · '+GRAN_TITLE[GRAN]+'</div>'+
+    '<div class="kpi-v">'+fmt(cur)+'</div>'+
+    '<div class="kpi-d"><span class="pct '+dcls+'">'+arrow+' '+(d>=0?'+':'')+(d*100).toFixed(0)+'%</span>'+
+    '<span class="'+dcls+'" style="opacity:.6">vs prior</span><span class="tag '+good+'">· '+tag+'</span></div></div>';
 }
 
-function renderFunnel(){
-  var host=document.getElementById('fgrid'); if(!host)return; host.innerHTML='';
-  var total=(D.funnel||[]).reduce(function(s,f){return s+f.spend;},0)||1;
-  (D.funnel||[]).forEach(function(f){
-    var d=document.createElement('div'); d.className='fc '+(STAGE_CLASS[f.stage]||'other');
-    d.innerHTML='<div class="fc-label">'+f.label+'</div>'+
-      '<div class="fc-stage">'+f.stage+'</div>'+
-      '<div class="fc-spend">$'+Math.round(f.spend).toLocaleString()+'</div>'+
-      '<div class="fc-share">'+Math.round(f.spend/total*100)+'% of spend</div>'+
-      '<div class="fc-metrics">'+
-        '<div class="fcm"><div class="fcm-v">'+fmtN(f.impr)+'</div><div class="fcm-l">Impr</div></div>'+
-        '<div class="fcm"><div class="fcm-v">'+f.clicks.toLocaleString()+'</div><div class="fcm-l">Clicks</div></div>'+
-        '<div class="fcm"><div class="fcm-v">'+(f.ctr*100).toFixed(2)+'%</div><div class="fcm-l">CTR</div></div>'+
-      '</div>';
-    host.appendChild(d);
-  });
+function renderKpis(s){
+  var n=s.length; if(!n){document.getElementById('kpis').innerHTML='';return;}
+  var cur=s[n-1], prev=n>1?s[n-2]:null;
+  var html='';
+  html+=deltaCard('Spend',cur.spend,prev&&prev.spend,money,0);
+  html+=deltaCard('Conversions',cur.conversions,prev&&prev.conversions,function(v){return nf(v);},1);
+  html+=deltaCard('CPC',cur.cpc,prev&&prev.cpc,function(v){return '$'+(v||0).toFixed(2);},-1);
+  html+=deltaCard('CTR',cur.ctr,prev&&prev.ctr,pct,1);
+  document.getElementById('kpis').innerHTML=html;
 }
 
-function renderStats(){
-  var m=D.meta||{};
-  var host=document.getElementById('statgrid'); if(!host)return;
-  host.innerHTML=
-    '<div class="stat"><div class="stat-v">'+(m.frequency!=null?m.frequency+'x':'—')+'</div><div class="stat-l">Avg Frequency (30d)</div></div>'+
-    '<div class="stat"><div class="stat-v">'+fmtN(m.reach||0)+'</div><div class="stat-l">Unique Members Reached</div></div>'+
-    '<div class="stat"><div class="stat-v">'+(m.totalImpressions||'—')+'</div><div class="stat-l">Total Impressions (30d)</div></div>';
-  var f=m.frequency||0;
-  var read=f>=10?'<strong>Heavy saturation.</strong> Reached members are seeing the program '+f+'x on average — deep repetition against a defined named-account audience, consistent with an always-on ABM posture. Watch for creative fatigue and rotate assets to keep CTR from eroding.'
-    :f>=5?'<strong>Healthy saturation.</strong> Around '+f+' impressions per reached account keeps the audience warm without over-exposure.'
-    :'<strong>Light saturation.</strong> At '+f+'x there is room to increase frequency against the target audience before fatigue.';
-  setText('satNote',read);
+// ---- ALERTS: spikes & sustained wrong-direction moves ----
+function trendRun(arr,key,wantUp){ // count consecutive moves in the "wantUp" bad direction at the tail
+  var run=0;
+  for(var i=arr.length-1;i>0;i--){
+    var diff=arr[i][key]-arr[i-1][key];
+    var bad = wantUp? diff<0 : diff>0; // wantUp=true: a DROP is bad
+    if(Math.abs(diff)<1e-9){break;}
+    if(bad)run++; else break;
+  }
+  return run;
+}
+function renderAlerts(s){
+  var out=[], n=s.length;
+  if(n>=2){
+    var cur=s[n-1], prev=s[n-2];
+    var sp=prev.spend?((cur.spend-prev.spend)/prev.spend):0;
+    if(sp>=0.25) out.push(['crit','Spend spike','<strong>Spend jumped '+(sp*100).toFixed(0)+'%</strong> '+GRAN_TITLE[GRAN].toLowerCase()+'-over-'+GRAN_TITLE[GRAN].toLowerCase()+' ('+money(prev.spend)+' → '+money(cur.spend)+'). Confirm it is intentional.']);
+    var cpcUp=prev.cpc?((cur.cpc-prev.cpc)/prev.cpc):0;
+    if(cpcUp>=0.15) out.push(['warn','Cost rising','<strong>CPC up '+(cpcUp*100).toFixed(0)+'%</strong> to $'+cur.cpc.toFixed(2)+' — efficiency slipping.']);
+    var convAvg=s.slice(Math.max(0,n-5),n-1).reduce(function(a,b){return a+b.conversions;},0)/Math.max(1,Math.min(4,n-1));
+    if(convAvg>=2 && cur.conversions < convAvg*0.5) out.push(['warn','Conversions dip','<strong>Conversions fell to '+cur.conversions+'</strong> vs a ~'+convAvg.toFixed(0)+' recent average.']);
+  }
+  var cpcRun=trendRun(s,'cpc',false); // rising CPC is bad
+  if(cpcRun>=3) out.push(['warn','Sustained trend','<strong>CPC has risen '+cpcRun+' '+GRAN_TITLE[GRAN].toLowerCase()+'s in a row.</strong> Cost is drifting the wrong way.']);
+  var ctrRun=trendRun(s,'ctr',true); // falling CTR is bad
+  if(ctrRun>=3) out.push(['warn','Sustained trend','<strong>CTR has declined '+ctrRun+' '+GRAN_TITLE[GRAN].toLowerCase()+'s in a row.</strong> Engagement is softening — consider creative refresh.']);
+  // saturation alerts from campaigns
+  var sat=(D.campaigns||[]).filter(function(c){return c.freq90>=20 || c.pen90>=0.6;});
+  if(sat.length) out.push(['crit','Saturation','<strong>'+sat.length+' campaign'+(sat.length>1?'s are':' is')+' over-saturated</strong> (90d frequency ≥20 or penetration ≥60%) — e.g. '+sat.slice(0,2).map(function(c){return c.name;}).join(', ')+'. Warm pool is being hammered.']);
+  if(!out.length) out.push(['good','All clear','No spikes or sustained adverse trends in the current view.']);
+  document.getElementById('alerts').innerHTML=out.map(function(a){
+    return '<div class="alert '+a[0]+'"><span class="alert-ic">'+a[1]+'</span><span class="alert-tx">'+a[2]+'</span></div>';
+  }).join('');
 }
 
-function renderNamed(){
-  var tbody=document.getElementById('namedBody'); if(!tbody)return; tbody.innerHTML='';
-  (D.named||[]).slice().sort(function(a,b){return b.spend-a.spend;}).forEach(function(n){
-    var tr=document.createElement('tr');
-    tr.innerHTML='<td><div class="cname">'+n.account+'</div></td>'+
-      '<td class="mono">$'+Math.round(n.spend).toLocaleString()+'</td>'+
-      '<td class="mono">'+n.impr.toLocaleString()+'</td>'+
-      '<td class="mono">'+n.clicks.toLocaleString()+'</td>'+
-      '<td class="mono">'+(n.ctr*100).toFixed(2)+'%</td>';
-    tbody.appendChild(tr);
-  });
-}
-
-function buildCharts(){
-  var stages=(D.funnel||[]);
-  new Chart(document.getElementById('funnelPie'),{
-    type:'doughnut',
-    data:{labels:stages.map(function(f){return f.stage;}),
-      datasets:[{data:stages.map(function(f){return f.spend;}),backgroundColor:['#28b4e0','#12c98e','#f4a261','#33445c'],borderWidth:0,hoverOffset:4}]},
-    options:{plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10},padding:12}}},cutout:'62%'}
-  });
-  var T=D.trend||[];
-  new Chart(document.getElementById('trendChart'),{
-    type:'bar',
-    data:{labels:T.map(function(t){return t.wk;}),
-      datasets:[
-        {label:'TOF',data:T.map(function(t){return t.tof;}),backgroundColor:'#1e8fb5',borderRadius:2},
-        {label:'MOF',data:T.map(function(t){return t.mof;}),backgroundColor:'#0d6e54',borderRadius:2},
-        {label:'BOF',data:T.map(function(t){return t.bof;}),backgroundColor:'#b5611f',borderRadius:2},
-      ]},
+function destroyCharts(){Object.keys(charts).forEach(function(k){if(charts[k]){charts[k].destroy();charts[k]=null;}});}
+function buildCharts(s){
+  destroyCharts();
+  var labels=s.map(function(r){return r.label;});
+  charts.sc=new Chart(document.getElementById('scChart'),{
+    data:{labels:labels,datasets:[
+      {type:'bar',label:'Spend',data:s.map(function(r){return r.spend;}),backgroundColor:'rgba(58,168,224,.22)',borderColor:'#3aa8e0',borderWidth:1,borderRadius:3,yAxisID:'y',order:2},
+      {type:'line',label:'Conversions',data:s.map(function(r){return r.conversions;}),borderColor:'#9bd534',backgroundColor:'#9bd534',tension:.4,pointRadius:2,yAxisID:'y1',order:1}
+    ]},
     options:{plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10}}}},
-      scales:{x:{stacked:true,ticks:{font:{size:9}}},y:{stacked:true,ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K';},font:{size:9}}}},responsive:true}
+      scales:{x:{ticks:{font:{size:9},maxRotation:0,autoSkip:true}},
+        y:{position:'left',ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K';},font:{size:9}}},
+        y1:{position:'right',grid:{drawOnChartArea:false},ticks:{font:{size:9}}}},responsive:true}
+  });
+  charts.cc=new Chart(document.getElementById('ccChart'),{
+    type:'line',
+    data:{labels:labels,datasets:[
+      {label:'CPC',data:s.map(function(r){return r.cpc;}),borderColor:'#e0a83a',backgroundColor:'#e0a83a',tension:.4,pointRadius:2,yAxisID:'y'},
+      {label:'CPM',data:s.map(function(r){return r.cpm;}),borderColor:'#f4732a',backgroundColor:'#f4732a',tension:.4,pointRadius:2,yAxisID:'y1'}
+    ]},
+    options:{plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10}}}},
+      scales:{x:{ticks:{font:{size:9},maxRotation:0,autoSkip:true}},
+        y:{position:'left',ticks:{callback:function(v){return '$'+v.toFixed(0);},font:{size:9}}},
+        y1:{position:'right',grid:{drawOnChartArea:false},ticks:{callback:function(v){return '$'+v.toFixed(0);},font:{size:9}}}},responsive:true}
+  });
+  charts.ctr=new Chart(document.getElementById('ctrChart'),{
+    type:'line',
+    data:{labels:labels,datasets:[
+      {label:'CTR',data:s.map(function(r){return r.ctr*100;}),borderColor:'#9d7bea',backgroundColor:'rgba(157,123,234,.12)',fill:true,tension:.4,pointRadius:2}
+    ]},
+    options:{plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10}}}},
+      scales:{x:{ticks:{font:{size:9},maxRotation:0,autoSkip:true}},y:{ticks:{callback:function(v){return v.toFixed(2)+'%';},font:{size:9}}}},responsive:true}
   });
 }
 
-// Boot: live JSON → fallback → render.
+function freqCls(v){return v>=50?'cell-r':v>=20?'cell-a':'cell-g';}
+function penCls(v){return v>=0.7?'cell-r':v>=0.4?'cell-a':'cell-g';}
+function stageCls(s){return 'st-'+(({TOF:'tof',MOF:'mof',BOF:'bof'})[s]||'other');}
+function renderTable(){
+  var rows=(D.campaigns||[]).slice().sort(function(a,b){return b.spend-a.spend;}).slice(0,10);
+  document.getElementById('campBody').innerHTML=rows.map(function(c){
+    return '<tr><td><span class="stage '+stageCls(c.stage)+'">'+(c.stage||'—')+'</span>'+c.name+'</td>'+
+      '<td>'+money(c.spend)+'</td><td>'+nf(c.impr)+'</td><td>'+nf(c.clicks)+'</td>'+
+      '<td>$'+(c.cpc||0).toFixed(2)+'</td><td>$'+(c.cpm||0).toFixed(2)+'</td>'+
+      '<td>'+(c.conv||0)+'</td><td>'+(c.costPerConv?money(c.costPerConv):'—')+'</td>'+
+      '<td class="'+freqCls(c.freq30)+'">'+(c.freq30||0).toFixed(1)+'</td>'+
+      '<td class="'+freqCls(c.freq90)+'">'+(c.freq90||0).toFixed(1)+'</td>'+
+      '<td class="'+penCls(c.pen30)+'">'+Math.round((c.pen30||0)*100)+'%</td>'+
+      '<td class="'+penCls(c.pen90)+'">'+Math.round((c.pen90||0)*100)+'%</td></tr>';
+  }).join('');
+  var sat=(D.campaigns||[]).filter(function(c){return c.freq90>=20 || c.pen90>=0.6;});
+  var fl=document.getElementById('satFlag');
+  if(sat.length){
+    fl.style.display='';
+    fl.innerHTML='<strong>Saturation flag.</strong> '+sat.length+' campaign'+(sat.length>1?'s run':' runs')+' at heavy 90-day frequency/penetration — '+
+      sat.slice(0,3).map(function(c){return c.name+' ('+c.freq90.toFixed(0)+'× / '+Math.round(c.pen90*100)+'%)';}).join('; ')+
+      '. The warm pool is seeing these repeatedly; cheap on CPM, but watch for fatigue. 30d frequency is roughly half the 90d, confirming the load is cumulative, not a recent spike.';
+  } else { fl.style.display='none'; }
+}
+
+function render(){
+  var s=(D.series&&D.series[GRAN])||[];
+  if(!s.length && GRAN!=='weekly'){GRAN='weekly';s=(D.series&&D.series.weekly)||[];syncSeg();}
+  setText('scTitle','Spend & Conversions · '+GRAN_TITLE[GRAN]);
+  renderKpis(s); renderAlerts(s); buildCharts(s); renderTable();
+  var m=D.meta||{};
+  setText('campCount',(m.account||'Geotab North America'));
+  setText('rangeLabel','Live · '+(m.rangeStart||'')+' → '+(m.rangeEnd||''));
+  if(m.generated)setText('fFoot','LinkedIn Ads via Windsor · '+(m.account||'Geotab North America')+' · refreshed '+m.generated);
+}
+function syncSeg(){document.querySelectorAll('#granSeg button').forEach(function(b){b.classList.toggle('on',b.dataset.g===GRAN);});}
+
+document.getElementById('granSeg').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b)return;
+  var g=b.dataset.g; var s=(D.series&&D.series[g])||[];
+  if(!s.length){return;} // no data for that granularity yet
+  GRAN=g; syncSeg(); render();
+});
+
 fetch('/data/na-performance.json',{cache:'no-store'})
   .then(function(r){return r.ok?r.json():Promise.reject();})
-  .then(function(j){D=j;})
+  .then(function(j){if(j&&j.series)D=j;})
   .catch(function(){D=FALLBACK;})
-  .finally(function(){ renderMeta(); renderFunnel(); renderStats(); renderNamed(); buildCharts(); });
+  .finally(render);
 </script>
 </body>
 </html>

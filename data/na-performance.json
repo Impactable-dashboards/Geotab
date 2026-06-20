@@ -1,35 +1,47 @@
 {
-  "meta": {
-    "generated": "Jun 20, 2026",
-    "window": "Last 30 days",
-    "totalSpend": "$56,276",
-    "totalImpressions": "1.5M",
-    "reach": 137372,
-    "frequency": 11.2
+  "meta": { "account": "Geotab North America", "generated": "Jun 20, 2026", "rangeStart": "2026-02-15", "rangeEnd": "2026-06-20" },
+  "series": {
+    "daily": [],
+    "weekly": [
+      { "label": "Wk07", "spend": 7105.7, "conversions": 5, "clicks": 655, "impressions": 376205, "cpc": 10.85, "cpm": 18.89, "ctr": 0.0017 },
+      { "label": "Wk08", "spend": 6493.0, "conversions": 5, "clicks": 711, "impressions": 366722, "cpc": 9.13, "cpm": 17.71, "ctr": 0.0019 },
+      { "label": "Wk09", "spend": 6212.77, "conversions": 3, "clicks": 900, "impressions": 439159, "cpc": 6.90, "cpm": 14.15, "ctr": 0.0021 },
+      { "label": "Wk10", "spend": 6256.14, "conversions": 3, "clicks": 832, "impressions": 363705, "cpc": 7.52, "cpm": 17.20, "ctr": 0.0023 },
+      { "label": "Wk11", "spend": 6387.74, "conversions": 1, "clicks": 878, "impressions": 369147, "cpc": 7.28, "cpm": 17.30, "ctr": 0.0024 },
+      { "label": "Wk12", "spend": 6280.44, "conversions": 8, "clicks": 891, "impressions": 392727, "cpc": 7.05, "cpm": 15.99, "ctr": 0.0023 },
+      { "label": "Wk13", "spend": 6377.75, "conversions": 3, "clicks": 866, "impressions": 375209, "cpc": 7.36, "cpm": 17.00, "ctr": 0.0023 },
+      { "label": "Wk14", "spend": 7393.69, "conversions": 3, "clicks": 992, "impressions": 376334, "cpc": 7.45, "cpm": 19.65, "ctr": 0.0026 },
+      { "label": "Wk15", "spend": 6746.99, "conversions": 3, "clicks": 1076, "impressions": 348595, "cpc": 6.27, "cpm": 19.35, "ctr": 0.0031 },
+      { "label": "Wk16", "spend": 6594.23, "conversions": 3, "clicks": 967, "impressions": 338731, "cpc": 6.82, "cpm": 19.47, "ctr": 0.0029 },
+      { "label": "Wk17", "spend": 15365.0, "conversions": 3, "clicks": 2546, "impressions": 399194, "cpc": 6.04, "cpm": 38.49, "ctr": 0.0064 },
+      { "label": "Wk18", "spend": 16080.04, "conversions": 4, "clicks": 2479, "impressions": 402136, "cpc": 6.49, "cpm": 39.99, "ctr": 0.0062 },
+      { "label": "Wk19", "spend": 11796.06, "conversions": 3, "clicks": 1934, "impressions": 413849, "cpc": 6.10, "cpm": 28.50, "ctr": 0.0047 },
+      { "label": "Wk20", "spend": 11974.54, "conversions": 7, "clicks": 1808, "impressions": 398266, "cpc": 6.62, "cpm": 30.07, "ctr": 0.0045 },
+      { "label": "Wk21", "spend": 11831.68, "conversions": 7, "clicks": 1835, "impressions": 368321, "cpc": 6.45, "cpm": 32.12, "ctr": 0.0050 },
+      { "label": "Wk22", "spend": 12685.49, "conversions": 3, "clicks": 1789, "impressions": 344022, "cpc": 7.09, "cpm": 36.87, "ctr": 0.0052 },
+      { "label": "Wk23", "spend": 13250.3, "conversions": 9, "clicks": 1727, "impressions": 367423, "cpc": 7.67, "cpm": 36.06, "ctr": 0.0047 },
+      { "label": "Wk24", "spend": 13781.67, "conversions": 5, "clicks": 1822, "impressions": 353054, "cpc": 7.56, "cpm": 39.04, "ctr": 0.0052 },
+      { "label": "Wk25", "spend": 11458.4, "conversions": 5, "clicks": 1522, "impressions": 323368, "cpc": 7.53, "cpm": 35.43, "ctr": 0.0047 }
+    ],
+    "monthly": [
+      { "label": "Jan", "spend": 33769.96, "conversions": 13, "clicks": 3241, "impressions": 1583031, "cpc": 10.42, "cpm": 21.33, "ctr": 0.0021 },
+      { "label": "Feb", "spend": 28567.20, "conversions": 22, "clicks": 3014, "impressions": 1568466, "cpc": 9.48, "cpm": 18.21, "ctr": 0.0019 },
+      { "label": "Mar", "spend": 27855.09, "conversions": 15, "clicks": 3850, "impressions": 1670215, "cpc": 7.24, "cpm": 16.68, "ctr": 0.0023 },
+      { "label": "Apr", "spend": 44333.30, "conversions": 16, "clicks": 6975, "impressions": 1598826, "cpc": 6.36, "cpm": 27.73, "ctr": 0.0044 },
+      { "label": "May", "spend": 53818.58, "conversions": 20, "clicks": 8142, "impressions": 1644274, "cpc": 6.61, "cpm": 32.73, "ctr": 0.0050 },
+      { "label": "Jun", "spend": 38490.37, "conversions": 19, "clicks": 5071, "impressions": 1043848, "cpc": 7.59, "cpm": 36.87, "ctr": 0.0049 }
+    ]
   },
-  "funnel": [
-    { "stage": "TOF", "label": "Top of Funnel", "spend": 30798, "impr": 548901, "clicks": 3124, "ctr": 0.0057 },
-    { "stage": "MOF", "label": "Mid Funnel", "spend": 15632, "impr": 406495, "clicks": 3442, "ctr": 0.0085 },
-    { "stage": "BOF", "label": "Bottom of Funnel", "spend": 5728, "impr": 42521, "clicks": 729, "ctr": 0.0171 },
-    { "stage": "Other", "label": "Always-On / Persona", "spend": 3750, "impr": 541471, "clicks": 237, "ctr": 0.0004 }
-  ],
-  "trend": [
-    { "wk": "Wk13", "tof": 3133, "mof": 1681, "bof": 910 },
-    { "wk": "Wk14", "tof": 3038, "mof": 1923, "bof": 1623 },
-    { "wk": "Wk15", "tof": 2738, "mof": 2117, "bof": 1164 },
-    { "wk": "Wk16", "tof": 2548, "mof": 2402, "bof": 933 },
-    { "wk": "Wk17", "tof": 7648, "mof": 5482, "bof": 1429 },
-    { "wk": "Wk18", "tof": 7609, "mof": 5577, "bof": 1950 },
-    { "wk": "Wk19", "tof": 5724, "mof": 3863, "bof": 1228 },
-    { "wk": "Wk20", "tof": 6405, "mof": 3651, "bof": 1091 },
-    { "wk": "Wk21", "tof": 6144, "mof": 3569, "bof": 1289 },
-    { "wk": "Wk22", "tof": 6746, "mof": 3740, "bof": 1324 },
-    { "wk": "Wk23", "tof": 7269, "mof": 3674, "bof": 1308 },
-    { "wk": "Wk24", "tof": 7661, "mof": 3650, "bof": 1400 }
-  ],
-  "named": [
-    { "account": "BrightView", "spend": 238, "impr": 754, "clicks": 29, "ctr": 0.0385 },
-    { "account": "Allied Universal", "spend": 103, "impr": 1145, "clicks": 29, "ctr": 0.0253 },
-    { "account": "TruGreen", "spend": 27, "impr": 306, "clicks": 8, "ctr": 0.0261 }
+  "campaigns": [
+    { "name": "GO Focus Plus · TOFU Image 05/26", "stage": "TOF", "spend": 12732, "impr": 206726, "clicks": 1030, "cpc": 12.36, "cpm": 61.59, "conv": 1, "costPerConv": 12732, "freq30": 6.4, "freq90": 7.9, "pen30": 0.065, "pen90": 0.090 },
+    { "name": "Car Rental & Leasing · TOF Image 370K", "stage": "TOF", "spend": 10288, "impr": 127295, "clicks": 644, "cpc": 15.98, "cpm": 80.82, "conv": 2, "costPerConv": 5144, "freq30": 3.5, "freq90": 5.1, "pen30": 0.036, "pen90": 0.066 },
+    { "name": "Field Service · TOF Image 52K", "stage": "TOF", "spend": 7394, "impr": 75352, "clicks": 375, "cpc": 19.72, "cpm": 98.13, "conv": 3, "costPerConv": 2465, "freq30": 6.0, "freq90": 8.6, "pen30": 0.057, "pen90": 0.112 },
+    { "name": "Public Sector · TOF Image 70K", "stage": "TOF", "spend": 6731, "impr": 81647, "clicks": 412, "cpc": 16.34, "cpm": 82.44, "conv": 1, "costPerConv": 6731, "freq30": 4.4, "freq90": 6.4, "pen30": 0.041, "pen90": 0.087 },
+    { "name": "Transport & Logistics · MOF Image 90D 2K", "stage": "MOF", "spend": 6245, "impr": 48078, "clicks": 340, "cpc": 18.37, "cpm": 129.89, "conv": 1, "costPerConv": 6245, "freq30": 6.6, "freq90": 9.9, "pen30": 0.377, "pen90": 0.584 },
+    { "name": "Transport & Logistics · TOF Image 100K", "stage": "TOF", "spend": 5533, "impr": 65627, "clicks": 320, "cpc": 17.29, "cpm": 84.31, "conv": 2, "costPerConv": 2767, "freq30": 2.7, "freq90": 4.3, "pen30": 0.027, "pen90": 0.059 },
+    { "name": "Field Service · TOF ENG Doc 280K", "stage": "TOF", "spend": 5231, "impr": 71478, "clicks": 4778, "cpc": 1.09, "cpm": 73.18, "conv": 0, "costPerConv": null, "freq30": 2.4, "freq90": 4.4, "pen30": 0.024, "pen90": 0.043 },
+    { "name": "Field Service · MOF ENG Doc 7.1K", "stage": "MOF", "spend": 4766, "impr": 33815, "clicks": 2243, "cpc": 2.12, "cpm": 140.94, "conv": 1, "costPerConv": 4766, "freq30": 3.1, "freq90": 5.0, "pen30": 0.439, "pen90": 0.517 },
+    { "name": "GO Focus Plus · TOFU Animation 05/26", "stage": "TOF", "spend": 4704, "impr": 97560, "clicks": 290, "cpc": 16.22, "cpm": 48.21, "conv": 1, "costPerConv": 4704, "freq30": 3.8, "freq90": 4.2, "pen30": 0.064, "pen90": 0.080 },
+    { "name": "Car Rental & Leasing · MOF ENG Doc 1.2K", "stage": "MOF", "spend": 4396, "impr": 34794, "clicks": 1644, "cpc": 2.67, "cpm": 126.34, "conv": 0, "costPerConv": null, "freq30": 8.8, "freq90": 21.7, "pen30": 0.722, "pen90": 0.762 }
   ]
 }
