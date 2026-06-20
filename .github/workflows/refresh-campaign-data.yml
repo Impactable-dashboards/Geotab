@@ -1,0 +1,47 @@
+name: Refresh Campaign Performance data
+
+# Pulls live LinkedIn Ads data from Windsor for the four Geotab regional
+# accounts and commits data/campaign-performance.json. Vercel auto-deploys
+# the commit, so the Campaign Performance report refreshes daily.
+#
+# Setup: add a repo secret WINDSOR_API_KEY (Settings -> Secrets and variables
+# -> Actions). Run once manually via "Run workflow" to validate.
+
+on:
+  schedule:
+    - cron: '0 11 * * *'   # daily at 11:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-campaign-data
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch latest data from Windsor
+        env:
+          WINDSOR_API_KEY: ${{ secrets.WINDSOR_API_KEY }}
+        run: node scripts/fetch-campaign-performance.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name "geotab-data-bot"
+          git config user.email "actions@github.com"
+          if git diff --quiet -- data/campaign-performance.json; then
+            echo "No data changes."
+          else
+            git add data/campaign-performance.json
+            git commit -m "Refresh campaign-performance data ($(date -u +%Y-%m-%d))"
+            git push
+          fi

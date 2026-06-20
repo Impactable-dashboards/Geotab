@@ -150,14 +150,14 @@ canvas{max-height:220px;}
     <div>
       <div class="mey">Geotab · LinkedIn Ads · DemandSense</div>
       <h1 class="mh1">Campaign <em>Performance</em> Report</h1>
-      <div class="msub">4 regions · 33 campaign groups · Last 30 days + 8-week trend · DemandSense data as of Jun 2, 2026</div>
+      <div class="msub" id="mSub">4 regions · Last 30 days + 8-week trend · LinkedIn Ads via Windsor</div>
     </div>
     <div class="mr">
-      <div class="mchip">Accounts <strong>4</strong></div>
-      <div class="mchip">Total spend (30d) <strong>$103,834</strong></div>
-      <div class="mchip">Total impressions <strong>4.5M</strong></div>
-      <div class="mchip">Data pulled <strong>Jun 2, 2026</strong></div>
-      <div class="li-badge">DemandSense · Live</div>
+      <div class="mchip">Accounts <strong id="mAccts">4</strong></div>
+      <div class="mchip">Total spend (30d) <strong id="mSpend">$108,130</strong></div>
+      <div class="mchip">Total impressions <strong id="mImpr">4.2M</strong></div>
+      <div class="mchip">Data pulled <strong id="mDate">Jun 20, 2026</strong></div>
+      <div class="li-badge">Windsor · Live</div>
     </div>
   </div>
 </div>
@@ -168,48 +168,7 @@ canvas{max-height:220px;}
 <div class="sh first"><span class="sh-num">01</span><span class="sh-title">30-Day Program Overview by Region</span></div>
 <p class="sh-desc">All spend in USD. EMEA account reports in EUR — converted at 1.08. APAC includes newly launched APAC Cloud 2026 campaign (weeks 21–22), which explains the step-up in spend.</p>
 
-<div class="rgrid">
-  <div class="rc na">
-    <div class="rc-label">North America</div>
-    <div class="rc-spend">$53,022</div>
-    <div class="rc-sub">1.6M impressions &nbsp;·&nbsp; 7,779 clicks</div>
-    <div class="rc-metrics">
-      <div class="rcm"><div class="rcm-v">0.49%</div><div class="rcm-l">CTR</div></div>
-      <div class="rcm"><div class="rcm-v">$33.10</div><div class="rcm-l">CPM</div></div>
-      <div class="rcm"><div class="rcm-v">$6.82</div><div class="rcm-l">CPC</div></div>
-    </div>
-  </div>
-  <div class="rc emea">
-    <div class="rc-label">EMEA</div>
-    <div class="rc-spend">$30,208</div>
-    <div class="rc-sub">1.2M impressions &nbsp;·&nbsp; 5,454 clicks</div>
-    <div class="rc-metrics">
-      <div class="rcm"><div class="rcm-v">0.44%</div><div class="rcm-l">CTR</div></div>
-      <div class="rcm"><div class="rcm-v">$24.64</div><div class="rcm-l">CPM</div></div>
-      <div class="rcm"><div class="rcm-v">$5.54</div><div class="rcm-l">CPC</div></div>
-    </div>
-  </div>
-  <div class="rc apac">
-    <div class="rc-label">APAC</div>
-    <div class="rc-spend">$13,040</div>
-    <div class="rc-sub">1.1M impressions &nbsp;·&nbsp; 1,129 clicks</div>
-    <div class="rc-metrics">
-      <div class="rcm"><div class="rcm-v">0.10%</div><div class="rcm-l">CTR</div></div>
-      <div class="rcm"><div class="rcm-v">$11.72</div><div class="rcm-l">CPM</div></div>
-      <div class="rcm"><div class="rcm-v">$11.55</div><div class="rcm-l">CPC</div></div>
-    </div>
-  </div>
-  <div class="rc latam">
-    <div class="rc-label">LATAM</div>
-    <div class="rc-spend">$7,564</div>
-    <div class="rc-sub">554K impressions &nbsp;·&nbsp; 2,023 clicks</div>
-    <div class="rc-metrics">
-      <div class="rcm"><div class="rcm-v">0.37%</div><div class="rcm-l">CTR</div></div>
-      <div class="rcm"><div class="rcm-v">$13.65</div><div class="rcm-l">CPM</div></div>
-      <div class="rcm"><div class="rcm-v">$3.74</div><div class="rcm-l">CPC</div></div>
-    </div>
-  </div>
-</div>
+<div class="rgrid" id="rgrid"></div>
 
 <!-- CHARTS ROW 1 -->
 <div class="crow">
@@ -333,9 +292,9 @@ canvas{max-height:220px;}
   <div>
     <div class="fb">impact<span>able</span></div>
     <div class="ft">Campaign Performance Report &nbsp;·&nbsp; <strong>Geotab Field Service Enterprise</strong></div>
-    <div class="ft">DemandSense data pull Jun 2, 2026 &nbsp;·&nbsp; 4 accounts &nbsp;·&nbsp; Last 30 days + 8-week trend</div>
+    <div class="ft" id="fFoot">LinkedIn Ads via Windsor &nbsp;·&nbsp; 4 accounts &nbsp;·&nbsp; Last 30 days + 8-week trend &nbsp;·&nbsp; refreshed Jun 20, 2026</div>
   </div>
-  <div class="fbadge">DemandSense · Live</div>
+  <div class="fbadge">Windsor · Live</div>
 </div>
 
 <script>
@@ -343,168 +302,210 @@ Chart.defaults.color='#4e637d';
 Chart.defaults.borderColor='#1a2537';
 Chart.defaults.font.family="'Poppins',sans-serif";
 
-// DATA
-var TREND=[
-  {wk:'Wk15',na:6746.99,emea:7578.30,apac:624.0,latam:1500.07},
-  {wk:'Wk16',na:6594.23,emea:8330.58,apac:953.8,latam:1729.22},
-  {wk:'Wk17',na:15365.0,emea:10641.42,apac:857.42,latam:1655.74},
-  {wk:'Wk18',na:16080.04,emea:11455.3,apac:768.98,latam:1676.92},
-  {wk:'Wk19',na:11796.06,emea:9427.98,apac:784.3,latam:1666.26},
-  {wk:'Wk20',na:11974.54,emea:7086.92,apac:954.62,latam:1703.37},
-  {wk:'Wk21',na:11831.68,emea:6452.29,apac:5650.69,latam:1676.32},
-  {wk:'Wk22',na:12685.49,emea:6806.68,apac:5078.91,latam:1675.68},
-];
+// ---- LIVE DATA (with built-in fallback) ----
+// /data/campaign-performance.json is rewritten daily from Windsor (LinkedIn
+// Ads) by the refresh GitHub Action. If it is missing or unreachable, the
+// page renders from FALLBACK below so it never breaks.
+var FALLBACK={
+  meta:{generated:'Jun 20, 2026',window:'Last 30 days',accounts:4,totalSpend:'$108,130',totalImpressions:'4.2M'},
+  regions:[
+    {key:'na',label:'North America',spend:56276,impressions:1541593,clicks:7598,ctr:0.0049,cpm:36.51,cpc:7.41},
+    {key:'emea',label:'EMEA',spend:33761,impressions:1303071,clicks:5319,ctr:0.0041,cpm:25.91,cpc:6.35},
+    {key:'apac',label:'APAC',spend:10636,impressions:821766,clicks:854,ctr:0.0010,cpm:12.94,cpc:12.45},
+    {key:'latam',label:'LATAM',spend:7457,impressions:553761,clicks:2014,ctr:0.0036,cpm:13.47,cpc:3.70}
+  ],
+  trend:[
+    {wk:'Wk17',na:15365.00,emea:10641.42,apac:857.42,latam:1655.74},
+    {wk:'Wk18',na:16080.04,emea:11455.30,apac:768.98,latam:1676.92},
+    {wk:'Wk19',na:11796.06,emea:9427.98,apac:784.30,latam:1666.26},
+    {wk:'Wk20',na:11974.54,emea:7086.92,apac:954.62,latam:1703.37},
+    {wk:'Wk21',na:11831.68,emea:6452.29,apac:5650.69,latam:1676.32},
+    {wk:'Wk22',na:12685.49,emea:6806.68,apac:5078.91,latam:1675.68},
+    {wk:'Wk23',na:13250.30,emea:7322.50,apac:1230.46,latam:1959.32},
+    {wk:'Wk24',na:13781.67,emea:9027.46,apac:583.96,latam:1652.10}
+  ],
+  naCampaigns:[
+    {n:'Always On - Retargeting',spend:6276.19,impr:464829,clicks:748,ctr:0.0016,cpm:13.50,cpc:8.39,eng:1439},
+    {n:'Vocational 2026 | $5K',spend:4871.51,impr:225399,clicks:682,ctr:0.0030,cpm:21.61,cpc:7.14,eng:1129},
+    {n:'Transportation & Logistics 2026 | $8K ($7k in July)',spend:9009.28,impr:205417,clicks:952,ctr:0.0046,cpm:43.86,cpc:9.46,eng:1484},
+    {n:'Integrated Marketing',spend:11046.28,impr:183492,clicks:773,ctr:0.0042,cpm:60.20,cpc:14.29,eng:1686},
+    {n:'Public Sector 2026 | $10K',spend:9201.22,impr:168552,clicks:974,ctr:0.0058,cpm:54.59,cpc:9.45,eng:1586},
+    {n:'ABX BA - 2026',spend:1541.88,impr:137951,clicks:73,ctr:0.0005,cpm:11.18,cpc:21.12,eng:86},
+    {n:'Field Service 2026 | $7.5K',spend:6589.48,impr:64062,clicks:2226,ctr:0.0348,cpm:102.86,cpc:2.96,eng:3458},
+    {n:'Car Rental & Leasing 2026 | $5K',spend:4906.44,impr:57086,clicks:792,ctr:0.0139,cpm:85.95,cpc:6.20,eng:1257},
+    {n:'ABX WV - 2026',spend:2512.09,impr:25910,clicks:357,ctr:0.0138,cpm:96.95,cpc:7.04,eng:587},
+    {n:'Utilities',spend:299.39,impr:7152,clicks:13,ctr:0.0018,cpm:41.86,cpc:23.03,eng:339},
+    {n:'TOF | Images | 6Sense | Transport & Logistics | Webinar Promotion',spend:22.73,impr:1743,clicks:8,ctr:0.0046,cpm:13.04,cpc:2.84,eng:8}
+  ],
+  emeaCampaigns:[
+    {n:'Always on retargeting',spend:4651.15,impr:374479,clicks:695,ctr:0.0019,cpm:12.42,cpc:6.69},
+    {n:'Services',spend:8179.35,impr:302243,clicks:1049,ctr:0.0035,cpm:27.06,cpc:7.80},
+    {n:'Always on - cold',spend:5791.68,impr:189265,clicks:649,ctr:0.0034,cpm:30.60,cpc:8.92},
+    {n:'Transport and Logistics',spend:2966.68,impr:99043,clicks:402,ctr:0.0041,cpm:29.95,cpc:7.38},
+    {n:'EMEA Fuel',spend:2491.59,impr:81422,clicks:663,ctr:0.0081,cpm:30.60,cpc:3.76},
+    {n:'EMEA Safety',spend:2350.66,impr:71930,clicks:563,ctr:0.0078,cpm:32.68,cpc:4.18},
+    {n:'LRM',spend:2422.77,impr:67347,clicks:409,ctr:0.0061,cpm:35.97,cpc:5.92},
+    {n:'Sustainability',spend:3599.65,impr:58318,clicks:143,ctr:0.0024,cpm:61.72,cpc:25.17},
+    {n:'People Transportation',spend:989.54,impr:33711,clicks:137,ctr:0.0041,cpm:29.35,cpc:7.22},
+    {n:'Boost_Post_Engagement_Mar 10, 2026',spend:317.88,impr:25313,clicks:609,ctr:0.0241,cpm:12.56,cpc:0.52}
+  ],
+  seniority:[
+    {s:'Senior',impr:687098,clicks:3190},
+    {s:'Manager',impr:234036,clicks:1374},
+    {s:'Director',impr:227043,clicks:849},
+    {s:'VP',impr:134451,clicks:688},
+    {s:'CXO',impr:90648,clicks:451},
+    {s:'Entry',impr:67711,clicks:668},
+    {s:'Owner',impr:38729,clicks:228}
+  ],
+  functions:[
+    {f:'Operations',impr:606200,clicks:3239},
+    {f:'Business Development',impr:318189,clicks:1282},
+    {f:'Sales',impr:88533,clicks:759},
+    {f:'IT',impr:187330,clicks:608},
+    {f:'Customer Success',impr:58455,clicks:546},
+    {f:'Engineering',impr:114195,clicks:498},
+    {f:'Finance',impr:88315,clicks:421},
+    {f:'Education',impr:66790,clicks:409},
+    {f:'Healthcare',impr:26630,clicks:368},
+    {f:'PM/Project Mgmt',impr:45862,clicks:331}
+  ]
+};
 
-var NA_CAMPAIGNS=[
-  {n:'Field Service 2026 | $7.5K',spend:6024.41,impr:65961,clicks:2287,ctr:0.0347,cpm:91.33,cpc:2.63,eng:3725},
-  {n:'ABX WV - 2026',spend:1924.66,impr:18814,clicks:367,ctr:0.0195,cpm:102.30,cpc:5.24,eng:565},
-  {n:'Car Rental & Leasing 2026 | $5K',spend:4995.30,impr:62430,clicks:856,ctr:0.0137,cpm:80.01,cpc:5.84,eng:1394},
-  {n:'Public Sector 2026 | $10K',spend:8870.56,impr:200189,clicks:1003,ctr:0.005,cpm:44.31,cpc:8.84,eng:1653},
-  {n:'Integrated Marketing',spend:9949.12,impr:172150,clicks:755,ctr:0.0044,cpm:57.79,cpc:13.18,eng:1614},
-  {n:'Transportation & Logistics 2026 | $10K',spend:8332.27,impr:241453,clicks:1016,ctr:0.0042,cpm:34.51,cpc:8.20,eng:1581},
-  {n:'Vocational 2026 | $5K',spend:4907.67,impr:227015,clicks:697,ctr:0.0031,cpm:21.62,cpc:7.04,eng:1119},
-  {n:'Utilities',spend:550.0,impr:13543,clicks:24,ctr:0.0018,cpm:40.61,cpc:22.92,eng:706},
-  {n:'Always On - Retargeting',spend:6023.23,impr:466463,clicks:739,ctr:0.0016,cpm:12.91,cpc:8.15,eng:1506},
-  {n:'ABX BA - 2026',spend:1422.21,impr:132085,clicks:27,ctr:0.0002,cpm:10.77,cpc:52.67,eng:28},
-];
+var D=FALLBACK, TREND=[], NA_CAMPAIGNS=[], EMEA_CAMPAIGNS=[], SENIORITY=[], FUNCTION=[];
 
-var EMEA_CAMPAIGNS=[
-  {n:'Events - Carroussels',spend:385.3,impr:4799,clicks:138,ctr:0.0288,cpm:80.29,cpc:2.79},
-  {n:'Boost Post Engagement',spend:322.06,impr:26052,clicks:594,ctr:0.0228,cpm:12.36,cpc:0.54},
-  {n:'EMEA Fuel',spend:2882.85,impr:94816,clicks:810,ctr:0.0085,cpm:30.40,cpc:3.56},
-  {n:'EMEA Safety',spend:2390.63,impr:71853,clicks:571,ctr:0.008,cpm:33.27,cpc:4.19},
-  {n:'LRM',spend:2290.50,impr:72760,clicks:414,ctr:0.0057,cpm:31.48,cpc:5.53},
-  {n:'People Transportation',spend:852.44,impr:21097,clicks:94,ctr:0.0045,cpm:40.41,cpc:9.07},
-  {n:'Always on - cold',spend:4194.94,impr:150660,clicks:565,ctr:0.0037,cpm:27.84,cpc:7.42},
-  {n:'Services',spend:8210.39,impr:311886,clicks:1106,ctr:0.0036,cpm:26.33,cpc:7.42},
-  {n:'Transport and Logistics',spend:2892.80,impr:98446,clicks:379,ctr:0.0039,cpm:29.38,cpc:7.63},
-  {n:'Always on retargeting',spend:4575.09,impr:334601,clicks:671,ctr:0.002,cpm:13.67,cpc:6.82},
-  {n:'Sustainability',spend:427.39,impr:14976,clicks:37,ctr:0.0025,cpm:28.54,cpc:11.55},
-  {n:'Events',spend:784.09,impr:23925,clicks:75,ctr:0.0031,cpm:32.77,cpc:10.45},
-];
-
-var SENIORITY=[
-  {s:'Senior',impr:681021,clicks:3135},
-  {s:'Manager',impr:230973,clicks:1390},
-  {s:'Director',impr:233135,clicks:788},
-  {s:'VP',impr:132823,clicks:679},
-  {s:'CXO',impr:93615,clicks:453},
-  {s:'Entry',impr:66375,clicks:683},
-  {s:'Owner',impr:41809,clicks:224},
-];
-var FUNCTION=[
-  {f:'Operations',impr:616703,clicks:3234},
-  {f:'Business Development',impr:318388,clicks:1239},
-  {f:'Sales',impr:89926,clicks:767},
-  {f:'IT',impr:183815,clicks:587},
-  {f:'Engineering',impr:117293,clicks:523},
-  {f:'Customer Success',impr:55965,clicks:496},
-  {f:'Finance',impr:84978,clicks:432},
-  {f:'Healthcare',impr:26333,clicks:371},
-  {f:'PM/Project Mgmt',impr:48659,clicks:338},
-  {f:'Military/Protective',impr:47680,clicks:165},
-].sort(function(a,b){return b.clicks-a.clicks;});
-
-// TREND CHART
-new Chart(document.getElementById('trendChart'),{
-  type:'bar',
-  data:{
-    labels:TREND.map(function(t){return t.wk;}),
-    datasets:[
-      {label:'NA',data:TREND.map(function(t){return t.na;}),backgroundColor:'#1e8fb5',borderRadius:2},
-      {label:'EMEA',data:TREND.map(function(t){return t.emea;}),backgroundColor:'#0d6e54',borderRadius:2},
-      {label:'APAC',data:TREND.map(function(t){return t.apac;}),backgroundColor:'#5c3d8f',borderRadius:2},
-      {label:'LATAM',data:TREND.map(function(t){return t.latam;}),backgroundColor:'#7a3d0a',borderRadius:2},
-    ]
-  },
-  options:{
-    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10}}}},
-    scales:{x:{stacked:true,ticks:{font:{size:9}}},y:{stacked:true,ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K';},font:{size:9}}}},
-    responsive:true
-  }
-});
-
-// SPEND PIE
-new Chart(document.getElementById('spendPie'),{
-  type:'doughnut',
-  data:{
-    labels:['North America','EMEA','APAC','LATAM'],
-    datasets:[{data:[53022,30208,13040,7564],backgroundColor:['#1e8fb5','#12c98e','#8b5cf6','#f4a261'],borderWidth:0,hoverOffset:4}]
-  },
-  options:{
-    plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10},padding:12}}},
-    cutout:'65%'
-  }
-});
-
-// SENIORITY CHART
-new Chart(document.getElementById('seniorityChart'),{
-  type:'bar',
-  data:{
-    labels:SENIORITY.map(function(s){return s.s;}),
-    datasets:[
-      {label:'Impressions',data:SENIORITY.map(function(s){return s.impr;}),backgroundColor:'rgba(30,143,181,.4)',yAxisID:'y'},
-      {label:'Clicks',data:SENIORITY.map(function(s){return s.clicks;}),backgroundColor:'#28b4e0',yAxisID:'y1'},
-    ]
-  },
-  options:{
-    plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10}}}},
-    scales:{
-      y:{type:'linear',position:'left',ticks:{callback:function(v){return (v/1000).toFixed(0)+'K';},font:{size:9}}},
-      y1:{type:'linear',position:'right',grid:{drawOnChartArea:false},ticks:{font:{size:9}}}
-    },
-    responsive:true
-  }
-});
-
-// FUNCTION CHART
-new Chart(document.getElementById('functionChart'),{
-  type:'bar',
-  data:{
-    labels:FUNCTION.map(function(f){return f.f;}),
-    datasets:[{label:'Clicks',data:FUNCTION.map(function(f){return f.clicks;}),backgroundColor:FUNCTION.map(function(f){return f.f==='Operations'?'#12c98e':f.f==='Business Development'?'#28b4e0':'#1e4d6e';}),borderRadius:4}]
-  },
-  options:{
-    plugins:{legend:{display:false}},
-    scales:{y:{beginAtZero:true,ticks:{font:{size:9}}},x:{ticks:{font:{size:9}}}},
-    indexAxis:'y',responsive:true
-  }
-});
-
-// TABLES
+function fmtN(n){return n>=1000000?(n/1000000).toFixed(2)+'M':n>=1000?(n/1000).toFixed(1)+'K':(''+n);}
 function effBadge(ctr){
   if(ctr>=0.02)return '<span class="badge badge-g">Excellent</span>';
   if(ctr>=0.01)return '<span class="badge badge-b">Strong</span>';
   if(ctr>=0.004)return '<span class="badge badge-y">Average</span>';
   return '<span class="badge badge-r">Weak</span>';
 }
-function fmtN(n){return n>=1000000?(n/1000000).toFixed(2)+'M':n>=1000?(n/1000).toFixed(1)+'K':n.toString();}
 
-(function(){
+function applyData(){
+  if(!D||!D.regions)D=FALLBACK;
+  TREND=D.trend||[]; NA_CAMPAIGNS=D.naCampaigns||[]; EMEA_CAMPAIGNS=D.emeaCampaigns||[];
+  SENIORITY=D.seniority||[];
+  FUNCTION=(D.functions||[]).slice().sort(function(a,b){return b.clicks-a.clicks;});
+}
+
+function renderMeta(){
+  var m=D.meta||{};
+  var set=function(id,v){var el=document.getElementById(id);if(el&&v!=null)el.textContent=v;};
+  set('mSpend',m.totalSpend); set('mImpr',m.totalImpressions); set('mDate',m.generated); set('mAccts',m.accounts);
+  if(m.generated){
+    set('mSub','4 regions · '+(m.window||'Last 30 days')+' + 8-week trend · LinkedIn Ads via Windsor');
+    set('fFoot','LinkedIn Ads via Windsor · '+(D.regions?D.regions.length:4)+' accounts · '+(m.window||'Last 30 days')+' + 8-week trend · refreshed '+m.generated);
+  }
+}
+
+function renderRegions(){
+  var host=document.getElementById('rgrid'); if(!host)return; host.innerHTML='';
+  (D.regions||[]).forEach(function(r){
+    var d=document.createElement('div'); d.className='rc '+r.key;
+    d.innerHTML='<div class="rc-label">'+r.label+'</div>'+
+      '<div class="rc-spend">$'+Math.round(r.spend).toLocaleString()+'</div>'+
+      '<div class="rc-sub">'+fmtN(r.impressions)+' impressions &nbsp;·&nbsp; '+r.clicks.toLocaleString()+' clicks</div>'+
+      '<div class="rc-metrics">'+
+        '<div class="rcm"><div class="rcm-v">'+(r.ctr*100).toFixed(2)+'%</div><div class="rcm-l">CTR</div></div>'+
+        '<div class="rcm"><div class="rcm-v">$'+r.cpm.toFixed(2)+'</div><div class="rcm-l">CPM</div></div>'+
+        '<div class="rcm"><div class="rcm-v">$'+r.cpc.toFixed(2)+'</div><div class="rcm-l">CPC</div></div>'+
+      '</div>';
+    host.appendChild(d);
+  });
+}
+
+function buildCharts(){
+  new Chart(document.getElementById('trendChart'),{
+    type:'bar',
+    data:{
+      labels:TREND.map(function(t){return t.wk;}),
+      datasets:[
+        {label:'NA',data:TREND.map(function(t){return t.na;}),backgroundColor:'#1e8fb5',borderRadius:2},
+        {label:'EMEA',data:TREND.map(function(t){return t.emea;}),backgroundColor:'#0d6e54',borderRadius:2},
+        {label:'APAC',data:TREND.map(function(t){return t.apac;}),backgroundColor:'#5c3d8f',borderRadius:2},
+        {label:'LATAM',data:TREND.map(function(t){return t.latam;}),backgroundColor:'#7a3d0a',borderRadius:2},
+      ]
+    },
+    options:{
+      plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10}}}},
+      scales:{x:{stacked:true,ticks:{font:{size:9}}},y:{stacked:true,ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K';},font:{size:9}}}},
+      responsive:true
+    }
+  });
+
+  new Chart(document.getElementById('spendPie'),{
+    type:'doughnut',
+    data:{
+      labels:(D.regions||[]).map(function(r){return r.label;}),
+      datasets:[{data:(D.regions||[]).map(function(r){return r.spend;}),backgroundColor:['#1e8fb5','#12c98e','#8b5cf6','#f4a261'],borderWidth:0,hoverOffset:4}]
+    },
+    options:{
+      plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10},padding:12}}},
+      cutout:'65%'
+    }
+  });
+
+  new Chart(document.getElementById('seniorityChart'),{
+    type:'bar',
+    data:{
+      labels:SENIORITY.map(function(s){return s.s;}),
+      datasets:[
+        {label:'Impressions',data:SENIORITY.map(function(s){return s.impr;}),backgroundColor:'rgba(30,143,181,.4)',yAxisID:'y'},
+        {label:'Clicks',data:SENIORITY.map(function(s){return s.clicks;}),backgroundColor:'#28b4e0',yAxisID:'y1'},
+      ]
+    },
+    options:{
+      plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10}}}},
+      scales:{
+        y:{type:'linear',position:'left',ticks:{callback:function(v){return (v/1000).toFixed(0)+'K';},font:{size:9}}},
+        y1:{type:'linear',position:'right',grid:{drawOnChartArea:false},ticks:{font:{size:9}}}
+      },
+      responsive:true
+    }
+  });
+
+  new Chart(document.getElementById('functionChart'),{
+    type:'bar',
+    data:{
+      labels:FUNCTION.map(function(f){return f.f;}),
+      datasets:[{label:'Clicks',data:FUNCTION.map(function(f){return f.clicks;}),backgroundColor:FUNCTION.map(function(f){return f.f==='Operations'?'#12c98e':f.f==='Business Development'?'#28b4e0':'#1e4d6e';}),borderRadius:4}]
+    },
+    options:{
+      plugins:{legend:{display:false}},
+      scales:{y:{beginAtZero:true,ticks:{font:{size:9}}},x:{ticks:{font:{size:9}}}},
+      indexAxis:'y',responsive:true
+    }
+  });
+}
+
+function buildNaTable(){
+  var maxCtr=NA_CAMPAIGNS.reduce(function(m,c){return Math.max(m,c.ctr);},0.0001);
   var sorted=NA_CAMPAIGNS.slice().sort(function(a,b){return b.ctr-a.ctr;});
-  var tbody=document.getElementById('naBody');
+  var tbody=document.getElementById('naBody'); tbody.innerHTML='';
   sorted.forEach(function(c){
-    var barW=Math.round((c.ctr/0.0347)*100);
-    var flagBA=c.n.includes('ABX BA');
+    var barW=Math.round((c.ctr/maxCtr)*100);
+    var flagBA=c.n.indexOf('ABX BA')>=0;
     var tr=document.createElement('tr');
-    tr.innerHTML='<td><div class="cname'+(flagBA?' "style="color:#f87171"':'">')+c.n+'</div></td>'+
+    tr.innerHTML='<td><div class="cname"'+(flagBA?' style="color:#f87171"':'')+'>'+c.n+'</div></td>'+
       '<td><div style="display:flex;align-items:center;gap:6px"><span class="mono">'+(c.ctr*100).toFixed(2)+'%</span><div class="ctr-bar" style="width:'+barW+'px'+(c.ctr<0.001?';background:var(--red)':'')+'"></div></div></td>'+
       '<td class="mono">$'+c.spend.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0})+'</td>'+
       '<td class="mono">'+fmtN(c.impr)+'</td>'+
       '<td class="mono">'+c.clicks.toLocaleString()+'</td>'+
       '<td class="mono">$'+c.cpm.toFixed(2)+'</td>'+
-      '<td class="mono '+(c.cpc>20?'style="color:#f87171"':'')+'">$'+c.cpc.toFixed(2)+'</td>'+
-      '<td class="mono">'+c.eng.toLocaleString()+'</td>'+
+      '<td class="mono"'+(c.cpc>20?' style="color:#f87171"':'')+'>$'+c.cpc.toFixed(2)+'</td>'+
+      '<td class="mono">'+(c.eng||0).toLocaleString()+'</td>'+
       '<td>'+effBadge(c.ctr)+'</td>';
     tbody.appendChild(tr);
   });
-})();
+}
 
-(function(){
+function buildEmeaTable(){
+  var maxCtr=EMEA_CAMPAIGNS.reduce(function(m,c){return Math.max(m,c.ctr);},0.0001);
   var sorted=EMEA_CAMPAIGNS.slice().sort(function(a,b){return b.ctr-a.ctr;});
-  var tbody=document.getElementById('emeaBody');
+  var tbody=document.getElementById('emeaBody'); tbody.innerHTML='';
   sorted.forEach(function(c){
-    var barW=Math.round((c.ctr/0.03)*100);
+    var barW=Math.round((c.ctr/maxCtr)*100);
     var tr=document.createElement('tr');
     tr.innerHTML='<td><div class="cname">'+c.n+'</div></td>'+
       '<td><div style="display:flex;align-items:center;gap:6px"><span class="mono">'+(c.ctr*100).toFixed(2)+'%</span><div class="ctr-bar" style="width:'+Math.min(barW,100)+'px"></div></div></td>'+
@@ -515,7 +516,7 @@ function fmtN(n){return n>=1000000?(n/1000000).toFixed(2)+'M':n>=1000?(n/1000).t
       '<td class="mono">$'+c.cpc.toFixed(2)+'</td>';
     tbody.appendChild(tr);
   });
-})();
+}
 
 // SORT
 var sortState={};
@@ -536,6 +537,13 @@ function sortTable(tableId,col){
   var ths=document.querySelectorAll('#'+tableId+' th');
   if(ths[col])ths[col].classList.add('sorted');
 }
+
+// Boot: try live JSON, fall back to embedded snapshot, then render everything.
+fetch('/data/campaign-performance.json',{cache:'no-store'})
+  .then(function(r){return r.ok?r.json():Promise.reject();})
+  .then(function(j){D=j;})
+  .catch(function(){D=FALLBACK;})
+  .finally(function(){ applyData(); renderMeta(); renderRegions(); buildCharts(); buildNaTable(); buildEmeaTable(); });
 </script>
 
 <!-- AI ASSISTANT PANEL -->
