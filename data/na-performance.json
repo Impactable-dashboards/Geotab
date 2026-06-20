@@ -2,34 +2,140 @@
   "meta": {
     "generated": "Jun 20, 2026",
     "window": "Last 30 days",
-    "totalSpend": "$56,276",
+    "totalSpend": "$443,464",
     "totalImpressions": "1.5M",
-    "reach": 137372,
-    "frequency": 11.2
+    "reach": 138952,
+    "frequency": 11.1
   },
   "funnel": [
-    { "stage": "TOF", "label": "Top of Funnel", "spend": 30798, "impr": 548901, "clicks": 3124, "ctr": 0.0057 },
-    { "stage": "MOF", "label": "Mid Funnel", "spend": 15632, "impr": 406495, "clicks": 3442, "ctr": 0.0085 },
-    { "stage": "BOF", "label": "Bottom of Funnel", "spend": 5728, "impr": 42521, "clicks": 729, "ctr": 0.0171 },
-    { "stage": "Other", "label": "Always-On / Persona", "spend": 3750, "impr": 541471, "clicks": 237, "ctr": 0.0004 }
+    {
+      "stage": "TOF",
+      "label": "Top of Funnel",
+      "spend": 134562,
+      "impr": 2623239,
+      "clicks": 19672,
+      "ctr": 0.0075
+    },
+    {
+      "stage": "MOF",
+      "label": "Mid Funnel",
+      "spend": 66689,
+      "impr": 3114986,
+      "clicks": 12846,
+      "ctr": 0.0041
+    },
+    {
+      "stage": "BOF",
+      "label": "Bottom of Funnel",
+      "spend": 26917,
+      "impr": 222320,
+      "clicks": 2172,
+      "ctr": 0.0098
+    },
+    {
+      "stage": "Other",
+      "label": "Always-On / Persona",
+      "spend": 214928,
+      "impr": 4875097,
+      "clicks": 34604,
+      "ctr": 0.0071
+    }
   ],
   "trend": [
-    { "wk": "Wk13", "tof": 3133, "mof": 1681, "bof": 910 },
-    { "wk": "Wk14", "tof": 3038, "mof": 1923, "bof": 1623 },
-    { "wk": "Wk15", "tof": 2738, "mof": 2117, "bof": 1164 },
-    { "wk": "Wk16", "tof": 2548, "mof": 2402, "bof": 933 },
-    { "wk": "Wk17", "tof": 7648, "mof": 5482, "bof": 1429 },
-    { "wk": "Wk18", "tof": 7609, "mof": 5577, "bof": 1950 },
-    { "wk": "Wk19", "tof": 5724, "mof": 3863, "bof": 1228 },
-    { "wk": "Wk20", "tof": 6405, "mof": 3651, "bof": 1091 },
-    { "wk": "Wk21", "tof": 6144, "mof": 3569, "bof": 1289 },
-    { "wk": "Wk22", "tof": 6746, "mof": 3740, "bof": 1324 },
-    { "wk": "Wk23", "tof": 7269, "mof": 3674, "bof": 1308 },
-    { "wk": "Wk24", "tof": 7661, "mof": 3650, "bof": 1400 }
+    {
+      "wk": "Wk13",
+      "tof": 27115,
+      "mof": 17359,
+      "bof": 6611
+    },
+    {
+      "wk": "Wk14",
+      "tof": 27747,
+      "mof": 19647,
+      "bof": 7422
+    },
+    {
+      "wk": "Wk15",
+      "tof": 23625,
+      "mof": 18084,
+      "bof": 6407
+    },
+    {
+      "wk": "Wk16",
+      "tof": 24369,
+      "mof": 19379,
+      "bof": 6264
+    },
+    {
+      "wk": "Wk17",
+      "tof": 31876,
+      "mof": 24580,
+      "bof": 8901
+    },
+    {
+      "wk": "Wk18",
+      "tof": 28692,
+      "mof": 22842,
+      "bof": 7492
+    },
+    {
+      "wk": "Wk19",
+      "tof": 22493,
+      "mof": 14635,
+      "bof": 5279
+    },
+    {
+      "wk": "Wk20",
+      "tof": 25287,
+      "mof": 17483,
+      "bof": 5497
+    },
+    {
+      "wk": "Wk21",
+      "tof": 29177,
+      "mof": 17952,
+      "bof": 5826
+    },
+    {
+      "wk": "Wk22",
+      "tof": 33309,
+      "mof": 16696,
+      "bof": 6325
+    },
+    {
+      "wk": "Wk23",
+      "tof": 29437,
+      "mof": 14390,
+      "bof": 7469
+    },
+    {
+      "wk": "Wk24",
+      "tof": 31130,
+      "mof": 14139,
+      "bof": 5716
+    }
   ],
   "named": [
-    { "account": "BrightView", "spend": 238, "impr": 754, "clicks": 29, "ctr": 0.0385 },
-    { "account": "Allied Universal", "spend": 103, "impr": 1145, "clicks": 29, "ctr": 0.0253 },
-    { "account": "TruGreen", "spend": 27, "impr": 306, "clicks": 8, "ctr": 0.0261 }
+    {
+      "account": "BrightView",
+      "spend": 238,
+      "impr": 754,
+      "clicks": 29,
+      "ctr": 0.0385
+    },
+    {
+      "account": "Allied Universal",
+      "spend": 103,
+      "impr": 1145,
+      "clicks": 29,
+      "ctr": 0.0253
+    },
+    {
+      "account": "TruGreen",
+      "spend": 27,
+      "impr": 306,
+      "clicks": 8,
+      "ctr": 0.0261
+    }
   ]
 }
