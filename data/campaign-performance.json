@@ -313,90 +313,90 @@
   "seniority": [
     {
       "s": "Senior",
-      "impr": 3300363,
-      "clicks": 16042
+      "impr": 687098,
+      "clicks": 3190
     },
     {
       "s": "Manager",
-      "impr": 1275194,
-      "clicks": 7887
+      "impr": 234036,
+      "clicks": 1374
     },
     {
       "s": "Director",
-      "impr": 2009610,
-      "clicks": 15840
+      "impr": 227043,
+      "clicks": 849
     },
     {
       "s": "VP",
-      "impr": 1652339,
-      "clicks": 17275
+      "impr": 134451,
+      "clicks": 688
     },
     {
       "s": "CXO",
-      "impr": 1038707,
-      "clicks": 7474
+      "impr": 90648,
+      "clicks": 451
     },
     {
       "s": "Entry",
-      "impr": 819699,
-      "clicks": 4332
+      "impr": 67711,
+      "clicks": 668
     },
     {
       "s": "Owner",
-      "impr": 784960,
-      "clicks": 4992
+      "impr": 38729,
+      "clicks": 228
     }
   ],
   "functions": [
     {
-      "f": "Business Development",
-      "impr": 2696381,
-      "clicks": 18426
-    },
-    {
       "f": "Operations",
-      "impr": 2473370,
-      "clicks": 13885
+      "impr": 606200,
+      "clicks": 3239
     },
     {
-      "f": "Finance",
-      "impr": 1053571,
-      "clicks": 8471
-    },
-    {
-      "f": "Engineering",
-      "impr": 869758,
-      "clicks": 8009
-    },
-    {
-      "f": "IT",
-      "impr": 871894,
-      "clicks": 6517
+      "f": "Business Development",
+      "impr": 318189,
+      "clicks": 1282
     },
     {
       "f": "Sales",
-      "impr": 730056,
-      "clicks": 5223
+      "impr": 88533,
+      "clicks": 759
     },
     {
-      "f": "Marketing",
-      "impr": 884454,
-      "clicks": 4869
+      "f": "IT",
+      "impr": 187330,
+      "clicks": 608
     },
     {
-      "f": "Product Management",
-      "impr": 381245,
-      "clicks": 3195
+      "f": "Customer Success",
+      "impr": 58455,
+      "clicks": 546
+    },
+    {
+      "f": "Engineering",
+      "impr": 114195,
+      "clicks": 498
+    },
+    {
+      "f": "Finance",
+      "impr": 88315,
+      "clicks": 421
+    },
+    {
+      "f": "Education",
+      "impr": 66790,
+      "clicks": 409
     },
     {
       "f": "Healthcare",
-      "impr": 219687,
-      "clicks": 2256
+      "impr": 26630,
+      "clicks": 368
     },
     {
-      "f": "Research",
-      "impr": 345926,
-      "clicks": 2230
+      "f": "PM/Project Mgmt",
+      "impr": 45862,
+      "clicks": 331
     }
   ]
 }
