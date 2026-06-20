@@ -22,7 +22,7 @@ async function windsor(fields, { datePreset, dateFrom, dateTo } = {}) {
   if (datePreset) p.set('date_preset', datePreset);
   if (dateFrom) p.set('date_from', dateFrom);
   if (dateTo) p.set('date_to', dateTo);
-  p.set('account_id', NA);
+  p.set('filter', JSON.stringify([['account_id', 'eq', NA]]));
   const res = await fetch('https://connectors.windsor.ai/linkedin?' + p.toString());
   if (!res.ok) throw new Error(`Windsor ${res.status}: ${(await res.text()).slice(0, 300)}`);
   const j = await res.json();

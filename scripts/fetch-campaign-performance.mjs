@@ -38,7 +38,14 @@ async function windsor(fields, { accounts, datePreset, dateFrom, dateTo } = {}) 
   if (datePreset) p.set('date_preset', datePreset);
   if (dateFrom) p.set('date_from', dateFrom);
   if (dateTo) p.set('date_to', dateTo);
-  if (accounts) p.set('account_id', [].concat(accounts).join(','));
+  // Windsor scopes accounts via the filter= param (a WHERE clause), not a bare
+  // account_id param. Single account -> eq; multi-account queries also request
+  // account_name as a field and are mapped client-side, so we only need the
+  // server filter for single-account (e.g. demographics) queries.
+  if (accounts) {
+    const ids = [].concat(accounts);
+    if (ids.length === 1) p.set('filter', JSON.stringify([['account_id', 'eq', ids[0]]]));
+  }
   const url = 'https://connectors.windsor.ai/linkedin?' + p.toString();
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Windsor ${res.status}: ${(await res.text()).slice(0, 300)}`);
