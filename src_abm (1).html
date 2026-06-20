@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab ABM — Intelligence Report v6</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0A0A0C;--s1:#15151A;--s2:#22222A;--s3:#2A2B34;
+    --border:#2E2E38;--border2:#3A3A45;
+    --text:#F4F1EA;--muted:#8C8A82;
+    --navy:#071A38;--blue:#1B9BD1;--blue2:#5BB8E0;
+    --green:#7BAA3E;--green2:#D4FF3D;
+    --red:#FF5A1F;--yellow:#FFB627;--orange:#C4521F;
+    --p1:#5BB8E0;--p2:#7BAA3E;--p3:#FFB627;--p4:#FF2D7A;--p5:#B07FC9;
+    --zach:#5BB8E0;--onur:#FFB627;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;line-height:1.55;}
+
+  /* MASTHEAD */
+  .masthead{background:linear-gradient(135deg,#050c1a 0%,#071A38 55%,#091929 100%);border-bottom:2px solid var(--blue);position:relative;overflow:hidden;}
+  .masthead::after{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(91,184,224,.1) 0%,transparent 65%);pointer-events:none;}
+  .mi{max-width:1340px;margin:0 auto;padding:30px 48px 24px;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;position:relative;z-index:1;}
+  .brand-n{font-family:'Inter',sans-serif;font-size:20px;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1;}
+  .brand-n span{color:var(--blue2);}
+  .brand-s{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+  .meyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue2);margin-bottom:7px;}
+  .mh1{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.025em;line-height:1.1;}
+  .mh1 em{color:var(--blue2);font-style:normal;}
+  .msub{font-size:11px;color:rgba(255,255,255,.35);margin-top:5px;font-weight:300;}
+  .mr{display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+  .mchip{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.05em;}
+  .mchip strong{color:rgba(255,255,255,.6);}
+  .li-badge{margin-top:6px;padding:4px 10px;border:1px solid rgba(91,184,224,.3);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue2);background:rgba(91,184,224,.06);}
+
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:100;background:rgba(8,9,14,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;padding:0 48px;overflow-x:auto;gap:0;}
+  .nav a{padding:12px 14px;color:var(--muted);text-decoration:none;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;cursor:pointer;}
+  .nav a:hover,.nav a.active{color:var(--text);border-bottom-color:var(--blue2);}
+  .nav a.rep-z{border-bottom-color:transparent;}
+  .nav a.rep-z:hover,.nav a.rep-z.active{color:var(--zach);border-bottom-color:var(--zach);}
+  .nav a.rep-o:hover,.nav a.rep-o.active{color:var(--onur);border-bottom-color:var(--onur);}
+
+  /* BODY */
+  .body{max-width:1340px;margin:0 auto;padding:0 48px 72px;}
+  .sh{display:flex;align-items:baseline;gap:12px;padding:30px 0 13px;border-top:1px solid var(--border);margin-top:4px;}
+  .sh.first{border-top:none;}
+  .sh-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue2);font-weight:500;letter-spacing:.06em;}
+  .sh-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.01em;}
+  .sh-desc{font-size:11px;color:var(--muted);margin-bottom:14px;}
+
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;border:1px solid var(--border);margin-bottom:16px;}
+  .sc{background:var(--s2);padding:14px 11px;text-align:center;}
+  .sn{font-size:22px;font-weight:800;line-height:1;margin-bottom:3px;color:#fff;}
+  .sn.bl{color:var(--blue2);} .sn.gr{color:var(--green2);} .sn.rd{color:var(--red);} .sn.yw{color:var(--yellow);}
+  .sl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1.3;}
+
+  /* CALLOUTS */
+  .callout{background:var(--s2);border:1px solid var(--border);border-left:3px solid var(--blue2);border-radius:0 8px 8px 0;padding:12px 16px;margin:10px 0 16px;}
+  .callout.red{border-left-color:var(--red);} .callout.yellow{border-left-color:var(--yellow);}
+  .callout.green{border-left-color:var(--green2);} .callout.orange{border-left-color:var(--orange);}
+  .ct{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue2);margin-bottom:4px;}
+  .callout.red .ct{color:#FF8A5C;} .callout.yellow .ct{color:#fbbf24;}
+  .callout.green .ct{color:#2ecc9a;} .callout.orange .ct{color:#FFB627;}
+  .cv{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+  .cb{font-size:11px;color:var(--muted);line-height:1.5;}
+  .cb strong{color:var(--text);}
+
+  /* TABLES */
+  .tbl{width:100%;border-collapse:separate;border-spacing:0;}
+  .tbl thead tr{background:var(--s2);}
+  .tbl thead th{padding:8px 10px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;border-bottom:1px solid var(--border2);white-space:nowrap;}
+  .tbl thead th.sc7{background:rgba(91,184,224,.07);color:var(--blue2);}
+  .tbl tbody tr:hover td{background:rgba(91,184,224,.04);}
+  .tbl td{padding:7px 10px;vertical-align:middle;border-bottom:1px solid var(--border);}
+
+  /* TAGS */
+  .an{font-size:12px;font-weight:600;color:#fff;white-space:nowrap;}
+  .tag{font-size:8px;font-weight:700;letter-spacing:.03em;padding:1px 4px;border-radius:2px;margin-left:3px;vertical-align:middle;}
+  .t-abm{color:var(--blue2);background:rgba(30,143,181,.12);}
+  .t-1to1{color:#2ecc9a;background:rgba(15,168,118,.12);}
+  .t-stage{color:#fbbf24;background:rgba(212,154,10,.1);}
+  .t-nn{color:#2ecc9a;background:rgba(15,168,118,.1);}
+  .t-exp{color:#D3B3E3;background:rgba(176,127,201,.1);}
+  .t-zach{color:var(--zach);background:rgba(91,184,224,.12);}
+  .t-onur{color:var(--onur);background:rgba(251,146,60,.12);}
+  .t-watch{color:#fbbf24;background:rgba(212,154,10,.1);}
+  .t-noown{color:#FF8A5C;background:rgba(255,90,31,.1);}
+  .t-resell{color:#FFB627;background:rgba(251,146,60,.1);}
+
+  /* HEATMAP ENGAGEMENT CELLS */
+  .hwrap{overflow-x:auto;}
+  .htbl{width:100%;border-collapse:separate;border-spacing:0;}
+  .htbl thead tr{background:var(--s2);}
+  .htbl thead th{padding:8px 9px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;border-bottom:1px solid var(--border2);white-space:nowrap;}
+  .htbl thead th.pcol{text-align:center;width:60px;}
+  .htbl tbody tr:hover td{background:rgba(91,184,224,.04);}
+  .htbl td{padding:6px 9px;vertical-align:middle;border-bottom:1px solid var(--border);}
+  .eng{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;font-size:8px;font-weight:700;}
+  .en{background:rgba(255,255,255,.03);color:rgba(255,255,255,.1);}
+  .el{background:rgba(91,184,224,.15);color:#5ec8e8;}
+  .em{background:rgba(91,184,224,.35);color:#bfdbfe;}
+  .eh{background:rgba(91,184,224,.65);color:#fff;}
+  .ev{background:#1B9BD1;color:#fff;box-shadow:0 0 6px rgba(30,143,181,.5);}
+  .sflag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#FF8A5C;background:rgba(255,90,31,.1);padding:2px 5px;border-radius:3px;border:1px solid rgba(255,90,31,.2);}
+  .dbwrap{display:flex;align-items:center;gap:5px;}
+  .dbfill{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--blue) 0%,var(--blue2) 100%);min-width:3px;}
+  .sbwrap{display:flex;align-items:flex-end;gap:2px;height:20px;}
+  .sbar{border-radius:1px 1px 0 0;min-height:1px;width:7px;}
+  .ap{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap;}
+  .ap-now{color:#FF8A5C;background:rgba(255,90,31,.15);}
+  .ap-wk{color:#FFB627;background:rgba(194,106,20,.15);}
+  .ap-ok{color:#2ecc9a;background:rgba(15,168,118,.12);}
+  .ap-w{color:var(--muted);background:rgba(255,255,255,.05);}
+
+  /* LEADERBOARD */
+  .ltbl{width:100%;border-collapse:separate;border-spacing:0;}
+  .ltbl thead tr{background:var(--s2);}
+  .ltbl thead th{padding:8px 11px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;border-bottom:1px solid var(--border2);white-space:nowrap;}
+  .ltbl tbody tr:hover td{background:rgba(91,184,224,.04);}
+  .ltbl td{padding:9px 11px;border-bottom:1px solid var(--border);vertical-align:middle;}
+  .rank{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--muted);}
+  .rank.gold{color:#fbbf24;} .rank.silver{color:#94a3b8;} .rank.bronze{color:#b45309;}
+  .pm-row{display:flex;gap:3px;}
+  .pm{width:18px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;}
+  .pm-p1{background:rgba(91,184,224,.25);color:#9ED4EF;}
+  .pm-p2{background:rgba(123,170,62,.25);color:#C6E89A;}
+  .pm-p3{background:rgba(255,182,39,.25);color:#FFD98A;}
+  .pm-p4{background:rgba(255,45,122,.25);color:#FF9EC2;}
+  .pm-p5{background:rgba(176,127,201,.25);color:#D3B3E3;}
+  .pm-e{background:rgba(255,255,255,.04);color:rgba(255,255,255,.1);}
+  .tr-up{color:var(--red);font-size:10px;font-weight:700;}
+  .tr-ok{color:var(--yellow);font-size:10px;font-weight:700;}
+  .tr-dn{color:var(--muted);font-size:10px;}
+  .ds{font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;white-space:nowrap;}
+  .ds75{color:#2ecc9a;background:rgba(15,168,118,.15);}
+  .ds50{color:#5ec8e8;background:rgba(30,143,181,.15);}
+  .ds30{color:#fbbf24;background:rgba(212,154,10,.15);}
+  .ds20{color:#FFB627;background:rgba(194,106,20,.15);}
+  .ds10{color:#94a3b8;background:rgba(148,163,184,.1);}
+  .dsp{color:var(--muted);background:rgba(148,163,184,.07);}
+
+  /* PIPELINE */
+  .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px;margin-bottom:20px;}
+  .pc{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:16px;position:relative;}
+  .pc.s75{border-color:var(--green2);} .pc.s50{border-color:var(--blue2);}
+  .pc.s30{border-color:var(--yellow);} .pc.s20{border-color:var(--orange);} .pc.s10{border-color:var(--muted);}
+  .pc-h{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+  .pc-n{font-size:13px;font-weight:700;color:#fff;}
+  .pc-s{font-size:9px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 7px;border-radius:3px;}
+  .s75 .pc-s{color:#2ecc9a;background:rgba(15,168,118,.15);}
+  .s50 .pc-s{color:#5ec8e8;background:rgba(30,143,181,.15);}
+  .s30 .pc-s{color:#fbbf24;background:rgba(212,154,10,.15);}
+  .s20 .pc-s{color:#FFB627;background:rgba(194,106,20,.15);}
+  .s10 .pc-s{color:#94a3b8;background:rgba(148,163,184,.1);}
+  .pc-m{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:9px;}
+  .pc-mi{background:var(--s3);border-radius:5px;padding:6px;text-align:center;}
+  .pc-mv{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:#fff;line-height:1;}
+  .pc-ml{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+  .pcsigs{display:flex;gap:3px;flex-wrap:wrap;}
+  .pcs{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;}
+  .pcs-li{background:rgba(30,143,181,.15);color:#5ec8e8;}
+  .pcs-6s{background:rgba(255,90,31,.15);color:#FF8A5C;}
+  .pcs-one{background:rgba(15,168,118,.15);color:#2ecc9a;}
+  .pcs-gift{background:rgba(176,127,201,.15);color:#D3B3E3;}
+  .pcs-sam{background:rgba(255,90,31,.2);color:#FF9EC2;}
+
+  /* CHARTS */
+  .crow{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0;}
+  .cbox{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:16px;}
+  .ctitle{font-size:11px;font-weight:700;color:var(--text);margin-bottom:12px;}
+  canvas{max-height:230px;}
+
+  /* ACTIONS TABLE */
+  .atbl{width:100%;border-collapse:separate;border-spacing:0;}
+  .atbl thead tr{background:var(--s2);}
+  .atbl thead th{padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;border-bottom:1px solid var(--border2);}
+  .atbl tbody tr:hover td{background:rgba(30,143,181,.03);}
+  .atbl td{padding:10px 14px;vertical-align:top;border-bottom:1px solid var(--border);}
+  .pdot{width:7px;height:7px;border-radius:50%;display:inline-block;}
+  .pd-r{background:var(--red);} .pd-y{background:var(--yellow);} .pd-g{background:var(--green2);}
+  .a-name{font-size:13px;font-weight:600;color:#fff;}
+  .a-trig{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.4;}
+  .a-do{font-size:11px;color:var(--text);line-height:1.5;border-left:2px solid var(--border2);padding-left:10px;}
+
+  /* REP TABS */
+  .rep-container{border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .rep-switcher{display:flex;background:var(--s1);border-bottom:1px solid var(--border);}
+  .rep-btn{flex:1;padding:14px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;background:none;border:none;color:var(--muted);border-bottom:3px solid transparent;transition:all .2s;}
+  .rep-btn.z.active{color:var(--zach);border-bottom-color:var(--zach);background:rgba(91,184,224,.05);}
+  .rep-btn.o.active{color:var(--onur);border-bottom-color:var(--onur);background:rgba(251,146,60,.05);}
+  .rep-btn:hover.z{color:var(--zach);}
+  .rep-btn:hover.o{color:var(--onur);}
+  .rep-panel{display:none;padding:24px;}
+  .rep-panel.active{display:block;}
+  .rep-header{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;margin-bottom:24px;}
+  .rep-avatar{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;}
+  .rep-avatar.z{background:rgba(91,184,224,.15);color:var(--zach);}
+  .rep-avatar.o{background:rgba(251,146,60,.15);color:var(--onur);}
+  .rep-name{font-size:18px;font-weight:800;color:#fff;}
+  .rep-role{font-size:11px;color:var(--muted);margin-top:2px;}
+  .rep-stats{display:flex;gap:16px;}
+  .rep-stat{text-align:center;}
+  .rep-sv{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;line-height:1;}
+  .rep-sl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  .rep-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+  .rep-card{background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:16px;}
+  .rep-card-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .rep-card-t{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+  .rep-acct-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .rep-acct{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-radius:6px;background:var(--s2);border:1px solid var(--border);}
+  .rep-acct-n{font-size:11px;font-weight:600;color:#fff;}
+  .rep-acct-r{display:flex;align-items:center;gap:5px;}
+  .rep-bullets{list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .rep-bullets li{font-size:11px;color:var(--muted);padding-left:14px;position:relative;line-height:1.45;}
+  .rep-bullets li::before{content:'→';position:absolute;left:0;color:var(--blue2);font-size:9px;top:1px;}
+  .rep-bullets li strong{color:var(--text);}
+  .rep-action-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .rep-action{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:12px;display:grid;grid-template-columns:auto 1fr;gap:10px;}
+  .rep-action.urg{border-color:rgba(255,90,31,.4);}
+  .rep-action.hi{border-color:rgba(251,146,60,.3);}
+  .ra-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-top:1px;}
+  .ra-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:3px;}
+  .ra-body{font-size:11px;color:var(--muted);line-height:1.45;}
+  .ra-body strong{color:var(--text);}
+
+  /* NEWS INTEL */
+  .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+  .news-card{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:16px;}
+  .news-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+  .news-acct{font-size:13px;font-weight:700;color:#fff;}
+  .news-date{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);}
+  .news-headline{font-size:11px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.35;}
+  .news-body{font-size:11px;color:var(--muted);line-height:1.5;}
+  .news-body strong{color:var(--text);}
+  .news-angle{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;padding:4px 8px;border-radius:4px;display:inline-block;}
+  .na-b{color:var(--blue2);background:rgba(30,143,181,.12);}
+  .na-g{color:#2ecc9a;background:rgba(15,168,118,.12);}
+  .na-y{color:#fbbf24;background:rgba(212,154,10,.12);}
+
+  /* COMPETITIVE INTEL */
+  .comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+  .comp-card{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:18px;}
+  .comp-card.samsara{border-top:2px solid var(--red);}
+  .comp-card.verizon{border-top:2px solid var(--orange);}
+  .comp-card.geotab{border-top:2px solid var(--green2);}
+  .comp-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .comp-name{font-size:14px;font-weight:800;color:#fff;}
+  .comp-cat{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .comp-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+  .comp-stat{background:var(--s3);border-radius:6px;padding:8px;text-align:center;}
+  .comp-sv{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:#fff;line-height:1;margin-bottom:2px;}
+  .comp-sl{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+  .comp-body{font-size:11px;color:var(--muted);line-height:1.5;}
+  .comp-body strong{color:var(--text);}
+  .comp-accts{margin-top:10px;}
+  .comp-acct-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+  .sam-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;padding:2px 6px;border-radius:3px;margin:2px;background:rgba(255,90,31,.1);color:#FF8A5C;border:1px solid rgba(255,90,31,.2);}
+  .vc-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;padding:2px 6px;border-radius:3px;margin:2px;background:rgba(251,146,60,.1);color:#FFB627;border:1px solid rgba(251,146,60,.2);}
+  .noown-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px;}
+  .noown-card{background:var(--s2);border:1px solid rgba(255,90,31,.2);border-radius:8px;padding:14px;}
+  .noown-n{font-size:12px;font-weight:700;color:#fff;margin-bottom:5px;}
+  .noown-sig{font-size:10px;color:var(--muted);line-height:1.4;}
+
+  /* FOOT */
+  .foot{background:linear-gradient(90deg,#050c1a 0%,#071A38 100%);border-top:2px solid var(--blue);padding:16px 48px;display:flex;justify-content:space-between;align-items:center;gap:20px;}
+  .fb{font-family:'Inter',sans-serif;font-size:15px;font-weight:800;color:#fff;letter-spacing:-.02em;}
+  .fb span{color:var(--blue2);}
+  .ft{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);margin-top:2px;}
+  .ft strong{color:rgba(255,255,255,.55);}
+  .fbadge{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue2);background:rgba(91,184,224,.08);border:1px solid rgba(91,184,224,.2);padding:4px 10px;border-radius:4px;}
+
+  /* PLEGEND */
+  .plegend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+  .pb{display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:20px;font-size:11px;font-weight:600;}
+  .pb .d{width:7px;height:7px;border-radius:50%;}
+  .pb1{background:rgba(91,184,224,.15);color:#9ED4EF;} .pb1 .d{background:var(--p1);}
+  .pb2{background:rgba(123,170,62,.15);color:#C6E89A;} .pb2 .d{background:var(--p2);}
+  .pb3{background:rgba(255,182,39,.15);color:#FFD98A;} .pb3 .d{background:var(--p3);}
+  .pb4{background:rgba(255,45,122,.15);color:#FF9EC2;} .pb4 .d{background:var(--p4);}
+  .pb5{background:rgba(176,127,201,.15);color:#D3B3E3;} .pb5 .d{background:var(--p5);}
+
+  /* SECTIONS */
+  section{display:none;}
+  section.active{display:block;}
+
+  @media(max-width:900px){
+    .mi{grid-template-columns:1fr;gap:14px;} .body{padding:0 20px 48px;}
+    .crow{grid-template-columns:1fr;} .comp-grid{grid-template-columns:1fr;}
+    .rep-grid{grid-template-columns:1fr;} .nav{padding:0 16px;}
+    .stats{grid-template-columns:repeat(4,1fr);} .foot{flex-direction:column;padding:16px 20px;}
+  }
+
+/* ===== Concrete + Canopy brand overlay (v7) ===== */
+body{background-color:var(--bg);background-image:radial-gradient(circle at 1px 1px,rgba(244,241,234,0.04) 1px,transparent 0);background-size:24px 24px;}
+.brand-n{font-family:'Archivo Black',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.005em;color:var(--text);}
+.brand-n span{color:var(--blue);}
+.brand-s{color:var(--green2);opacity:.8;}
+.meyebrow{font-family:'JetBrains Mono',monospace;color:var(--green2);}
+.mh1{font-family:'Archivo Black',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-.02em;color:var(--text);font-size:30px;}
+.mh1 em{color:var(--green2);font-style:normal;}
+.sh-title{font-family:'Archivo Black',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-.005em;color:var(--text);}
+.sh-num{color:var(--green2);font-family:'JetBrains Mono',monospace;}
+.sn{font-family:'JetBrains Mono',monospace;color:var(--text);}
+.sec-title,.section-title{font-family:'Archivo Black',sans-serif;text-transform:uppercase;}
+.li-badge{border-color:rgba(212,255,61,.35)!important;color:var(--green2)!important;background:rgba(212,255,61,.06)!important;}
+.nav a.active{color:var(--text)!important;box-shadow:inset 0 -2px 0 var(--green2);}
+.ct{color:var(--green2)!important;}
+
+</style>
+<style>#__implab_nav + * { margin-top: 0 !important; } body > *:nth-child(2) { padding-top: 0 !important; }</style>
+</head>
+<body>
+<div id="__implab_nav" style="position:sticky;top:0;z-index:9999;background:rgba(10,10,12,.96);backdrop-filter:blur(12px);border-bottom:1px solid #22222A;padding:0 28px;display:flex;align-items:center;height:46px;font-family:'Inter',sans-serif">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;border-right:1px solid #22222A;padding-right:16px;margin-right:16px;flex-shrink:0">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="opacity:.5"><path d="M9 11.5L4.5 7 9 2.5" stroke="#C8C4B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span style="font-family:'Archivo Black',sans-serif;font-size:13px;color:#F4F1EA;letter-spacing:.01em">impact<span style="color:#1B9BD1">able</span></span>
+  </a>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#1B9BD1;flex-shrink:0">ABM Intelligence</span>
+  <a href="/" style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#C8C4B8;opacity:.5;text-decoration:none;flex-shrink:0">All Reports →</a>
+</div>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<div class="masthead">
+  <div class="mi">
+    <div>
+      <div class="brand-n">impact<span>able</span></div>
+      <div class="brand-s">ABM Intelligence</div>
+    </div>
+    <div>
+      <div class="meyebrow">Geotab · Field Service Enterprise · Multi-Persona Intelligence Report v7</div>
+      <h1 class="mh1">ABM <em>Intelligence</em> Dashboard</h1>
+      <div class="msub">7-Week 6sense · May 19 Hub Data · Rep Tabs · Competitive Intel · Concrete + Canopy</div>
+    </div>
+    <div class="mr">
+      <div class="mchip">Version <strong>v7</strong></div>
+      <div class="mchip">Hub data <strong>May 19, 2026</strong></div>
+      <div class="mchip">6sense <strong>Mar 23 – May 17</strong></div>
+      <div class="mchip">Generated <strong>May 19, 2026</strong></div>
+      <div class="li-badge">LinkedIn Marketing Partner</div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav" id="mainNav">
+  <a onclick="showSection(event,'actions')" class="active">🎯 Actions</a>
+  <a onclick="showSection(event,'overview')">Overview</a>
+  <a onclick="showSection(event,'pipeline')">Pipeline</a>
+  <a onclick="showSection(event,'heatmap')">Heatmap</a>
+  <a onclick="showSection(event,'leaderboard')">Leaderboard</a>
+  <a onclick="showSection(event,'sixsense')">6sense</a>
+  <a onclick="showSection(event,'reps')" class="rep-z">Zach / Onur</a>
+  <a onclick="showSection(event,'competitive')">Competitive</a>
+  <a onclick="showSection(event,'news')">Sales Intel</a>
+</nav>
+
+<div class="body">
+
+<!-- 01 ACTIONS (TOP — per Jen's request) -->
+<section id="actions" class="active">
+<div class="sh first"><span class="sh-num">01</span><span class="sh-title">Action Plan — Top 10 This Week</span></div>
+<p class="sh-desc">Signal-based outreach priorities. Sorted by urgency. Updated weekly from 6sense + LinkedIn hub data. All Bombora counts now labeled as Surge.</p>
+
+<div class="stats">
+  <div class="sc"><div class="sn rd">7</div><div class="sl">Allied Universal<br>Consecutive Weeks</div></div>
+  <div class="sc"><div class="sn rd">6</div><div class="sl">Allied Universal<br>Surge Score Wk7</div></div>
+  <div class="sc"><div class="sn yw">51</div><div class="sl">Cintas Hub Clicks<br>Up from 0</div></div>
+  <div class="sc"><div class="sn bl">58K</div><div class="sl">Verizon Total<br>Impressions</div></div>
+  <div class="sc"><div class="sn gr">$2.1M</div><div class="sl">Pipeline MRR<br>Tracked</div></div>
+  <div class="sc"><div class="sn">5</div><div class="sl">Labcorp Surge<br>+ Signals Visit</div></div>
+  <div class="sc"><div class="sn yw">4</div><div class="sl">Deals 50%+<br>In Progress</div></div>
+  <div class="sc"><div class="sn bl">7</div><div class="sl">Weeks of<br>Signal Data</div></div>
+</div>
+
+<table class="atbl" id="actionTable"></table>
+</section>
+
+<!-- 02 OVERVIEW -->
+<section id="overview">
+<div class="sh first"><span class="sh-num">02</span><span class="sh-title">Program Overview</span></div>
+
+<div class="plegend">
+  <div class="pb pb1"><span class="d"></span>P1 — Safety &amp; Compliance</div>
+  <div class="pb pb2"><span class="d"></span>P2 — Operations / Maintenance</div>
+  <div class="pb pb3"><span class="d"></span>P3 — Routing / Dispatch</div>
+  <div class="pb pb4"><span class="d"></span>P4 — Competitor (Samsara)</div>
+  <div class="pb pb5"><span class="d"></span>P5 — Deal Acceleration</div>
+</div>
+
+<div class="callout red">
+  <div class="ct">7-Week Alert — Allied Universal</div>
+  <div class="cv">6 Surge score — 7th consecutive week of intent with zero 1:1 activation</div>
+  <div class="cb">Every week since March 23, Allied Universal has shown strong Bombora signal. This week: Electric Fleet, Asset Tracking, Dash Cam, Fleet Maintenance, Driver Risk Assessment, Fuel Management. Driver tracking + billing case study pages visited. <strong>Brief must move this week. Onur — this is your #1 item.</strong></div>
+</div>
+
+<div class="callout yellow">
+  <div class="ct">Campaign Breakthrough — Cintas</div>
+  <div class="cv">Cintas jumped to 51 hub clicks (up from 0 in May 7) — strongest conversion signal in the latest export</div>
+  <div class="cb">P4 and P5 campaigns are converting. They also visited the Field Service Buyers Guide and have held 3 Bombora surges for 3 consecutive weeks. <strong>Onur to time outreach now while intent is at its peak.</strong></div>
+</div>
+
+<div class="crow">
+  <div class="cbox"><div class="ctitle">Persona Reach — Accounts Per Campaign</div><canvas id="personaChart"></canvas></div>
+  <div class="cbox"><div class="ctitle">Top Accounts — Hub Clicks (May 19)</div><canvas id="clicksChart"></canvas></div>
+</div>
+</section>
+
+<!-- 03 PIPELINE -->
+<section id="pipeline">
+<div class="sh first"><span class="sh-num">03</span><span class="sh-title">Pipeline Intelligence</span></div>
+<p class="sh-desc">Deal stages from ABX Field Service Enterprise tracker. Updated May 19, 2026.</p>
+<div class="pgrid" id="pipelineCards"></div>
+</section>
+
+<!-- 04 HEATMAP -->
+<section id="heatmap">
+<div class="sh first"><span class="sh-num">04</span><span class="sh-title">Multi-Persona Engagement Heatmap</span></div>
+<p class="sh-desc">Hub Total = total clicks from May 19 hub export across all campaigns. Persona cells show reach (impressions) distributed proportionally — not per-persona click actuals. <strong>Hub Total is the definitive click count.</strong> Surge = Bombora surge count (Wk7). AT&T flagged Reseller? — engagement may reflect partner/reseller activity rather than direct fleet buying intent.</p>
+
+<div class="callout yellow">
+  <div class="ct">Display note — Click data</div>
+  <div class="cv">Hub Total column shows actual clicks. Persona cells show impression-level reach only.</div>
+  <div class="cb">The persona columns show which campaigns are reaching each account and at what impression depth. <strong>For total program click performance, use the Hub Total column — that is the single source of truth.</strong> A high impression count with low clicks indicates awareness without conversion.</div>
+</div>
+
+<div class="hwrap"><table class="htbl">
+  <thead><tr>
+    <th style="min-width:190px">Account</th>
+    <th class="pcol" style="color:#9ED4EF">P1</th>
+    <th class="pcol" style="color:#C6E89A">P2</th>
+    <th class="pcol" style="color:#FFD98A">P3</th>
+    <th class="pcol" style="color:#FF9EC2">P4</th>
+    <th class="pcol" style="color:#D3B3E3">P5</th>
+    <th style="width:65px">Depth</th>
+    <th style="width:95px">Surge (7wk)</th>
+    <th style="width:75px">Samsara</th>
+    <th style="width:90px">Hub Total</th>
+    <th style="width:55px">Fleet</th>
+    <th style="width:60px">MRR</th>
+    <th style="width:90px">Next Action</th>
+    <th style="width:48px">Score</th>
+  </tr></thead>
+  <tbody id="heatmapBody"></tbody>
+</table></div>
+
+<div class="sh"><span class="sh-num" style="font-size:9px">NO OWNER</span><span class="sh-title" style="font-size:14px">Unowned Accounts With Active Signal</span></div>
+<p class="sh-desc">These accounts have no BDE or Salesforce opportunity assigned. High engagement or surge scores indicate prospecting opportunities. Flag to sales leadership for ownership assignment.</p>
+<div class="noown-grid" id="noownGrid"></div>
+</section>
+
+<!-- 05 LEADERBOARD -->
+<section id="leaderboard">
+<div class="sh first"><span class="sh-num">05</span><span class="sh-title">Account Leaderboard — Composite Score</span></div>
+<p class="sh-desc">Score = (hub clicks × 10) + (hub impressions ÷ 100) + (persona depth × 20) + (Wk7 Surge × 15) + (Samsara Wk7 × 5) + deal stage bonus. Hub data: May 19, 2026.</p>
+<div style="overflow-x:auto"><table class="ltbl">
+  <thead><tr>
+    <th>#</th><th>Account</th><th>Owner</th><th>Personas</th>
+    <th>Clicks</th><th>Impressions</th><th>Surge Wk7</th><th>Samsara</th>
+    <th>Stage</th><th>Fleet</th><th>MRR</th><th>Trend</th><th>Score</th>
+  </tr></thead>
+  <tbody id="lbBody"></tbody>
+</table></div>
+</section>
+
+<!-- 06 6SENSE -->
+<section id="sixsense">
+<div class="sh first"><span class="sh-num">06</span><span class="sh-title">6sense Signal Layer — 7-Week Surge Trend</span></div>
+<p class="sh-desc">All Bombora counts labeled as "Surge" per updated report convention. Mar 23 – May 17, 2026. Segment refreshed to FieldService-NN-May2026 from Wk5.</p>
+<div class="crow">
+  <div class="cbox"><div class="ctitle">Surge Trend — Top 8 Accounts (7 Weeks)</div><canvas id="bomboraChart"></canvas></div>
+  <div class="cbox"><div class="ctitle">Samsara Competitive Research — 7-Week Total</div><canvas id="samsaraChart"></canvas></div>
+</div>
+<div style="margin-top:20px;overflow-x:auto"><table class="ltbl">
+  <thead><tr>
+    <th>Account</th><th>Wk1</th><th>Wk2</th><th>Wk3</th><th>Wk4</th><th>Wk5</th><th>Wk6</th>
+    <th style="color:var(--blue2)">Wk7</th><th>Samsara Total</th><th>Wk7 Topics</th>
+  </tr></thead>
+  <tbody id="ssBody"></tbody>
+</table></div>
+</section>
+
+<!-- 07 REP TABS -->
+<section id="reps">
+<div class="sh first"><span class="sh-num">07</span><span class="sh-title">Sales Rep Intelligence</span></div>
+<p class="sh-desc">Per-rep view: assigned accounts, top signal movements this week, what's new, and prioritized actions. Updated from May 19 hub + 7-week 6sense.</p>
+<div class="rep-container">
+  <div class="rep-switcher">
+    <button class="rep-btn z active" onclick="switchRep(event,'zach')">Zach Crocombe — BDE</button>
+    <button class="rep-btn o" onclick="switchRep(event,'onur')">Onur Aksan — BDE</button>
+  </div>
+  <div class="rep-panel active" id="rep-panel-zach"></div>
+  <div class="rep-panel" id="rep-panel-onur"></div>
+</div>
+</section>
+
+<!-- 08 COMPETITIVE INTEL -->
+<section id="competitive">
+<div class="sh first"><span class="sh-num">08</span><span class="sh-title">Competitive Intelligence — Samsara + Verizon Connect</span></div>
+<p class="sh-desc">Competitive research activity from named ABM accounts. Samsara and Verizon Connect are the two primary competitors tracked per Jen's request. Simultaneous Geotab site visits + competitor research = active vendor evaluation.</p>
+<div class="comp-grid" id="compGrid"></div>
+</section>
+
+<!-- 09 SALES INTEL (NEWS) -->
+<section id="news">
+<div class="sh first"><span class="sh-num">09</span><span class="sh-title">Sales Intel — Account News</span></div>
+<p class="sh-desc">Recent news and developments for top ABM accounts. Use as conversation openers, objection context, and deal accelerators. Sourced May 19, 2026.</p>
+<div class="news-grid" id="newsGrid"></div>
+</section>
+
+</div>
+
+<div class="foot">
+  <div>
+    <div class="fb">impact<span>able</span></div>
+    <div class="ft">ABM Intelligence v6 &nbsp;·&nbsp; <strong>Geotab Field Service Enterprise</strong></div>
+    <div class="ft">Generated May 19, 2026 &nbsp;·&nbsp; Hub: May 19, 2026 &nbsp;·&nbsp; 6sense: Mar 23–May 17, 2026</div>
+  </div>
+  <div class="fbadge">LinkedIn Marketing Partner</div>
+</div>
+
+<script>
+// ── SECTION NAVIGATION ──
+var chartsInit={};
+function showSection(evt,id){
+  document.querySelectorAll('section').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav a').forEach(function(a){a.classList.remove('active');});
+  evt.target.classList.add('active');
+  if((id==='overview'||id==='sixsense')&&!chartsInit[id]){
+    chartsInit[id]=true;
+    if(id==='overview')initOverviewCharts();
+    if(id==='sixsense')initSixsenseCharts();
+  }
+}
+function switchRep(evt,rep){
+  document.querySelectorAll('.rep-panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('rep-panel-'+rep).classList.add('active');
+  document.querySelectorAll('.rep-btn').forEach(function(b){b.classList.remove('active');});
+  evt.target.classList.add('active');
+}
+
+// ── DATA ──
+var WKC=['#0d1c2e','#0c3d6b','#0f6590','#1278a8','#1a8cbf','#20a8d8','#5BB8E0'];
+var P_LABELS={P1:'Safety & Compliance',P2:'Operations',P3:'Routing / Dispatch',P4:'Competitor (Samsara)',P5:'Deal Acceleration'};
+
+var SS={
+  'Johnson & Johnson':       {b:[4,1,2,2,3,2,3],s:[1,2,1,0,0,15,3], t:['Intelligent Routing','Dash Cam','Fleet Management']},
+  'Verizon':                 {b:[4,4,4,8,8,7,4],s:[0,0,0,0,5,0,8],  t:['Cost Savings','Dash Cam','Driver Risk Assessment','Fleet Management']},
+  'Allied Universal':        {b:[3,2,4,5,6,7,6],s:[0,0,0,0,0,0,0],  t:['Electric Fleet Vehicles','Asset Tracking','Dash Cam','Fleet Maintenance','Driver Risk Assessment','Fuel Management']},
+  'Charter Communications':  {b:[1,3,1,1,2,3,3],s:[15,5,8,5,5,4,3], t:['Dash Cam','Fuel Management','Vehicle Tracking']},
+  'Walt Disney Imagineering':{b:[2,3,2,3,4,3,3],s:[0,1,27,0,1,1,5], t:['Electric Fleet Vehicles','Dash Cam','Vehicle Tracking']},
+  'Cintas':                  {b:[0,0,0,1,3,3,3],s:[2,2,2,0,0,0,0],  t:['Asset Tracking','Dash Cam','Fuel Management']},
+  'Labcorp':                 {b:[1,1,4,3,7,3,5],s:[0,2,0,0,0,0,2],  t:['Cost Savings','Job Scheduling','Electric Fleet Vehicles','Dash Cam','Fuel Management']},
+  'Eli Lilly and Company':   {b:[1,0,2,3,2,1,3],s:[0,0,0,1,0,1,2],  t:['Driver Risk Assessment','Asset Tracking','Fuel Management']},
+  'TruGreen':                {b:[1,1,0,2,2,3,2],s:[0,0,0,0,0,0,0],  t:['Dash Cam','Vehicle Tracking']},
+  'BrightView Landscapes':   {b:[0,1,1,2,2,1,2],s:[0,0,0,0,0,0,0],  t:['Cost Savings','Dash Cam']},
+  'Rogers Communications':   {b:[2,0,1,1,1,1,0],s:[11,11,24,8,8,12,17],t:[]},
+  'Mary Kay':                {b:[0,0,0,3,1,0,2],s:[0,0,0,0,0,0,0],  t:['Dash Cam','Vehicle Tracking']},
+  'Brightspeed':             {b:[0,0,0,1,1,0,2],s:[0,0,0,0,0,0,0],  t:['Dash Cam','Fuel Management']},
+  'Frontier Internet':       {b:[1,0,0,3,5,0,0],s:[5,13,13,2,0,0,0],t:[]},
+  'Wrench Group':            {b:[0,0,0,0,0,0,0],s:[0,0,0,0,0,0,0],  t:['Competitors Page','PepsiCo Case Study','Cost Blog']},
+};
+
+var HUB={
+  'Johnson & Johnson':{c:58,i:43136},'Verizon':{c:30,i:58759},'AT&T':{c:42,i:3865},
+  'Charter Communications':{c:19,i:24751},'Allied Universal':{c:3,i:225},
+  'Walt Disney Imagineering':{c:35,i:1216},'BrightView Landscapes':{c:3,i:1442},
+  'Labcorp':{c:0,i:7949},'TruGreen':{c:9,i:774},'Eli Lilly and Company':{c:15,i:1778},
+  'Comcast':{c:18,i:3207},'Cintas':{c:51,i:4086},'Alsco Uniforms':{c:6,i:1132},
+  'Groundworks':{c:3,i:387},'Frontier Internet':{c:0,i:405},
+  'Mary Kay':{c:0,i:243},'Comfort Systems USA':{c:0,i:204},
+  'Wrench Group':{c:0,i:105},'Brightspeed':{c:0,i:508},
+};
+
+var PERSONAS={
+  'Johnson & Johnson':['P1','P2','P3','P4','P5'],'Verizon':['P1','P2','P3','P4','P5'],
+  'AT&T':['P4','P5'],'Charter Communications':['P1','P2','P3','P4','P5'],
+  'Allied Universal':['P1','P2','P3','P5'],'Walt Disney Imagineering':['P2','P3','P4','P5'],
+  'BrightView Landscapes':['P1','P2','P5'],'Labcorp':['P1','P2','P3','P4','P5'],
+  'TruGreen':['P1','P4','P5'],'Eli Lilly and Company':['P4'],
+  'Frontier Internet':['P4','P5'],'Cintas':['P4','P5'],'Comcast':['P4','P5'],
+  'Comfort Systems USA':['P5'],'Mary Kay':['P5'],'Alsco Uniforms':['P5'],
+  'Groundworks':['P5'],'Rogers Communications':['P1','P2','P3'],
+  'Wrench Group':[],'Brightspeed':['P1'],
+};
+
+var DEAL={
+  'BrightView Landscapes':{stage:'75% Negotiations',cls:'ds75',pcls:'s75',fleet:17000,mrr:156582,contacts:['Pat Hunt — VP Fleet','Shayn Spingler — CIO','Jody Suiter — Dir Fleet Ops'],one2one:true,gifts:true},
+  'Apex Service Partners':{stage:'75% Negotiations',cls:'ds75',pcls:'s75',fleet:12000,mrr:216000,contacts:[],one2one:false,gifts:false},
+  'Terminix/Rentokil':{stage:'75% Negotiating',cls:'ds75',pcls:'s75',fleet:3000,mrr:40000,contacts:[],one2one:false,gifts:false},
+  'Schindler Group':{stage:'50% Pilot',cls:'ds50',pcls:'s50',fleet:3000,mrr:45000,contacts:[],one2one:false,gifts:false},
+  'Johnson & Johnson':{stage:'30% Quotation',cls:'ds30',pcls:'s30',fleet:10000,mrr:184000,contacts:['Brigitt DeMarzo'],one2one:true,gifts:false},
+  'Rollins':{stage:'30% Quotation',cls:'ds30',pcls:'s30',fleet:18000,mrr:180000,contacts:[],one2one:false,gifts:false},
+  'Compass Group':{stage:'20% Collaboration',cls:'ds20',pcls:'s20',fleet:7000,mrr:70000,contacts:[],one2one:false,gifts:false},
+  'Walt Disney Imagineering':{stage:'10% Engaged',cls:'ds10',pcls:'s10',fleet:4000,mrr:46000,contacts:[],one2one:false,gifts:false},
+  'TruGreen':{stage:'10% Engaged',cls:'ds10',pcls:'s10',fleet:9000,mrr:0,contacts:[],one2one:true,gifts:false},
+  'Allied Universal':{stage:'Prospect',cls:'dsp',pcls:'s10',fleet:7500,mrr:0,contacts:['Kristi Fearn'],one2one:false,gifts:false},
+  'Charter Communications':{stage:'Prospect',cls:'dsp',pcls:'s10',fleet:10000,mrr:0,contacts:['Kamal Masih'],one2one:false,gifts:false},
+  'Eli Lilly and Company':{stage:'Prospect',cls:'dsp',pcls:'s10',fleet:5000,mrr:0,contacts:['Raj Gautam'],one2one:false,gifts:false},
+  'Labcorp':{stage:'Prospect',cls:'dsp',pcls:'s10',fleet:7000,mrr:0,contacts:[],one2one:false,gifts:false},
+  'Verizon':{stage:'Prospect',cls:'dsp',pcls:'s10',fleet:0,mrr:0,contacts:[],one2one:false,gifts:false},
+  'Cintas':{stage:'Prospect',cls:'dsp',pcls:'s10',fleet:13500,mrr:0,contacts:[],one2one:false,gifts:false},
+};
+
+var OWNER_MAP={
+  'Johnson & Johnson':'Zach','BrightView Landscapes':'Zach','Charter Communications':'Zach',
+  'Eli Lilly and Company':'Zach','Labcorp':'Zach','Cintas':'Onur','Comcast':'Zach',
+  'AT&T':'Zach','Walt Disney Imagineering':'Onur','TruGreen':'Onur','Frontier Internet':'Onur',
+  'Allied Universal':'Onur','Rogers Communications':'Onur','Alsco Uniforms':'Onur',
+  'Groundworks':'Onur','Wrench Group':'Onur','Brightspeed':'Zach',
+};
+var NN_MAP={
+  'Johnson & Johnson':'NN','BrightView Landscapes':'NN','TruGreen':'NN','Allied Universal':'NN',
+  'Labcorp':'NN','Eli Lilly and Company':'NN','Charter Communications':'NN','AT&T':'NN',
+  'Verizon':'NN','Frontier Internet':'NN','Walt Disney Imagineering':'NN',
+  'Cintas':'NN','Comcast':'NN','Groundworks':'NN','Alsco Uniforms':'NN',
+  'Wrench Group':'NN','Brightspeed':'NN','Mary Kay':'NN',
+};
+var ACCTS=[
+  'Johnson & Johnson','Verizon','Allied Universal','AT&T','Charter Communications',
+  'Walt Disney Imagineering','Labcorp','TruGreen','BrightView Landscapes',
+  'Eli Lilly and Company','Comcast','Cintas','Mary Kay','Comfort Systems USA',
+  'Frontier Internet','Alsco Uniforms','Groundworks','Wrench Group','Brightspeed',
+];
+
+// Helpers
+function fmtN(n){if(!n)return '—';if(n>=1000000)return '$'+(n/1000000).toFixed(1)+'M';if(n>=1000)return '$'+(n/1000).toFixed(0)+'K';return '$'+n;}
+function fmtF(n){if(!n)return '—';return (n/1000).toFixed(1)+'K';}
+function score(n){
+  var ss=SS[n]||{b:[0,0,0,0,0,0,0],s:[0,0,0,0,0,0,0]};
+  var hub=HUB[n]||{c:0,i:0};var p=(PERSONAS[n]||[]).length;var d=DEAL[n];
+  var st=d?d.stage:'';
+  var sb=st.includes('75')?100:st.includes('50')?60:st.includes('30')?35:st.includes('20')?20:st.includes('10')?10:0;
+  return Math.round((hub.c*10)+(hub.i/100)+(p*20)+(ss.b[6]*15)+(ss.s[6]*5)+sb);
+}
+function trend7(n){
+  var ss=SS[n];if(!ss)return 'quiet';var b=ss.b,w7=b[6];
+  if(w7>=6)return 'surge';if(w7>b[5])return 'rising';
+  if(w7===b[5]&&w7>0)return 'stable';if(w7<b[5]&&b[5]>0)return 'cooling';return 'quiet';
+}
+function apill(n){
+  var t=trend7(n);var ss=SS[n]||{s:[0,0,0,0,0,0,0]};
+  if(t==='surge'||ss.s[6]>=8)return '<span class="ap ap-now">Contact Now</span>';
+  if(t==='rising'||ss.s[6]>=3)return '<span class="ap ap-wk">This Week</span>';
+  if(t==='stable')return '<span class="ap ap-ok">Maintain</span>';
+  return '<span class="ap ap-w">Monitor</span>';
+}
+function engCls(c,i){
+  if(!c&&!i)return 'en';var s=c*10+i/100;
+  if(s>200)return 'ev';if(s>50)return 'eh';if(s>10)return 'em';return 'el';
+}
+function miniBar(b){
+  var mx=Math.max.apply(null,b.concat([1]));
+  return '<div class="sbwrap">'+b.map(function(v,i){var h=v===0?1:Math.max(2,Math.round((v/mx)*20));return '<div class="sbar" style="height:'+h+'px;background:'+(v===0?'var(--border)':WKC[i])+'"></div>';}).join('')+'</div>';
+}
+function ownerB(n){var o=OWNER_MAP[n];return o?'<span class="tag t-'+(o==='Zach'?'zach':'onur')+'">'+o+'</span>':'';}
+function nnB(n){var nn=NN_MAP[n];return nn?'<span class="tag t-nn">'+nn+'</span>':'';}
+
+// ACTION TABLE
+(function(){
+  var tbody=document.getElementById('actionTable');
+  if(!tbody)return;
+  var hdr=document.createElement('thead');
+  hdr.innerHTML='<tr><th style="width:26px"></th><th style="width:190px">Account</th><th style="min-width:250px">Signal Trigger</th><th>Action — This Week</th></tr>';
+  tbody.appendChild(hdr);
+  var b=document.createElement('tbody');
+  var ACTIONS=[
+    {p:'r',a:'Allied Universal',trig:'6 Surge score — 7th consecutive week. Driver tracking + billing case study pages visited this week. 0 plays ever activated.',do:'<strong>Onur: activate brief TODAY.</strong> 7 weeks of signal is the longest gap between intent and activation in the program. Lead with Driver Risk Assessment for 7.5K security vehicle fleet. Send Operation Let\'s Eat as a bridge immediately.'},
+    {p:'r',a:'Verizon',trig:'Surge score 4. Samsara back at 8 searches. Employee visited Verizon Connect press release page. Still no BDE owner — 7 weeks.',do:'<strong>Assign BDE owner today.</strong> The Verizon Connect page visit signals they are evaluating their own fleet division vs Geotab. Lead with open platform + integration story. 58K impressions, 30 clicks — try gifting to break through.'},
+    {p:'r',a:'Labcorp',trig:'5 Surge score. Two employees visited signals.geotab.com — active product evaluation. Brief still Priority 3.',do:'<strong>Raise brief to Priority 1 this week.</strong> Signals visit = product evaluation, not marketing browsing. Zach to reach out: lead with Job Scheduling and Cost Savings — those are the active Bombora topics. Layer in Operation Let\'s Eat.'},
+    {p:'r',a:'BrightView Landscapes',trig:'Signal recovering to 2 Surge. 75% Negotiations. Gifting live to 3 contacts. 1:1 brief still missing.',do:'<strong>Zach: complete 1:1 ad brief this week.</strong> Cost Savings + vehicle inspection keywords new. Gifting is live to Pat Hunt (VP Fleet), Shayn Spingler (CIO), Jody Suiter (Dir Fleet Ops). Use gifting engagement as opening. This is the highest-stage deal with a missing activation layer.'},
+    {p:'y',a:'Cintas',trig:'51 hub clicks (up from 0). Field Service Buyers Guide visited. 3 Surge score — 3rd consecutive week.',do:'<strong>Onur: time outreach now.</strong> Campaigns are converting — they are reading exactly the right ICP content. Lead with competitive displacement (Samsara) for 13.5K uniform services fleet. P4 and P5 are the primary drivers.'},
+    {p:'y',a:'Johnson & Johnson',trig:'Samsara eased 15→3. Still at 30% Quotation. EV Adoption keyword new. 1:1 active.',do:'<strong>Zach: follow up this week.</strong> Competitive window still warm but closing. New EV Adoption keyword = probe on the call. Lead with EV fleet readiness + FIPS security advantage vs Samsara. Close with 60-day pilot offer.'},
+    {p:'y',a:'Wrench Group',trig:'Visited /geotab-vs-competitors/, PepsiCo case study, and fleet cost blog in one session. Not in program yet.',do:'<strong>Flag to Jen this week.</strong> Legitimate field service HVAC fleet — three bottom-funnel pages in one session is classic late-stage evaluation. Confirm whether to add to 1:1 program before signal cools. 0 impressions in hub = no aircover running.'},
+    {p:'y',a:'Walt Disney Imagineering',trig:'3 Surge score — stable. Samsara ticking up to 5. Autopia electric vehicle conversion underway (2027 CARB agreement).',do:'EV angle is now confirmed — Disney has a formal CARB agreement to replace Autopia gas engines with electric by early 2027. <strong>Lead with EV fleet transition story.</strong> Confirm P4 competitive campaign is still running. Samsara at 5 and rising.'},
+    {p:'y',a:'Eli Lilly and Company',trig:'Re-escalating to 3 Surge. Samsara back at 2. Fleet management page visited.',do:'<strong>Zach: accelerate brief.</strong> Driver Risk Assessment + Asset Tracking are primary topics. Samsara re-emerging adds competitive urgency. Confirm pharma sedan fleet targeting before activation.'},
+    {p:'g',a:'Charter Communications',trig:'3 Surge score. Trimble surged to 46 keyword searches. Samsara at 3. Fleet management page visited.',do:'Zach to note: Trimble spike is a competitive signal — they are evaluating telematics providers. Lead with routing efficiency for 10K telecom fleet. Address both Samsara and Trimble proactively in outreach.'},
+  ];
+  ACTIONS.forEach(function(a){
+    var dc={r:'pd-r',y:'pd-y',g:'pd-g'}[a.p];
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td style="text-align:center"><span class="pdot '+dc+'"></span></td><td><div class="a-name">'+a.a+ownerB(a.a)+'</div></td><td><div class="a-trig">'+a.trig+'</div></td><td><div class="a-do">'+a.do+'</div></td>';
+    b.appendChild(tr);
+  });
+  tbody.appendChild(b);
+})();
+
+// PIPELINE CARDS
+(function(){
+  var order=['BrightView Landscapes','Johnson & Johnson','TruGreen','Walt Disney Imagineering','Allied Universal','Charter Communications','Labcorp','Cintas'];
+  var grid=document.getElementById('pipelineCards');
+  order.forEach(function(name){
+    var d=DEAL[name]||{};var ss=SS[name]||{b:[0,0,0,0,0,0,0],s:[0,0,0,0,0,0,0]};
+    var hub=HUB[name]||{c:0,i:0};var p=(PERSONAS[name]||[]).length;
+    var sigs=[];
+    if(p>0)sigs.push('<span class="pcs pcs-li">'+p+'P·'+hub.c+'c</span>');
+    if(ss.b[6]>0)sigs.push('<span class="pcs pcs-6s">'+ss.b[6]+' Surge</span>');
+    if(d.one2one)sigs.push('<span class="pcs pcs-one">1:1 Active</span>');
+    if(d.gifts)sigs.push('<span class="pcs pcs-gift">Gifting Live</span>');
+    if(ss.s[6]>0)sigs.push('<span class="pcs pcs-sam">⚑ '+ss.s[6]+' Sam</span>');
+    var contacts=(d.contacts||[]).map(function(c){return '<div>'+c+'</div>';}).join('');
+    var div=document.createElement('div');div.className='pc '+(d.pcls||'s10');
+    div.innerHTML='<div class="pc-h"><div class="pc-n">'+name+ownerB(name)+nnB(name)+'</div><div class="pc-s">'+(d.stage||'Prospect')+'</div></div><div class="pc-m"><div class="pc-mi"><div class="pc-mv">'+fmtF(d.fleet||0)+'</div><div class="pc-ml">Fleet</div></div><div class="pc-mi"><div class="pc-mv">'+(d.mrr?fmtN(d.mrr):'TBD')+'</div><div class="pc-ml">MRR</div></div><div class="pc-mi"><div class="pc-mv">'+(hub.c>0?hub.c+'c':hub.i>1000?Math.round(hub.i/1000)+'Ki':'—')+'</div><div class="pc-ml">LI Total</div></div></div><div class="pcsigs">'+sigs.join('')+'</div>'+(contacts?'<div class="pc-contacts" style="margin-top:7px;font-size:10px;color:var(--muted)"><strong style="color:var(--text)">Contacts:</strong> '+contacts+'</div>':'');
+    grid.appendChild(div);
+  });
+})();
+
+// HEATMAP
+(function(){
+  var tbody=document.getElementById('heatmapBody');
+  var sorted=ACCTS.slice().sort(function(a,b){
+    var pa=(PERSONAS[a]||[]).length,pb=(PERSONAS[b]||[]).length;
+    if(pa!==pb)return pb-pa;return score(b)-score(a);
+  });
+  sorted.forEach(function(n){
+    var ss=SS[n]||{b:[0,0,0,0,0,0,0],s:[0,0,0,0,0,0,0]};
+    var hub=HUB[n]||{c:0,i:0};var p=PERSONAS[n]||[];var d=DEAL[n]||{};
+    var wk7=ss.b[6];var samWk7=ss.s[6];var sc=score(n);
+    var perP=Math.round(hub.i/(p.length||1));var perC=Math.round(hub.c/(p.length||1));
+    var pCells=['P1','P2','P3','P4','P5'].map(function(pid){
+      if(!p.includes(pid))return '<td style="text-align:center"><span class="eng en">—</span></td>';
+      var cls=engCls(perC,perP);
+      var lbl=perP>0?(perP>999?Math.round(perP/1000)+'k':perP+'i'):'–';
+      return '<td style="text-align:center"><span class="eng '+cls+'" title="'+P_LABELS[pid]+'">'+lbl+'</span></td>';
+    }).join('');
+    var stT=d.stage&&!d.stage.includes('Prospect')?'<span class="tag t-stage">'+d.stage+'</span>':'';
+    var samD=samWk7>0?'<span class="sflag">⚑ '+samWk7+'</span>':'<span style="color:var(--border)">—</span>';
+    var w7c=wk7>=6?'var(--red)':wk7>=4?'var(--blue2)':wk7>=2?'var(--green2)':'var(--muted)';
+    var hubD='<span style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;color:'+(hub.c>=40?'var(--green2)':hub.c>0?'#fff':'var(--muted)')+'">'+hub.c+'c</span> <span style="font-family:\'JetBrains Mono\',monospace;font-size:9px;color:var(--muted)">'+(hub.i>999?Math.round(hub.i/1000)+'k':hub.i)+'i</span>';
+    var resellTag=n==='AT&T'?'<span class="tag t-resell">Reseller?</span>':'';
+    var watchTag=n==='Wrench Group'?'<span class="tag t-watch">Watch</span>':'';
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><div class="an">'+n+(d.one2one?'<span class="tag t-1to1">1:1</span>':'')+ownerB(n)+nnB(n)+stT+resellTag+watchTag+'</div></td>'+pCells+'<td><div class="dbwrap"><div class="dbfill" style="width:'+Math.max(3,p.length*14)+'px"></div><span style="font-size:9px;font-family:\'JetBrains Mono\',monospace;color:var(--muted)">'+p.length+'/5</span></div></td><td>'+miniBar(ss.b)+'<span style="font-family:\'JetBrains Mono\',monospace;font-size:9px;color:'+w7c+';margin-left:4px">'+wk7+'</span></td><td>'+samD+'</td><td>'+hubD+'</td><td style="font-family:\'JetBrains Mono\',monospace;font-size:9px;color:var(--muted)">'+fmtF(d.fleet||0)+'</td><td style="font-family:\'JetBrains Mono\',monospace;font-size:9px;color:var(--green2)">'+(d.mrr?fmtN(d.mrr):'—')+'</td><td>'+apill(n)+'</td><td><span style="font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700;color:#fff">'+sc+'</span></td>';
+    tbody.appendChild(tr);
+  });
+  // No-owner grid
+  var noown=['Verizon','Mary Kay','Wrench Group','Comfort Systems USA'];
+  var grid=document.getElementById('noownGrid');
+  noown.forEach(function(n){
+    var ss=SS[n]||{b:[0,0,0,0,0,0,0],s:[0,0,0,0,0,0,0]};
+    var hub=HUB[n]||{c:0,i:0};
+    var div=document.createElement('div');div.className='noown-card';
+    var surges=ss.b[6];var sams=ss.s[6];
+    div.innerHTML='<div class="noown-n">'+n+'<span class="tag t-noown" style="margin-left:4px">No Owner</span></div><div class="noown-sig">Hub: '+hub.c+'c / '+(hub.i>999?Math.round(hub.i/1000)+'K':hub.i)+'i'+(surges>0?' · Surge: '+surges:'')+(sams>0?' · Samsara: '+sams:'')+'</div>';
+    grid.appendChild(div);
+  });
+})();
+
+// LEADERBOARD
+(function(){
+  var sorted=ACCTS.slice().sort(function(a,b){return score(b)-score(a);});
+  var tbody=document.getElementById('lbBody');
+  sorted.forEach(function(n,idx){
+    var ss=SS[n]||{b:[0,0,0,0,0,0,0],s:[0,0,0,0,0,0,0]};
+    var hub=HUB[n]||{c:0,i:0};var p=PERSONAS[n]||[];var d=DEAL[n]||{};
+    var sc=score(n);
+    var rk=idx===0?'rank gold':idx===1?'rank silver':idx===2?'rank bronze':'rank';
+    var pM=['P1','P2','P3','P4','P5'].map(function(pid){return p.includes(pid)?'<span class="pm pm-'+pid.toLowerCase()+'">'+pid+'</span>':'<span class="pm pm-e">·</span>';}).join('');
+    var t=trend7(n);
+    var tr=t==='surge'?'↑↑ Surge':t==='rising'?'↑ Rising':t==='stable'?'→ Stable':t==='cooling'?'↓ Cooling':'— Quiet';
+    var tC=t==='surge'||t==='rising'?'tr-up':t==='stable'?'tr-ok':'tr-dn';
+    var sp=d.stage?'<span class="ds '+(d.cls||'dsp')+'">'+d.stage+'</span>':'<span style="color:var(--border)">—</span>';
+    var row=document.createElement('tr');
+    row.innerHTML='<td><span class="'+rk+'">'+(idx+1)+'</span></td><td><span style="font-weight:600;font-size:11px">'+n+'</span></td><td>'+ownerB(n)+'</td><td><div class="pm-row">'+pM+'</div></td><td style="font-family:\'JetBrains Mono\',monospace;font-size:11px;color:'+(hub.c>=40?'var(--green2)':'inherit')+'">'+hub.c+'</td><td style="font-family:\'JetBrains Mono\',monospace;font-size:10px">'+hub.i.toLocaleString()+'</td><td>'+miniBar(ss.b)+'<span style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:'+(ss.b[6]>=6?'var(--red)':ss.b[6]>=4?'var(--blue2)':'var(--green2)')+';margin-left:3px">'+ss.b[6]+'</span></td><td>'+(ss.s[6]>0?'<span class="sflag">⚑ '+ss.s[6]+'</span>':'<span style="color:var(--border)">—</span>')+'</td><td>'+sp+'</td><td style="font-family:\'JetBrains Mono\',monospace;font-size:9px;color:var(--muted)">'+fmtF(d.fleet||0)+'</td><td style="font-family:\'JetBrains Mono\',monospace;font-size:9px;color:var(--green2)">'+(d.mrr?fmtN(d.mrr):'—')+'</td><td><span class="'+tC+'" style="margin-right:4px">'+tr+'</span>'+apill(n)+'</td><td><span style="font-family:\'JetBrains Mono\',monospace;font-size:13px;font-weight:700;color:#fff">'+sc+'</span></td>';
+    tbody.appendChild(row);
+  });
+})();
+
+// 6SENSE TABLE
+(function(){
+  var tbody=document.getElementById('ssBody');
+  var entries=Object.keys(SS).map(function(n){return{n:n,v:SS[n]};}).sort(function(a,b){
+    var tA=a.v.b.reduce(function(s,v){return s+v;},0)+a.v.s.reduce(function(s,v){return s+v;},0);
+    var tB=b.v.b.reduce(function(s,v){return s+v;},0)+b.v.s.reduce(function(s,v){return s+v;},0);
+    return tB-tA;
+  });
+  function mkC(n,last){
+    var c=last?(n>=6?'var(--red)':n>=4?'var(--blue2)':n>=2?'var(--green2)':'var(--muted)'):(n>=4?'#FF8A5C':n>=2?'#fbbf24':'var(--muted)');
+    return '<td style="font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:600;color:'+(n===0?'var(--border)':c)+'">'+n+'</td>';
+  }
+  entries.forEach(function(e){
+    var totS=e.v.s.reduce(function(a,b){return a+b;},0);
+    var tops=e.v.t.length?e.v.t.map(function(t){return '<span style="font-size:8px;background:var(--s3);border:1px solid var(--border);color:var(--muted);padding:1px 4px;border-radius:2px;white-space:nowrap">'+t+'</span>';}).join(' '):'—';
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td><span style="font-weight:600;font-size:11px">'+e.n+'</span></td>'+e.v.b.map(function(v,i){return mkC(v,i===6);}).join('')+'<td>'+(totS>0?'<span class="sflag">⚑ '+totS+'</span>':'<span style="color:var(--border)">—</span>')+'</td><td>'+tops+'</td>';
+    tbody.appendChild(tr);
+  });
+})();
+
+// REP TABS
+(function(){
+  var ZACH={
+    name:'Zach Crocombe',role:'Business Development Executive',color:'z',
+    accounts:['Johnson & Johnson','BrightView Landscapes','Labcorp','Charter Communications','AT&T','Eli Lilly and Company','Comcast','Brightspeed'],
+    topMovement:'Labcorp — 5 Surge + Signals platform visit (product evaluation)',
+    whatsNew:[
+      '<strong>J&J Samsara cooling (15→3)</strong> — competitive window still warm but narrowing',
+      '<strong>Labcorp visited signals.geotab.com</strong> — this is product evaluation, not awareness browsing',
+      '<strong>BrightView recovering to 2 Surge</strong> after dip. Cost Savings + vehicle inspection keywords new',
+      '<strong>AT&T flagged as potential reseller</strong> — confirm whether engagement is direct fleet vs partner activity',
+      '<strong>Charter: Trimble surged to 46 keyword searches</strong> — evaluating telematics providers broadly',
+    ],
+    actions:[
+      {tier:'urg',title:'Labcorp — Brief to Priority 1 this week',body:'<strong>Raise to Priority 1</strong> — signals.geotab.com visit + 5 Surge is product evaluation behavior. Reach out now: lead with Job Scheduling and Cost Savings (top Bombora topics). Layer in Operation Let\'s Eat.'},
+      {tier:'urg',title:'BrightView — Complete 1:1 brief this week',body:'75% Negotiations deal with gifting live. <strong>This is the only missing activation layer at 75%.</strong> Call Pat Hunt or Shayn Spingler using gifting engagement as the opening.'},
+      {tier:'hi',title:'J&J — Follow up while window is still warm',body:'Samsara eased 15→3, not gone. EV Adoption keyword new. <strong>Call this week</strong> — lead with EV fleet readiness + FIPS advantage. Close with 60-day pilot offer.'},
+    ]
+  };
+  var ONUR={
+    name:'Onur Aksan',role:'Business Development Executive',color:'o',
+    accounts:['Allied Universal','TruGreen','Walt Disney Imagineering','Cintas','Frontier Internet','Rogers Communications','Alsco Uniforms','Groundworks','Wrench Group'],
+    topMovement:'Cintas — 51 hub clicks (up from 0). Campaigns are converting.',
+    whatsNew:[
+      '<strong>Cintas jumped to 51 hub clicks</strong> — P4/P5 campaigns working. Visited Field Service Buyers Guide',
+      '<strong>Allied Universal — 7th consecutive week</strong> of signal with zero activation. Now at 6 Surge',
+      '<strong>Walt Disney Imagineering — EV fleet news</strong>: CARB agreement to retire Autopia gas engines by early 2027. Net zero 2030 commitment',
+      '<strong>Wrench Group visited /geotab-vs-competitors/ + PepsiCo case study + cost blog</strong> — flag to Jen for 1:1 program decision',
+      '<strong>TruGreen routing page visit</strong> while 1:1 is live — program working correctly',
+    ],
+    actions:[
+      {tier:'urg',title:'Allied Universal — Activate brief TODAY',body:'7 weeks of signal, 0 activation. <strong>This cannot continue.</strong> Lead with Driver Risk Assessment for 7.5K security vehicle fleet. Send Operation Let\'s Eat immediately as a bridge while brief is being finalized.'},
+      {tier:'hi',title:'Cintas — Outreach while signal is peaking',body:'51 hub clicks + 3 consecutive Surge weeks + Field Service Buyers Guide visit. <strong>Reach out this week</strong> with competitive displacement (Samsara) angle for 13.5K uniform services fleet.'},
+      {tier:'hi',title:'Wrench Group — Flag to Jen for program decision',body:'Competitors page + PepsiCo case study + cost blog in one session. <strong>Legitimate field service HVAC fleet.</strong> Confirm 1:1 program inclusion before signal cools. Currently 0 impressions in hub.'},
+    ]
+  };
+
+  function buildRepPanel(rep,panelId){
+    var panel=document.getElementById(panelId);
+    var statColor=rep.color==='z'?'var(--zach)':'var(--onur)';
+    var headerHTML='<div class="rep-header"><div class="rep-avatar '+rep.color+'">'+rep.name[0]+'</div><div><div class="rep-name">'+rep.name+'</div><div class="rep-role">'+rep.role+'</div></div><div class="rep-stats">'+
+      '<div class="rep-stat"><div class="rep-sv" style="color:'+statColor+'">'+rep.accounts.length+'</div><div class="rep-sl">Accounts</div></div>';
+    var totalSurge=rep.accounts.reduce(function(s,n){return s+(SS[n]?SS[n].b[6]:0);},0);
+    var totalClicks=rep.accounts.reduce(function(s,n){return s+(HUB[n]?HUB[n].c:0);},0);
+    headerHTML+='<div class="rep-stat"><div class="rep-sv" style="color:'+statColor+'">'+totalSurge+'</div><div class="rep-sl">Total Surge</div></div>';
+    headerHTML+='<div class="rep-stat"><div class="rep-sv" style="color:'+statColor+'">'+totalClicks+'</div><div class="rep-sl">Hub Clicks</div></div></div></div>';
+
+    // Top movement callout
+    var movColor=rep.color==='z'?'rgba(91,184,224,.15)':'rgba(251,146,60,.15)';
+    var mvHTML='<div style="background:var(--s2);border:1px solid '+movColor+';border-radius:8px;padding:12px 16px;margin-bottom:16px;"><div style="font-family:\'JetBrains Mono\',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:'+(rep.color==='z'?'var(--blue2)':'var(--onur)')+';margin-bottom:4px;">⬆ Top Movement This Week</div><div style="font-size:12px;font-weight:700;color:#fff;">'+rep.topMovement+'</div></div>';
+
+    // Grid: account list + what's new
+    var gridHTML='<div class="rep-grid"><div class="rep-card"><div class="rep-card-h"><div class="rep-card-t">Your Accounts</div></div><ul class="rep-acct-list">';
+    rep.accounts.forEach(function(n){
+      var ss=SS[n]||{b:[0,0,0,0,0,0,0],s:[0,0,0,0,0,0,0]};
+      var hub=HUB[n]||{c:0,i:0};var d=DEAL[n]||{};
+      var w7=ss.b[6];var w7c=w7>=4?'var(--red)':w7>=2?'var(--blue2)':'var(--muted)';
+      var stg=d.stage&&!d.stage.includes('Prospect')?'<span class="ds '+(d.cls||'dsp')+'" style="font-size:7px">'+d.stage+'</span>':'';
+      gridHTML+='<li class="rep-acct"><div><div class="rep-acct-n">'+n+stg+'</div></div><div class="rep-acct-r"><span style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:'+w7c+'">Surge:'+w7+'</span><span style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:'+(hub.c>0?'var(--green2)':'var(--muted)')+'">'+hub.c+'c</span></div></li>';
+    });
+    gridHTML+='</ul></div><div class="rep-card"><div class="rep-card-h"><div class="rep-card-t">What\'s New This Week</div></div><ul class="rep-bullets">';
+    rep.whatsNew.forEach(function(w){gridHTML+='<li>'+w+'</li>';});
+    gridHTML+='</ul></div></div>';
+
+    // Actions
+    var actHTML='<div style="margin-bottom:8px"><div style="font-family:\'JetBrains Mono\',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">What To Do Next</div><div class="rep-action-list">';
+    rep.actions.forEach(function(a,i){
+      actHTML+='<div class="rep-action '+(a.tier==='urg'?'urg':'hi')+'"><div class="ra-num">'+(i+1)+'</div><div><div class="ra-title">'+a.title+'</div><div class="ra-body">'+a.body+'</div></div></div>';
+    });
+    actHTML+='</div></div>';
+
+    panel.innerHTML=headerHTML+mvHTML+gridHTML+actHTML;
+  }
+  buildRepPanel(ZACH,'rep-panel-zach');
+  buildRepPanel(ONUR,'rep-panel-onur');
+})();
+
+// COMPETITIVE INTEL
+(function(){
+  var grid=document.getElementById('compGrid');
+
+  // Samsara
+  var samAccts=['Rogers Comm. (17)','Verizon (8)','Walt Disney (5)','Charter (3)','J&J (3)','Labcorp (2)','Eli Lilly (2)','Travelers (3)'];
+  var samHTML='<div class="comp-card samsara"><div class="comp-h"><div><div class="comp-name">Samsara</div><div class="comp-cat">Primary Competitor</div></div></div>'+
+    '<div class="comp-stat-row">'+
+    '<div class="comp-stat"><div class="comp-sv" style="color:#FF8A5C">8</div><div class="comp-sl">Accounts Researching</div></div>'+
+    '<div class="comp-stat"><div class="comp-sv" style="color:#FF8A5C">44</div><div class="comp-sl">Wk7 Searches</div></div>'+
+    '<div class="comp-stat"><div class="comp-sv" style="color:#FF8A5C">188</div><div class="comp-sl">7-Week Total</div></div>'+
+    '</div>'+
+    '<div class="comp-body">Competitive research across 8 ABM accounts this week. <strong>Verizon re-emerged at 8 searches</strong> after dropping to 0 last week — active vendor comparison restarted. Rogers (Canada) leading at 17. J&J eased from 15 to 3 — competitive pressure cooling at the 30% Quotation stage. Charter sustained at 3.</div>'+
+    '<div class="comp-accts"><div class="comp-acct-lbl">Accounts researching Samsara this week:</div>'+
+    samAccts.map(function(a){return '<span class="sam-pill">'+a+'</span>';}).join('')+'</div></div>';
+  grid.innerHTML+=samHTML;
+
+  // Verizon Connect
+  var vcAccts=['Verizon (researching own division)','Charter (Trimble overlap)','TruGreen (routing eval)','Labcorp (Signals platform)'];
+  var vcHTML='<div class="comp-card verizon"><div class="comp-h"><div><div class="comp-name">Verizon Connect</div><div class="comp-cat">Secondary Competitor (per Jen)</div></div></div>'+
+    '<div class="comp-stat-row">'+
+    '<div class="comp-stat"><div class="comp-sv" style="color:#FFB627">3yr</div><div class="comp-sl">Min Contract Lock-in</div></div>'+
+    '<div class="comp-stat"><div class="comp-sv" style="color:#FFB627">46%</div><div class="comp-sl">Fleet Video AI Adoption</div></div>'+
+    '<div class="comp-stat"><div class="comp-sv" style="color:#FFB627">2026</div><div class="comp-sl">Trends Report Published</div></div>'+
+    '</div>'+
+    '<div class="comp-body">Verizon (the corporate account) visited the <strong>Verizon Connect press release page on Geotab\'s site</strong> — researching the competitive relationship between their own fleet division and Geotab. Verizon Connect published their 2026 Fleet Technology Trends Report (Feb 2026): 46% video telematics adoption, 80% GPS fleet tracking, 66% prioritizing efficiency. <strong>Key displacement angle: Verizon Connect requires 3-year minimum contracts</strong> — Geotab\'s open platform flexibility is a direct counter.</div>'+
+    '<div class="comp-accts"><div class="comp-acct-lbl">Accounts with Verizon Connect overlap signals:</div>'+
+    vcAccts.map(function(a){return '<span class="vc-pill">'+a+'</span>';}).join('')+'</div></div>';
+  grid.innerHTML+=vcHTML;
+})();
+
+// NEWS INTEL
+(function(){
+  var NEWS=[
+    {acct:'Allied Universal',date:'Active 2025–2026',headline:'36 total acquisitions — 7 in 2025 worth $695M in aggregate revenue',body:'Allied Universal is in active acquisition mode, having acquired security companies across North America. Most recent: Norred & Associates. HELIAUS AI workforce platform expanded with NIST 800-171 compliance and FedRAMP Moderate Equivalency (AWS GovCloud, March 2026). 150,000+ employees. Rapidly growing fleet footprint from acquired security operations.',angle:'Growth story = more vehicles, more operations, more need for unified fleet management. Each acquisition adds fleet vehicles that need telematics. Lead with scale and integration capability.',cls:'na-b'},
+    {acct:'Verizon Connect',date:'Feb 2026',headline:'Published 2026 Fleet Technology Trends Report — AI-driven fleet tech going mainstream',body:'46% of fleets now use video telematics (up 10pp since 2023). 74% report improved driver safety. 80% rely on GPS fleet tracking. Verizon Connect requires 3-year minimum contracts. CEO Peter Mitchell: "AI-powered fleet technology is no longer about collecting data — it\'s about turning insight into action."',angle:'Their own report validates every selling point Geotab leads with. Use this as third-party proof for any account using Verizon Connect. 3-year lock-in is a real displacement objection to address early.',cls:'na-y'},
+    {acct:'BrightView Landscapes',date:'2023–2026',headline:'250+ hybrid vehicles added; CEO Dale Asplund has deep fleet management background from United Rentals',body:'BrightView has been electrifying its field manager fleet since 2023 — Ford Maverick Hybrids, Honda Accord Hybrids, Toyota Corolla Hybrids. CEO Asplund served as COO at United Rentals and has extensive fleet management experience. 2026 Corporate Responsibility Report published. EV fleet transition actively underway.',angle:'CEO already speaks fleet management language. Lead with EV fleet visibility and ROI on hybrid/electric transition. Cost Savings Bombora topic is directly aligned with operational efficiency pressure on CEO-level conversations.',cls:'na-g'},
+    {acct:'Walt Disney Imagineering',date:'May 2026',headline:'CARB agreement to retire Autopia gas engines by early 2027 — net zero 2030 commitment',body:'Disneyland has a formal agreement with the California Air Resources Board to retire Autopia\'s gas-powered engines in early 2027 and replace them with fully electric ride vehicles. Walt Disney Imagineering is currently developing and testing electric prototypes. Part of Disney\'s net zero by 2030 commitment.',angle:'EV fleet transition is not aspirational for Disney — it\'s contractually committed. Geotab\'s EV fleet management capabilities (battery health, range optimization, charging management) are directly relevant to an Imagineering fleet team managing a large EV transition.',cls:'na-g'},
+    {acct:'Cintas',date:'2025–2026',headline:'Xos electric truck customer alongside UPS, FedEx, and Loomis',body:'Cintas is a named customer of Xos electric trucks as part of its fleet electrification strategy. Xos launched 2026 electric Class 6 chassis at $99,000. Cintas operates one of the largest uniform services fleets in North America — ~13,500 vehicles across multiple service categories.',angle:'EV fleet expansion is underway. Geotab\'s EV capabilities are a direct upsell angle on top of the current campaign traction. 51 hub clicks confirms campaigns are reaching the right people — time to outreach while momentum is high.',cls:'na-g'},
+    {acct:'Johnson & Johnson',date:'Historical baseline',headline:'28,500 global vehicles, 7,924 US vehicles — fleet safety reduction program active',body:'J&J\'s fleet safety program targets crashes per million miles driven under the Healthy Future initiative. Historical: reduced fleet accident rate by 3%, CO2 by 19% in 2014. Currently at 30% Quotation stage with Geotab — 10K US fleet, $184K MRR potential. Samsara searches recently spiked to 15 then eased to 3.',angle:'Fleet safety is a documented internal priority. Lead with crash reduction data and the FIPS security advantage over Samsara. EV Adoption keyword now appearing — probe current EV transition plans on next call.',cls:'na-b'},
+  ];
+  var grid=document.getElementById('newsGrid');
+  NEWS.forEach(function(n){
+    var div=document.createElement('div');div.className='news-card';
+    div.innerHTML='<div class="news-card-top"><div class="news-acct">'+n.acct+'</div><div class="news-date">'+n.date+'</div></div><div class="news-headline">'+n.headline+'</div><div class="news-body">'+n.body+'</div><div class="news-angle '+n.cls+'">Sales Angle: '+n.angle+'</div>';
+    grid.appendChild(div);
+  });
+})();
+
+
+// ── LAZY CHART INIT ──
+function initOverviewCharts(){
+  Chart.defaults.color='#8C8A82';Chart.defaults.borderColor='#2E2E38';Chart.defaults.font.family="'Inter',sans-serif";
+  var pEl=document.getElementById('personaChart');
+  var cEl=document.getElementById('clicksChart');
+  if(!pEl||!cEl)return;
+  new Chart(pEl,{type:'bar',data:{labels:['P1 Safety','P2 Ops','P3 Routing','P4 Samsara','P5 Deal'],datasets:[{label:'Accounts',data:[9,8,8,14,14],backgroundColor:['#5BB8E0','#7BAA3E','#FFB627','#FF2D7A','#B07FC9'],borderRadius:6}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
+  var topC=Object.entries(HUB).filter(function(e){return e[1].c>0;}).sort(function(a,b){return b[1].c-a[1].c;}).slice(0,10);
+  new Chart(cEl,{type:'bar',data:{labels:topC.map(function(e){return e[0].split(' ').slice(0,2).join(' ');}),datasets:[{label:'Clicks',data:topC.map(function(e){return e[1].c;}),backgroundColor:topC.map(function(e){return e[1].c>=40?'#D4FF3D':'#1B9BD1';}),borderRadius:6}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}},indexAxis:'y'}});
+}
+function initSixsenseCharts(){
+  Chart.defaults.color='#8C8A82';Chart.defaults.borderColor='#2E2E38';Chart.defaults.font.family="'Inter',sans-serif";
+  var bEl=document.getElementById('bomboraChart');
+  var sEl=document.getElementById('samsaraChart');
+  if(!bEl||!sEl)return;
+  var bAccts=Object.keys(SS).filter(function(n){return SS[n].b.reduce(function(a,b){return a+b;},0)>0;}).sort(function(a,b){return SS[b].b[6]-SS[a].b[6];}).slice(0,8);
+  new Chart(bEl,{type:'bar',data:{labels:bAccts.map(function(n){return n.split(' ').slice(0,2).join(' ');}),datasets:WKC.map(function(c,i){return{label:'Wk'+(i+1),data:bAccts.map(function(n){return SS[n].b[i];}),backgroundColor:c,borderRadius:2};})},options:{plugins:{legend:{position:'top',labels:{boxWidth:8,font:{size:9}}}},scales:{x:{stacked:false},y:{beginAtZero:true,max:8}}}});
+  var samData=Object.keys(SS).map(function(n){return{n:n,t:SS[n].s.reduce(function(a,b){return a+b;},0)};}).filter(function(x){return x.t>0;}).sort(function(a,b){return b.t-a.t;});
+  new Chart(sEl,{type:'bar',data:{labels:samData.map(function(x){return x.n.split(' ').slice(0,2).join(' ');}),datasets:[{label:'Total',data:samData.map(function(x){return x.t;}),backgroundColor:'#FF5A1F',borderRadius:6}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}},indexAxis:'y'}});
+}
+
+</script>
+
+<!-- AI ASSISTANT PANEL -->
+<div id="ai-btn" onclick="openAI()" style="position:fixed;bottom:28px;right:28px;z-index:8000;cursor:pointer;
+  background:linear-gradient(135deg,#0d6e54,#12c98e);border-radius:50px;
+  padding:12px 20px;display:flex;align-items:center;gap:9px;
+  box-shadow:0 8px 32px rgba(18,201,142,.35);transition:transform .15s,box-shadow .15s;"
+  onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 40px rgba(18,201,142,.45)'"
+  onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(18,201,142,.35)'">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#fff" stroke-width="1.5"/><path d="M5 8h6M5 5.5h3M5 10.5h4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+  <span style="font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:#fff;letter-spacing:-.01em">Ask the Data</span>
+</div>
+
+<div id="__ai_btn" onclick="__openAI()" style="position:fixed;bottom:24px;right:24px;z-index:9998;cursor:pointer;background:#1B9BD1;border-radius:3px;padding:12px 18px;display:flex;align-items:center;gap:9px;box-shadow:0 8px 28px rgba(27,155,209,.3);font-family:'Inter',sans-serif;transition:transform .15s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" stroke="#fff" stroke-width="1.4"/><path d="M5 7.5h5M5 5.5h3M5 9.5h4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff">Ask the Data</span>
+</div>
+<div id="__ai_overlay" onclick="__closeAI()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9998;backdrop-filter:blur(6px)"></div>
+<div id="__ai_panel" style="display:none;position:fixed;right:0;top:0;bottom:0;width:460px;max-width:95vw;background:#15151A;border-left:1px solid #22222A;z-index:9999;flex-direction:column;overflow:hidden;font-family:'Inter',sans-serif">
+  <div style="padding:20px 22px 16px;border-bottom:1px solid #22222A;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:#0A0A0C">
+    <div>
+      <div style="font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:-.01em;color:#F4F1EA">Ask the Data</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#C8C4B8;opacity:.45;margin-top:3px">Live Data · Impactable Intelligence</div>
+    </div>
+    <button onclick="__closeAI()" style="background:#22222A;border:none;border-radius:2px;color:#C8C4B8;cursor:pointer;padding:7px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;opacity:.6">Esc</button>
+  </div>
+  <div id="__ai_msgs" style="flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:11px">
+    <div style="background:#0A0A0C;border:1px solid #22222A;border-radius:4px;padding:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin-bottom:8px">Impactable AI</div>
+      <div style="font-size:13px;color:#C8C4B8;line-height:1.6;margin-bottom:12px">Ask about this report or the wider Geotab program. I pull live LinkedIn data and Impactable's strategy playbooks.</div>
+      <div style="display:flex;flex-direction:column;gap:6px" id="__ai_sugg">
+        <button class="__sg" onclick="__sugg(this)">What stands out in this report?</button>
+        <button class="__sg" onclick="__sugg(this)">What should we action this week?</button>
+        <button class="__sg" onclick="__sugg(this)">How does this compare to best practice?</button>
+      </div>
+    </div>
+  </div>
+  <div style="padding:14px 18px;border-top:1px solid #22222A;flex-shrink:0;display:flex;gap:9px;align-items:flex-end;background:#0A0A0C">
+    <textarea id="__ai_in" placeholder="Ask anything..." style="flex:1;background:#22222A;border:1px solid rgba(255,255,255,.06);border-radius:2px;padding:11px 13px;font-size:13px;color:#F4F1EA;font-family:'Inter',sans-serif;resize:none;min-height:46px;max-height:120px;outline:none;line-height:1.5" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();__send();}"></textarea>
+    <button onclick="__send()" id="__ai_send" style="background:#1B9BD1;border:none;border-radius:2px;padding:11px 17px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#fff;cursor:pointer;flex-shrink:0;height:46px">Send</button>
+  </div>
+</div>
+<style>.__sg{background:rgba(27,155,209,.06);border:1px solid rgba(27,155,209,.15);border-radius:2px;padding:8px 12px;font-size:12px;color:#5BB8E0;cursor:pointer;text-align:left;font-family:'Inter',sans-serif;transition:background .15s}.__sg:hover{background:rgba(27,155,209,.13)}#__ai_u{background:#22222A;border-radius:4px 4px 2px 4px;padding:10px 13px;align-self:flex-end;max-width:88%}#__aidot1,#__aidot2,#__aidot3{width:5px;height:5px;background:#1B9BD1;border-radius:50%;display:inline-block;animation:__blink 1.2s infinite}#__aidot2{animation-delay:.2s}#__aidot3{animation-delay:.4s}@keyframes __blink{0%,100%{opacity:.2}50%{opacity:1}}</style>
+<script>
+var __aiH=[];
+function __openAI(){document.getElementById('__ai_overlay').style.display='block';document.getElementById('__ai_panel').style.display='flex';document.getElementById('__ai_btn').style.display='none';document.getElementById('__ai_in').focus();}
+function __closeAI(){document.getElementById('__ai_overlay').style.display='none';document.getElementById('__ai_panel').style.display='none';document.getElementById('__ai_btn').style.display='flex';}
+function __sugg(b){document.getElementById('__ai_in').value=b.textContent;document.getElementById('__ai_sugg').style.display='none';__send();}
+function __esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function __fmtMd(t){
+  t=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  t=t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  t=t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  var lines=t.split(/\n/);var out=[];var listType=null;var listItems=[];var para=[];
+  function fP(){if(para.length){out.push('<p>'+para.join(' ')+'</p>');para=[];}}
+  function fL(){if(listItems.length){out.push('<'+listType+'>'+listItems.map(function(li){return '<li>'+li+'</li>';}).join('')+'</'+listType+'>');listItems=[];listType=null;}}
+  for(var i=0;i<lines.length;i++){var ln=lines[i].trim();if(!ln){fP();fL();continue;}
+    var num=ln.match(/^(\d+)[.)]\s+(.*)$/);var bul=ln.match(/^[-*\u2022]\s+(.*)$/);var hdr=ln.match(/^([A-Z][A-Z\s&]{2,40}):?$/);
+    if(num){fP();if(listType&&listType!=='ol')fL();listType='ol';listItems.push(num[2]);}
+    else if(bul){fP();if(listType&&listType!=='ul')fL();listType='ul';listItems.push(bul[1]);}
+    else if(hdr&&ln.indexOf('<a ')<0){fP();fL();out.push('<h4>'+ln.replace(/:$/,'')+'</h4>');}
+    else{fL();para.push(ln);}}
+  fP();fL();return out.join('');
+}
+function __add(r,t){var m=document.getElementById('__ai_msgs');var d=document.createElement('div');if(r==='u'){d.id='__ai_u';d.innerHTML='<div style="font-size:13px;color:#F4F1EA;line-height:1.5">'+__esc(t)+'</div>';}else if(r==='t'){d.id='__ai_ti';d.style.cssText='background:rgba(27,155,209,.05);border:1px solid rgba(27,155,209,.12);border-radius:4px 4px 4px 2px;padding:12px 14px;align-self:flex-start';d.innerHTML='<span id="__aidot1"></span> <span id="__aidot2"></span> <span id="__aidot3"></span>';}else{d.style.cssText='background:rgba(27,155,209,.05);border:1px solid rgba(27,155,209,.12);border-radius:4px 4px 4px 2px;padding:13px 15px;align-self:flex-start;max-width:95%';d.innerHTML='<div style="font-family:\'JetBrains Mono\',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin-bottom:7px">Impactable AI</div><div class="__md">'+__fmtMd(t)+'</div>';}m.appendChild(d);m.scrollTop=m.scrollHeight;return d;}
+async function __sendQ(q){document.getElementById('__ai_send').disabled=true;__add('u',q);var ty=__add('t','');__aiH.push({role:'user',content:q});try{var r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:__aiH.slice(0,-1)})});var d=await r.json();ty.remove();var a=d.answer||'No response.';__add('a',a);__aiH.push({role:'assistant',content:a});if(__aiH.length>20)__aiH=__aiH.slice(-20);}catch(e){ty.remove();__add('a','Error reaching data layer. Try again.');}document.getElementById('__ai_send').disabled=false;document.getElementById('__ai_in').focus();}
+function __send(){var i=document.getElementById('__ai_in');var q=i.value.trim();if(!q)return;i.value='';__sendQ(q);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')__closeAI();});
+</script>
+
+<style>.__md{font-size:13px;color:#F4F1EA;line-height:1.6;opacity:.92}.__md strong{color:#fff;font-weight:700}.__md a{color:#5BB8E0;text-decoration:underline;text-underline-offset:2px}.__md a:hover{color:#1B9BD1}.__md p{margin:0 0 10px}.__md p:last-child{margin-bottom:0}.__md ul,.__md ol{margin:6px 0 12px;padding-left:4px;list-style:none}.__md li{position:relative;padding-left:20px;margin-bottom:7px;line-height:1.55}.__md ul li::before{content:"";position:absolute;left:4px;top:8px;width:4px;height:4px;border-radius:50%;background:#1B9BD1}.__md ol{counter-reset:m}.__md ol li{counter-increment:m}.__md ol li::before{content:counter(m);position:absolute;left:0;top:0;font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;color:#1B9BD1;background:rgba(27,155,209,.1);width:16px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center}.__md h4{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin:14px 0 8px;font-weight:700}.__md h4:first-child{margin-top:0}</style>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Geotab — Audience Segment Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1628;--card:rgba(17,29,51,.7);--line:rgba(255,255,255,.08);--ink:#e8eef7;--mut:#8aa0bd;
+--blue:#0099d1;--teal:#00c4b3;--orange:#f4a261;--green:#22c55e;--red:#ef4444;--purple:#a78bfa;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.5;
+background-image:radial-gradient(900px 500px at 80% -10%,rgba(0,153,209,.10),transparent),radial-gradient(700px 400px at 0% 0%,rgba(0,196,179,.07),transparent);}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
+.mono{font-family:'JetBrains Mono',monospace}
+header.hd{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:26px}
+.eyebrow{color:var(--blue);font-weight:700;letter-spacing:.14em;font-size:11px;text-transform:uppercase}
+h1{font-size:30px;font-weight:700;margin:8px 0 6px;letter-spacing:-.02em}
+.sub{color:var(--mut);font-size:14px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.badge{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 13px;font-size:12px;color:var(--mut)}
+.badge b{color:var(--ink);font-family:'JetBrains Mono';font-size:14px}
+h2{font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--mut);margin:38px 0 14px;font-weight:700;display:flex;align-items:center;gap:10px}
+h2:before{content:'';width:3px;height:15px;background:var(--blue);border-radius:2px}
+.alert{background:linear-gradient(90deg,rgba(244,162,97,.13),rgba(244,162,97,.03));border:1px solid rgba(244,162,97,.35);border-radius:12px;padding:15px 17px;font-size:13.5px;color:#f6d2af;margin-bottom:8px}
+.alert b{color:#ffd9b0}
+.grid{display:grid;gap:14px}
+.g5{grid-template-columns:repeat(5,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.g5,.g4,.g3{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.stat .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.08em}
+.stat .v{font-family:'JetBrains Mono';font-size:23px;font-weight:700;margin:7px 0 3px}
+.stat .d{font-size:12px;color:var(--mut)}
+.pos{color:var(--green)} .neg{color:var(--red)} .warn{color:var(--orange)} .tealc{color:var(--teal)} .bluec{color:var(--blue)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:right;padding:9px 10px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--ink)}
+td.mono,td .bar{font-family:'JetBrains Mono'}
+tbody tr:hover{background:rgba(255,255,255,.025)}
+.barcell{position:relative}
+.barfill{position:absolute;left:0;top:0;bottom:0;background:rgba(0,153,209,.16);border-right:1px solid rgba(0,153,209,.45);z-index:0}
+.barcell span{position:relative;z-index:1;font-family:'JetBrains Mono'}
+.v-badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700;letter-spacing:.04em;font-family:'DM Sans'}
+.INVEST{background:rgba(34,197,94,.16);color:#7ee2a0;border:1px solid rgba(34,197,94,.4)}
+.HOLD{background:rgba(0,153,209,.16);color:#6fcdf0;border:1px solid rgba(0,153,209,.4)}
+.REDUCE{background:rgba(244,162,97,.16);color:#f6c08a;border:1px solid rgba(244,162,97,.4)}
+.EXCLUDE{background:rgba(239,68,68,.15);color:#f59a9a;border:1px solid rgba(239,68,68,.4)}
+.WATCH{background:rgba(167,139,250,.16);color:#c4b1fb;border:1px solid rgba(167,139,250,.4)}
+.icp-core{color:var(--green)} .icp-adj{color:var(--blue)} .icp-off{color:var(--orange)} .icp-na{color:var(--mut)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:8px 15px;border-radius:9px;cursor:pointer;font-size:12.5px;font-weight:600}
+.tab.on{background:rgba(0,153,209,.16);border-color:rgba(0,153,209,.5);color:#aee2f7}
+.note{font-size:12px;color:var(--mut);margin-top:10px}
+.cards{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+@media(max-width:820px){.cards{grid-template-columns:1fr}}
+.ins{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:15px 16px}
+.ins.op{border-left-color:var(--green)} .ins.cr{border-left-color:var(--red)} .ins.wa{border-left-color:var(--orange)}
+.ins .tg{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.ins.op .tg{color:#7ee2a0} .ins.cr .tg{color:#f59a9a} .ins.wa .tg{color:#f6c08a}
+.ins h4{font-size:15px;margin:6px 0 6px} .ins p{font-size:13px;color:#c2d2e6}
+.ins .num{font-family:'JetBrains Mono';color:var(--ink);font-weight:700}
+.mat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:820px){.mat{grid-template-columns:1fr}}
+.mat .c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.mat .lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut)}
+.mat .win{font-size:17px;font-weight:700;margin:6px 0 3px}
+.mat .st{font-family:'JetBrains Mono';font-size:12px;color:var(--teal)}
+.mat .iv{font-size:12px;color:var(--mut);margin-top:5px}
+.persona{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px;border-top:3px solid var(--blue)}
+.persona.inv{border-top-color:var(--green)} .persona.red{border-top-color:var(--orange)}
+.persona .nm{font-size:17px;font-weight:700} .persona .rl{font-size:12px;color:var(--blue);margin-bottom:10px}
+.persona .row{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;border-bottom:1px dashed var(--line)}
+.persona .row span:first-child{color:var(--mut)} .persona .row .mono{color:var(--ink)}
+.persona .act{font-size:12.5px;color:#c2d2e6;margin-top:11px}
+.rec td{font-size:12.5px} .rec .act{font-weight:700}
+footer{margin-top:46px;border-top:1px solid var(--line);padding-top:18px;font-size:11.5px;color:var(--mut)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin:6px 0 0}
+.legend span b{font-weight:700}
+</style></head>
+<body>
+<div id="__implab_nav" style="position:sticky;top:0;z-index:9999;background:rgba(10,10,12,.96);backdrop-filter:blur(12px);border-bottom:1px solid #22222A;padding:0 28px;display:flex;align-items:center;height:46px;font-family:'Inter',sans-serif">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;border-right:1px solid #22222A;padding-right:16px;margin-right:16px;flex-shrink:0">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="opacity:.5"><path d="M9 11.5L4.5 7 9 2.5" stroke="#C8C4B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span style="font-family:'Archivo Black',sans-serif;font-size:13px;color:#F4F1EA;letter-spacing:.01em">impact<span style="color:#1B9BD1">able</span></span>
+  </a>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#7BAA3E;flex-shrink:0">Performance</span>
+  <a href="/" style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#C8C4B8;opacity:.5;text-decoration:none;flex-shrink:0">All Reports →</a>
+</div>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<div class="wrap">
+
+<header class="hd">
+<div class="eyebrow">Impactable · Audience Segment Intelligence — Internal Diagnostic</div>
+<h1>Geotab Global LinkedIn — Who We Reach &amp; What It Returns</h1>
+<div class="sub">YTD 2026 (Jan 1 – May 30) · trailing-quarter zoom (Mar 1 – May 30) · 4 ad accounts: North America, EMEA, LATAM, APAC · Source: LinkedIn via DemandSense</div>
+<div class="badges">
+<div class="badge">Total invested <b>$377,101</b></div>
+<div class="badge">Impressions <b>18,189,452</b></div>
+<div class="badge">Clicks <b>62,204</b></div>
+<div class="badge">Dimensions analyzed <b>6</b></div>
+<div class="badge">Regions <b>4</b></div>
+</div>
+</header>
+
+<div class="alert"><b>Read this first — measurement status.</b> LinkedIn returns spend and conversions at the <b>account/campaign</b> level, not the <b>demographic</b> level. So the audience lens below is scored on <b>reach share, CTR, and engagement rate</b> (not cost-per-segment), and the investment lens carries the cost numbers. Tracked conversions are sparse and inconsistent across regions (NA 81 site conversions / 0 form leads; EMEA 6 / 5 leads), so <b>cost-per-conversion is directional only and is not a headline metric</b>. Industry data has a ~31% unclassified bucket and is directional. Every cost figure sits at the level where it actually exists.</div>
+
+<h2>Investment lens — where the money went (YTD 2026)</h2>
+<div class="grid g4">
+<div class="stat"><div class="k">North America</div><div class="v">$185,855</div><div class="d">49.3% of spend · CTR 0.31% · 81 conv</div></div>
+<div class="stat"><div class="k">EMEA</div><div class="v">$138,774</div><div class="d bluec">36.8% · CTR 0.46% (best) · CPC $4.94</div></div>
+<div class="stat"><div class="k">LATAM</div><div class="v">$29,166</div><div class="d">7.7% · CTR 0.37% · 14 conv</div></div>
+<div class="stat"><div class="k">APAC</div><div class="v">$23,305</div><div class="d warn">6.2% · CTR 0.12% · CPC $8.64</div></div>
+</div>
+<div class="panel" style="margin-top:14px"><table id="invT"><thead><tr>
+<th>Region</th><th>Spend</th><th>% spend</th><th>Impr</th><th>Clicks</th><th>CTR</th><th>CPC</th><th>CPM</th><th>Conv</th><th>Leads</th>
+</tr></thead><tbody></tbody></table>
+<div class="note">Trailing quarter (Mar–May) = <b class="mono">$265,583</b>, or <b class="mono">70%</b> of all YTD spend — investment scaled up sharply in the last 3 months. The EBR must answer what that ramp bought.</div>
+</div>
+
+<h2>Audience lens — who we reach <span></span></h2>
+<div class="legend">
+<span class="icp-core"><b>● Core ICP</b></span><span class="icp-adj"><b>● ICP-adjacent</b></span><span class="icp-off"><b>● Off-ICP</b></span>
+&nbsp;|&nbsp; Verdicts: <span class="v-badge INVEST">INVEST</span><span class="v-badge HOLD">HOLD</span><span class="v-badge REDUCE">REDUCE</span><span class="v-badge EXCLUDE">EXCLUDE</span><span class="v-badge WATCH">WATCH</span>
+</div>
+<div class="tabs" style="margin-top:12px">
+<div class="tab on" data-d="seniority">Seniority</div>
+<div class="tab" data-d="function">Job Function</div>
+<div class="tab" data-d="industry">Industry</div>
+<div class="tab" data-d="company_size">Company Size</div>
+<div class="tab" data-d="title">Job Title</div>
+<div class="tab" data-d="country">Country</div>
+</div>
+<div class="panel"><table id="dimT"><thead></thead><tbody></tbody></table>
+<div class="note" id="dimNote"></div></div>
+
+<h2>Hero efficiency snapshot</h2>
+<div class="grid g5">
+<div class="stat"><div class="k">Core function reach</div><div class="v pos">34%</div><div class="d">Operations — largest &amp; on-ICP</div></div>
+<div class="stat"><div class="k">Enterprise (1,001+)</div><div class="v tealc">55%</div><div class="d">of reach at target company size</div></div>
+<div class="stat"><div class="k">Off-ICP function reach</div><div class="v warn">20%</div><div class="d">recoverable: HR, Edu, Social, Health</div></div>
+<div class="stat"><div class="k">Best title CTR</div><div class="v pos">0.45%</div><div class="d">Fleet Manager — top converter signal</div></div>
+<div class="stat"><div class="k">APAC CTR gap</div><div class="v neg">0.12%</div><div class="d">vs 0.31–0.46% other regions</div></div>
+</div>
+
+<h2>Key findings</h2>
+<div class="cards">
+<div class="ins op"><div class="tg">Opportunity</div><h4>The engine is aimed at the right buyer.</h4>
+<p>Operations is the #1 function at <span class="num">34%</span> of reach, enterprise companies (1,001+) take <span class="num">55%</span>, and the top job titles are Operations, Logistics, Supply Chain, Transportation, and Fleet Managers. <span class="num">Fleet Manager</span> shows the single best title CTR at <span class="num">0.45%</span>. Core targeting is sound — the program reaches fleet decision-makers, not noise.</p></div>
+
+<div class="ins cr"><div class="tg">Critical</div><h4>One in five impressions reaches an off-ICP function.</h4>
+<p><span class="num">20%</span> of reach goes to Human Resources, Education, Community &amp; Social Services, Healthcare, Legal, Arts, and Media — functions with no role in a fleet-telematics purchase. That is roughly <span class="num">$75,349</span> of implied YTD reach value redirectable to ICP audiences. Tightening function targeting is the single clearest efficiency move.</p></div>
+
+<div class="ins cr"><div class="tg">Critical</div><h4>APAC runs at a third of the efficiency of every other region.</h4>
+<p>APAC CTR is <span class="num">0.12%</span> against 0.31–0.46% elsewhere, at the <span class="num">highest CPC ($8.64)</span>. The drag is Indonesia and the Philippines: ~1.5M impressions at ~0.07% CTR. APAC is the clearest region-level restructure or pause-and-rebuild candidate.</p></div>
+
+<div class="ins wa"><div class="tg">Watch</div><h4>"Senior" is the biggest bucket but it is not a decision-maker tier.</h4>
+<p>LinkedIn "Senior" (senior individual contributors) is <span class="num">43%</span> of all reach — more than Manager, Director, VP and CXO combined are clustered below it. Confirmed decision-maker tiers (Manager→CXO+Owner) sit around <span class="num">~48%</span>. Worth validating that "Senior" reach maps to fleet influencers, not adjacent ICs.</p></div>
+
+<div class="ins wa"><div class="tg">Watch</div><h4>EMEA looks efficient but its conversions don't show up.</h4>
+<p>EMEA has the <span class="num">best CTR (0.46%)</span> and <span class="num">lowest CPC ($4.94)</span> on <span class="num">$138,774</span> of spend, yet only 6 tracked site conversions vs 5 form leads. This is a <span class="num">measurement gap</span>, not necessarily a performance gap — EMEA likely runs on lead forms while the Insight Tag underfires. Fix before the EBR so EMEA isn't misread as underperforming.</p></div>
+
+<div class="ins cr"><div class="tg">Critical</div><h4>Entry-level engages hard — and that's a targeting flag.</h4>
+<p>Entry-level is <span class="num">9%</span> of reach with the <span class="num">highest engagement rate (1.36%)</span> of any seniority. High engagement from a non-buying tier inflates surface metrics without advancing pipeline. Exclude or down-weight Entry/Training to concentrate budget on buyers.</p></div>
+</div>
+
+<h2>Efficiency matrix — best performer per dimension</h2>
+<div class="mat">
+<div class="c"><div class="lab">Best Seniority (on-ICP)</div><div class="win">Manager</div><div class="st">17.7% reach · 0.38% CTR · INVEST</div><div class="iv">Largest on-ICP decision tier; scale.</div></div>
+<div class="c"><div class="lab">Best Function</div><div class="win">Operations</div><div class="st">34% reach · 0.36% CTR · INVEST</div><div class="iv">Core buyer; anchor the program here.</div></div>
+<div class="c"><div class="lab">Best Industry (core)</div><div class="win">Logistics &amp; Supply Chain</div><div class="st">6.1% reach · 0.35% CTR · INVEST</div><div class="iv">Highest-CTR core fleet vertical.</div></div>
+<div class="c"><div class="lab">Best Company Size</div><div class="win">10,001+ employees</div><div class="st">25.6% reach · 0.37% CTR · INVEST</div><div class="iv">On-target enterprise; protect share.</div></div>
+<div class="c"><div class="lab">Best Job Title (CTR)</div><div class="win">Fleet Manager</div><div class="st">0.45% CTR · INVEST</div><div class="iv">Strongest intent signal title; expand.</div></div>
+<div class="c"><div class="lab">Best Region (efficiency)</div><div class="win">EMEA</div><div class="st">0.46% CTR · $4.94 CPC</div><div class="iv">Most efficient reach; fix its tracking.</div></div>
+</div>
+
+<h2>Buyer personas</h2>
+<div class="grid g3">
+<div class="persona inv"><div class="nm">The Fleet Operator</div><div class="rl">Economic buyer · owns the telematics decision</div>
+<div class="row"><span>Titles</span><span class="mono">Ops / Fleet / Logistics Mgr</span></div>
+<div class="row"><span>Function</span><span class="mono">Operations (34% reach)</span></div>
+<div class="row"><span>Best title CTR</span><span class="mono">0.45% (Fleet Mgr)</span></div>
+<div class="row"><span>Verdict</span><span><span class="v-badge INVEST">INVEST</span></span></div>
+<div class="act">The core of the program and it is performing. Concentrate budget here, lead with operational-efficiency and safety creative, and expand lookalike titles (Dispatch, Maintenance, Yard).</div></div>
+
+<div class="persona"><div class="nm">The Enterprise Executive</div><div class="rl">Economic approver · CXO / VP / Director</div>
+<div class="row"><span>Seniority reach</span><span class="mono">Dir+VP+CXO ~27%</span></div>
+<div class="row"><span>Company size</span><span class="mono">1,001+ = 55%</span></div>
+<div class="row"><span>CTR</span><span class="mono">0.28–0.30%</span></div>
+<div class="row"><span>Verdict</span><span><span class="v-badge HOLD">HOLD</span></span></div>
+<div class="act">Present and on-ICP but lower CTR — they consume, they don't click. Serve thought-leadership / ROI proof, not direct-response. Hold spend, shift creative to credibility.</div></div>
+
+<div class="persona red"><div class="nm">The Non-Buyer (stuck)</div><div class="rl">Surface engagement, no pipeline role</div>
+<div class="row"><span>Functions</span><span class="mono">HR / Edu / Social / Health</span></div>
+<div class="row"><span>Off-ICP reach</span><span class="mono">~20% of function</span></div>
+<div class="row"><span>Entry seniority</span><span class="mono">8.6%, 1.36% ER</span></div>
+<div class="row"><span>Verdict</span><span><span class="v-badge REDUCE">REDUCE</span></span></div>
+<div class="act">Engages well but cannot buy. Add function and seniority exclusions (Entry, Training, HR, Education) to recover ~20% of reach for ICP audiences. Biggest single efficiency lever.</div></div>
+</div>
+
+<h2>Action recommendations</h2>
+<div class="panel"><table class="rec"><thead><tr><th>Dimension</th><th>Action</th><th>Segment</th><th>Rationale</th><th>Expected impact</th></tr></thead>
+<tbody>
+<tr><td>Function</td><td class="act warn">REDUCE</td><td style="text-align:left">HR, Education, Social Svcs, Healthcare, Arts, Media</td><td style="text-align:left">~20% of reach to non-buying functions</td><td style="text-align:left">Recover ~1/5 of reach for ICP; tighter CPL</td></tr>
+<tr><td>Seniority</td><td class="act warn">REDUCE</td><td style="text-align:left">Entry, Training, Unpaid</td><td style="text-align:left">8.8% off-ICP; high ER inflates vanity metrics</td><td style="text-align:left">Cleaner decision-maker concentration</td></tr>
+<tr><td>Region</td><td class="act neg">RESTRUCTURE</td><td style="text-align:left">APAC (Indonesia, Philippines)</td><td style="text-align:left">0.12% CTR, $8.64 CPC — 1/3 efficiency</td><td style="text-align:left">Reallocate ~$23K/yr or rebuild targeting</td></tr>
+<tr><td>Measurement</td><td class="act bluec">FIX</td><td style="text-align:left">EMEA Insight Tag / conversion tracking</td><td style="text-align:left">Best CTR/CPC but conversions invisible</td><td style="text-align:left">Defensible EMEA pipeline story for EBR</td></tr>
+<tr><td>Job Title</td><td class="act pos">SCALE</td><td style="text-align:left">Fleet/Ops/Logistics/Supply Chain Mgr</td><td style="text-align:left">Best CTRs + core ICP</td><td style="text-align:left">Expand budget + lookalike titles</td></tr>
+<tr><td>Industry</td><td class="act pos">SCALE</td><td style="text-align:left">Logistics, Transportation, Construction, Machinery, Oil &amp; Energy</td><td style="text-align:left">Core fleet verticals, INVEST verdicts</td><td style="text-align:left">Higher concentration in convertible verticals</td></tr>
+<tr><td>Industry</td><td class="act warn">REDUCE</td><td style="text-align:left">Internet, Management Consulting</td><td style="text-align:left">Top-2 named industries, both off-ICP (24% of classified)</td><td style="text-align:left">Directional (31% unclassified) — validate then trim</td></tr>
+<tr><td>Company Size</td><td class="act warn">MONITOR</td><td style="text-align:left">Sub-1,000 employees (21% SMB)</td><td style="text-align:left">Below enterprise ICP unless vertical-TOFU intends it</td><td style="text-align:left">Confirm which programs target mid-market</td></tr>
+<tr><td>Direction</td><td class="act bluec">EXPAND</td><td style="text-align:left">Meta + programmatic ABM reach extension</td><td style="text-align:left">Reach ICP accounts unreachable on LinkedIn</td><td style="text-align:left">De-risk single-channel dependency (pending data)</td></tr>
+</tbody></table></div>
+
+<footer>
+<b>Geotab — Audience Segment Intelligence Diagnostic</b> · YTD 2026 (Jan 1 – May 30), trailing-quarter zoom (Mar 1 – May 30)<br>
+Data source: LinkedIn Ads via DemandSense (accounts: Geotab North America, EMEA, LATAM, APAC). Investment lens cross-referenced against the Geotab ABM Multichannel KPI Tracker.<br>
+Method: demographic dimensions scored on reach share, CTR, and engagement rate (LinkedIn does not expose spend/conversions at member level). Verdicts applied against the Field Service Enterprise / fleet ICP. Industry data ~31% unclassified — directional. Conversion tracking inconsistent across regions — cost-per-conversion not used as a headline.<br>
+Prepared by Impactable · Internal diagnostic — precursor to the leadership EBR. Not for external distribution in this form.
+</footer>
+
+</div>
+<script>
+const DATA={"seniority": {"rows": [{"seg": "Senior", "impr": 7573479, "clk": 25713, "eng": 55380, "ctr": 0.34, "er": 0.731, "share": 42.85, "icp": "adj", "verdict": "HOLD"}, {"seg": "Manager", "impr": 3126380, "clk": 11959, "eng": 24158, "ctr": 0.383, "er": 0.773, "share": 17.69, "icp": "core", "verdict": "INVEST"}, {"seg": "Director", "impr": 2778057, "clk": 7907, "eng": 16851, "ctr": 0.285, "er": 0.607, "share": 15.72, "icp": "core", "verdict": "HOLD"}, {"seg": "Entry", "impr": 1524527, "clk": 8958, "eng": 20710, "ctr": 0.588, "er": 1.358, "share": 8.62, "icp": "off", "verdict": "REDUCE"}, {"seg": "VP", "impr": 1177692, "clk": 3438, "eng": 7643, "ctr": 0.292, "er": 0.649, "share": 6.66, "icp": "core", "verdict": "HOLD"}, {"seg": "CXO", "impr": 774904, "clk": 2293, "eng": 5797, "ctr": 0.296, "er": 0.748, "share": 4.38, "icp": "core", "verdict": "HOLD"}, {"seg": "Owner", "impr": 392792, "clk": 1285, "eng": 3012, "ctr": 0.327, "er": 0.767, "share": 2.22, "icp": "core", "verdict": "INVEST"}, {"seg": "Partner", "impr": 288949, "clk": 838, "eng": 1872, "ctr": 0.29, "er": 0.648, "share": 1.63, "icp": "adj", "verdict": "HOLD"}, {"seg": "Training", "impr": 34823, "clk": 508, "eng": 1076, "ctr": 1.459, "er": 3.09, "share": 0.2, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Unpaid", "impr": 4832, "clk": 18, "eng": 37, "ctr": 0.373, "er": 0.766, "share": 0.03, "icp": "off", "verdict": "EXCLUDE"}], "tot_i": 17676435, "tot_c": 62917, "avg_ctr": 0.356}, "function": {"rows": [{"seg": "Operations", "impr": 8166112, "clk": 29636, "eng": 62985, "ctr": 0.363, "er": 0.771, "share": 34.07, "icp": "core", "verdict": "INVEST"}, {"seg": "Business Development", "impr": 2876017, "clk": 8061, "eng": 17743, "ctr": 0.28, "er": 0.617, "share": 12.0, "icp": "core", "verdict": "HOLD"}, {"seg": "Information Technology", "impr": 1429999, "clk": 4728, "eng": 9795, "ctr": 0.331, "er": 0.685, "share": 5.97, "icp": "adj", "verdict": "HOLD"}, {"seg": "Engineering", "impr": 1177269, "clk": 4209, "eng": 9375, "ctr": 0.358, "er": 0.796, "share": 4.91, "icp": "core", "verdict": "INVEST"}, {"seg": "Finance", "impr": 1092535, "clk": 3886, "eng": 8531, "ctr": 0.356, "er": 0.781, "share": 4.56, "icp": "adj", "verdict": "HOLD"}, {"seg": "Sales", "impr": 916022, "clk": 4364, "eng": 8518, "ctr": 0.476, "er": 0.93, "share": 3.82, "icp": "adj", "verdict": "INVEST"}, {"seg": "Community and Social Services", "impr": 722821, "clk": 2360, "eng": 5092, "ctr": 0.326, "er": 0.704, "share": 3.02, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Program and Project Management", "impr": 694222, "clk": 2727, "eng": 5658, "ctr": 0.393, "er": 0.815, "share": 2.9, "icp": "core", "verdict": "INVEST"}, {"seg": "Human Resources", "impr": 677586, "clk": 1239, "eng": 2593, "ctr": 0.183, "er": 0.383, "share": 2.83, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Administrative", "impr": 675462, "clk": 2668, "eng": 5609, "ctr": 0.395, "er": 0.83, "share": 2.82, "icp": "adj", "verdict": "HOLD"}, {"seg": "Education", "impr": 660239, "clk": 2692, "eng": 5638, "ctr": 0.408, "er": 0.854, "share": 2.75, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Customer Success and Support", "impr": 595730, "clk": 2997, "eng": 6212, "ctr": 0.503, "er": 1.043, "share": 2.49, "icp": "adj", "verdict": "INVEST"}, {"seg": "Military and Protective Services", "impr": 469724, "clk": 1623, "eng": 3507, "ctr": 0.346, "er": 0.747, "share": 1.96, "icp": "adj", "verdict": "HOLD"}, {"seg": "Research", "impr": 448822, "clk": 1825, "eng": 3711, "ctr": 0.407, "er": 0.827, "share": 1.87, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Healthcare Services", "impr": 393399, "clk": 2826, "eng": 5547, "ctr": 0.718, "er": 1.41, "share": 1.64, "icp": "off", "verdict": "WATCH"}, {"seg": "Marketing", "impr": 366038, "clk": 1215, "eng": 2894, "ctr": 0.332, "er": 0.791, "share": 1.53, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Legal", "impr": 362262, "clk": 1253, "eng": 2608, "ctr": 0.346, "er": 0.72, "share": 1.51, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Accounting", "impr": 349867, "clk": 1548, "eng": 3344, "ctr": 0.442, "er": 0.956, "share": 1.46, "icp": "adj", "verdict": "INVEST"}, {"seg": "Consulting", "impr": 344218, "clk": 1294, "eng": 2985, "ctr": 0.376, "er": 0.867, "share": 1.44, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Media and Communication", "impr": 343169, "clk": 1196, "eng": 2554, "ctr": 0.349, "er": 0.744, "share": 1.43, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Arts and Design", "impr": 277867, "clk": 1155, "eng": 2667, "ctr": 0.416, "er": 0.96, "share": 1.16, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Purchasing", "impr": 263787, "clk": 1041, "eng": 2188, "ctr": 0.395, "er": 0.829, "share": 1.1, "icp": "core", "verdict": "INVEST"}, {"seg": "Real Estate", "impr": 192764, "clk": 890, "eng": 1943, "ctr": 0.462, "er": 1.008, "share": 0.8, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Product Management", "impr": 165752, "clk": 680, "eng": 1477, "ctr": 0.41, "er": 0.891, "share": 0.69, "icp": "adj", "verdict": "INVEST"}, {"seg": "Quality Assurance", "impr": 153604, "clk": 623, "eng": 1258, "ctr": 0.406, "er": 0.819, "share": 0.64, "icp": "adj", "verdict": "INVEST"}, {"seg": "Entrepreneurship", "impr": 153400, "clk": 449, "eng": 952, "ctr": 0.293, "er": 0.621, "share": 0.64, "icp": "adj", "verdict": "HOLD"}], "tot_i": 23968687, "tot_c": 87185, "avg_ctr": 0.364}, "industry": {"rows": [{"seg": "Internet", "impr": 3419948, "clk": 9322, "eng": 20583, "ctr": 0.273, "er": 0.602, "share": 13.15, "icp": "off", "verdict": "REDUCE"}, {"seg": "Management Consulting", "impr": 2948067, "clk": 8628, "eng": 19411, "ctr": 0.293, "er": 0.658, "share": 11.34, "icp": "off", "verdict": "REDUCE"}, {"seg": "Information Technology & Services", "impr": 1684017, "clk": 4988, "eng": 10979, "ctr": 0.296, "er": 0.652, "share": 6.48, "icp": "adj", "verdict": "HOLD"}, {"seg": "Logistics & Supply Chain", "impr": 1584300, "clk": 5610, "eng": 12340, "ctr": 0.354, "er": 0.779, "share": 6.09, "icp": "core", "verdict": "INVEST"}, {"seg": "Construction", "impr": 1351508, "clk": 4438, "eng": 10241, "ctr": 0.328, "er": 0.758, "share": 5.2, "icp": "core", "verdict": "INVEST"}, {"seg": "Transportation/Trucking/Railroad", "impr": 1276123, "clk": 3664, "eng": 8201, "ctr": 0.287, "er": 0.643, "share": 4.91, "icp": "core", "verdict": "HOLD"}, {"seg": "Machinery", "impr": 1052773, "clk": 3614, "eng": 7836, "ctr": 0.343, "er": 0.744, "share": 4.05, "icp": "core", "verdict": "INVEST"}, {"seg": "Higher Education", "impr": 964100, "clk": 3112, "eng": 6541, "ctr": 0.323, "er": 0.678, "share": 3.71, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Oil & Energy", "impr": 905114, "clk": 2330, "eng": 6306, "ctr": 0.257, "er": 0.697, "share": 3.48, "icp": "core", "verdict": "HOLD"}, {"seg": "Civil Engineering", "impr": 813967, "clk": 2413, "eng": 5774, "ctr": 0.296, "er": 0.709, "share": 3.13, "icp": "core", "verdict": "INVEST"}, {"seg": "Chemicals", "impr": 798440, "clk": 2748, "eng": 5204, "ctr": 0.344, "er": 0.652, "share": 3.07, "icp": "adj", "verdict": "HOLD"}, {"seg": "Financial Services", "impr": 781894, "clk": 2273, "eng": 5197, "ctr": 0.291, "er": 0.665, "share": 3.01, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Non-profit Organization Management", "impr": 760868, "clk": 2552, "eng": 5466, "ctr": 0.335, "er": 0.718, "share": 2.93, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Hospital & Health Care", "impr": 691291, "clk": 3256, "eng": 6051, "ctr": 0.471, "er": 0.875, "share": 2.66, "icp": "off", "verdict": "WATCH"}, {"seg": "Warehousing", "impr": 680005, "clk": 2197, "eng": 4400, "ctr": 0.323, "er": 0.647, "share": 2.62, "icp": "core", "verdict": "INVEST"}, {"seg": "Real Estate", "impr": 661839, "clk": 3225, "eng": 6156, "ctr": 0.487, "er": 0.93, "share": 2.55, "icp": "off", "verdict": "WATCH"}, {"seg": "Consumer Goods", "impr": 644068, "clk": 2086, "eng": 4202, "ctr": 0.324, "er": 0.652, "share": 2.48, "icp": "adj", "verdict": "HOLD"}, {"seg": "Government Administration", "impr": 631807, "clk": 2015, "eng": 4480, "ctr": 0.319, "er": 0.709, "share": 2.43, "icp": "adj", "verdict": "HOLD"}, {"seg": "Utilities", "impr": 630053, "clk": 2148, "eng": 6135, "ctr": 0.341, "er": 0.974, "share": 2.42, "icp": "core", "verdict": "INVEST"}, {"seg": "Food Production", "impr": 594263, "clk": 1991, "eng": 4198, "ctr": 0.335, "er": 0.706, "share": 2.29, "icp": "core", "verdict": "INVEST"}, {"seg": "Food & Beverages", "impr": 588616, "clk": 2228, "eng": 4660, "ctr": 0.379, "er": 0.792, "share": 2.26, "icp": "adj", "verdict": "INVEST"}, {"seg": "Package/Freight Delivery", "impr": 561522, "clk": 1554, "eng": 2844, "ctr": 0.277, "er": 0.506, "share": 2.16, "icp": "core", "verdict": "HOLD"}, {"seg": "Hospitality", "impr": 541607, "clk": 2440, "eng": 5314, "ctr": 0.451, "er": 0.981, "share": 2.08, "icp": "adj", "verdict": "INVEST"}, {"seg": "Mining & Metals", "impr": 491951, "clk": 1309, "eng": 2618, "ctr": 0.266, "er": 0.532, "share": 1.89, "icp": "core", "verdict": "HOLD"}, {"seg": "Accounting", "impr": 480240, "clk": 1626, "eng": 3730, "ctr": 0.339, "er": 0.777, "share": 1.85, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Retail", "impr": 464754, "clk": 1593, "eng": 3294, "ctr": 0.343, "er": 0.709, "share": 1.79, "icp": "adj", "verdict": "HOLD"}], "tot_i": 26003135, "tot_c": 83360, "avg_ctr": 0.321}, "company_size": {"rows": [{"seg": "10,001+", "impr": 4649208, "clk": 17228, "eng": 32982, "ctr": 0.371, "er": 0.709, "share": 25.77, "icp": "core", "verdict": "INVEST"}, {"seg": "1,001-5,000", "impr": 3873775, "clk": 14882, "eng": 31447, "ctr": 0.384, "er": 0.812, "share": 21.47, "icp": "core", "verdict": "INVEST"}, {"seg": "501-1,000", "impr": 2209655, "clk": 7550, "eng": 16625, "ctr": 0.342, "er": 0.752, "share": 12.25, "icp": "adj", "verdict": "HOLD"}, {"seg": "201-500", "impr": 2099587, "clk": 7607, "eng": 17222, "ctr": 0.362, "er": 0.82, "share": 11.64, "icp": "adj", "verdict": "HOLD"}, {"seg": "51-200", "impr": 2080038, "clk": 7094, "eng": 17169, "ctr": 0.341, "er": 0.825, "share": 11.53, "icp": "off", "verdict": "REDUCE"}, {"seg": "5,001-10,000", "impr": 1449305, "clk": 5369, "eng": 11212, "ctr": 0.37, "er": 0.774, "share": 8.03, "icp": "core", "verdict": "INVEST"}, {"seg": "11-50", "impr": 1002360, "clk": 3358, "eng": 7072, "ctr": 0.335, "er": 0.706, "share": 5.56, "icp": "off", "verdict": "REDUCE"}, {"seg": "2-10", "impr": 592535, "clk": 2015, "eng": 4652, "ctr": 0.34, "er": 0.785, "share": 3.28, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "1", "impr": 85035, "clk": 301, "eng": 711, "ctr": 0.354, "er": 0.836, "share": 0.47, "icp": "off", "verdict": "EXCLUDE"}], "tot_i": 18041498, "tot_c": 65404, "avg_ctr": 0.363}, "title": {"rows": [{"seg": "Operations Manager", "impr": 1057746.0, "clk": 4381.0, "eng": 9320.0, "ctr": 0.414, "er": 0.881, "share": 20.45, "icp": "core", "verdict": "INVEST"}, {"seg": "Director of Operations", "impr": 366907.0, "clk": 1185.0, "eng": 2616.0, "ctr": 0.323, "er": 0.713, "share": 7.09, "icp": "core", "verdict": "INVEST"}, {"seg": "General Manager", "impr": 336109.0, "clk": 1310.0, "eng": 2641.0, "ctr": 0.39, "er": 0.786, "share": 6.5, "icp": "core", "verdict": "INVEST"}, {"seg": "Logistics Manager", "impr": 266980.0, "clk": 1004.0, "eng": 1900.0, "ctr": 0.376, "er": 0.712, "share": 5.16, "icp": "core", "verdict": "INVEST"}, {"seg": "Operational Specialist", "impr": 250023.0, "clk": 997.0, "eng": 1978.0, "ctr": 0.399, "er": 0.791, "share": 4.83, "icp": "core", "verdict": "INVEST"}, {"seg": "President", "impr": 219467.0, "clk": 647.0, "eng": 1634.0, "ctr": 0.295, "er": 0.745, "share": 4.24, "icp": "adj", "verdict": "HOLD"}, {"seg": "Project Manager", "impr": 214120.0, "clk": 897.0, "eng": 1815.0, "ctr": 0.419, "er": 0.848, "share": 4.14, "icp": "adj", "verdict": "INVEST"}, {"seg": "Office Manager", "impr": 190035.0, "clk": 783.0, "eng": 1511.0, "ctr": 0.412, "er": 0.795, "share": 3.67, "icp": "adj", "verdict": "INVEST"}, {"seg": "Business Development Manager", "impr": 182182.0, "clk": 288.0, "eng": 730.0, "ctr": 0.158, "er": 0.401, "share": 3.52, "icp": "adj", "verdict": "HOLD"}, {"seg": "Chief Executive Officer", "impr": 180783.0, "clk": 718.0, "eng": 1973.0, "ctr": 0.397, "er": 1.091, "share": 3.5, "icp": "adj", "verdict": "INVEST"}, {"seg": "Manager", "impr": 168733.0, "clk": 534.0, "eng": 1074.0, "ctr": 0.316, "er": 0.637, "share": 3.26, "icp": "adj", "verdict": "HOLD"}, {"seg": "Member", "impr": 162413.0, "clk": 488.0, "eng": 1103.0, "ctr": 0.3, "er": 0.679, "share": 3.14, "icp": "off", "verdict": "EXCLUDE"}, {"seg": "Founder", "impr": 155684.0, "clk": 487.0, "eng": 1197.0, "ctr": 0.313, "er": 0.769, "share": 3.01, "icp": "adj", "verdict": "HOLD"}, {"seg": "Board Member", "impr": 141311.0, "clk": 420.0, "eng": 955.0, "ctr": 0.297, "er": 0.676, "share": 2.73, "icp": "adj", "verdict": "HOLD"}, {"seg": "Supply Chain Manager", "impr": 140526.0, "clk": 490.0, "eng": 967.0, "ctr": 0.349, "er": 0.688, "share": 2.72, "icp": "core", "verdict": "INVEST"}, {"seg": "Transportation Manager", "impr": 130507.0, "clk": 487.0, "eng": 1143.0, "ctr": 0.373, "er": 0.876, "share": 2.52, "icp": "core", "verdict": "INVEST"}, {"seg": "Managing Director", "impr": 124282.0, "clk": 407.0, "eng": 1128.0, "ctr": 0.327, "er": 0.908, "share": 2.4, "icp": "adj", "verdict": "HOLD"}, {"seg": "Warehouse Manager", "impr": 119957.0, "clk": 467.0, "eng": 864.0, "ctr": 0.389, "er": 0.72, "share": 2.32, "icp": "core", "verdict": "INVEST"}, {"seg": "Fleet Manager", "impr": 117248.0, "clk": 527.0, "eng": 1310.0, "ctr": 0.449, "er": 1.117, "share": 2.27, "icp": "core", "verdict": "INVEST"}, {"seg": "Director", "impr": 116606.0, "clk": 247.0, "eng": 775.0, "ctr": 0.212, "er": 0.665, "share": 2.25, "icp": "adj", "verdict": "HOLD"}, {"seg": "Business Development Specialist", "impr": 109437.0, "clk": 174.0, "eng": 351.0, "ctr": 0.159, "er": 0.321, "share": 2.12, "icp": "adj", "verdict": "HOLD"}, {"seg": "Logistics Account Executive", "impr": 107491.0, "clk": 82.0, "eng": 134.0, "ctr": 0.076, "er": 0.125, "share": 2.08, "icp": "adj", "verdict": "HOLD"}, {"seg": "Vice President", "impr": 106954.0, "clk": 193.0, "eng": 462.0, "ctr": 0.18, "er": 0.432, "share": 2.07, "icp": "adj", "verdict": "HOLD"}, {"seg": "Safety Specialist", "impr": 105421.0, "clk": 388.0, "eng": 1004.0, "ctr": 0.368, "er": 0.952, "share": 2.04, "icp": "core", "verdict": "INVEST"}, {"seg": "Head of Operations", "impr": 100931.0, "clk": 340.0, "eng": 717.0, "ctr": 0.337, "er": 0.71, "share": 1.95, "icp": "core", "verdict": "INVEST"}], "tot_i": 5171853.0, "tot_c": 17941.0, "avg_ctr": 0.347}, "country": {"rows": [{"seg": "United States", "impr": 6077195, "clk": 17883, "eng": 36296, "region": "NA", "ctr": 0.294, "er": 0.597, "share": 35.89, "icp": "na", "verdict": "HOLD"}, {"seg": "Canada", "impr": 1817510, "clk": 6456, "eng": 15266, "region": "NA", "ctr": 0.355, "er": 0.84, "share": 10.73, "icp": "na", "verdict": "HOLD"}, {"seg": "United Kingdom", "impr": 1601316, "clk": 4010, "eng": 11859, "region": "EMEA", "ctr": 0.25, "er": 0.741, "share": 9.46, "icp": "na", "verdict": "HOLD"}, {"seg": "Spain", "impr": 1465595, "clk": 7361, "eng": 15316, "region": "EMEA", "ctr": 0.502, "er": 1.045, "share": 8.66, "icp": "na", "verdict": "INVEST"}, {"seg": "France", "impr": 1338758, "clk": 6664, "eng": 10991, "region": "EMEA", "ctr": 0.498, "er": 0.821, "share": 7.91, "icp": "na", "verdict": "INVEST"}, {"seg": "Indonesia", "impr": 1164719, "clk": 787, "eng": 1497, "region": "APAC", "ctr": 0.068, "er": 0.129, "share": 6.88, "icp": "na", "verdict": "REDUCE"}, {"seg": "Italy", "impr": 767924, "clk": 2863, "eng": 6030, "region": "EMEA", "ctr": 0.373, "er": 0.785, "share": 4.54, "icp": "na", "verdict": "HOLD"}, {"seg": "Philippines", "impr": 397012, "clk": 272, "eng": 464, "region": "APAC", "ctr": 0.069, "er": 0.117, "share": 2.34, "icp": "na", "verdict": "REDUCE"}, {"seg": "Australia", "impr": 325310, "clk": 887, "eng": 2256, "region": "APAC", "ctr": 0.273, "er": 0.693, "share": 1.92, "icp": "na", "verdict": "HOLD"}, {"seg": "Germany", "impr": 266492, "clk": 1452, "eng": 3221, "region": "EMEA", "ctr": 0.545, "er": 1.209, "share": 1.57, "icp": "na", "verdict": "INVEST"}, {"seg": "Dominican Republic", "impr": 249799, "clk": 806, "eng": 1553, "region": "LATAM", "ctr": 0.323, "er": 0.622, "share": 1.48, "icp": "na", "verdict": "HOLD"}, {"seg": "Chile", "impr": 248356, "clk": 974, "eng": 1706, "region": "LATAM", "ctr": 0.392, "er": 0.687, "share": 1.47, "icp": "na", "verdict": "INVEST"}, {"seg": "Peru", "impr": 232083, "clk": 929, "eng": 1758, "region": "LATAM", "ctr": 0.4, "er": 0.757, "share": 1.37, "icp": "na", "verdict": "INVEST"}, {"seg": "Colombia", "impr": 222735, "clk": 896, "eng": 1647, "region": "LATAM", "ctr": 0.402, "er": 0.739, "share": 1.32, "icp": "na", "verdict": "INVEST"}, {"seg": "Argentina", "impr": 162553, "clk": 636, "eng": 1172, "region": "LATAM", "ctr": 0.391, "er": 0.721, "share": 0.96, "icp": "na", "verdict": "INVEST"}, {"seg": "Netherlands", "impr": 139536, "clk": 685, "eng": 1515, "region": "EMEA", "ctr": 0.491, "er": 1.086, "share": 0.82, "icp": "na", "verdict": "INVEST"}, {"seg": "Ireland", "impr": 137615, "clk": 2752, "eng": 6825, "region": "EMEA", "ctr": 2.0, "er": 4.959, "share": 0.81, "icp": "na", "verdict": "INVEST"}, {"seg": "Malaysia", "impr": 127367, "clk": 158, "eng": 313, "region": "APAC", "ctr": 0.124, "er": 0.246, "share": 0.75, "icp": "na", "verdict": "REDUCE"}, {"seg": "Mexico", "impr": 96168, "clk": 424, "eng": 802, "region": "LATAM", "ctr": 0.441, "er": 0.834, "share": 0.57, "icp": "na", "verdict": "INVEST"}, {"seg": "Switzerland", "impr": 92824, "clk": 690, "eng": 1438, "region": "EMEA", "ctr": 0.743, "er": 1.549, "share": 0.55, "icp": "na", "verdict": "INVEST"}], "tot_i": 16930867, "tot_c": 57585, "avg_ctr": 0.34}}; const INV={"ytd": {"rows": [{"name": "Geotab North America", "spend": 185855.21, "impr": 8023225, "clk": 24987, "eng": 52769, "conv": 81, "leads": 0, "ctr": 0.311, "cpm": 23.16, "cpc": 7.44, "er": 0.658}, {"name": "Geotab - EMEA", "spend": 138774.33, "impr": 6071058, "clk": 28071, "eng": 60183, "conv": 6, "leads": 5, "ctr": 0.462, "cpm": 22.86, "cpc": 4.94, "er": 0.991}, {"name": "Geotab - LATAM", "spend": 29166.15, "impr": 1755870, "clk": 6449, "eng": 17435, "conv": 14, "leads": 1, "ctr": 0.367, "cpm": 16.61, "cpc": 4.52, "er": 0.993}, {"name": "Geotab - APAC", "spend": 23305.43, "impr": 2339299, "clk": 2697, "eng": 5760, "conv": 4, "leads": 0, "ctr": 0.115, "cpm": 9.96, "cpc": 8.64, "er": 0.246}], "tot": {"spend": 377101.12, "impr": 18189452, "clk": 62204, "eng": 136147, "conv": 105, "leads": 6}}, "tq": {"rows": [{"name": "Geotab North America", "spend": 123518.05, "impr": 4871734, "clk": 18732, "eng": 36036, "conv": 46, "leads": 0, "ctr": 0.385, "cpm": 25.35, "cpc": 6.59, "er": 0.74}, {"name": "Geotab - EMEA", "spend": 102223.07, "impr": 4413391, "clk": 16835, "eng": 35079, "conv": 6, "leads": 4, "ctr": 0.381, "cpm": 23.16, "cpc": 6.07, "er": 0.795}, {"name": "Geotab - LATAM", "spend": 19882.58, "impr": 1214781, "clk": 4526, "eng": 11775, "conv": 10, "leads": 1, "ctr": 0.373, "cpm": 16.37, "cpc": 4.39, "er": 0.969}, {"name": "Geotab - APAC", "spend": 19959.76, "impr": 1871900, "clk": 2030, "eng": 4340, "conv": 4, "leads": 0, "ctr": 0.108, "cpm": 10.66, "cpc": 9.83, "er": 0.232}], "tot": {"spend": 265583.46, "impr": 12371806, "clk": 42123, "eng": 87230, "conv": 66, "leads": 5}}};
+// investment table
+(function(){
+ const tb=document.querySelector('#invT tbody'); const T=INV.ytd.tot;
+ INV.ytd.rows.forEach(r=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>${r.name.replace('Geotab','').replace('-','').trim()}</td>
+  <td class=mono>$${Math.round(r.spend).toLocaleString()}</td>
+  <td class=mono>${(r.spend/T.spend*100).toFixed(1)}%</td>
+  <td class=mono>${r.impr.toLocaleString()}</td>
+  <td class=mono>${r.clk.toLocaleString()}</td>
+  <td class=mono>${r.ctr.toFixed(3)}%</td>
+  <td class=mono>$${r.cpc.toFixed(2)}</td>
+  <td class=mono>$${r.cpm.toFixed(2)}</td>
+  <td class=mono>${r.conv}</td><td class=mono>${r.leads}</td>`;
+  tb.appendChild(tr);
+ });
+})();
+
+const COLS=[
+ {k:'seg',l:'Segment',f:v=>v},
+ {k:'icp',l:'ICP',f:v=>v==='na'?'—':`<span class="icp-${v}">●</span>`},
+ {k:'impr',l:'Impressions',bar:true},
+ {k:'share',l:'% reach',f:v=>v.toFixed(1)+'%'},
+ {k:'clk',l:'Clicks',f:v=>v.toLocaleString()},
+ {k:'ctr',l:'CTR',f:v=>v.toFixed(3)+'%'},
+ {k:'er',l:'Eng rate',f:v=>v.toFixed(3)+'%'},
+ {k:'verdict',l:'Verdict',f:v=>v==='na'?'—':`<span class="v-badge ${v}">${v}</span>`},
+];
+let cur='seniority', sortK='impr', asc=false;
+function render(){
+ const d=DATA[cur]; const maxI=Math.max(...d.rows.map(r=>r.impr));
+ const th=document.querySelector('#dimT thead'); const tb=document.querySelector('#dimT tbody');
+ th.innerHTML='<tr>'+COLS.map(c=>`<th data-k="${c.k}">${c.l}${sortK===c.k?(asc?' ▲':' ▼'):''}</th>`).join('')+'</tr>';
+ let rows=[...d.rows].sort((a,b)=>{let x=a[sortK],y=b[sortK];if(typeof x==='string')return asc?x.localeCompare(y):y.localeCompare(x);return asc?x-y:y-x;});
+ tb.innerHTML=rows.map(r=>'<tr>'+COLS.map(c=>{
+   if(c.bar){const w=(r.impr/maxI*100).toFixed(1);return `<td class="barcell"><div class="barfill" style="width:${w}%"></div><span>${r.impr.toLocaleString()}</span></td>`;}
+   return `<td class="${['impr','share','clk','ctr','er'].includes(c.k)?'mono':''}">${c.f?c.f(r[c.k]):r[c.k]}</td>`;
+ }).join('')+'</tr>').join('');
+ th.querySelectorAll('th').forEach(h=>h.onclick=()=>{const k=h.dataset.k;if(sortK===k)asc=!asc;else{sortK=k;asc=false;}render();});
+ const notes={
+  seniority:'Senior (senior ICs) dominates reach but is ICP-adjacent. Manager and Owner are the on-ICP INVEST tiers. Entry/Training flagged for exclusion.',
+  function:'Operations is the anchor (34%, INVEST). ~20% of reach lands on off-ICP functions (HR, Education, Social Services, Healthcare) — the top recoverable leakage.',
+  industry:'~31% of impressions are unclassified by LinkedIn (excluded from this table) — treat industry as directional. Top-2 named industries (Internet, Mgmt Consulting) are off-ICP; core fleet verticals score INVEST.',
+  company_size:'55% of reach hits enterprise (1,001+), on-ICP for a 10K-fleet target. ~21% is sub-201 SMB — validate against which vertical-TOFU programs intend mid-market before trimming.',
+  title:'Top-25 titles by reach. Fleet/Operations/Logistics/Supply Chain/Transportation Managers cluster at the top with the best CTRs — exactly the fleet ICP.',
+  country:'Scored on CTR efficiency, not ICP. APAC markets (Indonesia, Philippines, Malaysia) are the low-CTR drag; US/Canada/Spain/France/Ireland are efficient.'
+ };
+ document.getElementById('dimNote').innerHTML=notes[cur]+` &nbsp;·&nbsp; dimension total reach: <b class="mono">${d.tot_i.toLocaleString()}</b> impressions, avg CTR <b class="mono">${d.avg_ctr.toFixed(3)}%</b>.`;
+}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+ cur=t.dataset.d;sortK='impr';asc=false;render();
+});
+render();
+</script>
+
+<!-- AI ASSISTANT PANEL -->
+<div id="ai-btn" onclick="openAI()" style="position:fixed;bottom:28px;right:28px;z-index:8000;cursor:pointer;
+  background:linear-gradient(135deg,#0d6e54,#12c98e);border-radius:50px;
+  padding:12px 20px;display:flex;align-items:center;gap:9px;
+  box-shadow:0 8px 32px rgba(18,201,142,.35);transition:transform .15s,box-shadow .15s;"
+  onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 40px rgba(18,201,142,.45)'"
+  onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(18,201,142,.35)'">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#fff" stroke-width="1.5"/><path d="M5 8h6M5 5.5h3M5 10.5h4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+  <span style="font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:#fff;letter-spacing:-.01em">Ask the Data</span>
+</div>
+
+<div id="__ai_btn" onclick="__openAI()" style="position:fixed;bottom:24px;right:24px;z-index:9998;cursor:pointer;background:#1B9BD1;border-radius:3px;padding:12px 18px;display:flex;align-items:center;gap:9px;box-shadow:0 8px 28px rgba(27,155,209,.3);font-family:'Inter',sans-serif;transition:transform .15s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+  <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" stroke="#fff" stroke-width="1.4"/><path d="M5 7.5h5M5 5.5h3M5 9.5h4" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff">Ask the Data</span>
+</div>
+<div id="__ai_overlay" onclick="__closeAI()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9998;backdrop-filter:blur(6px)"></div>
+<div id="__ai_panel" style="display:none;position:fixed;right:0;top:0;bottom:0;width:460px;max-width:95vw;background:#15151A;border-left:1px solid #22222A;z-index:9999;flex-direction:column;overflow:hidden;font-family:'Inter',sans-serif">
+  <div style="padding:20px 22px 16px;border-bottom:1px solid #22222A;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:#0A0A0C">
+    <div>
+      <div style="font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:-.01em;color:#F4F1EA">Ask the Data</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#C8C4B8;opacity:.45;margin-top:3px">Live Data · Impactable Intelligence</div>
+    </div>
+    <button onclick="__closeAI()" style="background:#22222A;border:none;border-radius:2px;color:#C8C4B8;cursor:pointer;padding:7px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;opacity:.6">Esc</button>
+  </div>
+  <div id="__ai_msgs" style="flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:11px">
+    <div style="background:#0A0A0C;border:1px solid #22222A;border-radius:4px;padding:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin-bottom:8px">Impactable AI</div>
+      <div style="font-size:13px;color:#C8C4B8;line-height:1.6;margin-bottom:12px">Ask about this report or the wider Geotab program. I pull live LinkedIn data and Impactable's strategy playbooks.</div>
+      <div style="display:flex;flex-direction:column;gap:6px" id="__ai_sugg">
+        <button class="__sg" onclick="__sugg(this)">What stands out in this report?</button>
+        <button class="__sg" onclick="__sugg(this)">What should we action this week?</button>
+        <button class="__sg" onclick="__sugg(this)">How does this compare to best practice?</button>
+      </div>
+    </div>
+  </div>
+  <div style="padding:14px 18px;border-top:1px solid #22222A;flex-shrink:0;display:flex;gap:9px;align-items:flex-end;background:#0A0A0C">
+    <textarea id="__ai_in" placeholder="Ask anything..." style="flex:1;background:#22222A;border:1px solid rgba(255,255,255,.06);border-radius:2px;padding:11px 13px;font-size:13px;color:#F4F1EA;font-family:'Inter',sans-serif;resize:none;min-height:46px;max-height:120px;outline:none;line-height:1.5" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();__send();}"></textarea>
+    <button onclick="__send()" id="__ai_send" style="background:#1B9BD1;border:none;border-radius:2px;padding:11px 17px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#fff;cursor:pointer;flex-shrink:0;height:46px">Send</button>
+  </div>
+</div>
+<style>.__sg{background:rgba(27,155,209,.06);border:1px solid rgba(27,155,209,.15);border-radius:2px;padding:8px 12px;font-size:12px;color:#5BB8E0;cursor:pointer;text-align:left;font-family:'Inter',sans-serif;transition:background .15s}.__sg:hover{background:rgba(27,155,209,.13)}#__ai_u{background:#22222A;border-radius:4px 4px 2px 4px;padding:10px 13px;align-self:flex-end;max-width:88%}#__aidot1,#__aidot2,#__aidot3{width:5px;height:5px;background:#1B9BD1;border-radius:50%;display:inline-block;animation:__blink 1.2s infinite}#__aidot2{animation-delay:.2s}#__aidot3{animation-delay:.4s}@keyframes __blink{0%,100%{opacity:.2}50%{opacity:1}}</style>
+<script>
+var __aiH=[];
+function __openAI(){document.getElementById('__ai_overlay').style.display='block';document.getElementById('__ai_panel').style.display='flex';document.getElementById('__ai_btn').style.display='none';document.getElementById('__ai_in').focus();}
+function __closeAI(){document.getElementById('__ai_overlay').style.display='none';document.getElementById('__ai_panel').style.display='none';document.getElementById('__ai_btn').style.display='flex';}
+function __sugg(b){document.getElementById('__ai_in').value=b.textContent;document.getElementById('__ai_sugg').style.display='none';__send();}
+function __esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function __fmtMd(t){
+  t=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  t=t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  t=t.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  var lines=t.split(/\n/);var out=[];var listType=null;var listItems=[];var para=[];
+  function fP(){if(para.length){out.push('<p>'+para.join(' ')+'</p>');para=[];}}
+  function fL(){if(listItems.length){out.push('<'+listType+'>'+listItems.map(function(li){return '<li>'+li+'</li>';}).join('')+'</'+listType+'>');listItems=[];listType=null;}}
+  for(var i=0;i<lines.length;i++){var ln=lines[i].trim();if(!ln){fP();fL();continue;}
+    var num=ln.match(/^(\d+)[.)]\s+(.*)$/);var bul=ln.match(/^[-*\u2022]\s+(.*)$/);var hdr=ln.match(/^([A-Z][A-Z\s&]{2,40}):?$/);
+    if(num){fP();if(listType&&listType!=='ol')fL();listType='ol';listItems.push(num[2]);}
+    else if(bul){fP();if(listType&&listType!=='ul')fL();listType='ul';listItems.push(bul[1]);}
+    else if(hdr&&ln.indexOf('<a ')<0){fP();fL();out.push('<h4>'+ln.replace(/:$/,'')+'</h4>');}
+    else{fL();para.push(ln);}}
+  fP();fL();return out.join('');
+}
+function __add(r,t){var m=document.getElementById('__ai_msgs');var d=document.createElement('div');if(r==='u'){d.id='__ai_u';d.innerHTML='<div style="font-size:13px;color:#F4F1EA;line-height:1.5">'+__esc(t)+'</div>';}else if(r==='t'){d.id='__ai_ti';d.style.cssText='background:rgba(27,155,209,.05);border:1px solid rgba(27,155,209,.12);border-radius:4px 4px 4px 2px;padding:12px 14px;align-self:flex-start';d.innerHTML='<span id="__aidot1"></span> <span id="__aidot2"></span> <span id="__aidot3"></span>';}else{d.style.cssText='background:rgba(27,155,209,.05);border:1px solid rgba(27,155,209,.12);border-radius:4px 4px 4px 2px;padding:13px 15px;align-self:flex-start;max-width:95%';d.innerHTML='<div style="font-family:\'JetBrains Mono\',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin-bottom:7px">Impactable AI</div><div class="__md">'+__fmtMd(t)+'</div>';}m.appendChild(d);m.scrollTop=m.scrollHeight;return d;}
+async function __sendQ(q){document.getElementById('__ai_send').disabled=true;__add('u',q);var ty=__add('t','');__aiH.push({role:'user',content:q});try{var r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:__aiH.slice(0,-1)})});var d=await r.json();ty.remove();var a=d.answer||'No response.';__add('a',a);__aiH.push({role:'assistant',content:a});if(__aiH.length>20)__aiH=__aiH.slice(-20);}catch(e){ty.remove();__add('a','Error reaching data layer. Try again.');}document.getElementById('__ai_send').disabled=false;document.getElementById('__ai_in').focus();}
+function __send(){var i=document.getElementById('__ai_in');var q=i.value.trim();if(!q)return;i.value='';__sendQ(q);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')__closeAI();});
+</script>
+
+<style>.__md{font-size:13px;color:#F4F1EA;line-height:1.6;opacity:.92}.__md strong{color:#fff;font-weight:700}.__md a{color:#5BB8E0;text-decoration:underline;text-underline-offset:2px}.__md a:hover{color:#1B9BD1}.__md p{margin:0 0 10px}.__md p:last-child{margin-bottom:0}.__md ul,.__md ol{margin:6px 0 12px;padding-left:4px;list-style:none}.__md li{position:relative;padding-left:20px;margin-bottom:7px;line-height:1.55}.__md ul li::before{content:"";position:absolute;left:4px;top:8px;width:4px;height:4px;border-radius:50%;background:#1B9BD1}.__md ol{counter-reset:m}.__md ol li{counter-increment:m}.__md ol li::before{content:counter(m);position:absolute;left:0;top:0;font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;color:#1B9BD1;background:rgba(27,155,209,.1);width:16px;height:16px;border-radius:3px;display:flex;align-items:center;justify-content:center}.__md h4{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#1B9BD1;margin:14px 0 8px;font-weight:700}.__md h4:first-child{margin-top:0}</style>
+</body></html>
