@@ -47,7 +47,7 @@ function metricRow(label, r) {
 
 function stage(name) {
   const t = String(name || '').toUpperCase();
-  if (/^1:1\b/.test(String(name).trim())) return 'Named';
+  // 1:1 named-account and persona/always-on campaigns fold into "Other"
   if (/\bTOFU?\b/.test(t)) return 'TOF';
   if (/\bMOFU?\b/.test(t)) return 'MOF';
   if (/\bBOFU?\b/.test(t)) return 'BOF';
