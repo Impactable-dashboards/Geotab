@@ -1,141 +1,1783 @@
 {
   "meta": {
+    "account": "Geotab North America",
     "generated": "Jun 20, 2026",
-    "window": "Last 30 days",
-    "totalSpend": "$443,464",
-    "totalImpressions": "1.5M",
-    "reach": 138952,
-    "frequency": 11.1
+    "rangeStart": "2026-02-14",
+    "rangeEnd": "2026-06-20"
   },
-  "funnel": [
+  "series": {
+    "daily": [
+      {
+        "label": "2/14",
+        "spend": 330.4,
+        "conversions": 0,
+        "clicks": 37,
+        "impressions": 18972,
+        "cpc": 8.93,
+        "cpm": 17.42,
+        "ctr": 0.0019
+      },
+      {
+        "label": "2/15",
+        "spend": 314.68,
+        "conversions": 0,
+        "clicks": 32,
+        "impressions": 19879,
+        "cpc": 9.83,
+        "cpm": 15.83,
+        "ctr": 0.0016
+      },
+      {
+        "label": "2/16",
+        "spend": 1181.46,
+        "conversions": 1,
+        "clicks": 97,
+        "impressions": 58522,
+        "cpc": 12.18,
+        "cpm": 20.19,
+        "ctr": 0.0017
+      },
+      {
+        "label": "2/17",
+        "spend": 1188.83,
+        "conversions": 1,
+        "clicks": 106,
+        "impressions": 74981,
+        "cpc": 11.22,
+        "cpm": 15.86,
+        "ctr": 0.0014
+      },
+      {
+        "label": "2/18",
+        "spend": 1241.66,
+        "conversions": 1,
+        "clicks": 114,
+        "impressions": 64946,
+        "cpc": 10.89,
+        "cpm": 19.12,
+        "ctr": 0.0018
+      },
+      {
+        "label": "2/19",
+        "spend": 1203.1,
+        "conversions": 1,
+        "clicks": 121,
+        "impressions": 68487,
+        "cpc": 9.94,
+        "cpm": 17.57,
+        "ctr": 0.0018
+      },
+      {
+        "label": "2/20",
+        "spend": 966.72,
+        "conversions": 1,
+        "clicks": 123,
+        "impressions": 61576,
+        "cpc": 7.86,
+        "cpm": 15.7,
+        "ctr": 0.002
+      },
+      {
+        "label": "2/21",
+        "spend": 390.3,
+        "conversions": 0,
+        "clicks": 82,
+        "impressions": 20274,
+        "cpc": 4.76,
+        "cpm": 19.25,
+        "ctr": 0.004
+      },
+      {
+        "label": "2/22",
+        "spend": 320.93,
+        "conversions": 0,
+        "clicks": 68,
+        "impressions": 17936,
+        "cpc": 4.72,
+        "cpm": 17.89,
+        "ctr": 0.0038
+      },
+      {
+        "label": "2/23",
+        "spend": 1148.95,
+        "conversions": 1,
+        "clicks": 148,
+        "impressions": 77813,
+        "cpc": 7.76,
+        "cpm": 14.77,
+        "ctr": 0.0019
+      },
+      {
+        "label": "2/24",
+        "spend": 1271.14,
+        "conversions": 0,
+        "clicks": 177,
+        "impressions": 81523,
+        "cpc": 7.18,
+        "cpm": 15.59,
+        "ctr": 0.0022
+      },
+      {
+        "label": "2/25",
+        "spend": 1178.66,
+        "conversions": 0,
+        "clicks": 146,
+        "impressions": 82165,
+        "cpc": 8.07,
+        "cpm": 14.35,
+        "ctr": 0.0018
+      },
+      {
+        "label": "2/26",
+        "spend": 1144.91,
+        "conversions": 1,
+        "clicks": 129,
+        "impressions": 80742,
+        "cpc": 8.88,
+        "cpm": 14.18,
+        "ctr": 0.0016
+      },
+      {
+        "label": "2/27",
+        "spend": 943.29,
+        "conversions": 1,
+        "clicks": 145,
+        "impressions": 72132,
+        "cpc": 6.51,
+        "cpm": 13.08,
+        "ctr": 0.002
+      },
+      {
+        "label": "2/28",
+        "spend": 288.64,
+        "conversions": 0,
+        "clicks": 81,
+        "impressions": 21705,
+        "cpc": 3.56,
+        "cpm": 13.3,
+        "ctr": 0.0037
+      },
+      {
+        "label": "3/01",
+        "spend": 237.18,
+        "conversions": 0,
+        "clicks": 74,
+        "impressions": 23079,
+        "cpc": 3.21,
+        "cpm": 10.28,
+        "ctr": 0.0032
+      },
+      {
+        "label": "3/02",
+        "spend": 1117.95,
+        "conversions": 1,
+        "clicks": 143,
+        "impressions": 71166,
+        "cpc": 7.82,
+        "cpm": 15.71,
+        "ctr": 0.002
+      },
+      {
+        "label": "3/03",
+        "spend": 1106.14,
+        "conversions": 1,
+        "clicks": 132,
+        "impressions": 66452,
+        "cpc": 8.38,
+        "cpm": 16.65,
+        "ctr": 0.002
+      },
+      {
+        "label": "3/04",
+        "spend": 1148.46,
+        "conversions": 0,
+        "clicks": 137,
+        "impressions": 68287,
+        "cpc": 8.38,
+        "cpm": 16.82,
+        "ctr": 0.002
+      },
+      {
+        "label": "3/05",
+        "spend": 1146.21,
+        "conversions": 1,
+        "clicks": 133,
+        "impressions": 60813,
+        "cpc": 8.62,
+        "cpm": 18.85,
+        "ctr": 0.0022
+      },
+      {
+        "label": "3/06",
+        "spend": 1025.98,
+        "conversions": 0,
+        "clicks": 133,
+        "impressions": 57382,
+        "cpc": 7.71,
+        "cpm": 17.88,
+        "ctr": 0.0023
+      },
+      {
+        "label": "3/07",
+        "spend": 392.67,
+        "conversions": 0,
+        "clicks": 95,
+        "impressions": 21420,
+        "cpc": 4.13,
+        "cpm": 18.33,
+        "ctr": 0.0044
+      },
+      {
+        "label": "3/08",
+        "spend": 318.73,
+        "conversions": 0,
+        "clicks": 59,
+        "impressions": 18185,
+        "cpc": 5.4,
+        "cpm": 17.53,
+        "ctr": 0.0032
+      },
+      {
+        "label": "3/09",
+        "spend": 1188.72,
+        "conversions": 0,
+        "clicks": 142,
+        "impressions": 67364,
+        "cpc": 8.37,
+        "cpm": 17.65,
+        "ctr": 0.0021
+      },
+      {
+        "label": "3/10",
+        "spend": 1072.68,
+        "conversions": 1,
+        "clicks": 143,
+        "impressions": 63424,
+        "cpc": 7.5,
+        "cpm": 16.91,
+        "ctr": 0.0022
+      },
+      {
+        "label": "3/11",
+        "spend": 1153.05,
+        "conversions": 0,
+        "clicks": 149,
+        "impressions": 67888,
+        "cpc": 7.74,
+        "cpm": 16.98,
+        "ctr": 0.0022
+      },
+      {
+        "label": "3/12",
+        "spend": 1313.84,
+        "conversions": 0,
+        "clicks": 166,
+        "impressions": 65737,
+        "cpc": 7.91,
+        "cpm": 19.99,
+        "ctr": 0.0025
+      },
+      {
+        "label": "3/13",
+        "spend": 998.35,
+        "conversions": 0,
+        "clicks": 135,
+        "impressions": 59980,
+        "cpc": 7.4,
+        "cpm": 16.64,
+        "ctr": 0.0022
+      },
+      {
+        "label": "3/14",
+        "spend": 478.14,
+        "conversions": 0,
+        "clicks": 87,
+        "impressions": 22340,
+        "cpc": 5.5,
+        "cpm": 21.4,
+        "ctr": 0.0039
+      },
+      {
+        "label": "3/15",
+        "spend": 182.96,
+        "conversions": 0,
+        "clicks": 56,
+        "impressions": 22414,
+        "cpc": 3.27,
+        "cpm": 8.16,
+        "ctr": 0.0025
+      },
+      {
+        "label": "3/16",
+        "spend": 1145.05,
+        "conversions": 0,
+        "clicks": 157,
+        "impressions": 73100,
+        "cpc": 7.29,
+        "cpm": 15.66,
+        "ctr": 0.0022
+      },
+      {
+        "label": "3/17",
+        "spend": 827.87,
+        "conversions": 1,
+        "clicks": 111,
+        "impressions": 61207,
+        "cpc": 7.46,
+        "cpm": 13.53,
+        "ctr": 0.0018
+      },
+      {
+        "label": "3/18",
+        "spend": 1187.32,
+        "conversions": 0,
+        "clicks": 151,
+        "impressions": 72925,
+        "cpc": 7.86,
+        "cpm": 16.28,
+        "ctr": 0.0021
+      },
+      {
+        "label": "3/19",
+        "spend": 1153.9,
+        "conversions": 3,
+        "clicks": 203,
+        "impressions": 71146,
+        "cpc": 5.68,
+        "cpm": 16.22,
+        "ctr": 0.0029
+      },
+      {
+        "label": "3/20",
+        "spend": 1042.24,
+        "conversions": 0,
+        "clicks": 131,
+        "impressions": 63410,
+        "cpc": 7.96,
+        "cpm": 16.44,
+        "ctr": 0.0021
+      },
+      {
+        "label": "3/21",
+        "spend": 635.14,
+        "conversions": 0,
+        "clicks": 87,
+        "impressions": 26523,
+        "cpc": 7.3,
+        "cpm": 23.95,
+        "ctr": 0.0033
+      },
+      {
+        "label": "3/22",
+        "spend": 288.92,
+        "conversions": 4,
+        "clicks": 51,
+        "impressions": 24416,
+        "cpc": 5.67,
+        "cpm": 11.83,
+        "ctr": 0.0021
+      },
+      {
+        "label": "3/23",
+        "spend": 1205.76,
+        "conversions": 1,
+        "clicks": 138,
+        "impressions": 83423,
+        "cpc": 8.74,
+        "cpm": 14.45,
+        "ctr": 0.0016
+      },
+      {
+        "label": "3/24",
+        "spend": 1202.58,
+        "conversions": 0,
+        "clicks": 145,
+        "impressions": 72692,
+        "cpc": 8.29,
+        "cpm": 16.54,
+        "ctr": 0.002
+      },
+      {
+        "label": "3/25",
+        "spend": 1272.76,
+        "conversions": 0,
+        "clicks": 157,
+        "impressions": 68405,
+        "cpc": 8.11,
+        "cpm": 18.61,
+        "ctr": 0.0023
+      },
+      {
+        "label": "3/26",
+        "spend": 1087.01,
+        "conversions": 2,
+        "clicks": 130,
+        "impressions": 61917,
+        "cpc": 8.36,
+        "cpm": 17.56,
+        "ctr": 0.0021
+      },
+      {
+        "label": "3/27",
+        "spend": 961.38,
+        "conversions": 0,
+        "clicks": 135,
+        "impressions": 51376,
+        "cpc": 7.12,
+        "cpm": 18.71,
+        "ctr": 0.0026
+      },
+      {
+        "label": "3/28",
+        "spend": 423.95,
+        "conversions": 0,
+        "clicks": 83,
+        "impressions": 18746,
+        "cpc": 5.11,
+        "cpm": 22.62,
+        "ctr": 0.0044
+      },
+      {
+        "label": "3/29",
+        "spend": 224.31,
+        "conversions": 0,
+        "clicks": 78,
+        "impressions": 18650,
+        "cpc": 2.88,
+        "cpm": 12.03,
+        "ctr": 0.0042
+      },
+      {
+        "label": "3/30",
+        "spend": 1247.58,
+        "conversions": 0,
+        "clicks": 152,
+        "impressions": 73257,
+        "cpc": 8.21,
+        "cpm": 17.03,
+        "ctr": 0.0021
+      },
+      {
+        "label": "3/31",
+        "spend": 1068.26,
+        "conversions": 0,
+        "clicks": 157,
+        "impressions": 73091,
+        "cpc": 6.8,
+        "cpm": 14.62,
+        "ctr": 0.0022
+      },
+      {
+        "label": "4/01",
+        "spend": 1408.55,
+        "conversions": 0,
+        "clicks": 165,
+        "impressions": 68815,
+        "cpc": 8.54,
+        "cpm": 20.47,
+        "ctr": 0.0024
+      },
+      {
+        "label": "4/02",
+        "spend": 1307.01,
+        "conversions": 0,
+        "clicks": 179,
+        "impressions": 70890,
+        "cpc": 7.3,
+        "cpm": 18.44,
+        "ctr": 0.0025
+      },
+      {
+        "label": "4/03",
+        "spend": 1168.02,
+        "conversions": 0,
+        "clicks": 141,
+        "impressions": 46736,
+        "cpc": 8.28,
+        "cpm": 24.99,
+        "ctr": 0.003
+      },
+      {
+        "label": "4/04",
+        "spend": 734.41,
+        "conversions": 0,
+        "clicks": 104,
+        "impressions": 23474,
+        "cpc": 7.06,
+        "cpm": 31.29,
+        "ctr": 0.0044
+      },
+      {
+        "label": "4/05",
+        "spend": 459.86,
+        "conversions": 3,
+        "clicks": 94,
+        "impressions": 20071,
+        "cpc": 4.89,
+        "cpm": 22.91,
+        "ctr": 0.0047
+      },
+      {
+        "label": "4/06",
+        "spend": 1299.48,
+        "conversions": 1,
+        "clicks": 144,
+        "impressions": 63203,
+        "cpc": 9.02,
+        "cpm": 20.56,
+        "ctr": 0.0023
+      },
+      {
+        "label": "4/07",
+        "spend": 1202.19,
+        "conversions": 1,
+        "clicks": 142,
+        "impressions": 63397,
+        "cpc": 8.47,
+        "cpm": 18.96,
+        "ctr": 0.0022
+      },
+      {
+        "label": "4/08",
+        "spend": 1273.76,
+        "conversions": 0,
+        "clicks": 224,
+        "impressions": 70896,
+        "cpc": 5.69,
+        "cpm": 17.97,
+        "ctr": 0.0032
+      },
+      {
+        "label": "4/09",
+        "spend": 1103.85,
+        "conversions": 1,
+        "clicks": 197,
+        "impressions": 64276,
+        "cpc": 5.6,
+        "cpm": 17.17,
+        "ctr": 0.0031
+      },
+      {
+        "label": "4/10",
+        "spend": 1019.96,
+        "conversions": 0,
+        "clicks": 172,
+        "impressions": 53682,
+        "cpc": 5.93,
+        "cpm": 19,
+        "ctr": 0.0032
+      },
+      {
+        "label": "4/11",
+        "spend": 546.18,
+        "conversions": 0,
+        "clicks": 128,
+        "impressions": 16824,
+        "cpc": 4.27,
+        "cpm": 32.46,
+        "ctr": 0.0076
+      },
+      {
+        "label": "4/12",
+        "spend": 301.57,
+        "conversions": 0,
+        "clicks": 69,
+        "impressions": 16317,
+        "cpc": 4.37,
+        "cpm": 18.48,
+        "ctr": 0.0042
+      },
+      {
+        "label": "4/13",
+        "spend": 1214.05,
+        "conversions": 0,
+        "clicks": 168,
+        "impressions": 57707,
+        "cpc": 7.23,
+        "cpm": 21.04,
+        "ctr": 0.0029
+      },
+      {
+        "label": "4/14",
+        "spend": 1211.83,
+        "conversions": 2,
+        "clicks": 161,
+        "impressions": 62683,
+        "cpc": 7.53,
+        "cpm": 19.33,
+        "ctr": 0.0026
+      },
+      {
+        "label": "4/15",
+        "spend": 1349.67,
+        "conversions": 0,
+        "clicks": 215,
+        "impressions": 68107,
+        "cpc": 6.28,
+        "cpm": 19.82,
+        "ctr": 0.0032
+      },
+      {
+        "label": "4/16",
+        "spend": 1174.32,
+        "conversions": 0,
+        "clicks": 162,
+        "impressions": 62823,
+        "cpc": 7.25,
+        "cpm": 18.69,
+        "ctr": 0.0026
+      },
+      {
+        "label": "4/17",
+        "spend": 938.56,
+        "conversions": 1,
+        "clicks": 122,
+        "impressions": 54119,
+        "cpc": 7.69,
+        "cpm": 17.34,
+        "ctr": 0.0022
+      },
+      {
+        "label": "4/18",
+        "spend": 461.3,
+        "conversions": 0,
+        "clicks": 87,
+        "impressions": 17561,
+        "cpc": 5.3,
+        "cpm": 26.27,
+        "ctr": 0.005
+      },
+      {
+        "label": "4/19",
+        "spend": 244.5,
+        "conversions": 0,
+        "clicks": 52,
+        "impressions": 15731,
+        "cpc": 4.7,
+        "cpm": 15.54,
+        "ctr": 0.0033
+      },
+      {
+        "label": "4/20",
+        "spend": 2105.41,
+        "conversions": 1,
+        "clicks": 382,
+        "impressions": 73418,
+        "cpc": 5.51,
+        "cpm": 28.68,
+        "ctr": 0.0052
+      },
+      {
+        "label": "4/21",
+        "spend": 2527.56,
+        "conversions": 1,
+        "clicks": 401,
+        "impressions": 75186,
+        "cpc": 6.3,
+        "cpm": 33.62,
+        "ctr": 0.0053
+      },
+      {
+        "label": "4/22",
+        "spend": 2647.75,
+        "conversions": 1,
+        "clicks": 428,
+        "impressions": 69400,
+        "cpc": 6.19,
+        "cpm": 38.15,
+        "ctr": 0.0062
+      },
+      {
+        "label": "4/23",
+        "spend": 2502.91,
+        "conversions": 0,
+        "clicks": 432,
+        "impressions": 71949,
+        "cpc": 5.79,
+        "cpm": 34.79,
+        "ctr": 0.006
+      },
+      {
+        "label": "4/24",
+        "spend": 2476.73,
+        "conversions": 0,
+        "clicks": 391,
+        "impressions": 60770,
+        "cpc": 6.33,
+        "cpm": 40.76,
+        "ctr": 0.0064
+      },
+      {
+        "label": "4/25",
+        "spend": 1639.65,
+        "conversions": 0,
+        "clicks": 285,
+        "impressions": 26009,
+        "cpc": 5.75,
+        "cpm": 63.04,
+        "ctr": 0.011
+      },
+      {
+        "label": "4/26",
+        "spend": 1464.99,
+        "conversions": 0,
+        "clicks": 227,
+        "impressions": 22462,
+        "cpc": 6.45,
+        "cpm": 65.22,
+        "ctr": 0.0101
+      },
+      {
+        "label": "4/27",
+        "spend": 2331.79,
+        "conversions": 3,
+        "clicks": 359,
+        "impressions": 74342,
+        "cpc": 6.5,
+        "cpm": 31.37,
+        "ctr": 0.0048
+      },
+      {
+        "label": "4/28",
+        "spend": 2499.29,
+        "conversions": 1,
+        "clicks": 437,
+        "impressions": 73221,
+        "cpc": 5.72,
+        "cpm": 34.13,
+        "ctr": 0.006
+      },
+      {
+        "label": "4/29",
+        "spend": 2750.07,
+        "conversions": 0,
+        "clicks": 449,
+        "impressions": 67839,
+        "cpc": 6.12,
+        "cpm": 40.54,
+        "ctr": 0.0066
+      },
+      {
+        "label": "4/30",
+        "spend": 2968.08,
+        "conversions": 0,
+        "clicks": 458,
+        "impressions": 66918,
+        "cpc": 6.48,
+        "cpm": 44.35,
+        "ctr": 0.0068
+      },
+      {
+        "label": "5/01",
+        "spend": 2356.71,
+        "conversions": 0,
+        "clicks": 325,
+        "impressions": 60219,
+        "cpc": 7.25,
+        "cpm": 39.14,
+        "ctr": 0.0054
+      },
+      {
+        "label": "5/02",
+        "spend": 1780.51,
+        "conversions": 0,
+        "clicks": 256,
+        "impressions": 31144,
+        "cpc": 6.96,
+        "cpm": 57.17,
+        "ctr": 0.0082
+      },
+      {
+        "label": "5/03",
+        "spend": 1393.59,
+        "conversions": 0,
+        "clicks": 195,
+        "impressions": 28453,
+        "cpc": 7.15,
+        "cpm": 48.98,
+        "ctr": 0.0069
+      },
+      {
+        "label": "5/04",
+        "spend": 2179.27,
+        "conversions": 0,
+        "clicks": 291,
+        "impressions": 86537,
+        "cpc": 7.49,
+        "cpm": 25.18,
+        "ctr": 0.0034
+      },
+      {
+        "label": "5/05",
+        "spend": 1802.74,
+        "conversions": 2,
+        "clicks": 354,
+        "impressions": 80625,
+        "cpc": 5.09,
+        "cpm": 22.36,
+        "ctr": 0.0044
+      },
+      {
+        "label": "5/06",
+        "spend": 1953.55,
+        "conversions": 0,
+        "clicks": 345,
+        "impressions": 71465,
+        "cpc": 5.66,
+        "cpm": 27.34,
+        "ctr": 0.0048
+      },
+      {
+        "label": "5/07",
+        "spend": 1829.57,
+        "conversions": 0,
+        "clicks": 344,
+        "impressions": 67523,
+        "cpc": 5.32,
+        "cpm": 27.1,
+        "ctr": 0.0051
+      },
+      {
+        "label": "5/08",
+        "spend": 2050.82,
+        "conversions": 1,
+        "clicks": 331,
+        "impressions": 61538,
+        "cpc": 6.2,
+        "cpm": 33.33,
+        "ctr": 0.0054
+      },
+      {
+        "label": "5/09",
+        "spend": 1215.4,
+        "conversions": 0,
+        "clicks": 177,
+        "impressions": 25900,
+        "cpc": 6.87,
+        "cpm": 46.93,
+        "ctr": 0.0068
+      },
+      {
+        "label": "5/10",
+        "spend": 764.71,
+        "conversions": 0,
+        "clicks": 92,
+        "impressions": 20261,
+        "cpc": 8.31,
+        "cpm": 37.74,
+        "ctr": 0.0045
+      },
+      {
+        "label": "5/11",
+        "spend": 1990.98,
+        "conversions": 0,
+        "clicks": 282,
+        "impressions": 79671,
+        "cpc": 7.06,
+        "cpm": 24.99,
+        "ctr": 0.0035
+      },
+      {
+        "label": "5/12",
+        "spend": 2215.97,
+        "conversions": 0,
+        "clicks": 335,
+        "impressions": 78644,
+        "cpc": 6.61,
+        "cpm": 28.18,
+        "ctr": 0.0043
+      },
+      {
+        "label": "5/13",
+        "spend": 2107.64,
+        "conversions": 3,
+        "clicks": 306,
+        "impressions": 78037,
+        "cpc": 6.89,
+        "cpm": 27.01,
+        "ctr": 0.0039
+      },
+      {
+        "label": "5/14",
+        "spend": 1961.98,
+        "conversions": 3,
+        "clicks": 300,
+        "impressions": 66735,
+        "cpc": 6.54,
+        "cpm": 29.4,
+        "ctr": 0.0045
+      },
+      {
+        "label": "5/15",
+        "spend": 1551.33,
+        "conversions": 1,
+        "clicks": 257,
+        "impressions": 48780,
+        "cpc": 6.04,
+        "cpm": 31.8,
+        "ctr": 0.0053
+      },
+      {
+        "label": "5/16",
+        "spend": 1153.18,
+        "conversions": 0,
+        "clicks": 196,
+        "impressions": 23379,
+        "cpc": 5.88,
+        "cpm": 49.33,
+        "ctr": 0.0084
+      },
+      {
+        "label": "5/17",
+        "spend": 993.46,
+        "conversions": 0,
+        "clicks": 132,
+        "impressions": 23020,
+        "cpc": 7.53,
+        "cpm": 43.16,
+        "ctr": 0.0057
+      },
+      {
+        "label": "5/18",
+        "spend": 2036.94,
+        "conversions": 2,
+        "clicks": 321,
+        "impressions": 61674,
+        "cpc": 6.35,
+        "cpm": 33.03,
+        "ctr": 0.0052
+      },
+      {
+        "label": "5/19",
+        "spend": 1441.37,
+        "conversions": 0,
+        "clicks": 308,
+        "impressions": 68153,
+        "cpc": 4.68,
+        "cpm": 21.15,
+        "ctr": 0.0045
+      },
+      {
+        "label": "5/20",
+        "spend": 1886.86,
+        "conversions": 1,
+        "clicks": 299,
+        "impressions": 66292,
+        "cpc": 6.31,
+        "cpm": 28.46,
+        "ctr": 0.0045
+      },
+      {
+        "label": "5/21",
+        "spend": 2067.85,
+        "conversions": 2,
+        "clicks": 297,
+        "impressions": 70880,
+        "cpc": 6.96,
+        "cpm": 29.17,
+        "ctr": 0.0042
+      },
+      {
+        "label": "5/22",
+        "spend": 1781.22,
+        "conversions": 2,
+        "clicks": 259,
+        "impressions": 51442,
+        "cpc": 6.88,
+        "cpm": 34.63,
+        "ctr": 0.005
+      },
+      {
+        "label": "5/23",
+        "spend": 1498.89,
+        "conversions": 0,
+        "clicks": 214,
+        "impressions": 26884,
+        "cpc": 7,
+        "cpm": 55.75,
+        "ctr": 0.008
+      },
+      {
+        "label": "5/24",
+        "spend": 1118.55,
+        "conversions": 0,
+        "clicks": 137,
+        "impressions": 22996,
+        "cpc": 8.16,
+        "cpm": 48.64,
+        "ctr": 0.006
+      },
+      {
+        "label": "5/25",
+        "spend": 1874.1,
+        "conversions": 0,
+        "clicks": 285,
+        "impressions": 38480,
+        "cpc": 6.58,
+        "cpm": 48.7,
+        "ctr": 0.0074
+      },
+      {
+        "label": "5/26",
+        "spend": 1742.14,
+        "conversions": 0,
+        "clicks": 288,
+        "impressions": 65827,
+        "cpc": 6.05,
+        "cpm": 26.47,
+        "ctr": 0.0044
+      },
+      {
+        "label": "5/27",
+        "spend": 1944.09,
+        "conversions": 1,
+        "clicks": 322,
+        "impressions": 70550,
+        "cpc": 6.04,
+        "cpm": 27.56,
+        "ctr": 0.0046
+      },
+      {
+        "label": "5/28",
+        "spend": 2123.35,
+        "conversions": 2,
+        "clicks": 305,
+        "impressions": 65938,
+        "cpc": 6.96,
+        "cpm": 32.2,
+        "ctr": 0.0046
+      },
+      {
+        "label": "5/29",
+        "spend": 1981.95,
+        "conversions": 0,
+        "clicks": 258,
+        "impressions": 53148,
+        "cpc": 7.68,
+        "cpm": 37.29,
+        "ctr": 0.0049
+      },
+      {
+        "label": "5/30",
+        "spend": 1601.73,
+        "conversions": 0,
+        "clicks": 184,
+        "impressions": 25395,
+        "cpc": 8.71,
+        "cpm": 63.07,
+        "ctr": 0.0073
+      },
+      {
+        "label": "5/31",
+        "spend": 1418.13,
+        "conversions": 0,
+        "clicks": 147,
+        "impressions": 24684,
+        "cpc": 9.65,
+        "cpm": 57.45,
+        "ctr": 0.006
+      },
+      {
+        "label": "6/01",
+        "spend": 2117.04,
+        "conversions": 2,
+        "clicks": 289,
+        "impressions": 70656,
+        "cpc": 7.33,
+        "cpm": 29.96,
+        "ctr": 0.0041
+      },
+      {
+        "label": "6/02",
+        "spend": 2245.94,
+        "conversions": 4,
+        "clicks": 324,
+        "impressions": 63278,
+        "cpc": 6.93,
+        "cpm": 35.49,
+        "ctr": 0.0051
+      },
+      {
+        "label": "6/03",
+        "spend": 2146.18,
+        "conversions": 2,
+        "clicks": 264,
+        "impressions": 59436,
+        "cpc": 8.13,
+        "cpm": 36.11,
+        "ctr": 0.0044
+      },
+      {
+        "label": "6/04",
+        "spend": 2108.56,
+        "conversions": 1,
+        "clicks": 278,
+        "impressions": 68266,
+        "cpc": 7.58,
+        "cpm": 30.89,
+        "ctr": 0.0041
+      },
+      {
+        "label": "6/05",
+        "spend": 2052.23,
+        "conversions": 0,
+        "clicks": 248,
+        "impressions": 54379,
+        "cpc": 8.28,
+        "cpm": 37.74,
+        "ctr": 0.0046
+      },
+      {
+        "label": "6/06",
+        "spend": 1325.32,
+        "conversions": 0,
+        "clicks": 176,
+        "impressions": 26810,
+        "cpc": 7.53,
+        "cpm": 49.43,
+        "ctr": 0.0066
+      },
+      {
+        "label": "6/07",
+        "spend": 1255.03,
+        "conversions": 0,
+        "clicks": 148,
+        "impressions": 24598,
+        "cpc": 8.48,
+        "cpm": 51.02,
+        "ctr": 0.006
+      },
+      {
+        "label": "6/08",
+        "spend": 2138.55,
+        "conversions": 1,
+        "clicks": 293,
+        "impressions": 68783,
+        "cpc": 7.3,
+        "cpm": 31.09,
+        "ctr": 0.0043
+      },
+      {
+        "label": "6/09",
+        "spend": 2522.56,
+        "conversions": 1,
+        "clicks": 307,
+        "impressions": 62069,
+        "cpc": 8.22,
+        "cpm": 40.64,
+        "ctr": 0.005
+      },
+      {
+        "label": "6/10",
+        "spend": 2335.32,
+        "conversions": 1,
+        "clicks": 293,
+        "impressions": 60880,
+        "cpc": 7.97,
+        "cpm": 38.36,
+        "ctr": 0.0048
+      },
+      {
+        "label": "6/11",
+        "spend": 2216.58,
+        "conversions": 2,
+        "clicks": 309,
+        "impressions": 63481,
+        "cpc": 7.17,
+        "cpm": 34.92,
+        "ctr": 0.0049
+      },
+      {
+        "label": "6/12",
+        "spend": 1929.5,
+        "conversions": 0,
+        "clicks": 284,
+        "impressions": 54676,
+        "cpc": 6.79,
+        "cpm": 35.29,
+        "ctr": 0.0052
+      },
+      {
+        "label": "6/13",
+        "spend": 1611.28,
+        "conversions": 0,
+        "clicks": 203,
+        "impressions": 24018,
+        "cpc": 7.94,
+        "cpm": 67.09,
+        "ctr": 0.0084
+      },
+      {
+        "label": "6/14",
+        "spend": 1027.88,
+        "conversions": 0,
+        "clicks": 133,
+        "impressions": 19147,
+        "cpc": 7.73,
+        "cpm": 53.68,
+        "ctr": 0.0069
+      },
+      {
+        "label": "6/15",
+        "spend": 2071.32,
+        "conversions": 1,
+        "clicks": 282,
+        "impressions": 70754,
+        "cpc": 7.35,
+        "cpm": 29.27,
+        "ctr": 0.004
+      },
+      {
+        "label": "6/16",
+        "spend": 2051.5,
+        "conversions": 0,
+        "clicks": 274,
+        "impressions": 63867,
+        "cpc": 7.49,
+        "cpm": 32.12,
+        "ctr": 0.0043
+      },
+      {
+        "label": "6/17",
+        "spend": 2155.49,
+        "conversions": 0,
+        "clicks": 272,
+        "impressions": 62096,
+        "cpc": 7.92,
+        "cpm": 34.71,
+        "ctr": 0.0044
+      },
+      {
+        "label": "6/18",
+        "spend": 2063.53,
+        "conversions": 2,
+        "clicks": 296,
+        "impressions": 62909,
+        "cpc": 6.97,
+        "cpm": 32.8,
+        "ctr": 0.0047
+      },
+      {
+        "label": "6/19",
+        "spend": 1750.65,
+        "conversions": 2,
+        "clicks": 229,
+        "impressions": 45220,
+        "cpc": 7.64,
+        "cpm": 38.71,
+        "ctr": 0.0051
+      },
+      {
+        "label": "6/20",
+        "spend": 1583.17,
+        "conversions": 0,
+        "clicks": 190,
+        "impressions": 22792,
+        "cpc": 8.33,
+        "cpm": 69.46,
+        "ctr": 0.0083
+      }
+    ],
+    "weekly": [
+      {
+        "label": "Wk05",
+        "spend": 1224.47,
+        "conversions": 0,
+        "clicks": 117,
+        "impressions": 49605,
+        "cpc": 10.47,
+        "cpm": 24.68,
+        "ctr": 0.0024
+      },
+      {
+        "label": "Wk06",
+        "spend": 8455.26,
+        "conversions": 9,
+        "clicks": 771,
+        "impressions": 386393,
+        "cpc": 10.97,
+        "cpm": 21.88,
+        "ctr": 0.002
+      },
+      {
+        "label": "Wk07",
+        "spend": 7105.7,
+        "conversions": 5,
+        "clicks": 655,
+        "impressions": 376205,
+        "cpc": 10.85,
+        "cpm": 18.89,
+        "ctr": 0.0017
+      },
+      {
+        "label": "Wk08",
+        "spend": 6493,
+        "conversions": 5,
+        "clicks": 711,
+        "impressions": 366722,
+        "cpc": 9.13,
+        "cpm": 17.71,
+        "ctr": 0.0019
+      },
+      {
+        "label": "Wk09",
+        "spend": 6212.77,
+        "conversions": 3,
+        "clicks": 900,
+        "impressions": 439159,
+        "cpc": 6.9,
+        "cpm": 14.15,
+        "ctr": 0.0021
+      },
+      {
+        "label": "Wk10",
+        "spend": 6256.14,
+        "conversions": 3,
+        "clicks": 832,
+        "impressions": 363705,
+        "cpc": 7.52,
+        "cpm": 17.2,
+        "ctr": 0.0023
+      },
+      {
+        "label": "Wk11",
+        "spend": 6387.74,
+        "conversions": 1,
+        "clicks": 878,
+        "impressions": 369147,
+        "cpc": 7.28,
+        "cpm": 17.3,
+        "ctr": 0.0024
+      },
+      {
+        "label": "Wk12",
+        "spend": 6280.44,
+        "conversions": 8,
+        "clicks": 891,
+        "impressions": 392727,
+        "cpc": 7.05,
+        "cpm": 15.99,
+        "ctr": 0.0023
+      },
+      {
+        "label": "Wk13",
+        "spend": 6377.75,
+        "conversions": 3,
+        "clicks": 866,
+        "impressions": 375209,
+        "cpc": 7.36,
+        "cpm": 17,
+        "ctr": 0.0023
+      },
+      {
+        "label": "Wk14",
+        "spend": 7393.69,
+        "conversions": 3,
+        "clicks": 992,
+        "impressions": 376334,
+        "cpc": 7.45,
+        "cpm": 19.65,
+        "ctr": 0.0026
+      },
+      {
+        "label": "Wk15",
+        "spend": 6746.99,
+        "conversions": 3,
+        "clicks": 1076,
+        "impressions": 348595,
+        "cpc": 6.27,
+        "cpm": 19.35,
+        "ctr": 0.0031
+      },
+      {
+        "label": "Wk16",
+        "spend": 6594.23,
+        "conversions": 3,
+        "clicks": 967,
+        "impressions": 338731,
+        "cpc": 6.82,
+        "cpm": 19.47,
+        "ctr": 0.0029
+      },
+      {
+        "label": "Wk17",
+        "spend": 15365,
+        "conversions": 3,
+        "clicks": 2546,
+        "impressions": 399194,
+        "cpc": 6.04,
+        "cpm": 38.49,
+        "ctr": 0.0064
+      },
+      {
+        "label": "Wk18",
+        "spend": 16080.04,
+        "conversions": 4,
+        "clicks": 2479,
+        "impressions": 402136,
+        "cpc": 6.49,
+        "cpm": 39.99,
+        "ctr": 0.0062
+      },
+      {
+        "label": "Wk19",
+        "spend": 11796.06,
+        "conversions": 3,
+        "clicks": 1934,
+        "impressions": 413849,
+        "cpc": 6.1,
+        "cpm": 28.5,
+        "ctr": 0.0047
+      },
+      {
+        "label": "Wk20",
+        "spend": 11974.54,
+        "conversions": 7,
+        "clicks": 1808,
+        "impressions": 398266,
+        "cpc": 6.62,
+        "cpm": 30.07,
+        "ctr": 0.0045
+      },
+      {
+        "label": "Wk21",
+        "spend": 11831.68,
+        "conversions": 7,
+        "clicks": 1835,
+        "impressions": 368321,
+        "cpc": 6.45,
+        "cpm": 32.12,
+        "ctr": 0.005
+      },
+      {
+        "label": "Wk22",
+        "spend": 12685.49,
+        "conversions": 3,
+        "clicks": 1789,
+        "impressions": 344022,
+        "cpc": 7.09,
+        "cpm": 36.87,
+        "ctr": 0.0052
+      },
+      {
+        "label": "Wk23",
+        "spend": 13250.3,
+        "conversions": 9,
+        "clicks": 1727,
+        "impressions": 367423,
+        "cpc": 7.67,
+        "cpm": 36.06,
+        "ctr": 0.0047
+      },
+      {
+        "label": "Wk24",
+        "spend": 13781.67,
+        "conversions": 5,
+        "clicks": 1822,
+        "impressions": 353054,
+        "cpc": 7.56,
+        "cpm": 39.04,
+        "ctr": 0.0052
+      },
+      {
+        "label": "Wk25",
+        "spend": 11675.66,
+        "conversions": 5,
+        "clicks": 1543,
+        "impressions": 327639,
+        "cpc": 7.57,
+        "cpm": 35.64,
+        "ctr": 0.0047
+      }
+    ],
+    "monthly": [
+      {
+        "label": "Jan",
+        "spend": 33769.96,
+        "conversions": 13,
+        "clicks": 3241,
+        "impressions": 1583031,
+        "cpc": 10.42,
+        "cpm": 21.33,
+        "ctr": 0.0021
+      },
+      {
+        "label": "Feb",
+        "spend": 28567.2,
+        "conversions": 22,
+        "clicks": 3014,
+        "impressions": 1568466,
+        "cpc": 9.48,
+        "cpm": 18.21,
+        "ctr": 0.0019
+      },
+      {
+        "label": "Mar",
+        "spend": 27855.09,
+        "conversions": 15,
+        "clicks": 3850,
+        "impressions": 1670215,
+        "cpc": 7.24,
+        "cpm": 16.68,
+        "ctr": 0.0023
+      },
+      {
+        "label": "Apr",
+        "spend": 44333.3,
+        "conversions": 16,
+        "clicks": 6975,
+        "impressions": 1598826,
+        "cpc": 6.36,
+        "cpm": 27.73,
+        "ctr": 0.0044
+      },
+      {
+        "label": "May",
+        "spend": 53818.58,
+        "conversions": 20,
+        "clicks": 8142,
+        "impressions": 1644274,
+        "cpc": 6.61,
+        "cpm": 32.73,
+        "ctr": 0.005
+      },
+      {
+        "label": "Jun",
+        "spend": 38707.63,
+        "conversions": 19,
+        "clicks": 5092,
+        "impressions": 1048116,
+        "cpc": 7.6,
+        "cpm": 36.93,
+        "ctr": 0.0049
+      }
+    ]
+  },
+  "campaigns": [
     {
+      "name": "GO Focus Plus | TOFU | WV | Image | 05/2026",
       "stage": "TOF",
-      "label": "Top of Funnel",
-      "spend": 134562,
-      "impr": 2623239,
-      "clicks": 19672,
-      "ctr": 0.0075
+      "spend": 12792,
+      "impr": 207440,
+      "clicks": 1034,
+      "cpc": 12.37,
+      "cpm": 61.66,
+      "conv": 1,
+      "costPerConv": 12792,
+      "freq30": 6.36,
+      "freq90": 7.93,
+      "pen30": 0.065,
+      "pen90": 0.09
     },
     {
+      "name": "TOF | WV | Image | Car Rental & Leasing | 370K | 0…",
+      "stage": "TOF",
+      "spend": 10288,
+      "impr": 127295,
+      "clicks": 644,
+      "cpc": 15.98,
+      "cpm": 80.82,
+      "conv": 2,
+      "costPerConv": 5144,
+      "freq30": 3.53,
+      "freq90": 5.1,
+      "pen30": 0.036,
+      "pen90": 0.066
+    },
+    {
+      "name": "TOF | WV | Image | 6Sense | Field Service | 52K",
+      "stage": "TOF",
+      "spend": 7419,
+      "impr": 75568,
+      "clicks": 376,
+      "cpc": 19.73,
+      "cpm": 98.18,
+      "conv": 3,
+      "costPerConv": 2473,
+      "freq30": 5.98,
+      "freq90": 8.59,
+      "pen30": 0.057,
+      "pen90": 0.112
+    },
+    {
+      "name": "TOF | WV | Image | 6Sense | Public Sector | 70K",
+      "stage": "TOF",
+      "spend": 6753,
+      "impr": 81781,
+      "clicks": 413,
+      "cpc": 16.35,
+      "cpm": 82.57,
+      "conv": 1,
+      "costPerConv": 6753,
+      "freq30": 4.42,
+      "freq90": 6.4,
+      "pen30": 0.041,
+      "pen90": 0.087
+    },
+    {
+      "name": "MOF | WV | Image | 90D | 6Sense | Transport & Logi…",
       "stage": "MOF",
-      "label": "Mid Funnel",
-      "spend": 66689,
-      "impr": 3114986,
-      "clicks": 12846,
-      "ctr": 0.0041
+      "spend": 6270,
+      "impr": 48138,
+      "clicks": 341,
+      "cpc": 18.39,
+      "cpm": 130.25,
+      "conv": 1,
+      "costPerConv": 6270,
+      "freq30": 6.55,
+      "freq90": 9.94,
+      "pen30": 0.377,
+      "pen90": 0.584
     },
     {
-      "stage": "BOF",
-      "label": "Bottom of Funnel",
-      "spend": 26917,
-      "impr": 222320,
-      "clicks": 2172,
-      "ctr": 0.0098
+      "name": "TOF | WV | Image | 6Sense | Transport & Logistics …",
+      "stage": "TOF",
+      "spend": 5552,
+      "impr": 65767,
+      "clicks": 321,
+      "cpc": 17.3,
+      "cpm": 84.43,
+      "conv": 2,
+      "costPerConv": 2776,
+      "freq30": 2.65,
+      "freq90": 4.35,
+      "pen30": 0.027,
+      "pen90": 0.059
     },
     {
+      "name": "TOF | ENG | Doc | Field Service | 280K | 02.18.26",
+      "stage": "TOF",
+      "spend": 5233,
+      "impr": 71494,
+      "clicks": 4780,
+      "cpc": 1.09,
+      "cpm": 73.2,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 2.38,
+      "freq90": 4.37,
+      "pen30": 0.024,
+      "pen90": 0.043
+    },
+    {
+      "name": "MOF | ENG | Doc | 90D | 6Sense | Field Service | 7…",
+      "stage": "MOF",
+      "spend": 4766,
+      "impr": 33815,
+      "clicks": 2243,
+      "cpc": 2.12,
+      "cpm": 140.94,
+      "conv": 1,
+      "costPerConv": 4766,
+      "freq30": 3.13,
+      "freq90": 5.03,
+      "pen30": 0.439,
+      "pen90": 0.517
+    },
+    {
+      "name": "GO Focus Plus | TOFU | WV | Animation | 05/2026",
+      "stage": "TOF",
+      "spend": 4724,
+      "impr": 98288,
+      "clicks": 291,
+      "cpc": 16.23,
+      "cpm": 48.06,
+      "conv": 1,
+      "costPerConv": 4724,
+      "freq30": 3.77,
+      "freq90": 4.25,
+      "pen30": 0.064,
+      "pen90": 0.08
+    },
+    {
+      "name": "MOF | ENG | Doc | 90D | Car Rental & Leasing | 1.2…",
+      "stage": "MOF",
+      "spend": 4396,
+      "impr": 34794,
+      "clicks": 1644,
+      "cpc": 2.67,
+      "cpm": 126.34,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 8.77,
+      "freq90": 21.75,
+      "pen30": 0.722,
+      "pen90": 0.762
+    },
+    {
+      "name": "2502_NA_Video-Case-Studies-Doc_NS_BA_M_N_IP_LI",
       "stage": "Other",
-      "label": "Always-On / Persona",
-      "spend": 214928,
-      "impr": 4875097,
-      "clicks": 34604,
-      "ctr": 0.0071
-    }
-  ],
-  "trend": [
-    {
-      "wk": "Wk13",
-      "tof": 27115,
-      "mof": 17359,
-      "bof": 6611
+      "spend": 4389,
+      "impr": 72328,
+      "clicks": 462,
+      "cpc": 9.5,
+      "cpm": 60.68,
+      "conv": 5,
+      "costPerConv": 878,
+      "freq30": 3.76,
+      "freq90": 6,
+      "pen30": 0.368,
+      "pen90": 0.337
     },
     {
-      "wk": "Wk14",
-      "tof": 27747,
-      "mof": 19647,
-      "bof": 7422
+      "name": "MOFU | WV | IMG | 90D | 6Sense | Public Sector | 3…",
+      "stage": "MOF",
+      "spend": 4096,
+      "impr": 38126,
+      "clicks": 253,
+      "cpc": 16.19,
+      "cpm": 107.43,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 6.94,
+      "freq90": 11.3,
+      "pen30": 0.398,
+      "pen90": 0.515
     },
     {
-      "wk": "Wk15",
-      "tof": 23625,
-      "mof": 18084,
-      "bof": 6407
+      "name": "BOF | ENG | Doc | 60D | 6Sense | Public Sector | 1…",
+      "stage": "BOF",
+      "spend": 4021,
+      "impr": 21665,
+      "clicks": 590,
+      "cpc": 6.81,
+      "cpm": 185.58,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 5.89,
+      "freq90": 9.59,
+      "pen30": 0.499,
+      "pen90": 0.502
     },
     {
-      "wk": "Wk16",
-      "tof": 24369,
-      "mof": 19379,
-      "bof": 6264
+      "name": "MOF | WV | IMG | 6Sense | Vocational | 5.8K+ | 06.…",
+      "stage": "MOF",
+      "spend": 3740,
+      "impr": 53794,
+      "clicks": 304,
+      "cpc": 12.3,
+      "cpm": 69.52,
+      "conv": 2,
+      "costPerConv": 1870,
+      "freq30": 7.48,
+      "freq90": 11.13,
+      "pen30": 0.283,
+      "pen90": 0.376
     },
     {
-      "wk": "Wk17",
-      "tof": 31876,
-      "mof": 24580,
-      "bof": 8901
-    },
-    {
-      "wk": "Wk18",
-      "tof": 28692,
-      "mof": 22842,
-      "bof": 7492
-    },
-    {
-      "wk": "Wk19",
-      "tof": 22493,
-      "mof": 14635,
-      "bof": 5279
-    },
-    {
-      "wk": "Wk20",
-      "tof": 25287,
-      "mof": 17483,
-      "bof": 5497
-    },
-    {
-      "wk": "Wk21",
-      "tof": 29177,
-      "mof": 17952,
-      "bof": 5826
-    },
-    {
-      "wk": "Wk22",
-      "tof": 33309,
-      "mof": 16696,
-      "bof": 6325
-    },
-    {
-      "wk": "Wk23",
-      "tof": 29437,
-      "mof": 14390,
-      "bof": 7469
-    },
-    {
-      "wk": "Wk24",
-      "tof": 31130,
-      "mof": 14139,
-      "bof": 5716
-    }
-  ],
-  "named": [
-    {
-      "account": "BrightView",
-      "spend": 238,
-      "impr": 754,
-      "clicks": 29,
-      "ctr": 0.0385
-    },
-    {
-      "account": "Allied Universal",
-      "spend": 103,
-      "impr": 1145,
-      "clicks": 29,
-      "ctr": 0.0253
-    },
-    {
-      "account": "TruGreen",
-      "spend": 27,
-      "impr": 306,
-      "clicks": 8,
-      "ctr": 0.0261
+      "name": "TOF | VV | Video | 6Sense | Public Sector | 70K",
+      "stage": "TOF",
+      "spend": 3707,
+      "impr": 52633,
+      "clicks": 119,
+      "cpc": 31.15,
+      "cpm": 70.43,
+      "conv": 0,
+      "costPerConv": null,
+      "freq30": 2.28,
+      "freq90": 3.56,
+      "pen30": 0.059,
+      "pen90": 0.101
     }
   ]
 }
