@@ -103,7 +103,28 @@ async function main() {
       };
     })
     .sort((a, b) => b.spend - a.spend)
-    .slice(0, 15);
+    .slice(0, 30);
+
+  // Stage totals across ALL campaigns (for accurate % of spend by funnel stage)
+  const ST = { TOF: { spend: 0, impr: 0, clicks: 0, conv: 0 }, MOF: { spend: 0, impr: 0, clicks: 0, conv: 0 }, BOF: { spend: 0, impr: 0, clicks: 0, conv: 0 }, Other: { spend: 0, impr: 0, clicks: 0, conv: 0 } };
+  for (const r of camp90) {
+    const s = stage(r.campaign);
+    ST[s].spend += num(r.spend); ST[s].impr += num(r.impressions); ST[s].clicks += num(r.clicks); ST[s].conv += num(r.externalwebsiteconversions);
+  }
+  const stageTotals = {};
+  for (const k of ['TOF', 'MOF', 'BOF', 'Other']) stageTotals[k] = { spend: Math.round(ST[k].spend), impr: Math.round(ST[k].impr), clicks: Math.round(ST[k].clicks), conv: Math.round(ST[k].conv) };
+
+  // Weekly spend by funnel stage (campaign x week, parsed to stage) — last 12 complete ISO weeks
+  const cwRows = await windsor(['campaign', 'year_week_iso', 'spend'], { dateFrom: from(100), dateTo: iso(today) });
+  const byWk = {};
+  for (const r of cwRows) {
+    const w = r.year_week_iso; if (!w) continue;
+    (byWk[w] ||= { TOF: 0, MOF: 0, BOF: 0, Other: 0 })[stage(r.campaign)] += num(r.spend);
+  }
+  const wkKeys = Object.keys(byWk).sort((a, b) => { const [ya, wa] = a.split('|').map(Number); const [yb, wb] = b.split('|').map(Number); return ya - yb || wa - wb; });
+  const stageWeekly = wkKeys.slice(0, -1).slice(-12).map((w) => ({
+    wk: 'Wk' + w.split('|')[1], TOF: Math.round(byWk[w].TOF), MOF: Math.round(byWk[w].MOF), BOF: Math.round(byWk[w].BOF), Other: Math.round(byWk[w].Other),
+  }));
 
   const out = {
     meta: {
@@ -113,10 +134,11 @@ async function main() {
       rangeEnd: iso(today),
     },
     series: { daily, weekly, monthly },
+    stageWeekly, stageTotals,
     campaigns,
   };
 
-  console.log(`series: daily=${daily.length} weekly=${weekly.length} monthly=${monthly.length}  campaigns=${campaigns.length}`);
+  console.log(`series: daily=${daily.length} weekly=${weekly.length} monthly=${monthly.length}  campaigns=${campaigns.length}  stageWeekly=${stageWeekly.length}`);
   await writeFile(new URL('../data/na-performance.json', import.meta.url), JSON.stringify(out, null, 2) + '\n');
   console.log('Wrote data/na-performance.json');
 }

@@ -1553,6 +1553,118 @@
       }
     ]
   },
+  "stageWeekly": [
+    {
+      "wk": "Wk13",
+      "TOF": 3133,
+      "MOF": 1681,
+      "BOF": 910,
+      "Other": 653
+    },
+    {
+      "wk": "Wk14",
+      "TOF": 3038,
+      "MOF": 1923,
+      "BOF": 1623,
+      "Other": 810
+    },
+    {
+      "wk": "Wk15",
+      "TOF": 2738,
+      "MOF": 2117,
+      "BOF": 1164,
+      "Other": 728
+    },
+    {
+      "wk": "Wk16",
+      "TOF": 2548,
+      "MOF": 2402,
+      "BOF": 933,
+      "Other": 711
+    },
+    {
+      "wk": "Wk17",
+      "TOF": 7648,
+      "MOF": 5482,
+      "BOF": 1429,
+      "Other": 806
+    },
+    {
+      "wk": "Wk18",
+      "TOF": 7609,
+      "MOF": 5577,
+      "BOF": 1950,
+      "Other": 944
+    },
+    {
+      "wk": "Wk19",
+      "TOF": 5724,
+      "MOF": 3863,
+      "BOF": 1228,
+      "Other": 981
+    },
+    {
+      "wk": "Wk20",
+      "TOF": 6405,
+      "MOF": 3651,
+      "BOF": 1091,
+      "Other": 827
+    },
+    {
+      "wk": "Wk21",
+      "TOF": 6144,
+      "MOF": 3569,
+      "BOF": 1289,
+      "Other": 830
+    },
+    {
+      "wk": "Wk22",
+      "TOF": 6746,
+      "MOF": 3740,
+      "BOF": 1324,
+      "Other": 876
+    },
+    {
+      "wk": "Wk23",
+      "TOF": 7269,
+      "MOF": 3674,
+      "BOF": 1308,
+      "Other": 1000
+    },
+    {
+      "wk": "Wk24",
+      "TOF": 7661,
+      "MOF": 3650,
+      "BOF": 1400,
+      "Other": 1070
+    }
+  ],
+  "stageTotals": {
+    "TOF": {
+      "spend": 69066,
+      "impr": 1474762,
+      "clicks": 9095,
+      "conv": 15
+    },
+    "MOF": {
+      "spend": 43813,
+      "impr": 1344646,
+      "clicks": 9080,
+      "conv": 22
+    },
+    "BOF": {
+      "spend": 16184,
+      "impr": 123285,
+      "clicks": 1961,
+      "conv": 1
+    },
+    "Other": {
+      "spend": 9642,
+      "impr": 1548066,
+      "clicks": 810,
+      "conv": 17
+    }
+  },
   "campaigns": [
     {
       "name": "GO Focus Plus | TOFU | WV | Image | 05/2026",
