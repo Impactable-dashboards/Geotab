@@ -1,51 +1,51 @@
 {
   "meta": {
-    "generated": "Jul 27, 2026",
+    "generated": "Jul 28, 2026",
     "window": "Last 30 days",
     "accounts": 4,
-    "totalSpend": "$106,773",
-    "totalImpressions": "4.4M"
+    "totalSpend": "$108,346",
+    "totalImpressions": "4.5M"
   },
   "regions": [
     {
       "key": "na",
       "label": "North America",
-      "spend": 47590,
-      "impressions": 1504340,
-      "clicks": 7421,
+      "spend": 47352,
+      "impressions": 1535951,
+      "clicks": 7495,
       "ctr": 0.0049,
-      "cpm": 31.64,
-      "cpc": 6.41
+      "cpm": 30.83,
+      "cpc": 6.32
     },
     {
       "key": "emea",
       "label": "EMEA",
-      "spend": 48117,
-      "impressions": 1798485,
-      "clicks": 6788,
-      "ctr": 0.0038,
-      "cpm": 26.75,
-      "cpc": 7.09
+      "spend": 49858,
+      "impressions": 1857593,
+      "clicks": 6974,
+      "ctr": 0.0037,
+      "cpm": 26.84,
+      "cpc": 7.15
     },
     {
       "key": "apac",
       "label": "APAC",
-      "spend": 2023,
-      "impressions": 412061,
-      "clicks": 337,
+      "spend": 2065,
+      "impressions": 427139,
+      "clicks": 346,
       "ctr": 0.0008,
-      "cpm": 4.91,
-      "cpc": 6
+      "cpm": 4.83,
+      "cpc": 5.97
     },
     {
       "key": "latam",
       "label": "LATAM",
-      "spend": 9043,
-      "impressions": 685583,
-      "clicks": 3136,
+      "spend": 9071,
+      "impressions": 691399,
+      "clicks": 3175,
       "ctr": 0.0046,
-      "cpm": 13.19,
-      "cpc": 2.88
+      "cpm": 13.12,
+      "cpc": 2.86
     }
   ],
   "trend": [
@@ -109,185 +109,185 @@
   "naCampaigns": [
     {
       "n": "Always On - Retargeting",
-      "spend": 3206.97,
-      "impr": 396849,
-      "clicks": 611,
+      "spend": 3143.97,
+      "impr": 410874,
+      "clicks": 621,
       "ctr": 0.0015,
-      "cpm": 8.08,
-      "cpc": 5.25,
-      "eng": 750
+      "cpm": 7.65,
+      "cpc": 5.06,
+      "eng": 740
     },
     {
       "n": "ABX BA - 2026",
-      "spend": 2507.86,
-      "impr": 269364,
-      "clicks": 61,
+      "spend": 2655.47,
+      "impr": 285034,
+      "clicks": 66,
       "ctr": 0.0002,
-      "cpm": 9.31,
-      "cpc": 41.11,
-      "eng": 61
+      "cpm": 9.32,
+      "cpc": 40.23,
+      "eng": 66
     },
     {
       "n": "Integrated Marketing",
-      "spend": 10116.06,
-      "impr": 229536,
+      "spend": 10041.31,
+      "impr": 228812,
       "clicks": 778,
       "ctr": 0.0034,
-      "cpm": 44.07,
-      "cpc": 13,
-      "eng": 1511
+      "cpm": 43.88,
+      "cpc": 12.91,
+      "eng": 1529
     },
     {
       "n": "Public Sector 2026 | $10K",
-      "spend": 8848.03,
-      "impr": 180744,
-      "clicks": 1151,
+      "spend": 8600.24,
+      "impr": 180394,
+      "clicks": 1149,
       "ctr": 0.0064,
-      "cpm": 48.95,
-      "cpc": 7.69,
-      "eng": 1824
+      "cpm": 47.67,
+      "cpc": 7.49,
+      "eng": 1807
     },
     {
       "n": "Vocational 2026 | $5K",
-      "spend": 4009.11,
-      "impr": 145370,
-      "clicks": 771,
+      "spend": 3990.69,
+      "impr": 146402,
+      "clicks": 775,
       "ctr": 0.0053,
-      "cpm": 27.58,
-      "cpc": 5.2,
-      "eng": 1193
+      "cpm": 27.26,
+      "cpc": 5.15,
+      "eng": 1197
     },
     {
       "n": "Transportation & Logistics 2026 | $8K ($7k in July)",
-      "spend": 5388.69,
-      "impr": 114927,
-      "clicks": 723,
-      "ctr": 0.0063,
-      "cpm": 46.89,
-      "cpc": 7.45,
-      "eng": 1105
+      "spend": 5275,
+      "impr": 115481,
+      "clicks": 719,
+      "ctr": 0.0062,
+      "cpm": 45.68,
+      "cpc": 7.34,
+      "eng": 1097
     },
     {
       "n": "Car Rental & Leasing 2026 | $5K",
-      "spend": 5052.83,
-      "impr": 71564,
-      "clicks": 964,
-      "ctr": 0.0135,
-      "cpm": 70.61,
-      "cpc": 5.24,
-      "eng": 1521
+      "spend": 5169.75,
+      "impr": 73127,
+      "clicks": 995,
+      "ctr": 0.0136,
+      "cpm": 70.7,
+      "cpc": 5.2,
+      "eng": 1570
     },
     {
       "n": "Field Service 2026 | $4K",
-      "spend": 6155.45,
-      "impr": 66368,
-      "clicks": 1997,
-      "ctr": 0.0301,
-      "cpm": 92.75,
-      "cpc": 3.08,
-      "eng": 3233
+      "spend": 6172.69,
+      "impr": 66284,
+      "clicks": 2023,
+      "ctr": 0.0305,
+      "cpm": 93.12,
+      "cpc": 3.05,
+      "eng": 3260
     },
     {
       "n": "ABX WV - 2026",
-      "spend": 2304.85,
-      "impr": 29618,
-      "clicks": 365,
-      "ctr": 0.0123,
-      "cpm": 77.82,
-      "cpc": 6.31,
-      "eng": 549
+      "spend": 2303.16,
+      "impr": 29543,
+      "clicks": 369,
+      "ctr": 0.0125,
+      "cpm": 77.96,
+      "cpc": 6.24,
+      "eng": 566
     }
   ],
   "emeaCampaigns": [
     {
       "n": "Always on retargeting",
-      "spend": 8537.46,
-      "impr": 505572,
-      "clicks": 1236,
+      "spend": 8723.19,
+      "impr": 526087,
+      "clicks": 1269,
       "ctr": 0.0024,
-      "cpm": 16.89,
-      "cpc": 6.91
+      "cpm": 16.58,
+      "cpc": 6.87
     },
     {
       "n": "Services",
-      "spend": 5851.98,
-      "impr": 272994,
-      "clicks": 932,
+      "spend": 5941.74,
+      "impr": 283420,
+      "clicks": 962,
       "ctr": 0.0034,
-      "cpm": 21.44,
-      "cpc": 6.28
+      "cpm": 20.96,
+      "cpc": 6.18
     },
     {
       "n": "People Transportation",
-      "spend": 7693.96,
-      "impr": 222993,
-      "clicks": 829,
+      "spend": 8296.51,
+      "impr": 236206,
+      "clicks": 876,
       "ctr": 0.0037,
-      "cpm": 34.5,
-      "cpc": 9.28
+      "cpm": 35.12,
+      "cpc": 9.47
     },
     {
       "n": "LRM",
-      "spend": 7363.36,
-      "impr": 183626,
-      "clicks": 821,
+      "spend": 7724.84,
+      "impr": 184961,
+      "clicks": 829,
       "ctr": 0.0045,
-      "cpm": 40.1,
-      "cpc": 8.97
+      "cpm": 41.76,
+      "cpc": 9.32
     },
     {
       "n": "Always on - cold",
-      "spend": 4774.1,
-      "impr": 169169,
-      "clicks": 638,
-      "ctr": 0.0038,
-      "cpm": 28.22,
-      "cpc": 7.48
+      "spend": 5019.22,
+      "impr": 176796,
+      "clicks": 660,
+      "ctr": 0.0037,
+      "cpm": 28.39,
+      "cpc": 7.6
     },
     {
       "n": "Transport and Logistics",
-      "spend": 4290.64,
-      "impr": 137853,
-      "clicks": 809,
+      "spend": 4544.7,
+      "impr": 146135,
+      "clicks": 864,
       "ctr": 0.0059,
-      "cpm": 31.12,
-      "cpc": 5.3
+      "cpm": 31.1,
+      "cpc": 5.26
     },
     {
       "n": "EMEA Safety",
-      "spend": 3407.12,
-      "impr": 111098,
-      "clicks": 705,
-      "ctr": 0.0063,
-      "cpm": 30.67,
-      "cpc": 4.83
+      "spend": 3463.36,
+      "impr": 111023,
+      "clicks": 710,
+      "ctr": 0.0064,
+      "cpm": 31.19,
+      "cpc": 4.88
     },
     {
       "n": "Sustainability",
-      "spend": 3678.1,
-      "impr": 101929,
-      "clicks": 277,
+      "spend": 3700.76,
+      "impr": 101109,
+      "clicks": 273,
       "ctr": 0.0027,
-      "cpm": 36.08,
-      "cpc": 13.28
+      "cpm": 36.6,
+      "cpc": 13.56
     },
     {
       "n": "World Cup 2026",
-      "spend": 2270.87,
-      "impr": 78717,
-      "clicks": 264,
-      "ctr": 0.0034,
-      "cpm": 28.85,
-      "cpc": 8.6
+      "spend": 2189.12,
+      "impr": 77317,
+      "clicks": 255,
+      "ctr": 0.0033,
+      "cpm": 28.31,
+      "cpc": 8.58
     },
     {
       "n": "Boost_Post_Engagement_Mar 10, 2026",
-      "spend": 215.32,
-      "impr": 12495,
-      "clicks": 275,
-      "ctr": 0.022,
-      "cpm": 17.23,
-      "cpc": 0.78
+      "spend": 221.02,
+      "impr": 12500,
+      "clicks": 274,
+      "ctr": 0.0219,
+      "cpm": 17.68,
+      "cpc": 0.81
     },
     {
       "n": "KINTO RFP Enterprise: EMEA",
@@ -311,90 +311,90 @@
   "seniority": [
     {
       "s": "Senior",
-      "impr": 691880,
-      "clicks": 2914
+      "impr": 677224,
+      "clicks": 2833
     },
     {
       "s": "Manager",
-      "impr": 229540,
-      "clicks": 1174
+      "impr": 224652,
+      "clicks": 1142
     },
     {
       "s": "Director",
-      "impr": 231456,
-      "clicks": 877
+      "impr": 227767,
+      "clicks": 855
     },
     {
       "s": "VP",
-      "impr": 140732,
-      "clicks": 722
+      "impr": 138170,
+      "clicks": 695
     },
     {
       "s": "CXO",
-      "impr": 96752,
-      "clicks": 451
+      "impr": 94437,
+      "clicks": 437
     },
     {
       "s": "Entry",
-      "impr": 54505,
-      "clicks": 809
+      "impr": 53177,
+      "clicks": 794
     },
     {
       "s": "Owner",
-      "impr": 37510,
-      "clicks": 216
+      "impr": 36673,
+      "clicks": 213
     }
   ],
   "functions": [
     {
       "f": "Operations",
-      "impr": 591786,
-      "clicks": 3066
+      "impr": 578233,
+      "clicks": 2972
     },
     {
       "f": "Business Development",
-      "impr": 330511,
-      "clicks": 1208
+      "impr": 324354,
+      "clicks": 1183
     },
     {
       "f": "Sales",
-      "impr": 87574,
-      "clicks": 645
+      "impr": 85945,
+      "clicks": 631
     },
     {
       "f": "IT",
-      "impr": 223043,
-      "clicks": 542
+      "impr": 219844,
+      "clicks": 530
     },
     {
       "f": "Engineering",
-      "impr": 103114,
-      "clicks": 506
+      "impr": 101243,
+      "clicks": 494
     },
     {
       "f": "Finance",
-      "impr": 101354,
-      "clicks": 467
+      "impr": 99512,
+      "clicks": 458
     },
     {
       "f": "Education",
-      "impr": 72392,
-      "clicks": 443
+      "impr": 70941,
+      "clicks": 432
     },
     {
       "f": "Customer Success",
-      "impr": 81002,
-      "clicks": 395
+      "impr": 79774,
+      "clicks": 387
     },
     {
       "f": "PM/Project Mgmt",
-      "impr": 45337,
-      "clicks": 322
+      "impr": 44485,
+      "clicks": 316
     },
     {
       "f": "Community and Social Services",
-      "impr": 59497,
-      "clicks": 285
+      "impr": 58475,
+      "clicks": 272
     }
   ]
 }
