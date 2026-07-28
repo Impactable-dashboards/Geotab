@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Windsor_ai__get_current_user",
+      "mcp__Windsor_ai__get_connectors",
+      "mcp__Windsor_ai__get_fields",
+      "mcp__Windsor_ai__get_options",
+      "mcp__Windsor_ai__get_data",
+      "mcp__Windsor_ai__list_actions"
+    ]
+  }
+}
