@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geotab ABX Action List | Aug 9, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#001122; --navy-800:#00172e; --navy-700:#002245; --navy-500:#003973;
+  --card:#0D2744; --card-2:#0a1f38; --court:#002245;
+  --bone:#f5f5f5; --chalk:#E8E4DA; --muted:#93A4BE;
+  --line:rgba(190,214,246,0.14); --line-soft:rgba(190,214,246,0.08);
+  --blue:#0099D1; --blue-soft:#5BB8E0;
+  --teal:#00C4B3; --teal-dark:#009D8F;
+  --lime:#C6FF3D; --orange:#F4A261; --yellow:#FFD166; --rust:#FF5A1F;
+  --disp:'Anton',sans-serif; --serif:'Fraunces',serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--navy);color:var(--bone);-webkit-font-smoothing:antialiased;line-height:1.55}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(190,214,246,0.04) 1px,transparent 0);background-size:22px 22px;pointer-events:none;z-index:1}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,var(--navy-800) 0%,var(--navy-700) 55%,var(--navy-800) 100%);border-bottom:2px solid var(--teal);padding:32px 40px;position:relative;overflow:hidden;z-index:2}
+.hdr::after{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(0,196,179,0.12),transparent 60%);pointer-events:none}
+.eyebrow{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:'';width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2.4s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hdr-title{font-family:var(--disp);font-size:clamp(32px,5vw,52px);text-transform:uppercase;letter-spacing:.01em;line-height:.98;color:var(--bone);margin-bottom:6px}
+.hdr-title .em{color:var(--teal)}
+.hdr-sub{font-size:13px;color:var(--muted);margin-top:8px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hdr-sub .sep{color:var(--line);font-size:10px}
+.hdr-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,196,179,.1);border:1px solid var(--teal);color:var(--teal);font-family:var(--mono);font-size:10px;padding:4px 12px;letter-spacing:.1em;text-transform:uppercase}
+
+/* KPI STRIP */
+.kpi-strip{background:var(--card-2);border-bottom:1px solid var(--line);padding:14px 40px;display:flex;gap:0;position:relative;z-index:2}
+.kpi{flex:1;padding:10px 20px;border-right:1px solid var(--line);last-child{border:none}}
+.kpi:last-child{border:none}
+.kpi-label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:5px}
+.kpi-val{font-family:var(--disp);font-size:24px;color:var(--bone);letter-spacing:.01em;line-height:1}
+.kpi-val.teal{color:var(--teal)} .kpi-val.blue{color:var(--blue)} .kpi-val.lime{color:var(--lime)} .kpi-val.orange{color:var(--orange)}
+.kpi-context{font-size:10px;color:var(--muted);margin-top:3px}
+
+/* LEGEND */
+.legend{background:var(--navy-800);border-bottom:1px solid var(--line);padding:11px 40px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;position:relative;z-index:2}
+.lg{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);font-family:var(--mono);letter-spacing:.05em}
+.lg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.lg-sep{margin-left:auto;font-size:9px;color:rgba(147,164,190,.4);font-family:var(--mono);letter-spacing:.08em}
+
+/* MAIN */
+.main{padding:32px 40px;max-width:1360px;margin:0 auto;position:relative;z-index:2}
+
+/* SECTION HEADERS */
+.sec{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.sec-num{font-family:var(--mono);font-size:10px;color:var(--blue-soft);letter-spacing:.2em;margin-bottom:2px;text-transform:uppercase}
+.sec-title{font-family:var(--disp);font-size:22px;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+.sec-title .em{color:var(--teal)} .sec-title .b{color:var(--blue)} .sec-title .l{color:var(--lime)} .sec-title .o{color:var(--orange)}
+.sec-note{margin-left:auto;font-size:11px;color:var(--muted);font-family:var(--mono);letter-spacing:.04em;text-align:right}
+
+.block{margin-bottom:36px}
+
+/* CARDS */
+.cards{display:flex;flex-direction:column;gap:3px;margin-bottom:6px}
+
+.card{background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:200px 120px 1fr 52px;overflow:hidden;transition:border-color .15s}
+.card:hover{border-color:rgba(0,196,179,.25)}
+.card.urgent{border-left:3px solid var(--rust)}
+.card.action{border-left:3px solid var(--orange)}
+.card.watch{border-left:3px solid var(--blue)}
+.card.cool{border-left:3px solid var(--muted)}
+
+.card-co{padding:16px 16px;border-right:1px solid var(--line)}
+.co-name{font-family:var(--disp);font-size:17px;text-transform:uppercase;letter-spacing:.01em;color:var(--bone);line-height:1.05;margin-bottom:5px}
+.co-owner{font-family:var(--mono);font-size:9px;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px}
+.co-stage{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.05em}
+
+.card-trend{padding:16px 12px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.pill{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;white-space:nowrap;display:inline-block}
+.p-fire{background:rgba(255,90,31,.12);color:var(--rust);border:1px solid rgba(255,90,31,.25)}
+.p-stable{background:rgba(0,153,209,.1);color:var(--blue);border:1px solid rgba(0,153,209,.2)}
+.p-cool{background:rgba(244,162,97,.1);color:var(--orange);border:1px solid rgba(244,162,97,.2)}
+.p-dark{background:rgba(147,164,190,.1);color:var(--muted);border:1px solid var(--line)}
+.p-rise{background:rgba(198,255,61,.1);color:var(--lime);border:1px solid rgba(198,255,61,.2)}
+
+.nums{display:flex;flex-direction:column;gap:2px}
+.num-row{display:grid;grid-template-columns:28px 1fr;gap:4px;align-items:baseline}
+.num-lbl{font-family:var(--mono);font-size:9px;color:rgba(147,164,190,.5);text-align:right}
+.num-val{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--chalk)}
+.num-val.hi{color:var(--teal);font-weight:700}
+.num-val.warn{color:var(--orange)}
+.num-val.z{color:rgba(147,164,190,.3)}
+
+.card-action{padding:16px 18px}
+.a-label{font-family:var(--mono);font-size:9px;color:var(--blue);text-transform:uppercase;letter-spacing:.15em;font-weight:700;margin-bottom:6px}
+.a-label.teal{color:var(--teal)} .a-label.orange{color:var(--orange)} .a-label.lime{color:var(--lime)}
+.a-text{font-size:12px;color:var(--chalk);line-height:1.6}
+.a-text strong{color:var(--bone);font-weight:600}
+.a-text em{color:var(--rust);font-style:normal;font-weight:600}
+.a-text .flag{color:var(--lime);font-weight:600}
+
+.card-urg{border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:12px}
+.urg-icon{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
+.u-red{background:rgba(255,90,31,.15);border:1px solid rgba(255,90,31,.3)}
+.u-amber{background:rgba(244,162,97,.12);border:1px solid rgba(244,162,97,.25)}
+.u-blue{background:rgba(0,153,209,.1);border:1px solid rgba(0,153,209,.2)}
+.u-gray{background:rgba(147,164,190,.08);border:1px solid var(--line)}
+
+/* PROGRAM METRICS BOX */
+.prog-box{background:var(--card);border:1px solid var(--line);padding:20px 24px;margin-bottom:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.prog-stat{}
+.prog-lbl{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px}
+.prog-val{font-family:var(--disp);font-size:26px;color:var(--bone);letter-spacing:.01em}
+.prog-val.t{color:var(--teal)} .prog-val.b{color:var(--blue)} .prog-val.l{color:var(--lime)} .prog-val.o{color:var(--orange)}
+.prog-context{font-size:10px;color:var(--muted);margin-top:2px}
+.prog-divider{width:1px;background:var(--line)}
+
+/* SIGNAL TABLE */
+.sig-table{width:100%;border-collapse:collapse;margin-bottom:6px}
+.sig-table th{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);font-weight:600}
+.sig-table th.r{text-align:right}
+.sig-table td{padding:9px 12px;border-bottom:1px solid var(--line-soft);font-size:12px;color:var(--chalk);vertical-align:top}
+.sig-table td.r{text-align:right;font-family:var(--mono);font-size:11px;color:var(--bone)}
+.sig-table td.hi{color:var(--teal);font-weight:700;font-family:var(--mono)}
+.sig-table tr:hover td{background:rgba(255,255,255,.02)}
+.tco{font-family:var(--disp);font-size:14px;text-transform:uppercase;color:var(--bone);letter-spacing:.01em}
+.tsub{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.06em;margin-top:2px}
+.twhy{font-size:11px;color:var(--muted);line-height:1.5;max-width:280px}
+
+/* FOOTER */
+.footer{border-top:2px solid var(--teal);padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:var(--navy-800);position:relative;z-index:2}
+.footer-logo{font-family:var(--disp);font-size:14px;color:var(--bone);text-transform:uppercase;letter-spacing:.05em}
+.footer-logo span{color:var(--teal)}
+.footer-meta{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.08em;text-align:right}
+
+@media(max-width:800px){
+  .hdr,.kpi-strip,.legend,.main,.footer{padding-left:16px;padding-right:16px}
+  .card{grid-template-columns:1fr;border-left-width:3px!important}
+  .card-co,.card-trend,.card-action,.card-urg{border:none;padding:10px 14px}
+  .card-trend{flex-direction:row;flex-wrap:wrap;align-items:center}
+  .kpi-strip{flex-wrap:wrap}
+  .kpi{border:none;padding:8px 12px}
+}
+</style>
+</head>
+<body>
+<div id="__implab_nav" style="position:sticky;top:0;z-index:9999;background:rgba(0,17,34,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(190,214,246,0.14);padding:0 28px;display:flex;align-items:center;height:46px;font-family:'Inter',sans-serif">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;border-right:1px solid rgba(190,214,246,0.14);padding-right:16px;margin-right:16px;flex-shrink:0">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="opacity:.6"><path d="M9 11.5L4.5 7 9 2.5" stroke="#93A4BE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span style="font-family:'Anton',sans-serif;font-size:14px;color:#f5f5f5;letter-spacing:.02em;text-transform:uppercase">IMPACT<span style="color:#00C4B3">ABLE</span></span>
+  </a>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#00C4B3;flex-shrink:0">ABM Intelligence &middot; Weekly Action List</span>
+  <a href="/" style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#93A4BE;opacity:.6;text-decoration:none;flex-shrink:0">All Reports &rarr;</a>
+</div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="eyebrow">Geotab &mdash; Field Service Enterprise ABX</div>
+  <div class="hdr-title">Weekly <span class="em">Action</span> List</div>
+  <div class="hdr-sub">
+    <span>Jen Jakob</span><span class="sep">|</span>
+    <span>Zach Crocombe</span><span class="sep">|</span>
+    <span>Onur Aksan</span><span class="sep">|</span>
+    <span>Impactable Strategy</span><span class="sep">|</span>
+    <span>Aug 9, 2026</span>
+    <span class="hdr-badge">LinkedIn ABX Account Lists: 7d / 30d / 90d &nbsp;&middot;&nbsp; KPI Tracker: Jen's Google Sheet</span>
+  </div>
+</div>
+
+<!-- KPI STRIP (from Jen's KPI tracker, LinkedIn ABX tab) -->
+<div class="kpi-strip">
+  <div class="kpi">
+    <div class="kpi-label">ABX Spend 2026</div>
+    <div class="kpi-val teal">$1,597</div>
+    <div class="kpi-context">Feb&ndash;Apr (LinkedIn ABX tab)</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">ABX Impressions</div>
+    <div class="kpi-val blue">94,941</div>
+    <div class="kpi-context">90-day cumulative</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">T&amp;L LinkedIn CPC</div>
+    <div class="kpi-val">$9.57</div>
+    <div class="kpi-context">2026 avg vs $11.91 in 2025</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Field Service CTR</div>
+    <div class="kpi-val lime">4.27%</div>
+    <div class="kpi-context">Highest segment in program</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Active Urgencies</div>
+    <div class="kpi-val orange">4</div>
+    <div class="kpi-context">Live deals with coverage gap</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Intent Accounts</div>
+    <div class="kpi-val">30</div>
+    <div class="kpi-context">In 7-day account list</div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="lg"><div class="lg-dot" style="background:var(--rust)"></div>Act now &mdash; deal at risk</div>
+  <div class="lg"><div class="lg-dot" style="background:var(--orange)"></div>Action this week</div>
+  <div class="lg"><div class="lg-dot" style="background:var(--blue)"></div>Monitor &amp; confirm</div>
+  <div class="lg"><div class="lg-dot" style="background:var(--muted)"></div>Cooling &mdash; check status</div>
+  <div class="lg"><div class="lg-dot" style="background:var(--lime)"></div>New signal</div>
+  <div class="lg-sep">7d = Aug 2&ndash;9 &nbsp;&middot;&nbsp; 30d = Jul 10&ndash;Aug 9 &nbsp;&middot;&nbsp; 90d = May 11&ndash;Aug 9 &nbsp;&middot;&nbsp; Source: LinkedIn Company Hub exports</div>
+</div>
+
+<div class="main">
+
+  <!-- ============================== SECTION 1: ACT NOW ============================== -->
+  <div class="block">
+    <div class="sec">
+      <div>
+        <div class="sec-num">01</div>
+        <div class="sec-title">Act Now &mdash; <span class="o">Live Deals at Risk</span></div>
+      </div>
+      <div class="sec-note">Active deal stage + coverage gap<br>These cannot wait</div>
+    </div>
+
+    <div class="cards">
+
+      <!-- ALLIED UNIVERSAL -->
+      <div class="card urgent">
+        <div class="card-co">
+          <div class="co-name">Allied Universal</div>
+          <div class="co-owner">Onur Aksan</div>
+          <div class="co-stage">50% Pilot Live &nbsp;|&nbsp; TMO Reseller<br>8.8K fleet &nbsp;|&nbsp; LYTX+ + Geotab</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-cool">Cooling</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val warn">2,196</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val">10,041</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val hi">45,879</span></div>
+            <div class="num-row"><span class="num-lbl">clk7</span><span class="num-val">5</span></div>
+            <div class="num-row"><span class="num-lbl">eng30</span><span class="num-val">76</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">Jen &mdash; Confirm campaign status immediately</div>
+          <div class="a-text"><em>Pilot is live and reach is decelerating.</em> 45,879 impressions over 90 days is a strong foundation, but pace is falling at exactly the wrong moment &mdash; while internal stakeholders are forming a verdict on the pilot. <strong>Confirm 1:1 LinkedIn and Display are still running and budget has not been redirected.</strong> 7 Bombora topics last week (Cost Savings, Fleet Procurement, Asset Tracking, Vehicle Tracking, Electric Fleet, Intelligent Routing, Fleet Management) confirm active internal evaluation is ongoing right now. Air cover dropping during a live pilot evaluation is a direct risk to the deal.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-red">🔴</div></div>
+      </div>
+
+      <!-- RENTOKIL -->
+      <div class="card urgent">
+        <div class="card-co">
+          <div class="co-name">Rentokil Terminix</div>
+          <div class="co-owner">Zach Crocombe</div>
+          <div class="co-stage">RFP Imminent<br>20K fleet &nbsp;|&nbsp; $240K MRR opp</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-cool">Near Zero</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val z">—</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val warn">28</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val">96</span></div>
+            <div class="num-row"><span class="num-lbl">clk30</span><span class="num-val z">0</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">Jen &amp; Zach &mdash; Campaign status critical</div>
+          <div class="a-text"><em>RFP is imminent. 28 paid impressions over 30 days for a $240K MRR opportunity is not defensible.</em> The 1:1 LinkedIn + Display brief was due to launch Aug 1 per the ABX tracker. <strong>Confirm immediately whether these campaigns are live.</strong> Element partner is aligned; an Azuga displacement path is forming. Roger Peterson (Dir. Fleet) is the decision-maker. Confirm Branded Yeti Mug was sent 07/30 and follow-up is underway. Geotab vs. Samsara RFP &mdash; we cannot arrive at this fight invisible.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-red">🔴</div></div>
+      </div>
+
+      <!-- DISNEY -->
+      <div class="card urgent">
+        <div class="card-co">
+          <div class="co-name">Walt Disney Co.</div>
+          <div class="co-owner">Onur Aksan</div>
+          <div class="co-stage">NDA Signed &nbsp;|&nbsp; RFI Incoming<br>Disney Worldwide Services scope</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-dark">Gone Quiet</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val z">—</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val z">—</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val warn">718</span></div>
+            <div class="num-row"><span class="num-lbl">Imagin.</span><span class="num-val">65 / 357</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">Jen &amp; Onur &mdash; Reactivate air cover immediately</div>
+          <div class="a-text"><em>Air cover has stopped on the parent entity right as the RFI arrives.</em> Walt Disney Imagineering sub-entity shows 65 impressions this week and 357 over 30d, so some reach exists, but the parent (fleet decision-maker entity) is at zero for 30 days. <strong>Reactivate broad air cover now &mdash; do not wait for the RFI to define scope.</strong> 3 Bombora surges this week (Dash Cam, Fleet Maintenance, Intelligent Routing) confirm active internal evaluation. Contact: Christeon Goss. Hold 1:1 personalized targeting until RFI defines which Disney divisions are in scope.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-red">🔴</div></div>
+      </div>
+
+      <!-- J&J -->
+      <div class="card urgent">
+        <div class="card-co">
+          <div class="co-name">Johnson &amp; Johnson</div>
+          <div class="co-owner">Zach Crocombe</div>
+          <div class="co-stage">30% Quote &nbsp;|&nbsp; IT/Security blocked<br>10K fleet &nbsp;|&nbsp; $184K MRR opp</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-stable">Stable Reach</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val hi">3,304</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val">18,030</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val hi">76,164</span></div>
+            <div class="num-row"><span class="num-lbl">clk7</span><span class="num-val">6</span></div>
+            <div class="num-row"><span class="num-lbl">eng30</span><span class="num-val">48</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">Zach &mdash; Exec penetration is the play</div>
+          <div class="a-text">Reach is strong (3,304 this week, 76,164 over 90 days &mdash; highest ABX account in the program). Ads are working. The deal is stuck on IT/Security, not awareness. <strong>Ads alone will not break this logjam.</strong> Confirm Edwin gift (party link) was sent and the fault/causation safety email is out. 6sense showed Samsara and Trimble keywords last week &mdash; competitors are still circling while we're stalled. Zach needs to escalate to a higher-level Geotab contact to get above the IT blocker. The reach investment is justified; the deal needs human intervention now.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-red">🔴</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 2: ACTION THIS WEEK ============================== -->
+  <div class="block">
+    <div class="sec">
+      <div>
+        <div class="sec-num">02</div>
+        <div class="sec-title">Action This Week &mdash; <span class="em">Momentum Accounts</span></div>
+      </div>
+      <div class="sec-note">Strong reach, active deals<br>Specific next step per account</div>
+    </div>
+
+    <div class="cards">
+
+      <!-- CINTAS -->
+      <div class="card action">
+        <div class="card-co">
+          <div class="co-name">Cintas</div>
+          <div class="co-owner">Zach Crocombe</div>
+          <div class="co-stage">Intel Gathering<br>13.5K fleet &nbsp;|&nbsp; Building own telematics</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-stable">Stable</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val hi">2,083</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val">12,950</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val">38,284</span></div>
+            <div class="num-row"><span class="num-lbl">clk7</span><span class="num-val hi">23</span></div>
+            <div class="num-row"><span class="num-lbl">eng30</span><span class="num-val hi">203</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label teal">Best engagement account this week &mdash; Zach</div>
+          <div class="a-text"><strong>23 clicks and 37 engagements in 7 days. 203 engagements over 30 days.</strong> Someone inside Cintas is paying consistent attention. They're building their own telematics in-house &mdash; the pitch is not rip-and-replace, it's open platform / API integrations. Confirm the email cadence is running that exact angle. 203 engagements suggests internal stakeholders are reading. <strong>This is the right window to request a conversation before their in-house build locks in a direction.</strong> Upgrade from air cover to 1:1 LinkedIn when POC is confirmed.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-amber">🟡</div></div>
+      </div>
+
+      <!-- TRAVELERS -->
+      <div class="card action">
+        <div class="card-co">
+          <div class="co-name">Travelers Insurance</div>
+          <div class="co-owner">Zach Crocombe</div>
+          <div class="co-stage">Marked Low Priority<br>Data says otherwise</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-stable">Stable</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val hi">3,168</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val">13,737</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val hi">56,812</span></div>
+            <div class="num-row"><span class="num-lbl">clk7</span><span class="num-val">6</span></div>
+            <div class="num-row"><span class="num-lbl">eng30</span><span class="num-val">34</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label orange">Flag to Jen &amp; Zach &mdash; re-evaluate priority label</div>
+          <div class="a-text"><strong>3rd highest reach account in the program this week at 3,168 impressions. 56,812 over 90 days.</strong> That is more reach than most active deal accounts. The ABX tracker marks this low priority with low telematics interest. 6sense showed 499 keyword searches by 215 anonymous users last week, including oem (371 searches), Fleet Maintenance, ADAS, and AI Cameras. <span class="flag">The reach investment and intent signal are not aligned with the priority label.</span> Chocolate x4 direct mailer was sent &mdash; confirm whether follow-up email went out this week. Recommend re-evaluating before more budget goes in without a clear POC or next step.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-amber">🟡</div></div>
+      </div>
+
+      <!-- LABCORP -->
+      <div class="card action">
+        <div class="card-co">
+          <div class="co-name">Labcorp</div>
+          <div class="co-owner">Zach Crocombe</div>
+          <div class="co-stage">HOT Prospect<br>8K fleet &nbsp;|&nbsp; OEM (GM) only</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-stable">Stable</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val hi">1,091</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val">4,071</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val">19,173</span></div>
+            <div class="num-row"><span class="num-lbl">clk30</span><span class="num-val">30</span></div>
+            <div class="num-row"><span class="num-lbl">eng30</span><span class="num-val">30</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">7-day mailer follow-up window &mdash; Zach</div>
+          <div class="a-text">Good consistent reach. Direct mailer (chocolate x4) should have been received &mdash; <strong>7-day outreach window is now.</strong> Barry is the primary contact. Message angle: OEM gap (GM provides basics only) + 10% fuel efficiency goal + SBTi GHG commitments. 1:1 LinkedIn + Display brief was in progress &mdash; confirm live. Vidyard 1:1 video launched &mdash; check response rate. The pitch writes itself: what GM can't give them, Geotab can.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-amber">🟡</div></div>
+      </div>
+
+      <!-- ELI LILLY -->
+      <div class="card action">
+        <div class="card-co">
+          <div class="co-name">Eli Lilly &amp; Company</div>
+          <div class="co-owner">Zach Crocombe</div>
+          <div class="co-stage">WARM Prospect<br>NETS/NSC meeting target</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-stable">Stable</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val">205</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val">1,297</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val">4,026</span></div>
+            <div class="num-row"><span class="num-lbl">clk30</span><span class="num-val">33</span></div>
+            <div class="num-row"><span class="num-lbl">eng30</span><span class="num-val hi">60</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">Lock NETS/NSC meeting &mdash; Zach</div>
+          <div class="a-text">Strong response from direct mailer to Mark. <strong>Lock the NETS/NSC meeting this week.</strong> 60 engagements over 30 days. 3 POCs confirmed (Mark, Kim, Nicole). Legal restrictions on location data sharing may be softening per Kim Cregar &mdash; monitor before launching 1:1 targeting. Mark loves indie/racing &mdash; experiential gifting angle ready for post-meeting. Keep air cover consistent through the event window.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-amber">🟡</div></div>
+      </div>
+
+      <!-- McDONALD'S -->
+      <div class="card action">
+        <div class="card-co">
+          <div class="co-name">McDonald's</div>
+          <div class="co-owner">Zach Crocombe</div>
+          <div class="co-stage">20% Collaborating<br>CRM: Low Priority</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-stable">Stable</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val">652</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val">3,041</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val">8,122</span></div>
+            <div class="num-row"><span class="num-lbl">clk30</span><span class="num-val hi">60</span></div>
+            <div class="num-row"><span class="num-lbl">eng30</span><span class="num-val hi">103</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label orange">Data contradicts CRM priority label &mdash; flag to Zach</div>
+          <div class="a-text">103 engagements over 30 days and 146 clicks over 90 days. Someone inside McDonald's is clicking and engaging consistently. 6sense showed 4 Bombora surges last week: <strong>Intelligent Routing, Electric Fleet Vehicles, Fleet Maintenance, Asset Tracking.</strong> Motive camera intent also appeared. Marked low priority / limited telematics interest. <span class="flag">The data disagrees.</span> EV fleet and routing are the entry angles, not a telematics-first pitch. Worth a quick Zach check-in to see if anything has changed internally.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-amber">🟡</div></div>
+      </div>
+
+      <!-- STATE FARM -->
+      <div class="card action">
+        <div class="card-co">
+          <div class="co-name">State Farm</div>
+          <div class="co-owner">Zach Crocombe</div>
+          <div class="co-stage">Prospect<br>Mailer sent</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-cool">Cooling</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val warn">781</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val">9,996</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val">15,982</span></div>
+            <div class="num-row"><span class="num-lbl">clk30</span><span class="num-val">16</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">7-day follow-up email due now &mdash; Zach</div>
+          <div class="a-text">7-day reach slowing vs. 30-day pace. Chocolate x3 direct mailer should have arrived. <strong>7-day follow-up email is due now.</strong> 9,996 impressions over 30 days is meaningful investment. 6sense showed heavy Trimble (28 searches) and AI Camera (30 searches) keyword activity last week &mdash; active evaluation happening. Confirm email went out; check for any response this week.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-amber">🟡</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 3: COOLING ============================== -->
+  <div class="block">
+    <div class="sec">
+      <div>
+        <div class="sec-num">03</div>
+        <div class="sec-title">Cooling &mdash; <span class="b">Confirm Status</span></div>
+      </div>
+      <div class="sec-note">Strong 90-day history<br>Reach dropped in last 7&ndash;30 days</div>
+    </div>
+
+    <div class="cards">
+
+      <div class="card cool">
+        <div class="card-co">
+          <div class="co-name">Progressive Insurance</div>
+          <div class="co-owner">Onur Aksan</div>
+          <div class="co-stage">HOT in CRM &nbsp;|&nbsp; Mailer sent</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-cool">Cooling</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val z">—</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val warn">7,645</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val">24,147</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">Confirm campaign active &mdash; Onur</div>
+          <div class="a-text">HOT in CRM but zero paid reach this week. 7,645 impressions over 30 days confirms the campaign was working. <strong>Confirm it's still running.</strong> Mailer (chocolate x5) sent &mdash; follow-up outreach due now. Carol Preeder is the insurance team connector. AI Camera intent last week is a live opening. Same Carol Preeder contact applies to Farmers Insurance below.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-gray">⚪</div></div>
+      </div>
+
+      <div class="card cool">
+        <div class="card-co">
+          <div class="co-name">Farmers Insurance</div>
+          <div class="co-owner">Onur Aksan</div>
+          <div class="co-stage">Prospect &nbsp;|&nbsp; Mailer sent</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-cool">Cooling</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val z">—</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val warn">7,101</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val">26,888</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">Confirm campaign active &mdash; Onur</div>
+          <div class="a-text">26,888 impressions over 90 days &mdash; significant reach investment. Zero this week. <strong>Confirm campaign status and whether mailer follow-up 7-day email went out.</strong> If the window has passed, determine whether a second touchpoint is warranted before re-engaging.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-gray">⚪</div></div>
+      </div>
+
+      <div class="card cool">
+        <div class="card-co">
+          <div class="co-name">Charter Communications</div>
+          <div class="co-owner">Onur Aksan</div>
+          <div class="co-stage">Prospect &nbsp;|&nbsp; Cox acquired 60%</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-cool">Cooling</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val z">—</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val warn">993</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val">13,173</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">Confirm entity targeting &mdash; Onur</div>
+          <div class="a-text">13,173 impressions over 90 days. Spectrum sub-entity spiked this week (1,026 impressions in the broader export) but Charter parent shows zero. Post-acquisition org structure may be splitting the audience. <strong>Confirm which entity holds the fleet decision and update targeting accordingly.</strong></div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-gray">⚪</div></div>
+      </div>
+
+      <div class="card cool">
+        <div class="card-co">
+          <div class="co-name">Danaher / Hach</div>
+          <div class="co-owner">Zach Crocombe</div>
+          <div class="co-stage">WARM &nbsp;|&nbsp; 500-unit Hach pilot</div>
+        </div>
+        <div class="card-trend">
+          <span class="pill p-dark">Gone Quiet</span>
+          <div class="nums">
+            <div class="num-row"><span class="num-lbl">7d</span><span class="num-val z">—</span></div>
+            <div class="num-row"><span class="num-lbl">30d</span><span class="num-val z">—</span></div>
+            <div class="num-row"><span class="num-lbl">90d</span><span class="num-val warn">4,522</span></div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="a-label">Confirm pilot status &mdash; Zach</div>
+          <div class="a-text">4,522 impressions over 90 days, nothing in the last 30. Hach subsidiary pilot (500 units) is a live camera expansion opportunity into the full 2,500-vehicle Danaher footprint. <strong>Gifting was to activate in July &mdash; confirm status.</strong> If the pilot is progressing, air cover should be reinforcing it. Confirm with Zach whether the pause was intentional.</div>
+        </div>
+        <div class="card-urg"><div class="urg-icon u-gray">⚪</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 4: NEW SIGNALS ============================== -->
+  <div class="block">
+    <div class="sec">
+      <div>
+        <div class="sec-num">04</div>
+        <div class="sec-title">New Signals &mdash; <span class="l">Outside ABX List</span></div>
+      </div>
+      <div class="sec-note">Enterprise accounts with consistent paid reach<br>Evaluate for BDE assignment</div>
+    </div>
+
+    <table class="sig-table">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th class="r">7d</th>
+          <th class="r">30d</th>
+          <th class="r">90d</th>
+          <th class="r">Clicks 30d</th>
+          <th class="r">Eng 30d</th>
+          <th>Why It Matters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="tco">GardaWorld</div>
+            <div class="tsub">Security &amp; cash logistics &nbsp;|&nbsp; Large mixed fleet &nbsp;|&nbsp; 🇺🇸🇨🇦</div>
+          </td>
+          <td class="r">198</td><td class="r">815</td><td class="r">858</td><td class="r">10</td><td class="r">13</td>
+          <td><div class="twhy">Security logistics = large vehicle fleet with safety, tracking, and compliance needs identical to Geotab's ICP. Consistent reach across all three windows. Not on ABX list. Recommend BDE review for POC assignment.</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="tco">Clean Harbors</div>
+            <div class="tsub">Environmental field services &nbsp;|&nbsp; Specialized vehicle fleet &nbsp;|&nbsp; 🇺🇸</div>
+          </td>
+          <td class="r hi">0</td><td class="r">3,035</td><td class="r">4,592</td><td class="r">11</td><td class="r">37</td>
+          <td><div class="twhy">Environmental services with a large specialized field fleet. 37 engagements over 30 days is meaningful. Similar ICP profile to GFL Environmental. Cooling in last 7 days but the 90-day reach investment was significant. Worth BDE research before the account goes fully cold.</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="tco">Brightspeed</div>
+            <div class="tsub">Fiber telecom &nbsp;|&nbsp; Install &amp; maintenance fleet &nbsp;|&nbsp; 🇺🇸</div>
+          </td>
+          <td class="r hi">0</td><td class="r hi">0</td><td class="r">3,437</td><td class="r">—</td><td class="r">—</td>
+          <td><div class="twhy">On ABX tracker (Zach, with Verizon, contract at year 3). 3,437 impressions over 90 days but gone quiet in last 30. Confirm whether 1:1 campaign was paused intentionally and whether contract intel has been gathered. This is a renewal displacement opportunity.</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="tco">Republic Services</div>
+            <div class="tsub">Waste management &nbsp;|&nbsp; Large route fleet &nbsp;|&nbsp; 🇺🇸</div>
+          </td>
+          <td class="r hi">0</td><td class="r">1,622</td><td class="r">—</td><td class="r">5</td><td class="r">14</td>
+          <td><div class="twhy">Waste management = high-density route fleet with optimization, safety, and compliance exposure. 1,622 impressions over 30 days. Natural ICP candidate alongside GFL Environmental and Clean Harbors. Not on ABX list &mdash; recommend adding for BDE review.</div></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="tco">Axle Logistics</div>
+            <div class="tsub">3PL / freight brokerage &nbsp;|&nbsp; Fleet-adjacent</div>
+          </td>
+          <td class="r hi">0</td><td class="r hi">0</td><td class="r">10,861</td><td class="r">9</td><td class="r">12</td>
+          <td><div class="twhy">10,861 impressions over 90 days &mdash; significant historical reach investment. Gone quiet in last 30. Worth understanding if this was an intentional pause or a campaign configuration issue before the account goes fully dark.</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <div class="footer-logo">IMPACTABLE<span> &times; GEOTAB</span></div>
+    <div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:4px;letter-spacing:.08em">FIELD SERVICE ENTERPRISE ABX &nbsp;|&nbsp; WEEKLY ACTION LIST</div>
+  </div>
+  <div class="footer-meta">
+    LinkedIn Account Lists: 7d / 30d / 90d &nbsp;|&nbsp; KPI Tracker: Jen's Google Sheet<br>
+    6sense: Jul 27&ndash;Aug 2 &nbsp;|&nbsp; ABX Tracker v2 Aug 2026 &nbsp;|&nbsp; Aug 9, 2026
+  </div>
+</div>
+
+</body>
+</html>
